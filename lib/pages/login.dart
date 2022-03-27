@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:pimp_my_code/config/asset.dart';
+
+import '../styles.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
@@ -34,9 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         //appBar: CustomAppBar(),
         appBar: AppBar(
           leadingWidth: 92,
-          leading: Image.asset(
-            "images/pimp-my-code-logo.png",
-          ),
+          leading: Image.asset(Asset.logo),
           title: const Text('title').tr(),
           toolbarHeight: 90,
           backgroundColor: Colors.grey,
@@ -52,11 +53,9 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   const Text(
                     'to_login',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyles.bold,
                   ).tr(),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: 500,
                     child: TextFormField(
@@ -70,9 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                       maxLength: 50,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   SizedBox(
                     width: 500,
                     child: TextFormField(
@@ -87,9 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                       maxLength: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: 200,
                     child: FloatingActionButton(
@@ -100,13 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ).tr(),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       backgroundColor: Colors.grey,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: 150,
                     child: FloatingActionButton(
@@ -119,7 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.black),
                       ).tr(),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       backgroundColor: Colors.white,
                     ),
                   ),
