@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'router/router.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,10 +8,10 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('fr')],
-        path: 'translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp()
+      supportedLocales: const [Locale('en'), Locale('fr')],
+      path: 'translations',
+      fallbackLocale: const Locale('en'),
+      child: const MyApp(),
     ),
   );
 }

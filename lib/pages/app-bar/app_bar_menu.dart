@@ -196,14 +196,12 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         IconButton(
           icon: const Icon(Icons.login),
           tooltip: "login".tr(),
-          onPressed: () {
-          },
+          onPressed: () => context.go('/login'),
         ),
         IconButton(
           icon: const Icon(Icons.logout),
           tooltip: "logout".tr(),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
         PopupMenuButton<MenuValues>(
             icon: const Icon(Icons.more_vert),

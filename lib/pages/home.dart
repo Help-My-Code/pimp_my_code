@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
-import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/pages/app-bar/app-bar-menu.dart';
+import 'package:pimp_my_code/pages/app-bar/app_bar_menu.dart';
+
+import '../config/asset.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -15,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,12 +27,10 @@ class _HomePageState extends State<HomePage> {
               centerTitle: false,
               title: const Text('title').tr(),
               leadingWidth: 92,
-              leading: Image.asset(
-                "images/pimp-my-code-logo.png",
-              ),
+              leading: Image.asset(Asset.logo),
               toolbarHeight: 90,
               backgroundColor: Colors.grey,
-              bottom: const CustomAppBarMenu()
+              bottom: const CustomAppBarMenu(),
             ),
             // Other Sliver Widgets
             SliverList(
@@ -42,9 +38,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 800,
                   child: Center(
-                    child: Text(
-                      'Home',
-                    ),
+                    child: Text('Home'),
                   ),
                 )
               ]),
