@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
@@ -16,19 +18,27 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final requiredValidator = RequiredValidator(errorText: 'Password is required');
+  final requiredValidator =
+      RequiredValidator(errorText: ('required_field').tr());
 
   validForm() {
     _formKey.currentState!.validate();
+    GoRouter.of(context).go('/home');
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        //TODO comment mettre ce code en commun avec la taille variable qui fonctionne (voir app-bar.dart)
+        //appBar: CustomAppBar(),
         appBar: AppBar(
-          title: const Text('Pimp My Code'),
+          leadingWidth: 92,
+          leading: Image.asset(
+            "images/pimp-my-code-logo.png",
+          ),
+          title: const Text('title').tr(),
+          toolbarHeight: 90,
           backgroundColor: Colors.grey,
         ),
         body: Center(
@@ -41,9 +51,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   const Text(
-                    'Se Connecter',
+                    'to_login',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   const SizedBox(
                     height: 20,
                   ),
@@ -53,9 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                       validator: requiredValidator,
                       onChanged: (val) => email = val,
                       keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: 'Email *',
-                        icon: Icon(Icons.alternate_email),
+                      decoration: InputDecoration(
+                        labelText: 'email*'.tr(),
+                        icon: const Icon(Icons.alternate_email),
                       ),
                       maxLength: 50,
                     ),
@@ -70,9 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                       validator: requiredValidator,
                       onChanged: (val) => password = val,
                       keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: 'Password *',
-                        icon: Icon(Icons.password),
+                      decoration: InputDecoration(
+                        labelText: 'password*'.tr(),
+                        icon: const Icon(Icons.password),
                       ),
                       maxLength: 20,
                     ),
@@ -86,9 +96,9 @@ class _LoginPageState extends State<LoginPage> {
                       heroTag: "login",
                       onPressed: validForm,
                       child: const Text(
-                        'Connexion',
+                        'login',
                         style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
+                      ).tr(),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       backgroundColor: Colors.grey,
@@ -100,14 +110,14 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: 150,
                     child: FloatingActionButton(
-                      heroTag: "subscribe",
+                      heroTag: "register",
                       onPressed: () {
-                        Navigator.pushNamed(context, '/subscribe');
+                        GoRouter.of(context).go('/register');
                       },
                       child: const Text(
-                        'S\'inscrire ?',
+                        'to_register?',
                         style: TextStyle(color: Colors.black),
-                      ),
+                      ).tr(),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       backgroundColor: Colors.white,

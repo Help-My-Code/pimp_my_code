@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-class SubscribePage extends StatefulWidget {
-  const SubscribePage({Key? key, required this.title}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<SubscribePage> createState() => _SubscribePageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SubscribePageState extends State<SubscribePage> {
+class _RegisterPageState extends State<RegisterPage> {
   var email = '';
   var name = '';
   var firstname = '';
@@ -23,17 +25,12 @@ class _SubscribePageState extends State<SubscribePage> {
   final _formKey = GlobalKey<FormState>();
 
   final emailValidator = MultiValidator([
-    RequiredValidator(errorText: 'Email is required'),
-    EmailValidator(errorText: 'Please enter a valid email')
+    RequiredValidator(errorText: 'required_email'.tr()),
+    EmailValidator(errorText: 'valid_email'.tr())
   ]);
 
   final requiredValidator =
-      RequiredValidator(errorText: 'This field is required');
-
-  final passwordValidator = MultiValidator([
-    RequiredValidator(errorText: 'Password is required'),
-    MatchingPasswordValidator()
-  ]);
+      RequiredValidator(errorText: 'required_field'.tr());
 
   final TextEditingController controller = new TextEditingController();
 
@@ -46,8 +43,14 @@ class _SubscribePageState extends State<SubscribePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        //appBar: CustomAppBar(),
         appBar: AppBar(
-          title: const Text('Pimp My Code'),
+          leadingWidth: 92,
+          leading: Image.asset(
+            "images/pimp-my-code-logo.png",
+          ),
+          title: const Text('title').tr(),
+          toolbarHeight: 90,
           backgroundColor: Colors.grey,
         ),
         body: Container(
@@ -64,10 +67,10 @@ class _SubscribePageState extends State<SubscribePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     const Text(
-                      'S\'inscrire',
+                      'to_register',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                    ).tr(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -77,9 +80,9 @@ class _SubscribePageState extends State<SubscribePage> {
                         validator: emailValidator,
                         onChanged: (val) => email = val,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Email *',
-                          icon: Icon(Icons.alternate_email),
+                        decoration: InputDecoration(
+                          labelText: 'email*'.tr(),
+                          icon: const Icon(Icons.alternate_email),
                         ),
                         maxLength: 50,
                       ),
@@ -93,9 +96,9 @@ class _SubscribePageState extends State<SubscribePage> {
                         validator: requiredValidator,
                         onChanged: (val) => name = val,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Name *',
-                          icon: Icon(Icons.assignment_ind),
+                        decoration: InputDecoration(
+                          labelText: 'name*'.tr(),
+                          icon: const Icon(Icons.assignment_ind),
                         ),
                         maxLength: 50,
                       ),
@@ -109,9 +112,9 @@ class _SubscribePageState extends State<SubscribePage> {
                         validator: requiredValidator,
                         onChanged: (val) => firstname = val,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'FirstName *',
-                          icon: Icon(Icons.assignment_ind),
+                        decoration: InputDecoration(
+                          labelText: 'firstname*'.tr(),
+                          icon: const Icon(Icons.assignment_ind),
                         ),
                         maxLength: 50,
                       ),
@@ -125,19 +128,19 @@ class _SubscribePageState extends State<SubscribePage> {
                         controller: controller,
                         validator: (validator) {
                           if(validator!.isEmpty) {
-                            return 'Password is required';
+                            return 'required_password'.tr();
                           }
                           if (!isValidPassword) {
-                            return 'Please respect password conditions';
+                            return 'conditions_password'.tr();
                           }
                           return null;
                         },
                         obscureText: true,
                         onChanged: (val) => password = val,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Password *',
-                          icon: Icon(Icons.password),
+                        decoration: InputDecoration(
+                          labelText: 'password*'.tr(),
+                          icon: const Icon(Icons.password),
                         ),
                         maxLength: 20,
                       ),
@@ -167,10 +170,10 @@ class _SubscribePageState extends State<SubscribePage> {
                         obscureText: true,
                         validator: (validator) {
                           if(validator!.isEmpty) {
-                            return 'Password confirmation is required';
+                            return 'required_password_confirmation'.tr();
                           }
                           if (validator != password) {
-                            return 'The passwords do not match';
+                            return 'password_dont_match'.tr();
                           }
                           return null;
                         },
@@ -178,9 +181,9 @@ class _SubscribePageState extends State<SubscribePage> {
                           confirmPassword = val;
                         },
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Confirm Password *',
-                          icon: Icon(Icons.password),
+                        decoration: InputDecoration(
+                          labelText: 'password_confirmation*'.tr(),
+                          icon: const Icon(Icons.password),
                         ),
                         maxLength: 20,
                       ),
@@ -191,12 +194,12 @@ class _SubscribePageState extends State<SubscribePage> {
                     SizedBox(
                       width: 200,
                       child: FloatingActionButton(
-                        heroTag: "subscribe",
+                        heroTag: "register",
                         onPressed: validForm,
                         child: const Text(
-                          'Inscription',
+                          'registration',
                           style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
+                        ).tr(),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                         backgroundColor: Colors.grey,
@@ -210,12 +213,12 @@ class _SubscribePageState extends State<SubscribePage> {
                       child: FloatingActionButton(
                         heroTag: "login",
                         onPressed: () {
-                          Navigator.pushNamed(context, '/');
+                          GoRouter.of(context).go('/');
                         },
                         child: const Text(
-                          'Se connecter ?',
+                          'to_login?',
                           style: TextStyle(color: Colors.black),
-                        ),
+                        ).tr(),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                         backgroundColor: Colors.white,
@@ -229,18 +232,5 @@ class _SubscribePageState extends State<SubscribePage> {
         ),
       ),
     );
-  }
-}
-
-class MatchingPasswordValidator extends TextFieldValidator {
-  MatchingPasswordValidator({String errorText = 'Passwords are not similars'})
-      : super(errorText);
-
-  @override
-  bool get ignoreEmptyValues => true;
-
-  @override
-  bool isValid(String? value) {
-    return "1" == value;
   }
 }
