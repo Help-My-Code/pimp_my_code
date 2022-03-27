@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   validForm() {
     _formKey.currentState!.validate();
-    GoRouter.of(context).go('/home');
+    GoRouter.of(context).go('/');
   }
 
   @override

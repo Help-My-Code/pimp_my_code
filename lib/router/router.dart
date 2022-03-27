@@ -14,15 +14,15 @@ class PmcRouter {
     routes: <GoRoute>[
       GoRoute(
         path: '/',
+        builder: (BuildContext context, GoRouterState state) => const HomePage(title: title),
+      ),
+      GoRoute(
+        path: '/login',
         builder: (BuildContext context, GoRouterState state) => const LoginPage(title: title),
       ),
       GoRoute(
         path: '/register',
         builder: (BuildContext context, GoRouterState state) => const RegisterPage(title: title),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (BuildContext context, GoRouterState state) => const HomePage(title: title),
       ),
       GoRoute(
         path: '/messaging',

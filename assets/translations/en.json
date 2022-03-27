@@ -6,6 +6,7 @@
   "to_login": "Login",
   "to_login?": "Login ?",
   "login": "Connection",
+  "logout": "Logout",
   "email*": "Email *",
   "name*": "Name *",
   "firstname*": "Firstname *",
@@ -25,5 +26,9 @@
   "groups": "Groups",
   "my_groups": "My groups",
   "groups_im_member_of": "Groups I'm a member of",
-  "close_groups": "Close groups"
+  "close_groups": "Close groups",
+  "my_account": "My account",
+  "messaging": "Messaging",
+  "home": "Home",
+  "more_options": "More options"
 }

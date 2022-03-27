@@ -161,35 +161,54 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.home),
+          tooltip: "home".tr(),
           onPressed: () {
-            GoRouter.of(context).go('/home');
+            GoRouter.of(context).go('/');
           },
         ),
         IconButton(
           //TODO activer bonne icone selon s'il y a des nouvelles notifs
           icon: const Icon(Icons.notifications_none),
           //icon: const Icon(Icons.notifications_active),
+          tooltip: "notifications".tr(),
           onPressed: () => printNotifications(),
         ),
         IconButton(
           icon: const Icon(Icons.mail),
+          tooltip: "messaging".tr(),
           onPressed: () {
             GoRouter.of(context).go('/messaging');
           },
         ),
         IconButton(
           icon: const Icon(Icons.account_circle_rounded),
+          tooltip: "my_account".tr(),
           onPressed: () {
             GoRouter.of(context).go('/account');
           },
         ),
         IconButton(
           icon: const Icon(Icons.group),
+          tooltip: "groups".tr(),
           onPressed: () => printGroups(),
+        ),
+        //TODO afficher seulement login ou logout selon
+        IconButton(
+          icon: const Icon(Icons.login),
+          tooltip: "login".tr(),
+          onPressed: () {
+          },
+        ),
+        IconButton(
+          icon: const Icon(Icons.logout),
+          tooltip: "logout".tr(),
+          onPressed: () {
+          },
         ),
         PopupMenuButton<MenuValues>(
             icon: const Icon(Icons.more_vert),
             onSelected: onSelectMenu,
+            tooltip: "more_options".tr(),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuValues>>[
                   PopupMenuItem<MenuValues>(
                     value: MenuValues.settings,
