@@ -15,9 +15,34 @@ class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize;
 }
 
-enum MenuValues { settings }
+enum MenuValues { settings, login, logout }
 
 class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
+  void printSearch() {
+    Alert(
+      context: context,
+      title: "search".tr(),
+      content: Column(
+        children: <Widget>[
+          TextField(
+              decoration: InputDecoration(
+            hintText: 'search_user_group'.tr(),
+            prefixIcon: const Icon(Icons.search),
+          )),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          child: const Text(
+            "close",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ).tr(),
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+        )
+      ],
+    ).show();
+  }
+
   void printGroups() {
     Alert(
       context: context,
@@ -67,7 +92,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       buttons: [
         DialogButton(
           child: const Text(
-            "close_groups",
+            "close",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ).tr(),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
@@ -126,7 +151,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       buttons: [
         DialogButton(
           child: const Text(
-            "close_notifications",
+            "close",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ).tr(),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
@@ -137,6 +162,12 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
 
   void onSelectMenu(item) {
     switch (item) {
+      case MenuValues.login:
+        GoRouter.of(context).go('/login');
+        break;
+      case MenuValues.logout:
+        GoRouter.of(context).go('/logout');
+        break;
       case MenuValues.settings:
         GoRouter.of(context).go('/settings');
         break;
@@ -148,7 +179,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     return AppBar(
       centerTitle: true,
       backgroundColor: Colors.grey,
-      title: Container(
+      /*title: Container(
         width: 450,
         height: 40,
         color: Colors.white,
@@ -157,7 +188,8 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           hintText: 'search_user_group'.tr(),
           prefixIcon: const Icon(Icons.search),
         )),
-      ),
+      ),*/
+
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.home),
@@ -165,6 +197,11 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           onPressed: () {
             GoRouter.of(context).go('/');
           },
+        ),
+        IconButton(
+          icon: const Icon(Icons.search),
+          tooltip: "search".tr(),
+          onPressed: () => printSearch(),
         ),
         IconButton(
           //TODO activer bonne icone selon s'il y a des nouvelles notifs
@@ -192,22 +229,26 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           tooltip: "groups".tr(),
           onPressed: () => printGroups(),
         ),
-        //TODO afficher seulement login ou logout selon
-        IconButton(
-          icon: const Icon(Icons.login),
-          tooltip: "login".tr(),
-          onPressed: () => context.go('/login'),
-        ),
-        IconButton(
-          icon: const Icon(Icons.logout),
-          tooltip: "logout".tr(),
-          onPressed: () {},
-        ),
         PopupMenuButton<MenuValues>(
             icon: const Icon(Icons.more_vert),
             onSelected: onSelectMenu,
             tooltip: "more_options".tr(),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuValues>>[
+                  //TODO afficher seulement login ou logout selon
+                  PopupMenuItem<MenuValues>(
+                    value: MenuValues.login,
+                    child: ListTile(
+                      leading: const Icon(Icons.login),
+                      title: const Text('login').tr(),
+                    ),
+                  ),
+                  PopupMenuItem<MenuValues>(
+                    value: MenuValues.logout,
+                    child: ListTile(
+                      leading: const Icon(Icons.logout),
+                      title: const Text('logout').tr(),
+                    ),
+                  ),
                   PopupMenuItem<MenuValues>(
                     value: MenuValues.settings,
                     child: ListTile(
