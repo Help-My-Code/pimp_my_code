@@ -38,6 +38,7 @@ dependencies:
   go_router: ^3.0.5
   easy_localization: ^3.0.0
   rflutter_alert: ^2.0.4
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
