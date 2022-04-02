@@ -109,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: FloatingActionButton(
         heroTag: "login",
         onPressed: () {
-          GoRouter.of(context).go('/');
+          GoRouter.of(context).go('/login');
         },
         child: const Text(
           'to_login?',

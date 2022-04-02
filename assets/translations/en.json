@@ -22,13 +22,13 @@
   "search_user_group": "Search an user or a group",
   "settings": "Settings",
   "notifications": "Notifications",
-  "close_notifications": "Close notifications",
+  "close": "Close",
   "groups": "Groups",
   "my_groups": "My groups",
   "groups_im_member_of": "Groups I'm a member of",
-  "close_groups": "Close groups",
   "my_account": "My account",
   "messaging": "Messaging",
   "home": "Home",
+  "search": "Search",
   "more_options": "More options"
 }
