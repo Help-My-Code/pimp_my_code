@@ -1,6 +1,10 @@
 part of 'login_bloc.dart';
 
-@immutable
-abstract class LoginState {}
-
-class LoginInitial extends LoginState {}
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState({
+    @Default('') String email,
+    @Default('') String password,
+    @Default(FormNotSent()) FormStatus status,
+  }) = _State;
+}
