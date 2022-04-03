@@ -34,7 +34,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(status: const FormSubmissionSuccessful()),
       );
-      print(state);
     });
   }
 }

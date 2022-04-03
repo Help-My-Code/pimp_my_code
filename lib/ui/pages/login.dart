@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pimp_my_code/config/asset.dart';
+import 'package:pimp_my_code/core/form_status.dart';
 import 'package:pimp_my_code/state/login/login_bloc.dart';
 
 import '../styles.dart';
@@ -99,19 +100,41 @@ class LoginPage extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       child: SizedBox(
         width: 200,
-        child: FloatingActionButton(
-          heroTag: "login",
-          onPressed: () {
-            context.read<LoginBloc>().add(const LoginEvent.submit());
+        child: BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state.status is FormSubmissionSuccessful) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('login_success').tr(),
+                backgroundColor: Colors.green,
+              ));
+            }
+            if (state.status is FormSubmissionFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('login_failed').tr(),
+                backgroundColor: Theme.of(context).errorColor,
+              ));
+            }
           },
-          child: const Text(
-            'login',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ).tr(),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          backgroundColor: Colors.grey,
+          builder: (context, state) {
+            return FloatingActionButton(
+              heroTag: "login",
+              onPressed: () {
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate() &&
+                    state.status is FormNotSent) {
+                  context.read<LoginBloc>().add(const LoginEvent.submit());
+                }
+              },
+              child: const Text(
+                'login',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ).tr(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              backgroundColor: Colors.grey,
+            );
+          },
         ),
       ),
     );

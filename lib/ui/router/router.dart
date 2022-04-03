@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:pimp_my_code/state/login/login_bloc.dart';
 
 import '../../ioc_container.dart';
+import '../../state/login/login_bloc.dart';
+import '../../state/register/register_bloc.dart';
 import '../pages/account.dart';
 import '../pages/home.dart';
 import '../pages/login.dart';
@@ -30,8 +31,10 @@ class PmcRouter {
       ),
       GoRoute(
         path: '/register',
-        builder: (BuildContext context, GoRouterState state) =>
-            const RegisterPage(title: title),
+        builder: (BuildContext context, GoRouterState state) => BlocProvider(
+          create: (context) => sl.get<RegisterBloc>(),
+          child: const RegisterPage(title: title),
+        ),
       ),
       GoRoute(
         path: '/messaging',
