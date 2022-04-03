@@ -5,7 +5,7 @@ import '../pages/account.dart';
 import '../pages/home.dart';
 import '../pages/login.dart';
 import '../pages/messaging.dart';
-import '../pages/register.dart';
+import '../pages/register/register.dart';
 import '../pages/settings.dart';
 
 class PmcRouter {
