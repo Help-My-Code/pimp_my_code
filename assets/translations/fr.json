@@ -31,5 +31,6 @@
   "home": "Accueil",
   "search": "Rechercher",
   "more_options": "Plus d'options",
-  "login_failed": "Identifiants incorrects"
+  "wrong_credentials": "Identifiants incorrects",
+  "register_failed": "L'inscription a échoué"
 }

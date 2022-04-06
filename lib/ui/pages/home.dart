@@ -16,35 +16,33 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              pinned: true,
-              snap: false,
-              centerTitle: false,
-              title: const Text('title').tr(),
-              leadingWidth: 92,
-              leading: Image.asset(Asset.logo),
-              toolbarHeight: 90,
-              backgroundColor: Colors.amber,
-              bottom: const CustomAppBarMenu(),
-            ),
-            // Other Sliver Widgets
-            SliverList(
-              delegate: SliverChildListDelegate([
-                const SizedBox(
-                  height: 800,
-                  child: Center(
-                    child: Text('Home'),
-                  ),
-                )
-              ]),
-            ),
-          ],
-        ),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            snap: false,
+            centerTitle: false,
+            title: const Text('title').tr(),
+            leadingWidth: 92,
+            leading: Image.asset(Asset.logo),
+            toolbarHeight: 90,
+            backgroundColor: Colors.amber,
+            bottom: const CustomAppBarMenu(),
+          ),
+          // Other Sliver Widgets
+          SliverList(
+            delegate: SliverChildListDelegate([
+              const SizedBox(
+                height: 800,
+                child: Center(
+                  child: Text('Home'),
+                ),
+              )
+            ]),
+          ),
+        ],
       ),
     );
   }

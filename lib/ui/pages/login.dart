@@ -16,27 +16,25 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //TODO comment mettre ce code en commun avec la taille variable qui fonctionne (voir app-bar.dart)
-        //appBar: CustomAppBar(),
-        appBar: _buildAppBar(),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  _buildTitle(),
-                  _buildEmailField(context),
-                  _buildPasswordField(context),
-                  _buildSubmitButton(context),
-                  _buildGoToRegister(context),
-                ],
-              ),
+    return Scaffold(
+      //TODO comment mettre ce code en commun avec la taille variable qui fonctionne (voir app-bar.dart)
+      //appBar: CustomAppBar(),
+      appBar: _buildAppBar(),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                _buildTitle(),
+                _buildEmailField(context),
+                _buildPasswordField(context),
+                _buildSubmitButton(context),
+                _buildGoToRegister(context),
+              ],
             ),
           ),
         ),
@@ -45,12 +43,12 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildTitle() {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 20),
-      child: Text(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: const Text(
         'to_login',
         style: TextStyles.bold,
-      ),
+      ).tr(),
     );
   }
 
@@ -110,7 +108,7 @@ class LoginPage extends StatelessWidget {
             }
             if (state.status is FormSubmissionFailed) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('login_failed').tr(),
+                content: const Text('wrong_credentials').tr(),
                 backgroundColor: Theme.of(context).errorColor,
               ));
             }

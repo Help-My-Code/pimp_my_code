@@ -44,7 +44,7 @@ class ApiUserRepository extends UserRepository {
       });
       return Right(LoginResponse(response.body['accessToken']));
     } catch (e) {
-      return Left(LoginFailure(tr('login_failed')));
+      return Left(LoginFailure(tr('wrong_credentials')));
     }
   }
 }

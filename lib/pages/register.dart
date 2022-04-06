@@ -40,61 +40,57 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        //appBar: CustomAppBar(),
-        appBar: _buildAppBar(),
-        body: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    const Text(
-                      'to_register',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ).tr(),
-                    const SizedBox(height: 20),
-                    _buildEmail(),
-                    const SizedBox(height: 20),
-                    _buildNameField(),
-                    const SizedBox(height: 20),
-                    _buildFirstnameField(),
-                    const SizedBox(height: 10),
-                    _buildRequiredPassword(),
-                    FlutterPwValidator(
-                      controller: controller,
-                      minLength: 8,
-                      uppercaseCharCount: 1,
-                      numericCharCount: 1,
-                      specialCharCount: 1,
-                      normalCharCount: 1,
-                      width: 400,
-                      height: 150,
-                      onSuccess: () {
-                        isValidPassword = true;
-                      },
-                      onFail: () {
-                        isValidPassword = false;
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    _buildPasswordConfirmation(),
-                    const SizedBox(height: 20),
-                    buildRegister(),
-                    const SizedBox(height: 20),
-                    buildGoToLogin(context),
-                  ],
-                ),
+    return Scaffold(
+      //appBar: CustomAppBar(),
+      appBar: _buildAppBar(),
+      body: Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  const Text(
+                    'to_register',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ).tr(),
+                  const SizedBox(height: 20),
+                  _buildEmail(),
+                  const SizedBox(height: 20),
+                  _buildNameField(),
+                  const SizedBox(height: 20),
+                  _buildFirstnameField(),
+                  const SizedBox(height: 10),
+                  _buildRequiredPassword(),
+                  FlutterPwValidator(
+                    controller: controller,
+                    minLength: 8,
+                    uppercaseCharCount: 1,
+                    numericCharCount: 1,
+                    specialCharCount: 1,
+                    normalCharCount: 1,
+                    width: 400,
+                    height: 150,
+                    onSuccess: () {
+                      isValidPassword = true;
+                    },
+                    onFail: () {
+                      isValidPassword = false;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  _buildPasswordConfirmation(),
+                  const SizedBox(height: 20),
+                  buildRegister(),
+                  const SizedBox(height: 20),
+                  buildGoToLogin(context),
+                ],
               ),
             ),
           ),

@@ -31,5 +31,6 @@
   "home": "Home",
   "search": "Search",
   "more_options": "More options",
-  "login_failed": "Wrong credentials"
+  "wrong_credentials": "Wrong credentials",
+  "register_failed": "Register failed"
 }
