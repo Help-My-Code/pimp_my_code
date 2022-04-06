@@ -232,7 +232,7 @@ class _RegisterFormState extends State<RegisterForm> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.amber,
             );
           },
         ),

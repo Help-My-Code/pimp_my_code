@@ -32,5 +32,6 @@
   "search": "Rechercher",
   "more_options": "Plus d'options",
   "wrong_credentials": "Identifiants incorrects",
-  "register_failed": "L'inscription a échoué"
+  "register_failed": "L'inscription a échoué",
+  "register_success": "L'inscription a réussi"
 }

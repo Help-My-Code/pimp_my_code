@@ -130,7 +130,7 @@ class LoginPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.amber,
             );
           },
         ),
@@ -164,7 +164,7 @@ class LoginPage extends StatelessWidget {
       leading: Image.asset(Asset.logo),
       title: const Text('title').tr(),
       toolbarHeight: 90,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.amber,
     );
   }
 }

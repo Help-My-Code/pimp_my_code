@@ -32,7 +32,7 @@ class RegisterPage extends StatelessWidget {
       leading: Image.asset(Asset.logo),
       title: const Text('title').tr(),
       toolbarHeight: 90,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.amber,
     );
   }
 }

@@ -32,5 +32,6 @@
   "search": "Search",
   "more_options": "More options",
   "wrong_credentials": "Wrong credentials",
-  "register_failed": "Register failed"
+  "register_failed": "Register failed",
+  "register_success": "Successful registration"
 }
