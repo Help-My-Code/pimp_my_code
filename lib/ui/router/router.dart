@@ -34,7 +34,7 @@ class PmcRouter {
         path: '/register',
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
           create: (context) => sl.get<RegisterBloc>(),
-          child: const RegisterPage(title: title),
+          child: RegisterPage(title: title),
         ),
       ),
       GoRoute(
