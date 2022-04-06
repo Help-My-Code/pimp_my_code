@@ -134,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.amber,
       ),
     );
   }
@@ -246,7 +246,7 @@ class _RegisterPageState extends State<RegisterPage> {
       leading: Image.asset(Asset.logo),
       title: const Text('title').tr(),
       toolbarHeight: 90,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.amber,
     );
   }
 }

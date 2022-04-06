@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           leading: Image.asset(Asset.logo),
           title: const Text('title').tr(),
           toolbarHeight: 90,
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.amber,
         ),
         body: Center(
           child: Padding(
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Colors.amber,
                     ),
                   ),
                   const SizedBox(height: 20),

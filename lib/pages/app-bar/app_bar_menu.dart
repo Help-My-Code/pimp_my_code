@@ -178,7 +178,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.amber,
       /*title: Container(
         width: 450,
         height: 40,

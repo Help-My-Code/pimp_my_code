@@ -28,7 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
               leadingWidth: 92,
               leading: Image.asset(Asset.logo),
               toolbarHeight: 90,
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.amber,
               bottom: const CustomAppBarMenu(),
             ),
             // Other Sliver Widgets
