@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       routeInformationParser: PmcRouter.router.routeInformationParser,
       routerDelegate: PmcRouter.router.routerDelegate,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.amber,
       ),
     );
   }
