@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
 
 import '../usecases/register_use_case.dart';
 
@@ -10,5 +11,10 @@ abstract class UserRepository {
     firstName,
     lastName,
     description,
+  );
+
+  Future<Either<LoginFailure, LoginResponse>> login(
+    String email,
+    String password,
   );
 }

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/config/asset.dart';
-import 'package:pimp_my_code/state/register/register_bloc.dart';
 import 'package:pimp_my_code/ui/pages/register/widgets/register_form.dart';
-
-import '../../../ioc_container.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key, required this.title}) : super(key: key);
@@ -22,13 +18,10 @@ class RegisterPage extends StatelessWidget {
           alignment: Alignment.center,
           width: double.infinity,
           height: double.infinity,
-          child: SingleChildScrollView(
+          child: const SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: BlocProvider(
-                create: (context) => sl.get<RegisterBloc>(),
-                child: const RegisterForm(),
-              ),
+              padding: EdgeInsets.all(20),
+              child: RegisterForm(),
             ),
           ),
         ),

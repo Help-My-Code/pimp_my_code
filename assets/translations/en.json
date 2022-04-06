@@ -30,5 +30,6 @@
   "messaging": "Messaging",
   "home": "Home",
   "search": "Search",
-  "more_options": "More options"
+  "more_options": "More options",
+  "login_failed": "Wrong credentials"
 }

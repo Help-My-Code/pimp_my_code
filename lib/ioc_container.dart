@@ -1,5 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
+import 'package:pimp_my_code/state/login/login_bloc.dart';
 
 import 'config/env/base.dart';
 import 'domain/repositories/user_repository.dart';
@@ -29,10 +31,12 @@ void registerRepositories() {
 
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl.get()));
+  sl.registerSingleton(LoginUseCase(sl.get()));
 }
 
 void registerBloc() {
   sl.registerFactory(() => RegisterBloc(sl.get()));
+  sl.registerFactory(() => LoginBloc(sl.get()));
 }
 
 ChopperClient createChopper(Config config) {

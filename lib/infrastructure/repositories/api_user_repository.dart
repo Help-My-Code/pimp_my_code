@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/repositories/user_repository.dart';
-import 'package:pimp_my_code/domain/usecases/register_use_case.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../../domain/repositories/user_repository.dart';
+import '../../domain/usecases/login_use_case.dart';
+import '../../domain/usecases/register_use_case.dart';
 import '../source/api/command/authentication.dart';
 
 class ApiUserRepository extends UserRepository {
@@ -17,18 +19,32 @@ class ApiUserRepository extends UserRepository {
     lastName,
     description,
   ) async {
-    final response = await _dataSource.register(fields: {
-      'email': email,
-      'password': password,
-      'confirmPassword': confirmPassword,
-      'firstName': firstName,
-      'lastName': lastName,
-      'description': description,
-    });
-    if (response.isSuccessful) {
+    try {
+      await _dataSource.register(fields: {
+        'email': email,
+        'password': password,
+        'confirmPassword': confirmPassword,
+        'firstName': firstName,
+        'lastName': lastName,
+        'description': description,
+      });
       return Right(RegistrationSuccess());
-    } else {
+    } catch (e) {
       return Left(RegistrationFailed());
+    }
+  }
+
+  @override
+  Future<Either<LoginFailure, LoginResponse>> login(
+      String email, String password) async {
+    try {
+      final response = await _dataSource.login(fields: {
+        "email": email,
+        "password": password,
+      });
+      return Right(LoginResponse(response.body['accessToken']));
+    } catch (e) {
+      return Left(LoginFailure(tr('login_failed')));
     }
   }
 }
