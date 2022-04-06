@@ -24,8 +24,22 @@ class _CustomAppBarState extends State<CustomAppBar> {
         leading: Image.asset(Asset.logo),
         title: const Text('title').tr(),
         toolbarHeight: 90,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.amber,
       ),
     );
   }
 }
+
+/*class test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leadingWidth: 92,
+      leading: Image.asset(Asset.logo),
+      title: const Text('title').tr(),
+      toolbarHeight: 90,
+      backgroundColor: Colors.amber,
+    );
+  }
+}*/
+
