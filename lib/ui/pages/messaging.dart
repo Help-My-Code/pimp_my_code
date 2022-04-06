@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/pages/app-bar/app_bar_menu.dart';
 
-import '../config/asset.dart';
+import '../../config/asset.dart';
+import '../widgets/app-bar/app_bar_menu.dart';
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({Key? key, required this.title}) : super(key: key);
+class MessagingPage extends StatefulWidget {
+  const MessagingPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<MessagingPage> createState() => _MessagingPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _MessagingPageState extends State<MessagingPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,7 +38,7 @@ class _AccountPageState extends State<AccountPage> {
                 const SizedBox(
                   height: 800,
                   child: Center(
-                    child: Text('Account'),
+                    child: Text('Messaging'),
                   ),
                 )
               ]),

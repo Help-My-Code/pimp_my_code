@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/pages/app-bar/app_bar_menu.dart';
 
-import '../config/asset.dart';
+import '../../config/asset.dart';
+import '../widgets/app-bar/app_bar_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
