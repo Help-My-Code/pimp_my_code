@@ -166,7 +166,8 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         GoRouter.of(context).go('/login');
         break;
       case MenuValues.logout:
-        GoRouter.of(context).go('/logout');
+        // TODO déconnecter user
+        GoRouter.of(context).go('/login');
         break;
       case MenuValues.settings:
         GoRouter.of(context).go('/settings');

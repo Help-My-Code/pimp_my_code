@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/config/asset.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/core/form_status.dart';
-import 'package:pimp_my_code/state/login/login_bloc.dart';
+import 'package:pimp_my_code/state/register/register_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../../state/login/login_bloc.dart';
+import '../../../styles.dart';
+import '../../../validator/validators.dart';
 
-import '../styles.dart';
-import '../validator/validators.dart';
+class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //TODO comment mettre ce code en commun avec la taille variable qui fonctionne (voir app-bar.dart)
-      //appBar: CustomAppBar(),
-      appBar: _buildAppBar(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                _buildTitle(),
-                _buildEmailField(context),
-                _buildPasswordField(context),
-                _buildSubmitButton(context),
-                _buildGoToRegister(context),
-              ],
-            ),
-          ),
-        ),
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          _buildTitle(),
+          _buildEmailField(context),
+          _buildPasswordField(context),
+          _buildSubmitButton(context),
+          _buildGoToRegister(context),
+        ],
       ),
     );
   }
@@ -117,7 +113,6 @@ class LoginPage extends StatelessWidget {
           },
           builder: (context, state) {
             return FloatingActionButton(
-              heroTag: "login",
               onPressed: () {
                 if (_formKey.currentState != null &&
                     _formKey.currentState!.validate() &&
@@ -127,7 +122,7 @@ class LoginPage extends StatelessWidget {
               },
               child: const Text(
                 'login',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 20),
               ).tr(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -157,16 +152,6 @@ class LoginPage extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      leadingWidth: 92,
-      leading: Image.asset(Asset.logo),
-      title: const Text('title').tr(),
-      toolbarHeight: 90,
-      backgroundColor: Colors.amber,
     );
   }
 }

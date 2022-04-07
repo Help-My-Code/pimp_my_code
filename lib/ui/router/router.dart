@@ -8,7 +8,7 @@ import '../../state/login/login_bloc.dart';
 import '../../state/register/register_bloc.dart';
 import '../pages/account.dart';
 import '../pages/home.dart';
-import '../pages/login.dart';
+import '../pages/login/login.dart';
 import '../pages/messaging.dart';
 import '../pages/register/register.dart';
 import '../pages/settings.dart';
