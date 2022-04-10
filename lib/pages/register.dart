@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pimp_my_code/config/asset.dart';
 
+import '../ui/widgets/app-bar/app_bar.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.title}) : super(key: key);
 
@@ -41,8 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: CustomAppBar(),
-      appBar: _buildAppBar(),
+      appBar: const CustomAppBar(),
       body: Container(
         alignment: Alignment.center,
         width: double.infinity,
@@ -233,16 +234,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         maxLength: 50,
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      leadingWidth: 92,
-      leading: Image.asset(Asset.logo),
-      title: const Text('title').tr(),
-      toolbarHeight: 90,
-      backgroundColor: Colors.amber,
     );
   }
 }

@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../../config/asset.dart';
+
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBarMenu({Key? key})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
@@ -178,19 +180,11 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: true,
       backgroundColor: Colors.amber,
-      /*title: Container(
-        width: 450,
-        height: 40,
-        color: Colors.white,
-        child: TextField(
-            decoration: InputDecoration(
-          hintText: 'search_user_group'.tr(),
-          prefixIcon: const Icon(Icons.search),
-        )),
-      ),*/
-
+      leadingWidth: 60,
+      leading: Image.asset(Asset.zoomed_logo),
+      automaticallyImplyLeading: true,
+      title: const Text('title').tr(),
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.home),

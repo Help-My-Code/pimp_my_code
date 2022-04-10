@@ -20,10 +20,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return PreferredSize(
       preferredSize: const Size.fromHeight(100.0),
       child: AppBar(
-        leadingWidth: 92,
-        leading: Image.asset(Asset.logo),
+        leadingWidth: 60,
+        leading: Image.asset(Asset.zoomed_logo),
         title: const Text('title').tr(),
-        toolbarHeight: 90,
         backgroundColor: Colors.amber,
       ),
     );

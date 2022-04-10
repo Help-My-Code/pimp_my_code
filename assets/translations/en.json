@@ -34,5 +34,6 @@
   "wrong_credentials": "Wrong credentials",
   "register_failed": "Register failed",
   "register_success": "Successful registration",
-  "login_success": "Successful login"
+  "login_success": "Successful login",
+  "new_publication": "New publication"
 }

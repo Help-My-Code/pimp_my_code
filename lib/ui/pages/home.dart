@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-
+import 'package:getwidget/getwidget.dart';
 import '../../config/asset.dart';
+import '../styles.dart';
 import '../widgets/app-bar/app_bar_menu.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,33 +18,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            snap: false,
-            centerTitle: false,
-            title: const Text('title').tr(),
-            leadingWidth: 92,
-            leading: Image.asset(Asset.logo),
-            toolbarHeight: 90,
-            backgroundColor: Colors.amber,
-            bottom: const CustomAppBarMenu(),
+      appBar: const CustomAppBarMenu(),
+        body: Container(
+      alignment: Alignment.center,
+      width: double.infinity,
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(padding: EdgeInsets.all(20), child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              // TODO choisir le bouton préféré
+              GFButton(
+                onPressed: () {},
+                text: "new_publication".tr(),
+                icon: const Icon(Icons.add_box_outlined),
+                color: Colors.amber,
+                type: GFButtonType.outline2x,
+                highlightColor: Colors.white,
+                splashColor: Colors.amber,
+              ),
+              GFButton(
+                onPressed: () {},
+                text: "new_publication".tr(),
+                icon: const Icon(Icons.add_box_outlined),
+                color: Colors.amber,
+                textColor: Colors.black,
+              ),
+              const GFAvatar(
+                  backgroundImage: NetworkImage(
+                      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg")),
+            ],
           ),
-          // Other Sliver Widgets
-          SliverList(
-            delegate: SliverChildListDelegate([
-              const SizedBox(
-                height: 800,
-                child: Center(
-                  child: Text('Home'),
-                ),
-              )
-            ]),
-          ),
-        ],
+        )),
       ),
-    );
+    ));
   }
 }

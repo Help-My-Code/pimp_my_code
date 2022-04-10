@@ -34,5 +34,6 @@
   "wrong_credentials": "Identifiants incorrects",
   "register_failed": "L'inscription a échoué",
   "register_success": "Inscription réussie",
-  "login_success": "Connexion réussie"
+  "login_success": "Connexion réussie",
+  "new_publication": "Nouvelle publication"
 }

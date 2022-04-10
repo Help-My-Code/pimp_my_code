@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pimp_my_code/config/asset.dart';
 import 'package:pimp_my_code/ui/pages/login/widgets/login_form.dart';
 
+import '../../widgets/app-bar/app_bar.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -10,9 +12,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO comment mettre ce code en commun avec la taille variable qui fonctionne (voir app-bar.dart)
-      //appBar: CustomAppBar(),
-      appBar: _buildAppBar(),
+      appBar: const CustomAppBar(),
       body: Container(
         alignment: Alignment.center,
         width: double.infinity,
@@ -24,16 +24,6 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      leadingWidth: 92,
-      leading: Image.asset(Asset.logo),
-      title: const Text('title').tr(),
-      toolbarHeight: 90,
-      backgroundColor: Colors.amber,
     );
   }
 }
