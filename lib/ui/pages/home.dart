@@ -29,22 +29,12 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              // TODO choisir le bouton préféré
               GFButton(
                 onPressed: () {},
                 text: "new_publication".tr(),
-                icon: const Icon(Icons.add_box_outlined),
+                icon: const Icon(Icons.add_box_outlined, color: Colors.white),
                 color: Colors.amber,
-                type: GFButtonType.outline2x,
-                highlightColor: Colors.white,
-                splashColor: Colors.amber,
-              ),
-              GFButton(
-                onPressed: () {},
-                text: "new_publication".tr(),
-                icon: const Icon(Icons.add_box_outlined),
-                color: Colors.amber,
-                textColor: Colors.black,
+                textColor: Colors.white,
               ),
               const GFAvatar(
                   backgroundImage: NetworkImage(
