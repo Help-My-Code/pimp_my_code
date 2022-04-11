@@ -5,5 +5,5 @@ steps:
   - name: test
     image: dart
     commands:
-      - pub get
-      - pub run test
+      - flutter pub get
+      - flutter pub run test
