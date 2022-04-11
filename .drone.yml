@@ -3,7 +3,7 @@ name: default
 
 steps:
   - name: test
-    image: dart
+    image: fischerscode/flutter
     commands:
       - flutter pub get
       - flutter pub run test
