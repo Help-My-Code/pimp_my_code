@@ -2,10 +2,9 @@ kind: pipeline
 name: default
 
 steps:
-  - name: flutter
-    image: jarry6/drone-flutter:2
-    settings:
-      cn_net: true
-      source: "."
-      commands: >
-        flutter build apk
+  - name: test
+    image: cirrusci/flutter:stable
+    commands:
+      - sudo chown -R cirrus:cirrus .
+      - flutter doctor
+      - flutter test
