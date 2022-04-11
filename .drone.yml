@@ -3,7 +3,7 @@ name: default
 
 steps:
   - name: test
-    image: google/dart:2.16-dev
+    image: dart
     commands:
       - pub get
       - pub run test
