@@ -2,8 +2,10 @@ kind: pipeline
 name: default
 
 steps:
-  - name: test
-    image: fischerscode/flutter-sudo
-    commands:
-      - flutter pub get
-      - flutter pub run test
+  - name: flutter
+    image: jarry6/drone-flutter:2
+    settings:
+      cn_net: true
+      source: "."
+      commands: >
+        flutter build apk
