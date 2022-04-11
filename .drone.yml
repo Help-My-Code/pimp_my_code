@@ -3,7 +3,7 @@ name: default
 
 steps:
   - name: test
-    image: fischerscode/flutter
+    image: fischerscode/flutter-sudo
     commands:
       - flutter pub get
       - flutter pub run test
