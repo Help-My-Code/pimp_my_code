@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
 import 'package:pimp_my_code/state/login/login_bloc.dart';
@@ -14,6 +15,7 @@ final sl = GetIt.instance;
 
 Future<void> init(Config config) async {
   sl.registerSingleton(config);
+  sl.registerSingleton(const FlutterSecureStorage());
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
   registerRepositories();
@@ -31,7 +33,7 @@ void registerRepositories() {
 
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl.get()));
-  sl.registerSingleton(LoginUseCase(sl.get()));
+  sl.registerSingleton(LoginUseCase(sl.get(), sl.get()));
 }
 
 void registerBloc() {
