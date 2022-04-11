@@ -182,7 +182,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     return AppBar(
       backgroundColor: Colors.amber,
       leadingWidth: 60,
-      leading: Image.asset(Asset.zoomed_logo),
+      leading: Image.asset(Asset.zoomedLogo),
       automaticallyImplyLeading: true,
       title: const Text('title').tr(),
       actions: <Widget>[

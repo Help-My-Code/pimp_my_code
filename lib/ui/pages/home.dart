@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:getwidget/getwidget.dart';
-import '../../config/asset.dart';
-import '../styles.dart';
 import '../widgets/app-bar/app_bar_menu.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,40 +17,44 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBarMenu(),
-        body: Container(
-      alignment: Alignment.center,
-      width: double.infinity,
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: Padding(padding: EdgeInsets.all(20), child: Form(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              // TODO choisir le bouton préféré
-              GFButton(
-                onPressed: () {},
-                text: "new_publication".tr(),
-                icon: const Icon(Icons.add_box_outlined),
-                color: Colors.amber,
-                type: GFButtonType.outline2x,
-                highlightColor: Colors.white,
-                splashColor: Colors.amber,
+      body: Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  // TODO choisir le bouton préféré
+                  GFButton(
+                    onPressed: () {},
+                    text: "new_publication".tr(),
+                    icon: const Icon(Icons.add_box_outlined),
+                    color: Colors.amber,
+                    type: GFButtonType.outline2x,
+                    highlightColor: Colors.white,
+                    splashColor: Colors.amber,
+                  ),
+                  GFButton(
+                    onPressed: () {},
+                    text: "new_publication".tr(),
+                    icon: const Icon(Icons.add_box_outlined),
+                    color: Colors.amber,
+                    textColor: Colors.black,
+                  ),
+                  const GFAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg")),
+                ],
               ),
-              GFButton(
-                onPressed: () {},
-                text: "new_publication".tr(),
-                icon: const Icon(Icons.add_box_outlined),
-                color: Colors.amber,
-                textColor: Colors.black,
-              ),
-              const GFAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg")),
-            ],
+            ),
           ),
-        )),
+        ),
       ),
-    ));
+    );
   }
 }

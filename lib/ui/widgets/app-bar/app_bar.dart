@@ -21,7 +21,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       preferredSize: const Size.fromHeight(100.0),
       child: AppBar(
         leadingWidth: 60,
-        leading: Image.asset(Asset.zoomed_logo),
+        leading: Image.asset(Asset.zoomedLogo),
         title: const Text('title').tr(),
         backgroundColor: Colors.amber,
       ),
