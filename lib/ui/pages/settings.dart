@@ -24,13 +24,11 @@ class _SettingsPageState extends State<SettingsPage> {
           height: double.infinity,
           child: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: const <Widget>[Text("SETTINGS")],
-                  ),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: const <Widget>[Text('SETTINGS')],
                 )),
           ),
         ));

@@ -24,13 +24,11 @@ class _AccountPageState extends State<AccountPage> {
           height: double.infinity,
           child: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: const <Widget>[Text("ACCOUNT")],
-                  ),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: const <Widget>[Text('ACCOUNT')],
                 )),
           ),
         ));
