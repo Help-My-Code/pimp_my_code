@@ -9,6 +9,8 @@ import 'domain/repositories/user_repository.dart';
 import 'domain/usecases/register_use_case.dart';
 import 'infrastructure/repositories/api_user_repository.dart';
 import 'infrastructure/source/api/command/authentication.dart';
+import 'infrastructure/source/api/interceptor/add_token_interceptor.dart';
+import 'infrastructure/source/api/interceptor/error_interceptor.dart';
 import 'state/register/register_bloc.dart';
 
 final sl = GetIt.instance;
@@ -52,6 +54,8 @@ ChopperClient createChopper(Config config) {
         {'content-type': 'application/json', 'accept': 'application/json'},
       ),
       HttpLoggingInterceptor(),
+      AddTokenInterceptor(sl.get()),
+      RequestErrorInterceptor(),
     ],
     converter: const JsonConverter(),
   );
