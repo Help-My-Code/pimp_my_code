@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/core/form_status.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../state/login/login_bloc.dart';
+import '../../../router/routes.dart';
 import '../../../styles.dart';
 import '../../../validator/validators.dart';
 
@@ -138,7 +139,7 @@ class _LoginFormState extends State<LoginForm> {
       child: FloatingActionButton(
         heroTag: "register",
         onPressed: () {
-          GoRouter.of(context).go('/register');
+          context.go(Routes.register.path);
         },
         child: const Text(
           'to_register?',
