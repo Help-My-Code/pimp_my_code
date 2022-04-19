@@ -1,6 +1,22 @@
 part of 'session_cubit.dart';
 
-@immutable
-abstract class SessionState {}
+abstract class SessionState {
+  const SessionState();
+}
 
-class SessionInitial extends SessionState {}
+class UnknownAuthState extends SessionState {
+  const UnknownAuthState();
+}
+
+class Unauthenticated extends SessionState {
+  const Unauthenticated();
+}
+
+class Authenticated extends SessionState with EquatableMixin {
+  final String userId;
+
+  Authenticated({required this.userId});
+
+  @override
+  List<Object?> get props => [userId];
+}

@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pimp_my_code/core/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:pimp_my_code/core/usecase.dart';
+import 'package:pimp_my_code/infrastructure/converter/token_decoder.dart';
 
 import '../repositories/user_repository.dart';
 
@@ -14,14 +15,27 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
   Future<Either<LoginFailure, LoginResponse>> call(LoginParam params) async {
     final loginResponseOrFailure =
         await _repository.login(params.email, params.password);
-    loginResponseOrFailure.fold(
-      (failure) {},
-      (loginResponse) async =>
-          await _storage.write(key: 'token', value: loginResponse.token),
-    );
+    loginResponseOrFailure.fold((failure) {}, _saveUserInfoAfterLogin);
     return loginResponseOrFailure;
   }
+
+  Future<Either<UserIdNotFoundInLocalStorage, String>>
+      attemptAutoLogin() async {
+    final String? id = await _storage.read(key: 'id');
+    if (id == null) {
+      return Left(UserIdNotFoundInLocalStorage());
+    }
+    return Right(id);
+  }
+
+  _saveUserInfoAfterLogin(LoginResponse response) async {
+    final decodedToken = TokenDecoder.convertTokenToMap(response.token);
+    await _storage.write(key: 'token', value: response.token);
+    await _storage.write(key: 'id', value: decodedToken['id']);
+  }
 }
+
+class UserIdNotFoundInLocalStorage implements Exception {}
 
 class LoginResponse {
   final String token;
