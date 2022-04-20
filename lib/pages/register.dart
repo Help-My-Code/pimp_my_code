@@ -3,7 +3,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/config/asset.dart';
 
 import '../ui/widgets/app-bar/app_bar.dart';
 

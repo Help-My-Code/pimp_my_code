@@ -3,7 +3,8 @@ name: default
 
 steps:
   - name: test
-    image: fischerscode/flutter
+    image: cirrusci/flutter:stable
     commands:
-      - flutter pub get
-      - flutter pub run test
+      - sudo chown -R cirrus:cirrus .
+      - flutter doctor
+      - flutter test

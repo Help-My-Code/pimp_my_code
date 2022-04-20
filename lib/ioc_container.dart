@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
 import 'package:pimp_my_code/state/login/login_bloc.dart';
@@ -8,12 +9,15 @@ import 'domain/repositories/user_repository.dart';
 import 'domain/usecases/register_use_case.dart';
 import 'infrastructure/repositories/api_user_repository.dart';
 import 'infrastructure/source/api/command/authentication.dart';
+import 'infrastructure/source/api/interceptor/add_token_interceptor.dart';
+import 'infrastructure/source/api/interceptor/error_interceptor.dart';
 import 'state/register/register_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init(Config config) async {
   sl.registerSingleton(config);
+  sl.registerSingleton(const FlutterSecureStorage());
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
   registerRepositories();
@@ -31,7 +35,7 @@ void registerRepositories() {
 
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl.get()));
-  sl.registerSingleton(LoginUseCase(sl.get()));
+  sl.registerSingleton(LoginUseCase(sl.get(), sl.get()));
 }
 
 void registerBloc() {
@@ -50,6 +54,8 @@ ChopperClient createChopper(Config config) {
         {'content-type': 'application/json', 'accept': 'application/json'},
       ),
       HttpLoggingInterceptor(),
+      AddTokenInterceptor(sl.get()),
+      RequestErrorInterceptor(),
     ],
     converter: const JsonConverter(),
   );
