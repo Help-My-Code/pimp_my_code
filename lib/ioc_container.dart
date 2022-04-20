@@ -47,10 +47,11 @@ void registerUseCases() {
 }
 
 void registerBloc() {
-  sl.registerFactory(() => RegisterBloc(sl()));
-  sl.registerFactory(() => LoginBloc(sl()));
-
   sl.registerSingleton(SessionCubit(sl(), sl()));
+
+  sl.registerFactory(() => RegisterBloc(sl()));
+  sl.registerFactory(() => LoginBloc(sl(), sl()));
+
   sl.registerSingleton(ErrorHandlerBloc());
 
   sl.registerSingleton(AppObserver(sl(), sl()));

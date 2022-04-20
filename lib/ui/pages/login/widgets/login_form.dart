@@ -99,8 +99,6 @@ class _LoginFormState extends State<LoginForm> {
                 content: const Text('login_success').tr(),
                 backgroundColor: Colors.green,
               ));
-              //TODO enregistrer token
-              GoRouter.of(context).go('/');
             }
             if (state.status is FormSubmissionFailed) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

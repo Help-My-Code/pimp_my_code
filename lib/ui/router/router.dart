@@ -57,14 +57,15 @@ class AppRouter {
       ),
     ],
     redirect: (state) {
-      final bool isLoginPage = state.location == Routes.login.path;
+      final bool isInUnAuthPage = state.location == Routes.login.path ||
+          state.location == Routes.register.path;
 
       if (_sessionCubit.state is UnknownAuthState) {
         // TODO return loading screen
         // return Routes.loading.toPath;
-      } else if (!isLoginPage && _sessionCubit.state is Unauthenticated) {
+      } else if (!isInUnAuthPage && _sessionCubit.state is Unauthenticated) {
         return Routes.login.path;
-      } else if (isLoginPage && _sessionCubit.state is Authenticated) {
+      } else if (isInUnAuthPage && _sessionCubit.state is Authenticated) {
         return Routes.home.path;
       }
       return null;

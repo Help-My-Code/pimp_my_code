@@ -24,8 +24,8 @@ class ApiUserRepository extends UserRepository {
         'email': email,
         'password': password,
         'confirmPassword': confirmPassword,
-        'firstName': firstName,
-        'lastName': lastName,
+        'firstname': firstName,
+        'lastname': lastName,
         'description': description,
       });
       return Right(RegistrationSuccess());
