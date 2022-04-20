@@ -103,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return SizedBox(
       width: 150,
       child: FloatingActionButton(
-        heroTag: "login",
+        heroTag: 'login',
         onPressed: () {
           GoRouter.of(context).go('/login');
         },
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return SizedBox(
       width: 200,
       child: FloatingActionButton(
-        heroTag: "register",
+        heroTag: 'register',
         onPressed: validForm,
         child: const Text(
           'registration',

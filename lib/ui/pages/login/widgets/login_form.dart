@@ -137,7 +137,7 @@ class _LoginFormState extends State<LoginForm> {
     return SizedBox(
       width: 150,
       child: FloatingActionButton(
-        heroTag: "register",
+        heroTag: 'register',
         onPressed: () {
           context.go(Routes.register.path);
         },

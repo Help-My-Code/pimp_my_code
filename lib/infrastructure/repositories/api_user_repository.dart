@@ -39,8 +39,8 @@ class ApiUserRepository extends UserRepository {
       String email, String password) async {
     try {
       final response = await _dataSource.login(fields: {
-        "email": email,
-        "password": password,
+        'email': email,
+        'password': password,
       });
       return Right(LoginResponse(response.body['accessToken']));
     } catch (e) {
