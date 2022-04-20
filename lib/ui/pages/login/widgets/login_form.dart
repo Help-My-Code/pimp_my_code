@@ -119,7 +119,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: const Text(
                 'login',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ).tr(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
