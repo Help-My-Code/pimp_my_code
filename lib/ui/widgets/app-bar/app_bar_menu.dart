@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pimp_my_code/state/session/session_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
@@ -81,8 +83,9 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                   child: Icon(Icons.group),
                 ),
                 TextSpan(
-                    text: '   ' + 'groups_im_member_of'.tr(),
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                  text: '   ' + 'groups_im_member_of'.tr(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -163,14 +166,13 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     ).show();
   }
 
-  void onSelectMenu(item) {
+  void _onSelectMenu(MenuValues item) {
     switch (item) {
       case MenuValues.login:
         GoRouter.of(context).go('/login');
         break;
       case MenuValues.logout:
-        // TODO déconnecter user
-        GoRouter.of(context).go('/login');
+        context.read<SessionCubit>().logout();
         break;
       case MenuValues.settings:
         GoRouter.of(context).go('/settings');
@@ -226,34 +228,40 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           tooltip: 'groups'.tr(),
           onPressed: () => printGroups(),
         ),
-        PopupMenuButton<MenuValues>(
-          icon: const Icon(Icons.more_vert),
-          onSelected: onSelectMenu,
-          tooltip: 'more_options'.tr(),
-          itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuValues>>[
-            //TODO afficher seulement login ou logout selon
-            PopupMenuItem<MenuValues>(
-              value: MenuValues.login,
-              child: ListTile(
-                leading: const Icon(Icons.login),
-                title: const Text('login').tr(),
-              ),
-            ),
-            PopupMenuItem<MenuValues>(
-              value: MenuValues.logout,
-              child: ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('logout').tr(),
-              ),
-            ),
-            PopupMenuItem<MenuValues>(
-              value: MenuValues.settings,
-              child: ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('settings').tr(),
-              ),
-            )
-          ],
+        BlocBuilder<SessionCubit, SessionState>(
+          builder: (context, state) {
+            return PopupMenuButton<MenuValues>(
+              icon: const Icon(Icons.more_vert),
+              onSelected: _onSelectMenu,
+              tooltip: 'more_options'.tr(),
+              itemBuilder: (BuildContext context) =>
+                  <PopupMenuEntry<MenuValues>>[
+                if (state is Authenticated)
+                  PopupMenuItem<MenuValues>(
+                    value: MenuValues.logout,
+                    child: ListTile(
+                      leading: const Icon(Icons.logout),
+                      title: const Text('logout').tr(),
+                    ),
+                  ),
+                if (state is Unauthenticated)
+                  PopupMenuItem<MenuValues>(
+                    value: MenuValues.login,
+                    child: ListTile(
+                      leading: const Icon(Icons.login),
+                      title: const Text('login').tr(),
+                    ),
+                  ),
+                PopupMenuItem<MenuValues>(
+                  value: MenuValues.settings,
+                  child: ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text('settings').tr(),
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ],
     );

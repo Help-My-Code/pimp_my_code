@@ -43,7 +43,7 @@ void registerRepositories() {
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl()));
   sl.registerSingleton(LoginUseCase(sl(), sl()));
-  sl.registerSingleton(LogoutUseCase());
+  sl.registerSingleton(LogoutUseCase(sl()));
 }
 
 void registerBloc() {
