@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/core/form_status.dart';
 import 'package:pimp_my_code/state/register/register_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../validator/validators.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -217,7 +216,7 @@ class _RegisterFormState extends State<RegisterForm> {
           },
           builder: (context, state) {
             return FloatingActionButton(
-              heroTag: "register",
+              heroTag: 'register',
               onPressed: () {
                 if (_formKey.currentState != null &&
                     _formKey.currentState!.validate() &&
@@ -246,7 +245,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return SizedBox(
       width: 150,
       child: FloatingActionButton(
-        heroTag: "login",
+        heroTag: 'login',
         onPressed: () {
           GoRouter.of(context).go('/login');
         },

@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
+import 'package:pimp_my_code/state/session/session_cubit.dart';
 
 import '../../core/form_status.dart';
+import '../../domain/entities/user.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -10,8 +12,10 @@ part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
+  final SessionCubit _sessionCubit;
 
-  LoginBloc(this._loginUseCase) : super(const LoginState()) {
+  LoginBloc(this._loginUseCase, this._sessionCubit)
+      : super(const LoginState()) {
     on<_UpdateEmail>(onUpdateEmail);
     on<_UpdatePassword>(onUpdatePassword);
     on<_Submit>(onSubmit);
@@ -34,6 +38,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(status: const FormSubmissionSuccessful()),
       );
+      // TODO build user from another way
+      _sessionCubit.showHome(User(success.token));
     });
   }
 }

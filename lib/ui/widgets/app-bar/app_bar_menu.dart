@@ -23,7 +23,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   void printSearch() {
     Alert(
       context: context,
-      title: "search".tr(),
+      title: 'search'.tr(),
       content: Column(
         children: <Widget>[
           TextField(
@@ -36,7 +36,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       buttons: [
         DialogButton(
           child: const Text(
-            "close",
+            'close',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ).tr(),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
@@ -48,7 +48,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   void printGroups() {
     Alert(
       context: context,
-      title: "groups".tr(),
+      title: 'groups'.tr(),
       content: Column(
         children: <Widget>[
           const SizedBox(
@@ -61,8 +61,9 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                   child: Icon(Icons.group),
                 ),
                 TextSpan(
-                    text: "   " + "my_groups".tr(),
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                  text: '   ' + 'my_groups'.tr(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -80,7 +81,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                   child: Icon(Icons.group),
                 ),
                 TextSpan(
-                    text: "   " + "groups_im_member_of".tr(),
+                    text: '   ' + 'groups_im_member_of'.tr(),
                     style: const TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
@@ -94,7 +95,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       buttons: [
         DialogButton(
           child: const Text(
-            "close",
+            'close',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ).tr(),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
@@ -106,7 +107,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   void printNotifications() {
     Alert(
       context: context,
-      title: "notifications".tr(),
+      title: 'notifications'.tr(),
       content: Column(
         children: <Widget>[
           const SizedBox(
@@ -114,7 +115,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           ),
           GestureDetector(
               onTap: () {
-                print("Container 1 clicked");
+                print('Container 1 clicked');
               },
               child: RichText(
                 text: const TextSpan(
@@ -124,7 +125,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                       child: Icon(Icons.thumb_up),
                     ),
                     TextSpan(
-                      text: "   Juliette Romarin a aimé votre publication",
+                      text: '   Juliette Romarin a aimé votre publication',
                     ),
                   ],
                 ),
@@ -134,7 +135,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           ),
           GestureDetector(
               onTap: () {
-                print("Container 2 clicked");
+                print('Container 2 clicked');
               },
               child: RichText(
                 text: const TextSpan(
@@ -143,7 +144,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                       child: Icon(Icons.insert_comment),
                     ),
                     TextSpan(
-                      text: "   Juliette Romarin a commenté votre publication",
+                      text: '   Juliette Romarin a commenté votre publication',
                     ),
                   ],
                 ),
@@ -153,7 +154,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       buttons: [
         DialogButton(
           child: const Text(
-            "close",
+            'close',
             style: TextStyle(color: Colors.white, fontSize: 20),
           ).tr(),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
@@ -184,79 +185,76 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       leadingWidth: 60,
       leading: Image.asset(Asset.zoomedLogo),
       automaticallyImplyLeading: true,
-      title: const Text('title', style: TextStyle(
-          color: Colors.white
-      )).tr(),
-      iconTheme: const IconThemeData(
-          color: Colors.white
-      ),
+      title: const Text('title', style: TextStyle(color: Colors.white)).tr(),
+      iconTheme: const IconThemeData(color: Colors.white),
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.home),
-          tooltip: "home".tr(),
+          tooltip: 'home'.tr(),
           onPressed: () {
             GoRouter.of(context).go('/');
           },
         ),
         IconButton(
           icon: const Icon(Icons.search),
-          tooltip: "search".tr(),
+          tooltip: 'search'.tr(),
           onPressed: () => printSearch(),
         ),
         IconButton(
           //TODO activer bonne icone selon s'il y a des nouvelles notifs
           icon: const Icon(Icons.notifications_none),
           //icon: const Icon(Icons.notifications_active),
-          tooltip: "notifications".tr(),
+          tooltip: 'notifications'.tr(),
           onPressed: () => printNotifications(),
         ),
         IconButton(
           icon: const Icon(Icons.mail),
-          tooltip: "messaging".tr(),
+          tooltip: 'messaging'.tr(),
           onPressed: () {
             GoRouter.of(context).go('/messaging');
           },
         ),
         IconButton(
           icon: const Icon(Icons.account_circle_rounded),
-          tooltip: "my_account".tr(),
+          tooltip: 'my_account'.tr(),
           onPressed: () {
             GoRouter.of(context).go('/account');
           },
         ),
         IconButton(
           icon: const Icon(Icons.group),
-          tooltip: "groups".tr(),
+          tooltip: 'groups'.tr(),
           onPressed: () => printGroups(),
         ),
         PopupMenuButton<MenuValues>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: onSelectMenu,
-            tooltip: "more_options".tr(),
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuValues>>[
-                  //TODO afficher seulement login ou logout selon
-                  PopupMenuItem<MenuValues>(
-                    value: MenuValues.login,
-                    child: ListTile(
-                      leading: const Icon(Icons.login),
-                      title: const Text('login').tr(),
-                    ),
-                  ),
-                  PopupMenuItem<MenuValues>(
-                    value: MenuValues.logout,
-                    child: ListTile(
-                      leading: const Icon(Icons.logout),
-                      title: const Text('logout').tr(),
-                    ),
-                  ),
-                  PopupMenuItem<MenuValues>(
-                    value: MenuValues.settings,
-                    child: ListTile(
-                      leading: const Icon(Icons.settings),
-                      title: const Text('settings').tr(),
-                    ),
-                  )
-                ]),
+          icon: const Icon(Icons.more_vert),
+          onSelected: onSelectMenu,
+          tooltip: 'more_options'.tr(),
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuValues>>[
+            //TODO afficher seulement login ou logout selon
+            PopupMenuItem<MenuValues>(
+              value: MenuValues.login,
+              child: ListTile(
+                leading: const Icon(Icons.login),
+                title: const Text('login').tr(),
+              ),
+            ),
+            PopupMenuItem<MenuValues>(
+              value: MenuValues.logout,
+              child: ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text('logout').tr(),
+              ),
+            ),
+            PopupMenuItem<MenuValues>(
+              value: MenuValues.settings,
+              child: ListTile(
+                leading: const Icon(Icons.settings),
+                title: const Text('settings').tr(),
+              ),
+            )
+          ],
+        ),
       ],
     );
   }
