@@ -47,3 +47,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+class HomeList extends StatelessWidget {
+  const HomeList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 8,
+        itemBuilder: (context, index) {
+      return GFListTile(
+          titleText:'Title',
+          subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          icon: Icon(Icons.favorite)
+      );
+    });
+  }
+}
+
+
