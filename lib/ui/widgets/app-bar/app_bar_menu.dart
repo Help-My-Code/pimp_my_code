@@ -19,7 +19,7 @@ class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize;
 }
 
-enum MenuValues { settings, login, logout }
+enum MenuValues { login, logout }
 
 class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   void printSearch() {
@@ -174,9 +174,6 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       case MenuValues.logout:
         context.read<SessionCubit>().logout();
         break;
-      case MenuValues.settings:
-        GoRouter.of(context).go('/settings');
-        break;
     }
   }
 
@@ -252,13 +249,6 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                       title: const Text('login').tr(),
                     ),
                   ),
-                PopupMenuItem<MenuValues>(
-                  value: MenuValues.settings,
-                  child: ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('settings').tr(),
-                  ),
-                )
               ],
             );
           },
