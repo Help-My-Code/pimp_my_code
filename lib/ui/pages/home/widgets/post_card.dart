@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/ui/widgets/code_editor/code_showroom.dart';
-import 'package:pimp_my_code/ui/widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
+import '../../../widgets/code_editor/code_showroom.dart';
+import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
@@ -33,7 +33,10 @@ class PostCard extends StatelessWidget {
   final String post;
   final List<String>? codes;
   final String likeCount, unlikeCount, commentaryCount;
-  final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed, onSharePressed;
+  final Function()? onLikePressed,
+      onUnlikePressed,
+      onCommentaryPressed,
+      onSharePressed;
   final bool isLiked;
 
   @override
