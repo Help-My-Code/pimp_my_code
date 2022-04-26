@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-
 class CodeEditor extends StatefulWidget {
-  const CodeEditor({Key? key, required this.onCodeChange, this.initialCode}) : super(key: key);
+  const CodeEditor({Key? key, required this.onCodeChange, this.initialCode})
+      : super(key: key);
   final Function(String?) onCodeChange;
   final String? initialCode;
 
@@ -28,31 +28,32 @@ class _CodeEditorState extends State<CodeEditor> {
     textController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  DisableShortcut(
+    return DisableShortcut(
       child: Actions(
         actions: {InsertTabIntent: InsertTabAction()},
         child: Shortcuts(
           shortcuts: {
             LogicalKeySet(LogicalKeyboardKey.tab):
-            InsertTabIntent(2, textController),
+                InsertTabIntent(2, textController),
           },
           child: TextField(
-            onChanged: (v) {
+            onChanged: (text) {
               setState(() {
-                code = v;
+                code = text;
               });
-              widget.onCodeChange(v);
+              widget.onCodeChange(text);
             },
             enableInteractiveSelection: true,
-            toolbarOptions: ToolbarOptions(
+            toolbarOptions: const ToolbarOptions(
               copy: true,
               cut: true,
               paste: true,
               selectAll: true,
             ),
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
             controller: textController,
             textInputAction: TextInputAction.newline,
             maxLines: 30,
@@ -78,17 +79,23 @@ class InsertTabAction extends Action {
       final oldValue = intent.textController.value;
       final newComposing = TextRange.collapsed(oldValue.composing.start);
       final newSelection = TextSelection.collapsed(
-          offset: oldValue.selection.start + intent.numSpaces);
-
+        offset: oldValue.selection.start + intent.numSpaces,
+      );
       final newText = StringBuffer(oldValue.selection.isValid
-          ? oldValue.selection.textBefore(oldValue.text)
+          ? oldValue.selection.textBefore(
+              oldValue.text,
+            )
           : oldValue.text);
       for (var i = 0; i < intent.numSpaces; i++) {
         newText.write(' ');
       }
-      newText.write(oldValue.selection.isValid
-          ? oldValue.selection.textAfter(oldValue.text)
-          : '');
+      final isValid = oldValue.selection.isValid;
+      if (isValid) {
+        newText.write(oldValue.selection.textAfter(
+          oldValue.text,
+        ));
+      }
+
       intent.textController.value = intent.textController.value.copyWith(
         composing: newComposing,
         text: newText.toString(),
