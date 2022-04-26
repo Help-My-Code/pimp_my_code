@@ -40,11 +40,11 @@ class _CodeEditorState extends State<CodeEditor> {
                 InsertTabIntent(2, textController),
           },
           child: TextField(
-            onChanged: (v) {
+            onChanged: (text) {
               setState(() {
-                code = v;
+                code = text;
               });
-              widget.onCodeChange(v);
+              widget.onCodeChange(text);
             },
             enableInteractiveSelection: true,
             toolbarOptions: const ToolbarOptions(
