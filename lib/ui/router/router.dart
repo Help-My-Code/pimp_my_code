@@ -9,7 +9,7 @@ import '../../state/login/login_bloc.dart';
 import '../../state/register/register_bloc.dart';
 import '../../state/session/session_cubit.dart';
 import '../pages/account.dart';
-import '../pages/home.dart';
+import '../pages/home/home.dart';
 import '../pages/login/login.dart';
 import '../pages/messaging.dart';
 import '../pages/register/register.dart';
