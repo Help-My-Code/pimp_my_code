@@ -13,7 +13,6 @@ import '../pages/home.dart';
 import '../pages/login/login.dart';
 import '../pages/messaging.dart';
 import '../pages/register/register.dart';
-import '../pages/settings.dart';
 
 class AppRouter {
   static String title = 'title'.tr();
@@ -49,11 +48,6 @@ class AppRouter {
         path: Routes.account.path,
         builder: (BuildContext context, GoRouterState state) =>
             AccountPage(title: title),
-      ),
-      GoRoute(
-        path: Routes.settings.path,
-        builder: (BuildContext context, GoRouterState state) =>
-            SettingsPage(title: title),
       ),
     ],
     redirect: (state) {
