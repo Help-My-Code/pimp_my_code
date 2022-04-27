@@ -15,4 +15,12 @@ class _$ContentInteractor extends ContentInteractor {
 
   @override
   final definitionType = ContentInteractor;
+
+  @override
+  Future<Response<dynamic>> getFollowingPublicationsByUserId(String userId) {
+    final $url = '/content/getFollowingPublicationsByUserId';
+    final $params = <String, dynamic>{'userId': userId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -6,4 +6,7 @@ part 'content.chopper.dart';
 abstract class ContentInteractor extends ChopperService {
   static ContentInteractor create([ChopperClient? client]) =>
       _$ContentInteractor(client);
+
+  @Get(path: '/getFollowingPublicationsByUserId')
+  Future<Response> getFollowingPublicationsByUserId(@Query() String userId);
 }

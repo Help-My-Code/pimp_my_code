@@ -10,7 +10,7 @@ abstract class ContentRepository {
   Future<Either<Failure, Content>> updateContent(Content content);
   Future<Either<Failure, void>> deleteContent(String id);
   Future<Either<GetPublicationFailed, List<Content>>> getFollowingPublications(
-      {String userId});
+      {required String userId});
 }
 
 class GetPublicationFailed extends Failure {}

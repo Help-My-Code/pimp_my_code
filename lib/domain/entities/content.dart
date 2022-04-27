@@ -6,7 +6,7 @@ class Content {
   final String creatorId;
   final String groupId;
   final String parentId;
-  final String contentType;
+  final ContentType contentType;
 
   Content(
     this.id,
@@ -18,4 +18,20 @@ class Content {
     this.parentId,
     this.contentType,
   );
+}
+
+enum ContentType {
+  publication,
+  comment,
+}
+
+extension ContentTypeExtension on ContentType {
+  String get string {
+    switch (this) {
+      case ContentType.publication:
+        return 'publication';
+      case ContentType.comment:
+        return 'comment';
+    }
+  }
 }
