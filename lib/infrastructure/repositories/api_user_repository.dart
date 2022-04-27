@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../domain/usecases/login_use_case.dart';
-import '../../domain/usecases/register_use_case.dart';
+import '../../domain/usecases/auth/login_use_case.dart';
+import '../../domain/usecases/auth/register_use_case.dart';
 import '../source/api/command/authentication.dart';
 
 class ApiUserRepository extends UserRepository {

@@ -1,8 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
-import 'package:pimp_my_code/domain/usecases/logout_use_case.dart';
 import 'package:pimp_my_code/state/error_handler/error_handler_bloc.dart';
 import 'package:pimp_my_code/state/login/login_bloc.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
@@ -10,7 +8,9 @@ import 'package:pimp_my_code/ui/router/router.dart';
 
 import 'config/env/base.dart';
 import 'domain/repositories/user_repository.dart';
-import 'domain/usecases/register_use_case.dart';
+import 'domain/usecases/auth/login_use_case.dart';
+import 'domain/usecases/auth/logout_use_case.dart';
+import 'domain/usecases/auth/register_use_case.dart';
 import 'infrastructure/repositories/api_user_repository.dart';
 import 'infrastructure/source/api/command/authentication.dart';
 import 'infrastructure/source/api/interceptor/add_token_interceptor.dart';

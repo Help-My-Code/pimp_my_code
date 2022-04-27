@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
 
 class CodeShowRoom extends StatelessWidget {
-  const CodeShowRoom({Key? key, required this.data, this.language = 'python'}) : super(key: key);
+  const CodeShowRoom({Key? key, required this.data, this.language = 'python'})
+      : super(key: key);
 
   final String language, data;
 
@@ -13,7 +12,7 @@ class CodeShowRoom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+      decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
       child: HighlightView(
         // The original code to be highlighted
         data,
@@ -27,10 +26,10 @@ class CodeShowRoom extends StatelessWidget {
         theme: githubTheme,
 
         // Specify padding
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
 
         // Specify text style
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontFamily: 'arial',
           fontSize: 16,
         ),

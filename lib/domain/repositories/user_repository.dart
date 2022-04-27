@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
 
-import '../usecases/register_use_case.dart';
+import '../usecases/auth/login_use_case.dart';
+import '../usecases/auth/register_use_case.dart';
 
 abstract class UserRepository {
   Future<Either<RegistrationFailed, RegistrationSuccess>> register(

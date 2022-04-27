@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import '../../core/failure.dart';
-import '../../core/usecase.dart';
+import '../../../core/failure.dart';
+import '../../../core/usecase.dart';
 
-import '../repositories/user_repository.dart';
+import '../../repositories/user_repository.dart';
 
 class RegisterUseCase extends UseCase<RegistrationSuccess, RegisterParams> {
   RegisterUseCase(this.repository);

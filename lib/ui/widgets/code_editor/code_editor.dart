@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class CodeEditor extends StatefulWidget {
   const CodeEditor({Key? key, required this.onCodeChange, this.initialCode})
@@ -159,8 +158,9 @@ class DisableShortcut extends StatelessWidget {
       actions: {
         SelectionIntent: CallbackAction(
           onInvoke: (intent) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Copy is forbidden")));
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Copy is forbidden')),
+            );
             return FocusScope.of(context).requestFocus(FocusNode());
           },
         ),
@@ -168,8 +168,9 @@ class DisableShortcut extends StatelessWidget {
           onInvoke: (intent) async {
             // ClipboardData? data = await Clipboard.getData('text/plain');
             // print(" paste callBack ${data!.text}");
-            return ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Paste is forbidden")));
+            return ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Paste is forbidden')),
+            );
           },
         )
       },

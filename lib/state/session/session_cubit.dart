@@ -4,8 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/user.dart';
-import '../../domain/usecases/login_use_case.dart';
-import '../../domain/usecases/logout_use_case.dart';
+import '../../domain/usecases/auth/login_use_case.dart';
+import '../../domain/usecases/auth/logout_use_case.dart';
 
 part 'session_state.dart';
 
