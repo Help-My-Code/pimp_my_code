@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:pimp_my_code/core/failure.dart';
 
 import 'package:dartz/dartz.dart';
@@ -37,10 +39,14 @@ class ApiContentRepository extends ContentRepository {
     required String userId,
   }) async {
     final response = await _dataSource.getFollowingPublicationsByUserId(userId);
-
-    return Right(response.body
-        .map(ApiContentModel.fromJson)
-        .map(_contentMapper.mapApiContentToContent));
+    log(response.body);
+    final List<Map<String, dynamic>> apiContents = List.from(response.body);
+    return Right(
+      apiContents
+          .map(ApiContentModel.fromJson)
+          .map(_contentMapper.mapApiContentToContent)
+          .toList(),
+    );
   }
 
   @override

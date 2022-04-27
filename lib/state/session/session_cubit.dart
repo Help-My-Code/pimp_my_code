@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
@@ -48,6 +50,7 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   }
 
   Future<String> getUserId() async {
-    return await _secureStorage.read(key: 'userId') ?? '';
+    log(state.toString());
+    return await _secureStorage.read(key: 'id') ?? '';
   }
 }

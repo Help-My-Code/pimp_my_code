@@ -1,17 +1,16 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pimp_my_code/domain/entities/content.dart';
-import 'package:pimp_my_code/domain/repositories/content_repository.dart';
-import 'package:pimp_my_code/domain/usecases/content/get_following_publication.dart';
-import 'package:pimp_my_code/infrastructure/converter/content_mapper.dart';
-import 'package:pimp_my_code/infrastructure/repositories/api_content_repository.dart';
-import 'package:pimp_my_code/infrastructure/source/api/command/content.dart';
-import 'package:pimp_my_code/state/cubit/retrieve_content_cubit.dart';
-import 'package:pimp_my_code/state/error_handler/error_handler_bloc.dart';
-import 'package:pimp_my_code/state/login/login_bloc.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
-import 'package:pimp_my_code/ui/router/router.dart';
+import 'domain/repositories/content_repository.dart';
+import 'domain/usecases/content/get_following_publication.dart';
+import 'infrastructure/converter/content_mapper.dart';
+import 'infrastructure/repositories/api_content_repository.dart';
+import 'infrastructure/source/api/command/content.dart';
+import 'state/error_handler/error_handler_bloc.dart';
+import 'state/login/login_bloc.dart';
+import 'state/retrieve_content/retrieve_content_cubit.dart';
+import 'state/session/session_cubit.dart';
+import 'ui/router/router.dart';
 
 import 'config/env/base.dart';
 import 'domain/repositories/user_repository.dart';
