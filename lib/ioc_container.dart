@@ -1,6 +1,13 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/entities/content.dart';
+import 'package:pimp_my_code/domain/repositories/content_repository.dart';
+import 'package:pimp_my_code/domain/usecases/content/get_following_publication.dart';
+import 'package:pimp_my_code/infrastructure/converter/content_mapper.dart';
+import 'package:pimp_my_code/infrastructure/repositories/api_content_repository.dart';
+import 'package:pimp_my_code/infrastructure/source/api/command/content.dart';
+import 'package:pimp_my_code/state/cubit/retrieve_content_cubit.dart';
 import 'package:pimp_my_code/state/error_handler/error_handler_bloc.dart';
 import 'package:pimp_my_code/state/login/login_bloc.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
@@ -25,6 +32,7 @@ Future<void> init(Config config) async {
   sl.registerSingleton(const FlutterSecureStorage());
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
+  registerMapper();
   registerRepositories();
   registerUseCases();
   registerBloc();
@@ -34,16 +42,23 @@ Future<void> init(Config config) async {
 
 void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<AuthenticationInteractor>());
+  sl.registerSingleton(chopper.getService<ContentInteractor>());
+}
+
+void registerMapper() {
+  sl.registerFactory(() => ContentMapper());
 }
 
 void registerRepositories() {
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl()));
+  sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
 }
 
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl()));
   sl.registerSingleton(LoginUseCase(sl(), sl()));
   sl.registerSingleton(LogoutUseCase(sl()));
+  sl.registerSingleton(GetFollowingPublicationUseCase(sl()));
 }
 
 void registerBloc() {
@@ -55,6 +70,7 @@ void registerBloc() {
   sl.registerSingleton(ErrorHandlerBloc());
 
   sl.registerSingleton(AppObserver(sl(), sl()));
+  sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {
@@ -62,6 +78,7 @@ ChopperClient createChopper(Config config) {
     baseUrl: config.baseUrl,
     services: [
       AuthenticationInteractor.create(),
+      ContentInteractor.create(),
     ],
     interceptors: [
       const HeadersInterceptor(
