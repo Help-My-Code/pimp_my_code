@@ -17,6 +17,7 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   SessionCubit(
     this._loginUseCase,
     this._logoutUseCase,
+    this._secureStorage,
   ) : super(const UnknownAuthState()) {
     _attemptAutoLogin();
   }

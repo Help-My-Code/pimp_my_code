@@ -37,8 +37,10 @@ class ApiContentRepository extends ContentRepository {
     required String userId,
   }) async {
     final response = await _dataSource.getFollowingPublicationsByUserId(userId);
-    ApiContentModel apiContentModel = ApiContentModel.fromJson(response.body);
-    return Right(_contentMapper.mapApiContentToContent(apiContentModel));
+
+    return Right(response.body
+        .map(ApiContentModel.fromJson)
+        .map(_contentMapper.mapApiContentToContent));
   }
 
   @override

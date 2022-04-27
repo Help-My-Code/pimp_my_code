@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'content_model.freezed.dart';
+part 'content_model.g.dart';
 
 @freezed
 class ApiContentModel with _$ApiContentModel {
