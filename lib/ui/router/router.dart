@@ -22,20 +22,22 @@ class AppRouter {
     routes: <GoRoute>[
       GoRoute(
         path: Routes.home.path,
-        builder: (BuildContext context, GoRouterState state) =>
-            HomePage(title: title),
+        builder: (BuildContext context, GoRouterState state) => BlocProvider(
+          create: (context) => sl<RetrieveContentCubit>()..loadPublication(),
+          child: HomePage(title: title),
+        ),
       ),
       GoRoute(
         path: Routes.login.path,
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => sl.get<LoginBloc>(),
+          create: (context) => sl<LoginBloc>(),
           child: LoginPage(title: title),
         ),
       ),
       GoRoute(
         path: Routes.register.path,
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => sl.get<RegisterBloc>(),
+          create: (context) => sl<RegisterBloc>(),
           child: RegisterPage(title: title),
         ),
       ),
