@@ -7,13 +7,13 @@ part 'content_model.g.dart';
 class ApiContentModel with _$ApiContentModel {
   const factory ApiContentModel({
     required String id,
-    required String title,
+    String? title,
     required String content,
-    required DateTime createdAt,
-    required String creatorId,
-    required String groupId,
-    required String parentId,
-    required String contentType,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'group_id') String? groupId,
+    @JsonKey(name: 'creator_id') required String creatorId,
+    @JsonKey(name: 'parent_id') String? parentId,
+    @JsonKey(name: 'content_type') required String contentType,
   }) = _ApiContentModel;
 
   factory ApiContentModel.fromJson(Map<String, dynamic> json) =>

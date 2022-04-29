@@ -24,20 +24,20 @@ class _$ApiContentModelTearOff {
 
   _ApiContentModel call(
       {required String id,
-      required String title,
+      String? title,
       required String content,
-      required DateTime createdAt,
-      required String creatorId,
-      required String groupId,
-      required String parentId,
-      required String contentType}) {
+      @JsonKey(name: 'created_at') required DateTime createdAt,
+      @JsonKey(name: 'group_id') String? groupId,
+      @JsonKey(name: 'creator_id') required String creatorId,
+      @JsonKey(name: 'parent_id') String? parentId,
+      @JsonKey(name: 'content_type') required String contentType}) {
     return _ApiContentModel(
       id: id,
       title: title,
       content: content,
       createdAt: createdAt,
-      creatorId: creatorId,
       groupId: groupId,
+      creatorId: creatorId,
       parentId: parentId,
       contentType: contentType,
     );
@@ -54,12 +54,17 @@ const $ApiContentModel = _$ApiContentModelTearOff();
 /// @nodoc
 mixin _$ApiContentModel {
   String get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'group_id')
+  String? get groupId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'creator_id')
   String get creatorId => throw _privateConstructorUsedError;
-  String get groupId => throw _privateConstructorUsedError;
-  String get parentId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parent_id')
+  String? get parentId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'content_type')
   String get contentType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -75,13 +80,13 @@ abstract class $ApiContentModelCopyWith<$Res> {
       _$ApiContentModelCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String title,
+      String? title,
       String content,
-      DateTime createdAt,
-      String creatorId,
-      String groupId,
-      String parentId,
-      String contentType});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'group_id') String? groupId,
+      @JsonKey(name: 'creator_id') String creatorId,
+      @JsonKey(name: 'parent_id') String? parentId,
+      @JsonKey(name: 'content_type') String contentType});
 }
 
 /// @nodoc
@@ -99,8 +104,8 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
-    Object? creatorId = freezed,
     Object? groupId = freezed,
+    Object? creatorId = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
   }) {
@@ -112,7 +117,7 @@ class _$ApiContentModelCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -121,18 +126,18 @@ class _$ApiContentModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      groupId: groupId == freezed
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as String?,
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupId: groupId == freezed
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as String,
       parentId: parentId == freezed
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -150,13 +155,13 @@ abstract class _$ApiContentModelCopyWith<$Res>
   @override
   $Res call(
       {String id,
-      String title,
+      String? title,
       String content,
-      DateTime createdAt,
-      String creatorId,
-      String groupId,
-      String parentId,
-      String contentType});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'group_id') String? groupId,
+      @JsonKey(name: 'creator_id') String creatorId,
+      @JsonKey(name: 'parent_id') String? parentId,
+      @JsonKey(name: 'content_type') String contentType});
 }
 
 /// @nodoc
@@ -176,8 +181,8 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
-    Object? creatorId = freezed,
     Object? groupId = freezed,
+    Object? creatorId = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
   }) {
@@ -189,7 +194,7 @@ class __$ApiContentModelCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       content: content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -198,18 +203,18 @@ class __$ApiContentModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      groupId: groupId == freezed
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as String?,
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupId: groupId == freezed
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as String,
       parentId: parentId == freezed
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -223,13 +228,13 @@ class __$ApiContentModelCopyWithImpl<$Res>
 class _$_ApiContentModel implements _ApiContentModel {
   const _$_ApiContentModel(
       {required this.id,
-      required this.title,
+      this.title,
       required this.content,
-      required this.createdAt,
-      required this.creatorId,
-      required this.groupId,
-      required this.parentId,
-      required this.contentType});
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'group_id') this.groupId,
+      @JsonKey(name: 'creator_id') required this.creatorId,
+      @JsonKey(name: 'parent_id') this.parentId,
+      @JsonKey(name: 'content_type') required this.contentType});
 
   factory _$_ApiContentModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiContentModelFromJson(json);
@@ -237,23 +242,28 @@ class _$_ApiContentModel implements _ApiContentModel {
   @override
   final String id;
   @override
-  final String title;
+  final String? title;
   @override
   final String content;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'group_id')
+  final String? groupId;
+  @override
+  @JsonKey(name: 'creator_id')
   final String creatorId;
   @override
-  final String groupId;
+  @JsonKey(name: 'parent_id')
+  final String? parentId;
   @override
-  final String parentId;
-  @override
+  @JsonKey(name: 'content_type')
   final String contentType;
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, title: $title, content: $content, createdAt: $createdAt, creatorId: $creatorId, groupId: $groupId, parentId: $parentId, contentType: $contentType)';
+    return 'ApiContentModel(id: $id, title: $title, content: $content, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType)';
   }
 
   @override
@@ -265,8 +275,8 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
+            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality()
                 .equals(other.contentType, contentType));
@@ -279,8 +289,8 @@ class _$_ApiContentModel implements _ApiContentModel {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(creatorId),
       const DeepCollectionEquality().hash(groupId),
+      const DeepCollectionEquality().hash(creatorId),
       const DeepCollectionEquality().hash(parentId),
       const DeepCollectionEquality().hash(contentType));
 
@@ -297,14 +307,15 @@ class _$_ApiContentModel implements _ApiContentModel {
 
 abstract class _ApiContentModel implements ApiContentModel {
   const factory _ApiContentModel(
-      {required String id,
-      required String title,
-      required String content,
-      required DateTime createdAt,
-      required String creatorId,
-      required String groupId,
-      required String parentId,
-      required String contentType}) = _$_ApiContentModel;
+          {required String id,
+          String? title,
+          required String content,
+          @JsonKey(name: 'created_at') required DateTime createdAt,
+          @JsonKey(name: 'group_id') String? groupId,
+          @JsonKey(name: 'creator_id') required String creatorId,
+          @JsonKey(name: 'parent_id') String? parentId,
+          @JsonKey(name: 'content_type') required String contentType}) =
+      _$_ApiContentModel;
 
   factory _ApiContentModel.fromJson(Map<String, dynamic> json) =
       _$_ApiContentModel.fromJson;
@@ -312,18 +323,23 @@ abstract class _ApiContentModel implements ApiContentModel {
   @override
   String get id;
   @override
-  String get title;
+  String? get title;
   @override
   String get content;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
+  @JsonKey(name: 'group_id')
+  String? get groupId;
+  @override
+  @JsonKey(name: 'creator_id')
   String get creatorId;
   @override
-  String get groupId;
+  @JsonKey(name: 'parent_id')
+  String? get parentId;
   @override
-  String get parentId;
-  @override
+  @JsonKey(name: 'content_type')
   String get contentType;
   @override
   @JsonKey(ignore: true)

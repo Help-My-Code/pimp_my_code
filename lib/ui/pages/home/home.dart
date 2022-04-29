@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               return const Loading();
             },
             orElse: () => const Loading(),
-            loaded: (publications) => const HomeLoaded(),
+            loaded: (publications) => HomeLoaded(publications: publications),
           );
         },
       ),
