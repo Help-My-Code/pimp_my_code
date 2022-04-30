@@ -8,6 +8,7 @@ class Content {
   final String? parentId;
   final ContentType contentType;
   final List<String> medias;
+  final String? userPicture;
 
   Content(
     this.id,
@@ -19,6 +20,7 @@ class Content {
     this.parentId,
     this.contentType,
     this.medias,
+    this.userPicture,
   );
 }
 

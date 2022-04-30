@@ -18,6 +18,7 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       contentType: json['contentType'] as String,
       medias:
           (json['medias'] as List<dynamic>).map((e) => e as String).toList(),
+      userPicture: json['userPicture'] as String?,
     );
 
 Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
       'parentId': instance.parentId,
       'contentType': instance.contentType,
       'medias': instance.medias,
+      'userPicture': instance.userPicture,
     };

@@ -31,7 +31,8 @@ class _$ApiContentModelTearOff {
       @JsonKey(name: 'creatorId') required String creatorId,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') required String contentType,
-      required List<String> medias}) {
+      required List<String> medias,
+      String? userPicture}) {
     return _ApiContentModel(
       id: id,
       title: title,
@@ -42,6 +43,7 @@ class _$ApiContentModelTearOff {
       parentId: parentId,
       contentType: contentType,
       medias: medias,
+      userPicture: userPicture,
     );
   }
 
@@ -69,6 +71,7 @@ mixin _$ApiContentModel {
   @JsonKey(name: 'contentType')
   String get contentType => throw _privateConstructorUsedError;
   List<String> get medias => throw _privateConstructorUsedError;
+  String? get userPicture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -90,7 +93,8 @@ abstract class $ApiContentModelCopyWith<$Res> {
       @JsonKey(name: 'creatorId') String creatorId,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') String contentType,
-      List<String> medias});
+      List<String> medias,
+      String? userPicture});
 }
 
 /// @nodoc
@@ -113,6 +117,7 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? parentId = freezed,
     Object? contentType = freezed,
     Object? medias = freezed,
+    Object? userPicture = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -151,6 +156,10 @@ class _$ApiContentModelCopyWithImpl<$Res>
           ? _value.medias
           : medias // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      userPicture: userPicture == freezed
+          ? _value.userPicture
+          : userPicture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -171,7 +180,8 @@ abstract class _$ApiContentModelCopyWith<$Res>
       @JsonKey(name: 'creatorId') String creatorId,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') String contentType,
-      List<String> medias});
+      List<String> medias,
+      String? userPicture});
 }
 
 /// @nodoc
@@ -196,6 +206,7 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? parentId = freezed,
     Object? contentType = freezed,
     Object? medias = freezed,
+    Object? userPicture = freezed,
   }) {
     return _then(_ApiContentModel(
       id: id == freezed
@@ -234,6 +245,10 @@ class __$ApiContentModelCopyWithImpl<$Res>
           ? _value.medias
           : medias // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      userPicture: userPicture == freezed
+          ? _value.userPicture
+          : userPicture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -250,7 +265,8 @@ class _$_ApiContentModel implements _ApiContentModel {
       @JsonKey(name: 'creatorId') required this.creatorId,
       @JsonKey(name: 'parentId') this.parentId,
       @JsonKey(name: 'contentType') required this.contentType,
-      required this.medias});
+      required this.medias,
+      this.userPicture});
 
   factory _$_ApiContentModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiContentModelFromJson(json);
@@ -278,10 +294,12 @@ class _$_ApiContentModel implements _ApiContentModel {
   final String contentType;
   @override
   final List<String> medias;
+  @override
+  final String? userPicture;
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, title: $title, content: $content, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType, medias: $medias)';
+    return 'ApiContentModel(id: $id, title: $title, content: $content, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType, medias: $medias, userPicture: $userPicture)';
   }
 
   @override
@@ -298,7 +316,9 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality()
                 .equals(other.contentType, contentType) &&
-            const DeepCollectionEquality().equals(other.medias, medias));
+            const DeepCollectionEquality().equals(other.medias, medias) &&
+            const DeepCollectionEquality()
+                .equals(other.userPicture, userPicture));
   }
 
   @override
@@ -312,7 +332,8 @@ class _$_ApiContentModel implements _ApiContentModel {
       const DeepCollectionEquality().hash(creatorId),
       const DeepCollectionEquality().hash(parentId),
       const DeepCollectionEquality().hash(contentType),
-      const DeepCollectionEquality().hash(medias));
+      const DeepCollectionEquality().hash(medias),
+      const DeepCollectionEquality().hash(userPicture));
 
   @JsonKey(ignore: true)
   @override
@@ -335,7 +356,8 @@ abstract class _ApiContentModel implements ApiContentModel {
       @JsonKey(name: 'creatorId') required String creatorId,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') required String contentType,
-      required List<String> medias}) = _$_ApiContentModel;
+      required List<String> medias,
+      String? userPicture}) = _$_ApiContentModel;
 
   factory _ApiContentModel.fromJson(Map<String, dynamic> json) =
       _$_ApiContentModel.fromJson;
@@ -363,6 +385,8 @@ abstract class _ApiContentModel implements ApiContentModel {
   String get contentType;
   @override
   List<String> get medias;
+  @override
+  String? get userPicture;
   @override
   @JsonKey(ignore: true)
   _$ApiContentModelCopyWith<_ApiContentModel> get copyWith =>

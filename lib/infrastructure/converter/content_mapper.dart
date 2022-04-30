@@ -25,6 +25,7 @@ class ContentMapper {
       apiContentModel.parentId,
       _contentTypefromString(apiContentModel.contentType),
       apiContentModel.medias,
+      apiContentModel.userPicture,
     );
   }
 }
