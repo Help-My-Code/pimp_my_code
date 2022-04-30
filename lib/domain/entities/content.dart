@@ -7,6 +7,7 @@ class Content {
   final String? groupId;
   final String? parentId;
   final ContentType contentType;
+  final List<String> medias;
 
   Content(
     this.id,
@@ -17,6 +18,7 @@ class Content {
     this.groupId,
     this.parentId,
     this.contentType,
+    this.medias,
   );
 }
 

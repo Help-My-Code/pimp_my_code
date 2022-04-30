@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pimp_my_code/core/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -32,7 +30,6 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
 
   _saveUserInfoAfterLogin(LoginResponse response) async {
     final decodedToken = TokenDecoder.convertTokenToMap(response.token);
-    log("decodedToken: $decodedToken");
     await _storage.write(key: 'token', value: response.token);
     await _storage.write(key: 'id', value: decodedToken['userId']);
   }

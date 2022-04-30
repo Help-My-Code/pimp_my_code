@@ -61,15 +61,10 @@ class HomeLoaded extends StatelessWidget {
                   ],
                   title: publications[index].title,
                   post: publications[index].content,
-                  images: const [
-                    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                    'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                  ],
-                  imageURL:
-                      'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+                  images: publications[index].medias,
+                  imageURL: publications[index].medias.isEmpty
+                      ? 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg'
+                      : publications[index].medias[0],
                   username: 'Benjamin Raynal',
                   date: 'Il y a 5 minutes',
                 );
