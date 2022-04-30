@@ -11,6 +11,7 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       title: json['title'] as String?,
       content: json['content'] as String,
+      code: json['code'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       groupId: json['groupId'] as String?,
       creatorId: json['creatorId'] as String,
@@ -18,6 +19,7 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       contentType: json['contentType'] as String,
       medias:
           (json['medias'] as List<dynamic>).map((e) => e as String).toList(),
+      username: json['username'] as String,
       userPicture: json['userPicture'] as String?,
     );
 
@@ -26,11 +28,13 @@ Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
       'id': instance.id,
       'title': instance.title,
       'content': instance.content,
+      'code': instance.code,
       'createdAt': instance.createdAt.toIso8601String(),
       'groupId': instance.groupId,
       'creatorId': instance.creatorId,
       'parentId': instance.parentId,
       'contentType': instance.contentType,
       'medias': instance.medias,
+      'username': instance.username,
       'userPicture': instance.userPicture,
     };

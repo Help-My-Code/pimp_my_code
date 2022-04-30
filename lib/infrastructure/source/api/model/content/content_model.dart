@@ -9,12 +9,14 @@ class ApiContentModel with _$ApiContentModel {
     required String id,
     String? title,
     required String content,
+    String? code,
     @JsonKey(name: 'createdAt') required DateTime createdAt,
     @JsonKey(name: 'groupId') String? groupId,
     @JsonKey(name: 'creatorId') required String creatorId,
     @JsonKey(name: 'parentId') String? parentId,
     @JsonKey(name: 'contentType') required String contentType,
     required List<String> medias,
+    required String username,
     String? userPicture,
   }) = _ApiContentModel;
 
