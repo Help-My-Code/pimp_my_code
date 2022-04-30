@@ -64,7 +64,9 @@ class PostCard extends StatelessWidget {
                   child: Text(
                     title!,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               if (title != null)
@@ -79,12 +81,13 @@ class PostCard extends StatelessWidget {
                       return Container(
                         margin: const EdgeInsets.all(5.0),
                         child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5.0)),
-                            child: ImageFullScreenWrapper(
-                              url: url,
-                              dark: true,
-                            )),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5.0)),
+                          child: ImageFullScreenWrapper(
+                            url: url,
+                            dark: true,
+                          ),
+                        ),
                       );
                     },
                   ).toList(),

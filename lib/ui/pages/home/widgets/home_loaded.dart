@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/domain/entities/content.dart';
@@ -66,7 +67,8 @@ class HomeLoaded extends StatelessWidget {
                       ? publications[index].userPicture!
                       : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
                   username: 'Benjamin Raynal',
-                  date: 'Il y a 5 minutes',
+                  date: DateFormat('dd MMMM yyyy')
+                      .format(publications[index].createdAt),
                 );
               },
             ),
