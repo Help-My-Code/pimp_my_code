@@ -17,11 +17,11 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   void loadPublication() async {
     emit(const RetrieveContentState.loading());
     String userId = await _sessionCubit.getUserId();
-    final publications = await _getFollowingPublication(userId);
-    publications.fold((l) {
-      emit(const RetrieveContentState.failure());
-    }, (r) {
-      emit(RetrieveContentState.loaded(r));
-    });
+//    final publications = await _getFollowingPublication(userId);
+//    publications.fold((l) {
+//      emit(const RetrieveContentState.failure());
+//    }, (r) {
+//      emit(RetrieveContentState.loaded(r));
+//    });
   }
 }

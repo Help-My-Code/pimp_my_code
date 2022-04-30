@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
+import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
@@ -66,6 +67,7 @@ void registerUseCases() {
   sl.registerSingleton(LoginUseCase(sl(), sl()));
   sl.registerSingleton(LogoutUseCase(sl()));
   sl.registerSingleton(GetFollowingPublicationUseCase(sl()));
+  sl.registerSingleton(FindUserByNameUseCase(sl()));
 }
 
 void registerBloc() {

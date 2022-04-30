@@ -14,7 +14,7 @@ class RetrieveUserCubit extends Cubit<RetrieveUserState> {
   RetrieveUserCubit(this._sessionCubit, this._findUserByName)
       : super(const RetrieveUserState.initial());
 
-  void loadPublication() async {
+  void loadUser() async {
     emit(const RetrieveUserState.loading());
     String userId = await _sessionCubit.getUserId();
     final publications = await _findUserByName(userId);

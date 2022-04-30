@@ -32,7 +32,7 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
 
   _saveUserInfoAfterLogin(LoginResponse response) async {
     final decodedToken = TokenDecoder.convertTokenToMap(response.token);
-    log("decodedToken: $decodedToken");
+    log('decodedToken: $decodedToken');
     await _storage.write(key: 'token', value: response.token);
     await _storage.write(key: 'id', value: decodedToken['userId']);
   }
