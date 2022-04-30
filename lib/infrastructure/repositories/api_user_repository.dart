@@ -1,50 +1,34 @@
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
+
+import '../../core/failure.dart';
+import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../domain/usecases/auth/login_use_case.dart';
-import '../../domain/usecases/auth/register_use_case.dart';
-import '../source/api/command/authentication.dart';
+import '../converter/user_mapper.dart';
+import '../source/api/command/user.dart';
+import '../source/api/model/user/user_model.dart';
+
 
 class ApiUserRepository extends UserRepository {
-  ApiUserRepository(this._dataSource);
+  final UserInteractor _dataSource;
+  final UserMapper _userMapper;
 
-  final AuthenticationInteractor _dataSource;
+  ApiUserRepository(this._dataSource, this._userMapper);
 
   @override
-  Future<Either<RegistrationFailed, RegistrationSuccess>> register(
-    email,
-    password,
-    confirmPassword,
-    firstName,
-    lastName,
-    description,
-  ) async {
-    try {
-      await _dataSource.register(fields: {
-        'email': email,
-        'password': password,
-        'confirmPassword': confirmPassword,
-        'firstname': firstName,
-        'lastname': lastName,
-        'description': description,
-      });
-      return Right(RegistrationSuccess());
-    } catch (e) {
-      return Left(RegistrationFailed());
-    }
+  Future<Either<GetUserFailed, List<User>>> getByName({required String name}) async {
+    final response = await _dataSource.getByName(name);
+    final List<Map<String, dynamic>> apiUsers =
+    List.from(response.body['users']);
+    return Right(
+      apiUsers
+          .map(ApiUserModel.fromJson)
+          .map(_userMapper.mapApiUserToUser)
+          .toList(),
+    );
   }
 
   @override
-  Future<Either<LoginFailure, LoginResponse>> login(
-      String email, String password) async {
-    try {
-      final response = await _dataSource.login(fields: {
-        'email': email,
-        'password': password,
-      });
-      return Right(LoginResponse(response.body['accessToken']));
-    } catch (e) {
-      return Left(LoginFailure(tr('wrong_credentials')));
-    }
+  Future<Either<Failure, void>> updateUser(User user) {
+    throw UnimplementedError();
   }
 }

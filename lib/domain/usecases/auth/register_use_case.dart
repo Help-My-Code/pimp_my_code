@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
+
 import '../../../core/failure.dart';
 import '../../../core/usecase.dart';
-
-import '../../repositories/user_repository.dart';
+import '../../repositories/auth_repository.dart';
 
 class RegisterUseCase extends UseCase<RegistrationSuccess, RegisterParams> {
   RegisterUseCase(this.repository);
 
-  final UserRepository repository;
+  final AuthRepository repository;
 
   @override
   Future<Either<RegistrationFailed, RegistrationSuccess>> call(
