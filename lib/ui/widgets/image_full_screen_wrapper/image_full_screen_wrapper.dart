@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,7 +5,8 @@ class ImageFullScreenWrapper extends StatelessWidget {
   final bool dark;
   final String url;
 
-  const ImageFullScreenWrapper({Key? key,
+  const ImageFullScreenWrapper({
+    Key? key,
     required this.url,
     this.dark = true,
   }) : super(key: key);
@@ -30,7 +29,10 @@ class ImageFullScreenWrapper extends StatelessWidget {
           ),
         );
       },
-      child: Image.network(url, fit: BoxFit.cover,),
+      child: Image.network(
+        url,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
@@ -55,7 +57,10 @@ class _FullScreenPageState extends State<FullScreenPage> {
     var brightness = widget.dark ? Brightness.light : Brightness.dark;
     var color = widget.dark ? Colors.black12 : Colors.white70;
 
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top],
+    );
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: color,
       statusBarColor: color,
@@ -69,10 +74,10 @@ class _FullScreenPageState extends State<FullScreenPage> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      // Restore your settings here...
-    ));
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top],
+    );
     super.dispose();
   }
 
@@ -85,7 +90,7 @@ class _FullScreenPageState extends State<FullScreenPage> {
           Stack(
             children: [
               AnimatedPositioned(
-                duration: Duration(milliseconds: 333),
+                duration: const Duration(milliseconds: 333),
                 curve: Curves.fastOutSlowIn,
                 top: 0,
                 bottom: 0,
@@ -95,7 +100,9 @@ class _FullScreenPageState extends State<FullScreenPage> {
                   panEnabled: true,
                   minScale: 0.5,
                   maxScale: 4,
-                  child: Image.network(widget.url,),
+                  child: Image.network(
+                    widget.url,
+                  ),
                 ),
               ),
             ],

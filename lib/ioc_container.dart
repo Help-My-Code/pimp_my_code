@@ -1,16 +1,22 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
-import 'package:pimp_my_code/domain/usecases/logout_use_case.dart';
-import 'package:pimp_my_code/state/error_handler/error_handler_bloc.dart';
-import 'package:pimp_my_code/state/login/login_bloc.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
-import 'package:pimp_my_code/ui/router/router.dart';
+import 'domain/repositories/content_repository.dart';
+import 'domain/usecases/content/get_following_publication.dart';
+import 'infrastructure/converter/content_mapper.dart';
+import 'infrastructure/repositories/api_content_repository.dart';
+import 'infrastructure/source/api/command/content.dart';
+import 'state/error_handler/error_handler_bloc.dart';
+import 'state/login/login_bloc.dart';
+import 'state/retrieve_content/retrieve_content_cubit.dart';
+import 'state/session/session_cubit.dart';
+import 'ui/router/router.dart';
 
 import 'config/env/base.dart';
 import 'domain/repositories/user_repository.dart';
-import 'domain/usecases/register_use_case.dart';
+import 'domain/usecases/auth/login_use_case.dart';
+import 'domain/usecases/auth/logout_use_case.dart';
+import 'domain/usecases/auth/register_use_case.dart';
 import 'infrastructure/repositories/api_user_repository.dart';
 import 'infrastructure/source/api/command/authentication.dart';
 import 'infrastructure/source/api/interceptor/add_token_interceptor.dart';
@@ -25,6 +31,7 @@ Future<void> init(Config config) async {
   sl.registerSingleton(const FlutterSecureStorage());
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
+  registerMapper();
   registerRepositories();
   registerUseCases();
   registerBloc();
@@ -34,20 +41,27 @@ Future<void> init(Config config) async {
 
 void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<AuthenticationInteractor>());
+  sl.registerSingleton(chopper.getService<ContentInteractor>());
+}
+
+void registerMapper() {
+  sl.registerFactory(() => ContentMapper());
 }
 
 void registerRepositories() {
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl()));
+  sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
 }
 
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl()));
   sl.registerSingleton(LoginUseCase(sl(), sl()));
   sl.registerSingleton(LogoutUseCase(sl()));
+  sl.registerSingleton(GetFollowingPublicationUseCase(sl()));
 }
 
 void registerBloc() {
-  sl.registerSingleton(SessionCubit(sl(), sl()));
+  sl.registerSingleton(SessionCubit(sl(), sl(), sl()));
 
   sl.registerFactory(() => RegisterBloc(sl()));
   sl.registerFactory(() => LoginBloc(sl(), sl()));
@@ -55,6 +69,7 @@ void registerBloc() {
   sl.registerSingleton(ErrorHandlerBloc());
 
   sl.registerSingleton(AppObserver(sl(), sl()));
+  sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {
@@ -62,6 +77,7 @@ ChopperClient createChopper(Config config) {
     baseUrl: config.baseUrl,
     services: [
       AuthenticationInteractor.create(),
+      ContentInteractor.create(),
     ],
     interceptors: [
       const HeadersInterceptor(

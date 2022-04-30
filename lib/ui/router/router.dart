@@ -7,6 +7,7 @@ import 'package:pimp_my_code/ui/router/routes.dart';
 import '../../ioc_container.dart';
 import '../../state/login/login_bloc.dart';
 import '../../state/register/register_bloc.dart';
+import '../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../state/session/session_cubit.dart';
 import '../pages/account.dart';
 import '../pages/home/home.dart';
@@ -22,20 +23,22 @@ class AppRouter {
     routes: <GoRoute>[
       GoRoute(
         path: Routes.home.path,
-        builder: (BuildContext context, GoRouterState state) =>
-            HomePage(title: title),
+        builder: (BuildContext context, GoRouterState state) => BlocProvider(
+          create: (context) => sl<RetrieveContentCubit>(),
+          child: HomePage(title: title),
+        ),
       ),
       GoRoute(
         path: Routes.login.path,
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => sl.get<LoginBloc>(),
+          create: (context) => sl<LoginBloc>(),
           child: LoginPage(title: title),
         ),
       ),
       GoRoute(
         path: Routes.register.path,
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => sl.get<RegisterBloc>(),
+          create: (context) => sl<RegisterBloc>(),
           child: RegisterPage(title: title),
         ),
       ),

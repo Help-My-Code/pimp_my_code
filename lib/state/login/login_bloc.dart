@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/usecases/login_use_case.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
 
 import '../../core/form_status.dart';
 import '../../domain/entities/user.dart';
+import '../../domain/usecases/auth/login_use_case.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

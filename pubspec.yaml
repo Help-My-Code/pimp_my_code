@@ -50,6 +50,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   pinch_zoom_image_last: ^0.4.1
   cached_network_image: ^3.2.0
+  json_serializable: ^6.1.6
 
 dev_dependencies:
   flutter_test:

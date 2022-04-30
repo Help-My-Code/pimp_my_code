@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/usecases/register_use_case.dart';
 
 import '../../core/form_status.dart';
+import '../../domain/usecases/auth/register_use_case.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
