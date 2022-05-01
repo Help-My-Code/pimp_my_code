@@ -27,6 +27,7 @@ class _$ApiContentModelTearOff {
       String? title,
       required String content,
       String? code,
+      String? codeResult,
       @JsonKey(name: 'createdAt') required DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'creatorId') required String creatorId,
@@ -40,6 +41,7 @@ class _$ApiContentModelTearOff {
       title: title,
       content: content,
       code: code,
+      codeResult: codeResult,
       createdAt: createdAt,
       groupId: groupId,
       creatorId: creatorId,
@@ -65,6 +67,7 @@ mixin _$ApiContentModel {
   String? get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
+  String? get codeResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdAt')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'groupId')
@@ -95,6 +98,7 @@ abstract class $ApiContentModelCopyWith<$Res> {
       String? title,
       String content,
       String? code,
+      String? codeResult,
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'creatorId') String creatorId,
@@ -120,6 +124,7 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
     Object? code = freezed,
+    Object? codeResult = freezed,
     Object? createdAt = freezed,
     Object? groupId = freezed,
     Object? creatorId = freezed,
@@ -145,6 +150,10 @@ class _$ApiContentModelCopyWithImpl<$Res>
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codeResult: codeResult == freezed
+          ? _value.codeResult
+          : codeResult // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -194,6 +203,7 @@ abstract class _$ApiContentModelCopyWith<$Res>
       String? title,
       String content,
       String? code,
+      String? codeResult,
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'creatorId') String creatorId,
@@ -221,6 +231,7 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
     Object? code = freezed,
+    Object? codeResult = freezed,
     Object? createdAt = freezed,
     Object? groupId = freezed,
     Object? creatorId = freezed,
@@ -246,6 +257,10 @@ class __$ApiContentModelCopyWithImpl<$Res>
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codeResult: codeResult == freezed
+          ? _value.codeResult
+          : codeResult // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -291,6 +306,7 @@ class _$_ApiContentModel implements _ApiContentModel {
       this.title,
       required this.content,
       this.code,
+      this.codeResult,
       @JsonKey(name: 'createdAt') required this.createdAt,
       @JsonKey(name: 'groupId') this.groupId,
       @JsonKey(name: 'creatorId') required this.creatorId,
@@ -311,6 +327,8 @@ class _$_ApiContentModel implements _ApiContentModel {
   final String content;
   @override
   final String? code;
+  @override
+  final String? codeResult;
   @override
   @JsonKey(name: 'createdAt')
   final DateTime createdAt;
@@ -335,7 +353,7 @@ class _$_ApiContentModel implements _ApiContentModel {
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, title: $title, content: $content, code: $code, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType, medias: $medias, username: $username, userImage: $userImage)';
+    return 'ApiContentModel(id: $id, title: $title, content: $content, code: $code, codeResult: $codeResult, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType, medias: $medias, username: $username, userImage: $userImage)';
   }
 
   @override
@@ -347,6 +365,8 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.code, code) &&
+            const DeepCollectionEquality()
+                .equals(other.codeResult, codeResult) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
@@ -365,6 +385,7 @@ class _$_ApiContentModel implements _ApiContentModel {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(code),
+      const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(groupId),
       const DeepCollectionEquality().hash(creatorId),
@@ -391,6 +412,7 @@ abstract class _ApiContentModel implements ApiContentModel {
       String? title,
       required String content,
       String? code,
+      String? codeResult,
       @JsonKey(name: 'createdAt') required DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'creatorId') required String creatorId,
@@ -411,6 +433,8 @@ abstract class _ApiContentModel implements ApiContentModel {
   String get content;
   @override
   String? get code;
+  @override
+  String? get codeResult;
   @override
   @JsonKey(name: 'createdAt')
   DateTime get createdAt;

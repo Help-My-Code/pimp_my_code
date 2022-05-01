@@ -36,5 +36,6 @@
   "register_failed": "Register failed",
   "register_success": "Successful registration",
   "login_success": "Successful login",
-  "new_publication": "New publication"
+  "new_publication": "New publication",
+  "program_execution_failure": "Something unexpected occured during the program execution"
 }

@@ -10,6 +10,7 @@ class ApiContentModel with _$ApiContentModel {
     String? title,
     required String content,
     String? code,
+    String? codeResult,
     @JsonKey(name: 'createdAt') required DateTime createdAt,
     @JsonKey(name: 'groupId') String? groupId,
     @JsonKey(name: 'creatorId') required String creatorId,

@@ -10,6 +10,7 @@ class Content {
   final List<String> medias;
   final String? userPicture;
   final String? code;
+  final String? codeResult;
   final String username;
 
   Content({
@@ -26,6 +27,9 @@ class Content {
     this.code,
     required this.username,
   });
+    this.username,
+      this.codeResult,
+  );
 }
 
 enum ContentType {
