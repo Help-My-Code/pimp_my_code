@@ -1,10 +1,15 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/content.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+
+import '../../core/failure.dart';
 
 part 'create_post_state.dart';
 
@@ -23,6 +28,10 @@ class CreatePostCubit extends Cubit<CreatePostState> {
         state.username != null &&
         state.createdAt != null &&
         state.medias != null;
+  }
+
+  void onCancel() {
+    emit(CreatePostState.initial());
   }
 
   void onNewTemporaryPost(String userPicture, String username) {
@@ -54,18 +63,27 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(state.copyWith(codeResult: codeResult));
   }
 
+  void onLanguageChange(String language){
+    emit(state.copyWith(language: language));
+  }
+
   void onSubmitCompilation() async {
     emit(state.copyWith(isLoading: true));
     if (state.code != null) {
       final either = await _executeProgramUseCase
           .call(ExecuteProgramParams(state.language, state.code!));
-      either.fold((l) => null, (r) => null);
+      either.fold((f) {
+        emit(state.copyWith(failureOrSuccessOption: some(left(f))));
+      }, (r) {
+        emit(state.copyWith(codeResult: r));
+      });
     }
     emit(state.copyWith(isLoading: false));
   }
 
   void onSubmitPost(
     String creatorId,
+      BuildContext context,
   ) async {
     emit(state.copyWith(isLoading: true));
     if (isValid) {
@@ -78,7 +96,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
               content: state.content!,
               userPicture: state.userPicture!,
               username: state.username!));
-      either.fold((l) => null, (r) => null);
+      either.fold((f) {
+        emit(state.copyWith(failureOrSuccessOption: some(left(f))));
+      }, (r) {
+        emit(CreatePostState.initial());
+        GoRouter.of(context).refresh();
+      });
     }
     emit(state.copyWith(isLoading: false));
   }

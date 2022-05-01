@@ -37,6 +37,9 @@
   "register_success": "Inscription réussie",
   "login_success": "Connexion réussie",
   "new_publication": "Nouvelle publication",
-  "program_execution_failure": "Erreur inatendue s'est passée durant l'éxécution du code"
+  "program_execution_failure": "Erreur inatendue s'est passée durant l'éxécution du code",
+  "cancel": "Annuler",
+  "compile": "Compiler",
+  "submit": "Soumettre"
 
 }

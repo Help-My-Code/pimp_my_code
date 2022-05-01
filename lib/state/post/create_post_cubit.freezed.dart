@@ -28,7 +28,8 @@ class _$CreatePostStateTearOff {
       String? code,
       String? codeResult,
       required String language,
-      required bool isLoading}) {
+      required bool isLoading,
+      required Option<Either<Failure, Unit>> failureOrSuccessOption}) {
     return _CreatePostState(
       title: title,
       content: content,
@@ -40,6 +41,7 @@ class _$CreatePostStateTearOff {
       codeResult: codeResult,
       language: language,
       isLoading: isLoading,
+      failureOrSuccessOption: failureOrSuccessOption,
     );
   }
 }
@@ -59,6 +61,8 @@ mixin _$CreatePostState {
   String? get codeResult => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  Option<Either<Failure, Unit>> get failureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreatePostStateCopyWith<CreatePostState> get copyWith =>
@@ -80,7 +84,8 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String? code,
       String? codeResult,
       String language,
-      bool isLoading});
+      bool isLoading,
+      Option<Either<Failure, Unit>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -104,6 +109,7 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
+    Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -146,6 +152,10 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<Failure, Unit>>,
     ));
   }
 }
@@ -167,7 +177,8 @@ abstract class _$CreatePostStateCopyWith<$Res>
       String? code,
       String? codeResult,
       String language,
-      bool isLoading});
+      bool isLoading,
+      Option<Either<Failure, Unit>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -193,6 +204,7 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
+    Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_CreatePostState(
       title: title == freezed
@@ -235,6 +247,10 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<Failure, Unit>>,
     ));
   }
 }
@@ -252,7 +268,8 @@ class _$_CreatePostState extends _CreatePostState {
       this.code,
       this.codeResult,
       required this.language,
-      required this.isLoading})
+      required this.isLoading,
+      required this.failureOrSuccessOption})
       : super._();
 
   @override
@@ -275,10 +292,12 @@ class _$_CreatePostState extends _CreatePostState {
   final String language;
   @override
   final bool isLoading;
+  @override
+  final Option<Either<Failure, Unit>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, language: $language, isLoading: $isLoading)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, language: $language, isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -297,7 +316,9 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality()
                 .equals(other.codeResult, codeResult) &&
             const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.failureOrSuccessOption, failureOrSuccessOption));
   }
 
   @override
@@ -312,7 +333,8 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(language),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(failureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -322,16 +344,18 @@ class _$_CreatePostState extends _CreatePostState {
 
 abstract class _CreatePostState extends CreatePostState {
   const factory _CreatePostState(
-      {String? title,
-      String? content,
-      String? userPicture,
-      String? username,
-      DateTime? createdAt,
-      List<String>? medias,
-      String? code,
-      String? codeResult,
-      required String language,
-      required bool isLoading}) = _$_CreatePostState;
+          {String? title,
+          String? content,
+          String? userPicture,
+          String? username,
+          DateTime? createdAt,
+          List<String>? medias,
+          String? code,
+          String? codeResult,
+          required String language,
+          required bool isLoading,
+          required Option<Either<Failure, Unit>> failureOrSuccessOption}) =
+      _$_CreatePostState;
   const _CreatePostState._() : super._();
 
   @override
@@ -354,6 +378,8 @@ abstract class _CreatePostState extends CreatePostState {
   String get language;
   @override
   bool get isLoading;
+  @override
+  Option<Either<Failure, Unit>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$CreatePostStateCopyWith<_CreatePostState> get copyWith =>

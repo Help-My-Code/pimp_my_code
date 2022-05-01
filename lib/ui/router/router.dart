@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/ui/router/routes.dart';
 
 import '../../ioc_container.dart';
@@ -23,10 +24,12 @@ class AppRouter {
     routes: <GoRoute>[
       GoRoute(
         path: Routes.home.path,
-        builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => sl<RetrieveContentCubit>(),
-          child: HomePage(title: title),
-        ),
+        builder: (BuildContext context, GoRouterState state) => MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (context) => sl<RetrieveContentCubit>(),
+          ),
+          BlocProvider(create: (context) => sl<CreatePostCubit>())
+        ], child: HomePage(title: title)),
       ),
       GoRoute(
         path: Routes.login.path,
