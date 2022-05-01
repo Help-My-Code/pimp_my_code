@@ -17,7 +17,7 @@ class ApiContentModel with _$ApiContentModel {
     @JsonKey(name: 'contentType') required String contentType,
     required List<String> medias,
     required String username,
-    String? userPicture,
+    String? userImage,
   }) = _ApiContentModel;
 
   factory ApiContentModel.fromJson(Map<String, dynamic> json) =>
