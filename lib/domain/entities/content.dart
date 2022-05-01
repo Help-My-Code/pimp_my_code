@@ -7,6 +7,10 @@ class Content {
   final String? groupId;
   final String? parentId;
   final ContentType contentType;
+  final List<String> medias;
+  final String? userPicture;
+  final String? code;
+  final String username;
 
   Content(
     this.id,
@@ -17,6 +21,10 @@ class Content {
     this.groupId,
     this.parentId,
     this.contentType,
+    this.medias,
+    this.userPicture,
+    this.code,
+    this.username,
   );
 }
 

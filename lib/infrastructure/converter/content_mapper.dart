@@ -24,6 +24,10 @@ class ContentMapper {
       apiContentModel.groupId,
       apiContentModel.parentId,
       _contentTypefromString(apiContentModel.contentType),
+      apiContentModel.medias,
+      apiContentModel.userImage,
+      apiContentModel.code,
+      apiContentModel.username,
     );
   }
 }
