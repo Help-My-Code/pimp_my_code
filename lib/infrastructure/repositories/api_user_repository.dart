@@ -20,7 +20,6 @@ class ApiUserRepository extends UserRepository {
     final response = await _dataSource.getByName(name);
     final List<Map<String, dynamic>> apiUsers =
         List.from(response.body['users']);
-    print(apiUsers);
     return Right(
       apiUsers
           .map(ApiUserModel.fromJson)
