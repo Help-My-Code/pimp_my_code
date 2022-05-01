@@ -15,8 +15,8 @@ class RetrieveUserCubit extends Cubit<RetrieveUserState> {
 
   void loadUser(String name) async {
     emit(const RetrieveUserState.loading());
-    final publications = await _findUserByName(FindUserByNameParam(name));
-    publications.fold((l) {
+    final users = await _findUserByName(FindUserByNameParam(name));
+    users.fold((l) {
       emit(const RetrieveUserState.failure());
     }, (r) {
       emit(RetrieveUserState.loaded(r));

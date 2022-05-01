@@ -29,11 +29,9 @@ class _$ApiUserModelTearOff {
       required String firstname,
       required String lastname,
       String? description,
-      @JsonKey(name: 'user_role')
-          required String userRole,
+      @JsonKey(name: 'user_role') required String userRole,
       required String confidentiality,
-      @JsonKey(name: 'principal_picture_url')
-          required String? principalPictureUrl}) {
+      @JsonKey(name: 'principal_picture_url') String? principalPictureUrl}) {
     return _ApiUserModel(
       id: id,
       email: email,
@@ -245,11 +243,9 @@ class _$_ApiUserModel implements _ApiUserModel {
       required this.firstname,
       required this.lastname,
       this.description,
-      @JsonKey(name: 'user_role')
-          required this.userRole,
+      @JsonKey(name: 'user_role') required this.userRole,
       required this.confidentiality,
-      @JsonKey(name: 'principal_picture_url')
-          required this.principalPictureUrl});
+      @JsonKey(name: 'principal_picture_url') this.principalPictureUrl});
 
   factory _$_ApiUserModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiUserModelFromJson(json);
@@ -335,7 +331,7 @@ abstract class _ApiUserModel implements ApiUserModel {
           required String userRole,
       required String confidentiality,
       @JsonKey(name: 'principal_picture_url')
-          required String? principalPictureUrl}) = _$_ApiUserModel;
+          String? principalPictureUrl}) = _$_ApiUserModel;
 
   factory _ApiUserModel.fromJson(Map<String, dynamic> json) =
       _$_ApiUserModel.fromJson;

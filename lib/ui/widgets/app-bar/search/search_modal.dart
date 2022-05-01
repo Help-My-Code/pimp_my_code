@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
-import 'package:pimp_my_code/ui/pages/home/widgets/searched_users_loaded.dart';
+import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_groups_loaded.dart';
+import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_users_loaded.dart';
 
-import '../loading.dart';
+import '../../../../state/retrieve_group/retrieve_group_cubit.dart';
+import '../../loading.dart';
 
 class SearchModal extends StatelessWidget {
   const SearchModal({Key? key}) : super(key: key);
@@ -19,7 +21,12 @@ class SearchModal extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(
-            onChanged: context.read<RetrieveUserCubit>().loadUser,
+            onChanged: (text) {
+              if(text != '') {
+                context.read<RetrieveUserCubit>().loadUser(text);
+                context.read<RetrieveGroupCubit>().loadGroup(text);
+              }
+            },
             decoration: InputDecoration(
               hintText: 'search_user_group'.tr(),
               prefixIcon: const Icon(Icons.search),
@@ -46,21 +53,26 @@ class SearchModal extends StatelessWidget {
             );
           }),
           const SizedBox(height: 10),
-          //if(groups.isNotEmpty)
-          const Text('groups').tr(),
-          const SizedBox(height: 10),
-          Row(
-            children: const <Widget>[
-              GFAvatar(
-                size: 20,
-                backgroundImage: NetworkImage(
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/120px-User-avatar.svg.png?20201213175635',
-                ),
-              ),
-              SizedBox(width: 10),
-              Text('Entraide node', style: TextStyle(fontSize: 16)),
-            ],
-          ),
+          BlocConsumer<RetrieveGroupCubit, RetrieveGroupState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  failure: () {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: const Text('Failed_to_load_groups').tr(),
+                      backgroundColor: Theme.of(context).errorColor,
+                    ));
+                  },
+                );
+              }, builder: (context, state) {
+            return state.maybeWhen(
+              initial: () {
+                return const SizedBox();
+              },
+              orElse: () => const Loading(),
+              loaded: (groups) => SearchedGroupsLoaded(groups: groups),
+            );
+          }),
         ],
       ),
     );
