@@ -10,7 +10,7 @@ class User {
   final String? description;
   final Role userRole;
   final Confidentiality confidentiality;
-  final String principalPictureUrl;
+  final String? principalPictureUrl;
 
   User(this.id,
       this.email,

@@ -2,17 +2,30 @@ import 'package:dartz/dartz.dart';
 import 'package:pimp_my_code/core/usecase.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
 
+import '../../../core/failure.dart';
 import '../../entities/user.dart';
 
-class FindUserByNameUseCase extends UseCase<List<User>, String> {
-  final UserRepository users;
+class FindUserByNameUseCase extends UseCase<List<User>, FindUserByNameParam> {
+  final UserRepository _repository;
 
-  FindUserByNameUseCase(this.users);
+  FindUserByNameUseCase(this._repository);
 
   @override
-  Future<Either<GetUserFailed, List<User>>> call(
-    String params,
+  Future<Either<FindUserByNameFailure, List<User>>> call(
+      FindUserByNameParam params,
   ) async {
-    return users.getByName(name: params);
+    return await _repository.getByName(name: params.name);
   }
+}
+
+class FindUserByNameFailure extends Failure {
+  final String message;
+
+  FindUserByNameFailure(this.message);
+}
+
+class FindUserByNameParam {
+  final String name;
+
+  FindUserByNameParam(this.name);
 }

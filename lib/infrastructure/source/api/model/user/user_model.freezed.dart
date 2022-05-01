@@ -33,7 +33,7 @@ class _$ApiUserModelTearOff {
           required String userRole,
       required String confidentiality,
       @JsonKey(name: 'principal_picture_url')
-          required String principalPictureUrl}) {
+          required String? principalPictureUrl}) {
     return _ApiUserModel(
       id: id,
       email: email,
@@ -67,7 +67,7 @@ mixin _$ApiUserModel {
   String get userRole => throw _privateConstructorUsedError;
   String get confidentiality => throw _privateConstructorUsedError;
   @JsonKey(name: 'principal_picture_url')
-  String get principalPictureUrl => throw _privateConstructorUsedError;
+  String? get principalPictureUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -89,7 +89,7 @@ abstract class $ApiUserModelCopyWith<$Res> {
       String? description,
       @JsonKey(name: 'user_role') String userRole,
       String confidentiality,
-      @JsonKey(name: 'principal_picture_url') String principalPictureUrl});
+      @JsonKey(name: 'principal_picture_url') String? principalPictureUrl});
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class _$ApiUserModelCopyWithImpl<$Res> implements $ApiUserModelCopyWith<$Res> {
       principalPictureUrl: principalPictureUrl == freezed
           ? _value.principalPictureUrl
           : principalPictureUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -169,7 +169,7 @@ abstract class _$ApiUserModelCopyWith<$Res>
       String? description,
       @JsonKey(name: 'user_role') String userRole,
       String confidentiality,
-      @JsonKey(name: 'principal_picture_url') String principalPictureUrl});
+      @JsonKey(name: 'principal_picture_url') String? principalPictureUrl});
 }
 
 /// @nodoc
@@ -230,7 +230,7 @@ class __$ApiUserModelCopyWithImpl<$Res> extends _$ApiUserModelCopyWithImpl<$Res>
       principalPictureUrl: principalPictureUrl == freezed
           ? _value.principalPictureUrl
           : principalPictureUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -273,7 +273,7 @@ class _$_ApiUserModel implements _ApiUserModel {
   final String confidentiality;
   @override
   @JsonKey(name: 'principal_picture_url')
-  final String principalPictureUrl;
+  final String? principalPictureUrl;
 
   @override
   String toString() {
@@ -335,7 +335,7 @@ abstract class _ApiUserModel implements ApiUserModel {
           required String userRole,
       required String confidentiality,
       @JsonKey(name: 'principal_picture_url')
-          required String principalPictureUrl}) = _$_ApiUserModel;
+          required String? principalPictureUrl}) = _$_ApiUserModel;
 
   factory _ApiUserModel.fromJson(Map<String, dynamic> json) =
       _$_ApiUserModel.fromJson;
@@ -359,7 +359,7 @@ abstract class _ApiUserModel implements ApiUserModel {
   String get confidentiality;
   @override
   @JsonKey(name: 'principal_picture_url')
-  String get principalPictureUrl;
+  String? get principalPictureUrl;
   @override
   @JsonKey(ignore: true)
   _$ApiUserModelCopyWith<_ApiUserModel> get copyWith =>

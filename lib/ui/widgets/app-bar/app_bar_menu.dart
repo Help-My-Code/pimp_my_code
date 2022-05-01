@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
 import '../../../ioc_container.dart';
-import '../../../state/session/session_cubit.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
-import '../loading.dart';
+import '../../../state/session/session_cubit.dart';
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBarMenu({Key? key})
@@ -28,10 +26,6 @@ enum MenuValues { login, logout }
 
 class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   void printSearch() {
-    List users = [];
-
-    List groups = [];
-
     Alert(
       context: context,
       title: 'search'.tr(),

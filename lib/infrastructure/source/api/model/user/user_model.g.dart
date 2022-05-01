@@ -16,7 +16,7 @@ _$_ApiUserModel _$$_ApiUserModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       userRole: json['user_role'] as String,
       confidentiality: json['confidentiality'] as String,
-      principalPictureUrl: json['principal_picture_url'] as String,
+      principalPictureUrl: json['principal_picture_url'] as String?,
     );
 
 Map<String, dynamic> _$$_ApiUserModelToJson(_$_ApiUserModel instance) =>

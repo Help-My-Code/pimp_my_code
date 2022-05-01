@@ -9,15 +9,14 @@ part 'retrieve_user_state.dart';
 part 'retrieve_user_cubit.freezed.dart';
 
 class RetrieveUserCubit extends Cubit<RetrieveUserState> {
-  final SessionCubit _sessionCubit;
   final FindUserByNameUseCase _findUserByName;
-  RetrieveUserCubit(this._sessionCubit, this._findUserByName)
+  RetrieveUserCubit(this._findUserByName)
       : super(const RetrieveUserState.initial());
 
-  void loadUser() async {
+  void loadUser(String name) async {
+    print(name);
     emit(const RetrieveUserState.loading());
-    String userId = await _sessionCubit.getUserId();
-    final publications = await _findUserByName(userId);
+    final publications = await _findUserByName(FindUserByNameParam(name));
     publications.fold((l) {
       emit(const RetrieveUserState.failure());
     }, (r) {

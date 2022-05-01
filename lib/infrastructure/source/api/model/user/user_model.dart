@@ -14,7 +14,7 @@ class ApiUserModel with _$ApiUserModel {
     String? description,
     @JsonKey(name: 'user_role') required String userRole,
     required String confidentiality,
-    @JsonKey(name: 'principal_picture_url') required String principalPictureUrl,
+    @JsonKey(name: 'principal_picture_url') required String? principalPictureUrl,
   }) = _ApiUserModel;
 
   factory ApiUserModel.fromJson(Map<String, dynamic> json) =>

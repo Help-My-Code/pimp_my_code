@@ -80,7 +80,7 @@ void registerBloc() {
 
   sl.registerSingleton(AppObserver(sl(), sl()));
   sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
-  sl.registerFactory(() => RetrieveUserCubit(sl(), sl()));
+  sl.registerFactory(() => RetrieveUserCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
