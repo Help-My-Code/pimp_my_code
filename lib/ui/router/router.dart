@@ -57,10 +57,7 @@ class AppRouter {
       final bool isInUnAuthPage = state.location == Routes.login.path ||
           state.location == Routes.register.path;
 
-      if (_sessionCubit.state is UnknownAuthState) {
-        // TODO return loading screen
-        // return Routes.loading.toPath;
-      } else if (!isInUnAuthPage && _sessionCubit.state is Unauthenticated) {
+      if (!isInUnAuthPage && _sessionCubit.state is Unauthenticated) {
         return Routes.login.path;
       } else if (isInUnAuthPage && _sessionCubit.state is Authenticated) {
         return Routes.home.path;

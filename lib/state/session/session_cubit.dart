@@ -48,6 +48,10 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   }
 
   Future<String> getUserId() async {
-    return await _secureStorage.read(key: 'id') ?? '';
+    final userId = await _secureStorage.read(key: 'id');
+    if (userId == null) {
+      throw AssertionError();
+    }
+    return userId;
   }
 }
