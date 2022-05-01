@@ -30,7 +30,6 @@ class HomeLoaded extends StatelessWidget {
             child: ListView.builder(
               itemCount: publications.length,
               itemBuilder: (context, index) {
-                print(publications[0].code);
                 return PostCard(
                   onLikePressed: () {},
                   onUnlikePressed: () {},
