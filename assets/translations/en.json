@@ -37,8 +37,8 @@
   "register_success": "Successful registration",
   "login_success": "Successful login",
   "new_publication": "New publication",
-  "program_execution_failure": "Something unexpected occured during the program execution",
-  "cancel": "Cancel",
+  "program_execution_failure": "Something unexpected occured during the program execution"
+"cancel": "Cancel",
   "compile": "Compile",
   "submit": "Submit",
   "title_hint": "Title",
