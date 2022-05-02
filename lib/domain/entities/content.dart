@@ -12,19 +12,19 @@ class Content {
   final String? code;
   final String username;
 
-  Content(
-    this.id,
-    this.content,
-    this.createdAt,
-    this.creatorId,
-    this.contentType,
-    this.medias,
-    this.username, {
+  Content({
+    required this.id,
     this.title,
+    required this.content,
+    required this.createdAt,
+    required this.creatorId,
     this.groupId,
     this.parentId,
+    required this.contentType,
+    required this.medias,
     this.userPicture,
     this.code,
+    required this.username,
   });
 }
 

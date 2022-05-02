@@ -16,14 +16,14 @@ class ContentMapper {
 
   Content mapApiContentToContent(ApiContentModel apiContentModel) {
     return Content(
-      apiContentModel.id,
-      apiContentModel.content,
-      apiContentModel.createdAt,
-      apiContentModel.creatorId,
-      _contentTypefromString(apiContentModel.contentType),
-      apiContentModel.medias,
-      apiContentModel.username,
+      id: apiContentModel.id,
       title: apiContentModel.title,
+      content: apiContentModel.content,
+      createdAt: apiContentModel.createdAt,
+      creatorId: apiContentModel.creatorId,
+      contentType: _contentTypefromString(apiContentModel.contentType),
+      medias: apiContentModel.medias,
+      username: apiContentModel.username,
       groupId: apiContentModel.groupId,
       parentId: apiContentModel.parentId,
       userPicture: apiContentModel.userImage,
