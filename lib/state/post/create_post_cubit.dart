@@ -23,11 +23,15 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       : super(CreatePostState.initial());
 
   bool get isValid {
-    return state.content != null &&
+    return (state.content != null && state.content!.isNotEmpty) &&
         state.userPicture != null &&
         state.username != null &&
         state.createdAt != null &&
         state.medias != null;
+  }
+
+  bool get isValidForCompilation {
+    return state.code != null && state.code!.isNotEmpty;
   }
 
   void onCancel() {

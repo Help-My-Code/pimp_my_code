@@ -18,25 +18,25 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBarMenu(),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+      body: SingleChildScrollView(
         child: Column(
           children: [
             BlocBuilder<CreatePostCubit, CreatePostState>(
               buildWhen: (p,c) => p.createdAt != c.createdAt,
                 builder: (context, state) {
               if (state.createdAt != null) {
-                return CreatePostCard();
+                return const CreatePostCard();
               }
-              return GFButton(
-                onPressed: () {
-                  context.read<CreatePostCubit>().onNewTemporaryPost('', '');
-                },
-                text: 'Ajouter une publication',
-                // icon: Icon(Icons.add),
-                shape: GFButtonShape.square,
-                // type: GFButtonType.transparent,
+              return Align(
+                child: GFButton(
+                  onPressed: () {
+                    context.read<CreatePostCubit>().onNewTemporaryPost('', '');
+                  },
+                  text: tr('add_post'),
+                  // icon: Icon(Icons.add),
+                  shape: GFButtonShape.standard,
+                  // type: GFButtonType.transparent,
+                ),
               );
             }),
             // BlocConsumer<RetrieveContentCubit, RetrieveContentState>(

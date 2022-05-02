@@ -40,5 +40,9 @@
   "program_execution_failure": "Something unexpected occured during the program execution",
   "cancel": "Cancel",
   "compile": "Compile",
-  "submit": "Submit"
+  "submit": "Submit",
+  "title_hint": "Title",
+  "content_hint": "Content",
+  "add_post": "Add a post",
+  "media_hint": "Add a photo"
 }

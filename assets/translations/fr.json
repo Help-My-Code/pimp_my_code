@@ -40,6 +40,10 @@
   "program_execution_failure": "Erreur inatendue s'est passée durant l'éxécution du code",
   "cancel": "Annuler",
   "compile": "Compiler",
-  "submit": "Soumettre"
+  "submit": "Soumettre",
+  "title_hint": "Titre",
+  "content_hint": "Contenu",
+  "add_post": "Ajouter une publication",
+  "media_hint": "Ajouter une photo"
 
 }
