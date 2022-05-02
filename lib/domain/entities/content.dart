@@ -14,18 +14,18 @@ class Content {
 
   Content(
     this.id,
-    this.title,
     this.content,
     this.createdAt,
     this.creatorId,
-    this.groupId,
-    this.parentId,
     this.contentType,
     this.medias,
+    this.username, {
+    this.title,
+    this.groupId,
+    this.parentId,
     this.userPicture,
     this.code,
-    this.username,
-  );
+  });
 }
 
 enum ContentType {

@@ -17,9 +17,9 @@ class User {
       this.password,
       this.firstname,
       this.lastname,
-      this.description,
       this.userRole,
-      this.confidentiality,
-      this.principalPictureUrl);
+      this.confidentiality, {
+        this.description,
+        this.principalPictureUrl,
+      });
 }
-

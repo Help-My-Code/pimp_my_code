@@ -13,12 +13,12 @@ class ApiAuthRepository extends AuthRepository {
 
   @override
   Future<Either<RegistrationFailed, RegistrationSuccess>> register(
-    email,
-    password,
-    confirmPassword,
-    firstName,
-    lastName,
-    description,
+    String email,
+    String password,
+    String confirmPassword,
+    String firstName,
+    String lastName,
+    String description,
   ) async {
     try {
       await _dataSource.register(fields: {

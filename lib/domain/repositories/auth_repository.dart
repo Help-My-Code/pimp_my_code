@@ -5,12 +5,12 @@ import '../usecases/auth/register_use_case.dart';
 
 abstract class AuthRepository {
   Future<Either<RegistrationFailed, RegistrationSuccess>> register(
-    email,
-    password,
-    confirmPassword,
-    firstName,
-    lastName,
-    description,
+    String email,
+    String password,
+    String confirmPassword,
+    String firstName,
+    String lastName,
+    String description,
   );
 
   Future<Either<LoginFailure, LoginResponse>> login(

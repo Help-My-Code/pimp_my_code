@@ -17,17 +17,17 @@ class ContentMapper {
   Content mapApiContentToContent(ApiContentModel apiContentModel) {
     return Content(
       apiContentModel.id,
-      apiContentModel.title,
       apiContentModel.content,
       apiContentModel.createdAt,
       apiContentModel.creatorId,
-      apiContentModel.groupId,
-      apiContentModel.parentId,
       _contentTypefromString(apiContentModel.contentType),
       apiContentModel.medias,
-      apiContentModel.userImage,
-      apiContentModel.code,
       apiContentModel.username,
+      title: apiContentModel.title,
+      groupId: apiContentModel.groupId,
+      parentId: apiContentModel.parentId,
+      userPicture: apiContentModel.userImage,
+      code: apiContentModel.code,
     );
   }
 }

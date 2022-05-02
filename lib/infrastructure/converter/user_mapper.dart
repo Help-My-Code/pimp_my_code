@@ -32,10 +32,10 @@ class UserMapper {
       apiUserModel.password,
       apiUserModel.firstname,
       apiUserModel.lastname,
-      apiUserModel.description,
       _roleFromString(apiUserModel.userRole),
       _confidentialityFromString(apiUserModel.confidentiality),
-      apiUserModel.principalPictureUrl,
+      description: apiUserModel.description,
+      principalPictureUrl: apiUserModel.principalPictureUrl,
     );
   }
 }

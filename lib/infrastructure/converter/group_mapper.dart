@@ -26,10 +26,10 @@ class GroupMapper {
     return Group(
       apiGroupModel.id,
       apiGroupModel.name,
-      apiGroupModel.description,
       _confidentialityFromString(apiGroupModel.confidentiality),
       _userMapper.mapApiUserToUser(apiGroupModel.creator),
-      apiGroupModel.principalPictureUrl,
+      description: apiGroupModel.description,
+      principalPictureUrl: apiGroupModel.principalPictureUrl,
     );
   }
 }
