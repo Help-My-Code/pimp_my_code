@@ -24,11 +24,11 @@ class GroupMapper {
 
   Group mapApiGroupToGroup(ApiGroupModel apiGroupModel) {
     return Group(
-      apiGroupModel.id,
-      apiGroupModel.name,
-      _confidentialityFromString(apiGroupModel.confidentiality),
-      _userMapper.mapApiUserToUser(apiGroupModel.creator),
+      id: apiGroupModel.id,
+      name: apiGroupModel.name,
       description: apiGroupModel.description,
+      confidentiality: _confidentialityFromString(apiGroupModel.confidentiality),
+      creator: _userMapper.mapApiUserToUser(apiGroupModel.creator),
       principalPictureUrl: apiGroupModel.principalPictureUrl,
     );
   }

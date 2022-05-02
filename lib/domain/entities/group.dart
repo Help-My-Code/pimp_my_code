@@ -10,6 +10,11 @@ class Group {
   final User creator;
   final String? principalPictureUrl;
 
-  Group(this.id, this.name, this.confidentiality, this.creator,
-      {this.description, this.principalPictureUrl});
+  Group(
+      {required this.id,
+      required this.name,
+      this.description,
+      required this.confidentiality,
+      required this.creator,
+      this.principalPictureUrl});
 }

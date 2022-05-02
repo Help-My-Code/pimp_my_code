@@ -27,14 +27,14 @@ class UserMapper {
 
   User mapApiUserToUser(ApiUserModel apiUserModel) {
     return User(
-      apiUserModel.id,
-      apiUserModel.email,
-      apiUserModel.password,
-      apiUserModel.firstname,
-      apiUserModel.lastname,
-      _roleFromString(apiUserModel.userRole),
-      _confidentialityFromString(apiUserModel.confidentiality),
+      id: apiUserModel.id,
+      email: apiUserModel.email,
+      password: apiUserModel.password,
+      firstname: apiUserModel.firstname,
+      lastname: apiUserModel.lastname,
       description: apiUserModel.description,
+      userRole: _roleFromString(apiUserModel.userRole),
+      confidentiality: _confidentialityFromString(apiUserModel.confidentiality),
       principalPictureUrl: apiUserModel.principalPictureUrl,
     );
   }

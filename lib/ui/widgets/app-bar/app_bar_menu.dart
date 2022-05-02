@@ -187,13 +187,14 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           tooltip: 'notifications'.tr(),
           onPressed: () => printNotifications(),
         ),
-        IconButton(
+        // TODO Réactiver si mise en place de la messagerie
+        /*IconButton(
           icon: const Icon(Icons.mail),
           tooltip: 'messaging'.tr(),
           onPressed: () {
             GoRouter.of(context).go('/messaging');
           },
-        ),
+        ),*/
         IconButton(
           icon: const Icon(Icons.account_circle_rounded),
           tooltip: 'my_account'.tr(),

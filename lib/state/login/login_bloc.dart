@@ -41,7 +41,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         state.copyWith(status: const FormSubmissionSuccessful()),
       );
       // TODO build user from another way
-      _sessionCubit.showHome(User(success.token, '', '', '', '', Role.member, Confidentiality.public));
+      _sessionCubit.showHome(User(id: success.token, email: '', password: '', firstname: '', lastname: '',
+          userRole: Role.member, confidentiality: Confidentiality.public));
     });
   }
 }

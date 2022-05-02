@@ -12,14 +12,14 @@ class User {
   final Confidentiality confidentiality;
   final String? principalPictureUrl;
 
-  User(this.id,
-      this.email,
-      this.password,
-      this.firstname,
-      this.lastname,
-      this.userRole,
-      this.confidentiality, {
-        this.description,
-        this.principalPictureUrl,
-      });
+  User(
+      {required this.id,
+      required this.email,
+      required this.password,
+      required this.firstname,
+      required this.lastname,
+      this.description,
+      required this.userRole,
+      required this.confidentiality,
+      this.principalPictureUrl});
 }
