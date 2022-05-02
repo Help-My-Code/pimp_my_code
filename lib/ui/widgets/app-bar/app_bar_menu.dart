@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
+import 'package:pimp_my_code/ui/widgets/app-bar/search/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
+import '../../../ioc_container.dart';
+import '../../../state/retrieve_user/retrieve_user_cubit.dart';
+import '../../../state/session/session_cubit.dart';
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBarMenu({Key? key})
@@ -26,24 +30,17 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     Alert(
       context: context,
       title: 'search'.tr(),
-      content: Column(
-        children: <Widget>[
-          TextField(
-              decoration: InputDecoration(
-            hintText: 'search_user_group'.tr(),
-            prefixIcon: const Icon(Icons.search),
-          )),
-        ],
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl.get<RetrieveUserCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => sl.get<RetrieveGroupCubit>(),
+          ),
+        ], child: const SearchModal(),
       ),
-      buttons: [
-        DialogButton(
-          child: const Text(
-            'close',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ).tr(),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-        )
-      ],
+      buttons: [],
     ).show();
   }
 
@@ -95,15 +92,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           // TODO afficher groupes
         ],
       ),
-      buttons: [
-        DialogButton(
-          child: const Text(
-            'close',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ).tr(),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-        )
-      ],
+      buttons: [],
     ).show();
   }
 
@@ -154,15 +143,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
               )),
         ],
       ),
-      buttons: [
-        DialogButton(
-          child: const Text(
-            'close',
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ).tr(),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-        )
-      ],
+      buttons: [],
     ).show();
   }
 

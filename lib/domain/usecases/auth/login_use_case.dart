@@ -4,10 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:pimp_my_code/core/usecase.dart';
 import 'package:pimp_my_code/infrastructure/converter/token_decoder.dart';
 
-import '../../repositories/user_repository.dart';
+import '../../repositories/auth_repository.dart';
 
 class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
-  final UserRepository _repository;
+  final AuthRepository _repository;
   final FlutterSecureStorage _storage;
 
   LoginUseCase(this._repository, this._storage);
