@@ -1,16 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/carousel/gf_items_carousel.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_editor.dart';
 
-import '../../../widgets/code_editor/code_showroom.dart';
-import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CreatePostCard extends StatelessWidget {

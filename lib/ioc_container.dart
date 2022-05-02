@@ -7,12 +7,6 @@ import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.da
 import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
-import 'package:pimp_my_code/domain/services/program_service.dart';
-import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
-import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
-import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
-import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
-import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
 import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
@@ -68,10 +62,8 @@ void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<AuthenticationInteractor>());
   sl.registerSingleton(chopper.getService<ContentInteractor>());
   sl.registerSingleton(chopper.getService<ProgramInteractor>());
-
   sl.registerSingleton(chopper.getService<UserInteractor>());
   sl.registerSingleton(chopper.getService<GroupInteractor>());
-  sl.registerSingleton(chopper.getService<ProgramInteractor>());
 
 }
 
@@ -92,10 +84,6 @@ void registerServices() {
   sl.registerSingleton<ProgramService>(ApiProgramService(sl()));
 }
 
-void registerServices() {
-  sl.registerSingleton<ProgramService>(ApiProgramService(sl()));
-}
-
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl()));
   sl.registerSingleton(LoginUseCase(sl(), sl()));
@@ -105,26 +93,18 @@ void registerUseCases() {
   sl.registerSingleton(CreatePublicationUseCase(sl()));
   sl.registerSingleton(FindUserByNameUseCase(sl()));
   sl.registerSingleton(FindGroupByNameUseCase(sl()));
-  sl.registerSingleton(ExecuteProgramUseCase(sl()));
-  sl.registerSingleton(CreatePublicationUseCase(sl()));
 }
 
 void registerBloc() {
   sl.registerSingleton(SessionCubit(sl(), sl(), sl()));
-
   sl.registerFactory(() => RegisterBloc(sl()));
   sl.registerFactory(() => LoginBloc(sl(), sl()));
-
   sl.registerSingleton(ErrorHandlerBloc());
-
   sl.registerSingleton(AppObserver(sl(), sl()));
   sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
-
   sl.registerSingleton(CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
-
-  sl.registerSingleton(CreatePostCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {
@@ -133,7 +113,6 @@ ChopperClient createChopper(Config config) {
     services: [
       AuthenticationInteractor.create(),
       ContentInteractor.create(),
-      ProgramInteractor.create(),
       ProgramInteractor.create(),
       UserInteractor.create(),
       GroupInteractor.create(),

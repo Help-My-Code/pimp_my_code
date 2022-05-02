@@ -30,25 +30,24 @@ class ContentMapper {
       parentId: apiContentModel.parentId,
       userPicture: apiContentModel.userImage,
       code: apiContentModel.code,
-      apiContentModel.codeResult,
+      codeResult: apiContentModel.codeResult,
     );
   }
 
   Content fromParam(CreatePublicationParam params) {
     return Content(
-      '',
-      params.title,
-      params.content,
-      params.createdAt,
-      params.creatorId,
-      params.groupId,
-      params.parentId,
-      _contentTypefromString(params.contentType),
-      params.medias,
-      params.userPicture,
-      params.code,
-      params.username,
-      params.codeResult,
+      title: params.title,
+      content: params.content,
+      createdAt: params.createdAt,
+      creatorId: params.creatorId,
+      contentType: _contentTypefromString(params.contentType),
+      medias: params.medias,
+      username: params.username,
+      groupId: params.groupId,
+      parentId: params.parentId,
+      userPicture: params.userPicture,
+      code: params.code,
+      codeResult: params.codeResult,
     );
   }
 }

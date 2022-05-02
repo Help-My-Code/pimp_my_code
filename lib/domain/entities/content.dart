@@ -1,5 +1,5 @@
 class Content {
-  final String id;
+  final String? id;
   final String? title;
   final String content;
   final DateTime createdAt;
@@ -14,22 +14,21 @@ class Content {
   final String username;
 
   Content({
-    required this.id,
-    this.title,
     required this.content,
     required this.createdAt,
     required this.creatorId,
-    this.groupId,
-    this.parentId,
     required this.contentType,
     required this.medias,
+    required this.username,
+    this.id,
+    this.title,
+    this.groupId,
+    this.parentId,
     this.userPicture,
     this.code,
-    required this.username,
+    this.codeResult,
   });
-    this.username,
-      this.codeResult,
-  );
+
 }
 
 enum ContentType {
