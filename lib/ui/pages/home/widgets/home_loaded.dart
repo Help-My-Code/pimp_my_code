@@ -19,13 +19,6 @@ class HomeLoaded extends StatelessWidget {
       height: double.infinity,
       child: Column(
         children: [
-          GFButton(
-            onPressed: () {},
-            text: 'Ajouter une publication',
-            // icon: Icon(Icons.add),
-            shape: GFButtonShape.square,
-            // type: GFButtonType.transparent,
-          ),
           Flexible(
             child: ListView.builder(
               itemCount: publications.length,

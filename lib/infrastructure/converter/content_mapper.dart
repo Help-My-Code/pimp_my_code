@@ -1,3 +1,5 @@
+import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
+
 import '../source/api/model/content/content_model.dart';
 
 import '../../domain/entities/content.dart';
@@ -28,6 +30,24 @@ class ContentMapper {
       parentId: apiContentModel.parentId,
       userPicture: apiContentModel.userImage,
       code: apiContentModel.code,
+      codeResult: apiContentModel.codeResult,
+    );
+  }
+
+  Content fromParam(CreatePublicationParam params) {
+    return Content(
+      title: params.title,
+      content: params.content,
+      createdAt: params.createdAt,
+      creatorId: params.creatorId,
+      contentType: _contentTypefromString(params.contentType),
+      medias: params.medias,
+      username: params.username,
+      groupId: params.groupId,
+      parentId: params.parentId,
+      userPicture: params.userPicture,
+      code: params.code,
+      codeResult: params.codeResult,
     );
   }
 }

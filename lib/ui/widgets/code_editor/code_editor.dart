@@ -30,33 +30,38 @@ class _CodeEditorState extends State<CodeEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return DisableShortcut(
-      child: Actions(
-        actions: {InsertTabIntent: InsertTabAction()},
-        child: Shortcuts(
-          shortcuts: {
-            LogicalKeySet(LogicalKeyboardKey.tab):
-                InsertTabIntent(2, textController),
-          },
-          child: TextField(
-            onChanged: (text) {
-              setState(() {
-                code = text;
-              });
-              widget.onCodeChange(text);
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100
+      ),
+      child: DisableShortcut(
+        child: Actions(
+          actions: {InsertTabIntent: InsertTabAction()},
+          child: Shortcuts(
+            shortcuts: {
+              LogicalKeySet(LogicalKeyboardKey.tab):
+                  InsertTabIntent(2, textController),
             },
-            enableInteractiveSelection: true,
-            toolbarOptions: const ToolbarOptions(
-              copy: true,
-              cut: true,
-              paste: true,
-              selectAll: true,
+            child: TextField(
+              onChanged: (text) {
+                setState(() {
+                  code = text;
+                });
+                widget.onCodeChange(text);
+              },
+              enableInteractiveSelection: true,
+              toolbarOptions: const ToolbarOptions(
+                copy: true,
+                cut: true,
+                paste: true,
+                selectAll: true,
+              ),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              controller: textController,
+              textInputAction: TextInputAction.newline,
+              maxLines: 10,
+              keyboardType: TextInputType.multiline,
             ),
-            style: const TextStyle(fontWeight: FontWeight.bold),
-            controller: textController,
-            textInputAction: TextInputAction.newline,
-            maxLines: 30,
-            keyboardType: TextInputType.multiline,
           ),
         ),
       ),

@@ -1,6 +1,12 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/services/program_service.dart';
+import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
+import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
+import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
 import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
@@ -44,6 +50,7 @@ Future<void> init(Config config) async {
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
   registerMapper();
+  registerServices();
   registerRepositories();
   registerUseCases();
   registerBloc();
@@ -54,8 +61,10 @@ Future<void> init(Config config) async {
 void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<AuthenticationInteractor>());
   sl.registerSingleton(chopper.getService<ContentInteractor>());
+  sl.registerSingleton(chopper.getService<ProgramInteractor>());
   sl.registerSingleton(chopper.getService<UserInteractor>());
   sl.registerSingleton(chopper.getService<GroupInteractor>());
+
 }
 
 void registerMapper() {
@@ -71,25 +80,29 @@ void registerRepositories() {
   sl.registerSingleton<GroupRepository>(ApiGroupRepository(sl(), sl()));
 }
 
+void registerServices() {
+  sl.registerSingleton<ProgramService>(ApiProgramService(sl()));
+}
+
 void registerUseCases() {
   sl.registerSingleton(RegisterUseCase(sl()));
   sl.registerSingleton(LoginUseCase(sl(), sl()));
   sl.registerSingleton(LogoutUseCase(sl()));
   sl.registerSingleton(GetFollowingPublicationUseCase(sl()));
+  sl.registerSingleton(ExecuteProgramUseCase(sl()));
+  sl.registerSingleton(CreatePublicationUseCase(sl()));
   sl.registerSingleton(FindUserByNameUseCase(sl()));
   sl.registerSingleton(FindGroupByNameUseCase(sl()));
 }
 
 void registerBloc() {
   sl.registerSingleton(SessionCubit(sl(), sl(), sl()));
-
   sl.registerFactory(() => RegisterBloc(sl()));
   sl.registerFactory(() => LoginBloc(sl(), sl()));
-
   sl.registerSingleton(ErrorHandlerBloc());
-
   sl.registerSingleton(AppObserver(sl(), sl()));
   sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
+  sl.registerSingleton(CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
 }
@@ -100,6 +113,7 @@ ChopperClient createChopper(Config config) {
     services: [
       AuthenticationInteractor.create(),
       ContentInteractor.create(),
+      ProgramInteractor.create(),
       UserInteractor.create(),
       GroupInteractor.create(),
     ],
