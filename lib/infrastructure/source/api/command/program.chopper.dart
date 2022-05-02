@@ -17,9 +17,8 @@ class _$ProgramInteractor extends ProgramInteractor {
   final definitionType = ProgramInteractor;
 
   @override
-  Future<Response<dynamic>> executeProgram(
-      {required Map<String, String> fields}) {
-    final $url = '/program/executeProgram';
+  Future<Response<dynamic>> execute({required Map<String, String> fields}) {
+    final $url = '/program/execute';
     final $body = fields;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);

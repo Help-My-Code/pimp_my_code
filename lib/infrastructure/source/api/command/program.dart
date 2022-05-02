@@ -7,6 +7,6 @@ abstract class ProgramInteractor extends ChopperService {
   static ProgramInteractor create([ChopperClient? client]) =>
       _$ProgramInteractor(client);
 
-  @Post(path: '/executeProgram')
-  Future<Response> executeProgram({@Body() required Map<String, String> fields});
+  @Post(path: '/execute')
+  Future<Response> execute({@Body() required Map<String, String> fields});
 }
