@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_editor.dart';
+import 'package:pimp_my_code/ui/widgets/code_editor/code_showroom.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -19,9 +20,9 @@ class CreatePostCard extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 50, left: 20, right: 20, top: 20),
         boxFit: BoxFit.cover,
         title: GFListTile(
-          avatar: GFAvatar(
-            backgroundImage: NetworkImage(state.userPicture ?? ''),
-          ),
+          // avatar: GFAvatar(
+          //   backgroundImage: NetworkImage(state.userPicture ?? ''),
+          // ),
           title: const Text(
             'username',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -98,8 +99,8 @@ class CreatePostCard extends StatelessWidget {
                   height: 10,
                 ),
                 CreatePostCardRadio(
-                    label: 'Javascript',
-                    value: 'JAVASCRIPT',
+                    label: 'Dart',
+                    value: 'DART',
                     groupValue: state.language,
                     onChanged: (value) {
                       context.read<CreatePostCubit>().onLanguageChange(value);
@@ -124,6 +125,8 @@ class CreatePostCard extends StatelessWidget {
                 context.read<CreatePostCubit>().onCodeChange(code);
               }
             })),
+            if(state.codeResult  != null && state.codeResult!.isNotEmpty)
+              Align(child: CodeShowRoom(data: state.codeResult!, language: state.language.toLowerCase(),)),
           ],
         ),
         buttonBar: GFButtonBar(
