@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/domain/entities/user.dart';
 
+import '../../../default_pictures.dart';
+
 class SearchedUsersLoaded extends StatelessWidget {
   final List<User> users;
 
@@ -31,7 +33,7 @@ class SearchedUsersLoaded extends StatelessWidget {
                         size: 20,
                         backgroundImage: NetworkImage(
                           users[index].principalPictureUrl ??
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/120px-User-avatar.svg.png?20201213175635',
+                              DefaultPictures.defaultUserPicture,
                         ),
                       ),
                       const SizedBox(width: 10),

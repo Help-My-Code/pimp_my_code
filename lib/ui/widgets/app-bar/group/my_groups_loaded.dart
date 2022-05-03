@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/domain/entities/group.dart';
+import 'package:pimp_my_code/ui/default_pictures.dart';
 
 class MyGroupsLoaded extends StatelessWidget {
   final List<Group> groups;
@@ -33,7 +34,7 @@ class MyGroupsLoaded extends StatelessWidget {
             ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.15,
             child: ListView.builder(
               itemCount: groups.length,
               itemBuilder: (context, index) {
@@ -44,7 +45,7 @@ class MyGroupsLoaded extends StatelessWidget {
                         size: 20,
                         backgroundImage: NetworkImage(
                           groups[index].principalPictureUrl ??
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/120px-User-avatar.svg.png?20201213175635',
+                              DefaultPictures.defaultUserPicture,
                         ),
                       ),
                       const SizedBox(width: 10),
