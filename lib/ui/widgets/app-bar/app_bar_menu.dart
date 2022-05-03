@@ -11,6 +11,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../config/asset.dart';
 import '../../../ioc_container.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
+import '../../../state/retrive_member_groups/retrieve_group_members_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
@@ -55,6 +56,9 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         providers: [
           BlocProvider(
             create: (context) => sl.get<RetrieveMyGroupsCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => sl.get<RetrieveGroupMembersCubit>(),
           ),
         ],
         child: const GroupModal(),

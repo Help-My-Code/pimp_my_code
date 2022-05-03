@@ -13,7 +13,9 @@ _$_ApiGroupModel _$$_ApiGroupModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       confidentiality: json['confidentiality'] as String,
       principalPictureUrl: json['principal_picture_url'] as String?,
-      creator: ApiUserModel.fromJson(json['creator'] as Map<String, dynamic>),
+      creator: json['creator'] == null
+          ? null
+          : ApiUserModel.fromJson(json['creator'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ApiGroupModelToJson(_$_ApiGroupModel instance) =>

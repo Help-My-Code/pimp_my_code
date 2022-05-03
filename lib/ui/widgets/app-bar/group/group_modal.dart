@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
+import '../../../../state/retrive_member_groups/retrieve_group_members_cubit.dart';
 import '../../loading.dart';
+import 'group_members_loaded.dart';
 import 'my_groups_loaded.dart';
 
 class GroupModal extends StatelessWidget {
@@ -39,13 +41,13 @@ class GroupModal extends StatelessWidget {
             );
           }),
           const SizedBox(height: 10),
-          /*BlocConsumer<RetrieveGroupCubit, RetrieveGroupState>(
+          BlocConsumer<RetrieveGroupMembersCubit, RetrieveGroupMembersState>(
               listener: (context, state) {
                 state.maybeWhen(
                   orElse: () {},
                   failure: () {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Failed_to_load_groups').tr(),
+                      content: const Text('Failed_to_load_group_members').tr(),
                       backgroundColor: Theme.of(context).errorColor,
                     ));
                   },
@@ -53,12 +55,13 @@ class GroupModal extends StatelessWidget {
               }, builder: (context, state) {
             return state.maybeWhen(
               initial: () {
-                return const SizedBox();
+                context.read<RetrieveGroupMembersCubit>().loadGroupMembers();
+                return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (groups) => GroupedGroupsLoaded(groups: groups),
+              loaded: (groupMembers) => GroupMembersLoaded(groupMembers: groupMembers),
             );
-          }),*/
+          }),
         ],
       ),
     );
