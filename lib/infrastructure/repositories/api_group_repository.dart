@@ -19,7 +19,6 @@ class ApiGroupRepository extends GroupRepository {
   Future<Either<FindGroupByNameFailure, List<Group>>> getByName(
       {required String name}) async {
     final response = await _dataSource.getByName(name);
-    print(response.body);
     final List<Map<String, dynamic>> apiGroups =
         List.from(response.body['groups']);
     return Right(

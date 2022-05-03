@@ -27,7 +27,6 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
     final response = await _dataSource.getByMemberId(id);
     final List<Map<String, dynamic>> apiGroupMembers =
         List.from(response.body['groupMember']);
-    print(apiGroupMembers);
     return Right(
       apiGroupMembers
           .map(ApiGroupMemberModel.fromJson)
