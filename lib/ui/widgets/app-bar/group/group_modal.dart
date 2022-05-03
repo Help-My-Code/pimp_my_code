@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_groups_loaded.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_users_loaded.dart';
 
-import '../../../../state/retrieve_group/retrieve_group_cubit.dart';
+import '../../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import '../../loading.dart';
+import 'my_groups_loaded.dart';
 
-class SearchModal extends StatelessWidget {
-  const SearchModal({Key? key}) : super(key: key);
+class GroupModal extends StatelessWidget {
+  const GroupModal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +17,13 @@ class SearchModal extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextField(
-            onChanged: (text) {
-              if(text != '') {
-                context.read<RetrieveUserCubit>().loadUser(text);
-                context.read<RetrieveGroupCubit>().loadGroup(text);
-              }
-            },
-            decoration: InputDecoration(
-              hintText: 'search_user_group'.tr(),
-              prefixIcon: const Icon(Icons.search),
-            ),
-          ),
-          BlocConsumer<RetrieveUserCubit, RetrieveUserState>(
+          BlocConsumer<RetrieveMyGroupsCubit, RetrieveMyGroupsState>(
               listener: (context, state) {
             state.maybeWhen(
               orElse: () {},
               failure: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_users').tr(),
+                  content: const Text('Failed_to_load_groups').tr(),
                   backgroundColor: Theme.of(context).errorColor,
                 ));
               },
@@ -46,14 +31,15 @@ class SearchModal extends StatelessWidget {
           }, builder: (context, state) {
             return state.maybeWhen(
               initial: () {
-                return const SizedBox();
+                context.read<RetrieveMyGroupsCubit>().loadMyGroups();
+                return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (users) => SearchedUsersLoaded(users: users),
+              loaded: (groups) => MyGroupsLoaded(groups: groups),
             );
           }),
           const SizedBox(height: 10),
-          BlocConsumer<RetrieveGroupCubit, RetrieveGroupState>(
+          /*BlocConsumer<RetrieveGroupCubit, RetrieveGroupState>(
               listener: (context, state) {
                 state.maybeWhen(
                   orElse: () {},
@@ -70,9 +56,9 @@ class SearchModal extends StatelessWidget {
                 return const SizedBox();
               },
               orElse: () => const Loading(),
-              loaded: (groups) => SearchedGroupsLoaded(groups: groups),
+              loaded: (groups) => GroupedGroupsLoaded(groups: groups),
             );
-          }),
+          }),*/
         ],
       ),
     );

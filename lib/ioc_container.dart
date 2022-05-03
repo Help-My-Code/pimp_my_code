@@ -8,11 +8,13 @@ import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
+import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
 import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
 
 import 'config/env/base.dart';
@@ -93,6 +95,7 @@ void registerUseCases() {
   sl.registerSingleton(CreatePublicationUseCase(sl()));
   sl.registerSingleton(FindUserByNameUseCase(sl()));
   sl.registerSingleton(FindGroupByNameUseCase(sl()));
+  sl.registerSingleton(FindMyGroupsUseCase(sl()));
 }
 
 void registerBloc() {
@@ -105,6 +108,7 @@ void registerBloc() {
   sl.registerSingleton(CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
+  sl.registerFactory(() => RetrieveMyGroupsCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {

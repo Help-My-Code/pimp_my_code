@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'retrieve_group_cubit.dart';
+part of 'retrieve_my_groups_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$RetrieveGroupStateTearOff {
-  const _$RetrieveGroupStateTearOff();
+class _$RetrieveMyGroupsStateTearOff {
+  const _$RetrieveMyGroupsStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -38,10 +38,10 @@ class _$RetrieveGroupStateTearOff {
 }
 
 /// @nodoc
-const $RetrieveGroupState = _$RetrieveGroupStateTearOff();
+const $RetrieveMyGroupsState = _$RetrieveMyGroupsStateTearOff();
 
 /// @nodoc
-mixin _$RetrieveGroupState {
+mixin _$RetrieveMyGroupsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -95,20 +95,20 @@ mixin _$RetrieveGroupState {
 }
 
 /// @nodoc
-abstract class $RetrieveGroupStateCopyWith<$Res> {
-  factory $RetrieveGroupStateCopyWith(
-          RetrieveGroupState value, $Res Function(RetrieveGroupState) then) =
-      _$RetrieveGroupStateCopyWithImpl<$Res>;
+abstract class $RetrieveMyGroupsStateCopyWith<$Res> {
+  factory $RetrieveMyGroupsStateCopyWith(RetrieveMyGroupsState value,
+          $Res Function(RetrieveMyGroupsState) then) =
+      _$RetrieveMyGroupsStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RetrieveGroupStateCopyWithImpl<$Res>
-    implements $RetrieveGroupStateCopyWith<$Res> {
-  _$RetrieveGroupStateCopyWithImpl(this._value, this._then);
+class _$RetrieveMyGroupsStateCopyWithImpl<$Res>
+    implements $RetrieveMyGroupsStateCopyWith<$Res> {
+  _$RetrieveMyGroupsStateCopyWithImpl(this._value, this._then);
 
-  final RetrieveGroupState _value;
+  final RetrieveMyGroupsState _value;
   // ignore: unused_field
-  final $Res Function(RetrieveGroupState) _then;
+  final $Res Function(RetrieveMyGroupsState) _then;
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ abstract class _$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$InitialCopyWithImpl<$Res>
-    extends _$RetrieveGroupStateCopyWithImpl<$Res>
+    extends _$RetrieveMyGroupsStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -135,7 +135,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'RetrieveGroupState.initial()';
+    return 'RetrieveMyGroupsState.initial()';
   }
 
   @override
@@ -222,7 +222,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements RetrieveGroupState {
+abstract class _Initial implements RetrieveMyGroupsState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -234,7 +234,7 @@ abstract class _$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$LoadingCopyWithImpl<$Res>
-    extends _$RetrieveGroupStateCopyWithImpl<$Res>
+    extends _$RetrieveMyGroupsStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -250,7 +250,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'RetrieveGroupState.loading()';
+    return 'RetrieveMyGroupsState.loading()';
   }
 
   @override
@@ -337,7 +337,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements RetrieveGroupState {
+abstract class _Loading implements RetrieveMyGroupsState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -349,7 +349,8 @@ abstract class _$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$RetrieveGroupStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res>
+    extends _$RetrieveMyGroupsStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -380,7 +381,7 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'RetrieveGroupState.loaded(groups: $groups)';
+    return 'RetrieveMyGroupsState.loaded(groups: $groups)';
   }
 
   @override
@@ -475,7 +476,7 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements RetrieveGroupState {
+abstract class _Loaded implements RetrieveMyGroupsState {
   const factory _Loaded(List<Group> groups) = _$_Loaded;
 
   List<Group> get groups;
@@ -491,7 +492,7 @@ abstract class _$FailureCopyWith<$Res> {
 
 /// @nodoc
 class __$FailureCopyWithImpl<$Res>
-    extends _$RetrieveGroupStateCopyWithImpl<$Res>
+    extends _$RetrieveMyGroupsStateCopyWithImpl<$Res>
     implements _$FailureCopyWith<$Res> {
   __$FailureCopyWithImpl(_Failure _value, $Res Function(_Failure) _then)
       : super(_value, (v) => _then(v as _Failure));
@@ -507,7 +508,7 @@ class _$_Failure implements _Failure {
 
   @override
   String toString() {
-    return 'RetrieveGroupState.failure()';
+    return 'RetrieveMyGroupsState.failure()';
   }
 
   @override
@@ -594,6 +595,6 @@ class _$_Failure implements _Failure {
   }
 }
 
-abstract class _Failure implements RetrieveGroupState {
+abstract class _Failure implements RetrieveMyGroupsState {
   const factory _Failure() = _$_Failure;
 }
