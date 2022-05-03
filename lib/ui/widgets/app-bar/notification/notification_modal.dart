@@ -2,14 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
-import '../../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
+import '../../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import '../../loading.dart';
-import 'group_members_loaded.dart';
-import 'my_groups_loaded.dart';
+import 'notifications_loaded.dart';
 
-class GroupModal extends StatelessWidget {
-  const GroupModal({Key? key}) : super(key: key);
+class NotificationModal extends StatelessWidget {
+  const NotificationModal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +17,13 @@ class GroupModal extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          BlocConsumer<RetrieveMyGroupsCubit, RetrieveMyGroupsState>(
+          BlocConsumer<RetrieveNotificationsCubit, RetrieveNotificationsState>(
               listener: (context, state) {
             state.maybeWhen(
               orElse: () {},
               failure: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_groups').tr(),
+                  content: const Text('Failed_to_load_notifications').tr(),
                   backgroundColor: Theme.of(context).errorColor,
                 ));
               },
@@ -33,21 +31,21 @@ class GroupModal extends StatelessWidget {
           }, builder: (context, state) {
             return state.maybeWhen(
               initial: () {
-                context.read<RetrieveMyGroupsCubit>().loadMyGroups();
+                context.read<RetrieveNotificationsCubit>().loadNotifications();
                 return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (groups) => MyGroupsLoaded(groups: groups),
+              loaded: (notifications) => NotificationsLoaded(notifications: notifications),
             );
           }),
           const SizedBox(height: 10),
-          BlocConsumer<RetrieveGroupMembersCubit, RetrieveGroupMembersState>(
+          /*BlocConsumer<RetrieveNotificationMembersCubit, RetrieveNotificationMembersState>(
               listener: (context, state) {
                 state.maybeWhen(
                   orElse: () {},
                   failure: () {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Failed_to_load_group_members').tr(),
+                      content: const Text('Failed_to_load_notification_members').tr(),
                       backgroundColor: Theme.of(context).errorColor,
                     ));
                   },
@@ -55,13 +53,13 @@ class GroupModal extends StatelessWidget {
               }, builder: (context, state) {
             return state.maybeWhen(
               initial: () {
-                context.read<RetrieveGroupMembersCubit>().loadGroupMembers();
+                context.read<RetrieveNotificationMembersCubit>().loadNotificationMembers();
                 return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (groupMembers) => GroupMembersLoaded(groupMembers: groupMembers),
+              loaded: (notificationMembers) => NotificationMembersLoaded(notificationMembers: notificationMembers),
             );
-          }),
+          }),*/
         ],
       ),
     );

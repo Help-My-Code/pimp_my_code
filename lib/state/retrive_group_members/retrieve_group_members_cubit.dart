@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 
-import '../../domain/usecases/group/find_member_groups.dart';
+import '../../domain/usecases/group-member/find_group_members.dart';
 import '../session/session_cubit.dart';
 
 part 'retrieve_group_members_cubit.freezed.dart';
