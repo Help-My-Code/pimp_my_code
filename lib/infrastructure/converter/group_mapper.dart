@@ -23,12 +23,11 @@ class GroupMapper {
   }
 
   Group mapApiGroupToGroup(ApiGroupModel apiGroupModel) {
-    return Group(
+    return Group.withoutCreator(
       id: apiGroupModel.id,
       name: apiGroupModel.name,
       description: apiGroupModel.description,
       confidentiality: _confidentialityFromString(apiGroupModel.confidentiality),
-      creator: _userMapper.mapApiUserToUser(apiGroupModel.creator),
       principalPictureUrl: apiGroupModel.principalPictureUrl,
     );
   }

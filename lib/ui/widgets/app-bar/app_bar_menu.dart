@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
+import 'package:pimp_my_code/ui/widgets/app-bar/group/group_modal.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/search/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
 import '../../../ioc_container.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
+import '../../../state/retrive_member_groups/retrieve_group_members_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
@@ -38,7 +41,8 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           BlocProvider(
             create: (context) => sl.get<RetrieveGroupCubit>(),
           ),
-        ], child: const SearchModal(),
+        ],
+        child: const SearchModal(),
       ),
       buttons: [],
     ).show();
@@ -46,6 +50,22 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
 
   void printGroups() {
     Alert(
+      context: context,
+      title: 'groups'.tr(),
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl.get<RetrieveMyGroupsCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => sl.get<RetrieveGroupMembersCubit>(),
+          ),
+        ],
+        child: const GroupModal(),
+      ),
+      buttons: [],
+    ).show();
+    /*Alert(
       context: context,
       title: 'groups'.tr(),
       content: Column(
@@ -93,7 +113,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         ],
       ),
       buttons: [],
-    ).show();
+    ).show();*/
   }
 
   void printNotifications() {

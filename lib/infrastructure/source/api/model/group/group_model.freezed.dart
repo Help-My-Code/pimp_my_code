@@ -28,7 +28,7 @@ class _$ApiGroupModelTearOff {
       String? description,
       required String confidentiality,
       @JsonKey(name: 'principal_picture_url') String? principalPictureUrl,
-      required ApiUserModel creator}) {
+      ApiUserModel? creator}) {
     return _ApiGroupModel(
       id: id,
       name: name,
@@ -55,7 +55,7 @@ mixin _$ApiGroupModel {
   String get confidentiality => throw _privateConstructorUsedError;
   @JsonKey(name: 'principal_picture_url')
   String? get principalPictureUrl => throw _privateConstructorUsedError;
-  ApiUserModel get creator => throw _privateConstructorUsedError;
+  ApiUserModel? get creator => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -74,9 +74,9 @@ abstract class $ApiGroupModelCopyWith<$Res> {
       String? description,
       String confidentiality,
       @JsonKey(name: 'principal_picture_url') String? principalPictureUrl,
-      ApiUserModel creator});
+      ApiUserModel? creator});
 
-  $ApiUserModelCopyWith<$Res> get creator;
+  $ApiUserModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -121,13 +121,17 @@ class _$ApiGroupModelCopyWithImpl<$Res>
       creator: creator == freezed
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
-              as ApiUserModel,
+              as ApiUserModel?,
     ));
   }
 
   @override
-  $ApiUserModelCopyWith<$Res> get creator {
-    return $ApiUserModelCopyWith<$Res>(_value.creator, (value) {
+  $ApiUserModelCopyWith<$Res>? get creator {
+    if (_value.creator == null) {
+      return null;
+    }
+
+    return $ApiUserModelCopyWith<$Res>(_value.creator!, (value) {
       return _then(_value.copyWith(creator: value));
     });
   }
@@ -146,10 +150,10 @@ abstract class _$ApiGroupModelCopyWith<$Res>
       String? description,
       String confidentiality,
       @JsonKey(name: 'principal_picture_url') String? principalPictureUrl,
-      ApiUserModel creator});
+      ApiUserModel? creator});
 
   @override
-  $ApiUserModelCopyWith<$Res> get creator;
+  $ApiUserModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -196,7 +200,7 @@ class __$ApiGroupModelCopyWithImpl<$Res>
       creator: creator == freezed
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
-              as ApiUserModel,
+              as ApiUserModel?,
     ));
   }
 }
@@ -210,7 +214,7 @@ class _$_ApiGroupModel implements _ApiGroupModel {
       this.description,
       required this.confidentiality,
       @JsonKey(name: 'principal_picture_url') this.principalPictureUrl,
-      required this.creator});
+      this.creator});
 
   factory _$_ApiGroupModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiGroupModelFromJson(json);
@@ -227,7 +231,7 @@ class _$_ApiGroupModel implements _ApiGroupModel {
   @JsonKey(name: 'principal_picture_url')
   final String? principalPictureUrl;
   @override
-  final ApiUserModel creator;
+  final ApiUserModel? creator;
 
   @override
   String toString() {
@@ -278,7 +282,7 @@ abstract class _ApiGroupModel implements ApiGroupModel {
       String? description,
       required String confidentiality,
       @JsonKey(name: 'principal_picture_url') String? principalPictureUrl,
-      required ApiUserModel creator}) = _$_ApiGroupModel;
+      ApiUserModel? creator}) = _$_ApiGroupModel;
 
   factory _ApiGroupModel.fromJson(Map<String, dynamic> json) =
       _$_ApiGroupModel.fromJson;
@@ -295,7 +299,7 @@ abstract class _ApiGroupModel implements ApiGroupModel {
   @JsonKey(name: 'principal_picture_url')
   String? get principalPictureUrl;
   @override
-  ApiUserModel get creator;
+  ApiUserModel? get creator;
   @override
   @JsonKey(ignore: true)
   _$ApiGroupModelCopyWith<_ApiGroupModel> get copyWith =>

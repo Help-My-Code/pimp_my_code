@@ -7,7 +7,7 @@ class Group {
   final String name;
   final String? description;
   final Confidentiality confidentiality;
-  final User creator;
+  final User? creator;
   final String? principalPictureUrl;
 
   Group(
@@ -17,4 +17,12 @@ class Group {
       required this.confidentiality,
       required this.creator,
       this.principalPictureUrl});
+
+  Group.withoutCreator(
+      {required this.id,
+        required this.name,
+        this.description,
+        required this.confidentiality,
+        this.creator,
+        this.principalPictureUrl});
 }

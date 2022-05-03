@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_groups_loaded.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_users_loaded.dart';

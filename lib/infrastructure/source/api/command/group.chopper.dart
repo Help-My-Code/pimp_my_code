@@ -23,4 +23,12 @@ class _$GroupInteractor extends GroupInteractor {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getByCreatorId(String creatorId) {
+    final $url = '/group/getByCreatorId';
+    final $params = <String, dynamic>{'creatorId': creatorId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

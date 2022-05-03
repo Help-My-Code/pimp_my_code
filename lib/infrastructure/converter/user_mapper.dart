@@ -14,6 +14,7 @@ class UserMapper {
         throw AssertionError();
     }
   }
+
   Role _roleFromString(String string) {
     switch (string) {
       case 'ADMIN':

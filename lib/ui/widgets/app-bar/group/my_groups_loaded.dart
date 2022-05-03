@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/domain/entities/group.dart';
+import 'package:pimp_my_code/ui/default_pictures.dart';
 
-import '../../../default_pictures.dart';
-
-class SearchedGroupsLoaded extends StatelessWidget {
+class MyGroupsLoaded extends StatelessWidget {
   final List<Group> groups;
 
-  const SearchedGroupsLoaded({
+  const MyGroupsLoaded({
     Key? key,
     required this.groups,
   }) : super(key: key);
@@ -18,11 +17,24 @@ class SearchedGroupsLoaded extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          const SizedBox(height: 20),
-          if (groups.isNotEmpty) const Text('groups').tr(),
+          const SizedBox(height: 10),
+          if (groups.isNotEmpty)
+            RichText(
+              text: TextSpan(
+                children: [
+                  const WidgetSpan(
+                    child: Icon(Icons.group),
+                  ),
+                  TextSpan(
+                    text: '   ' + 'my_groups'.tr(),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.15,
             child: ListView.builder(
               itemCount: groups.length,
               itemBuilder: (context, index) {

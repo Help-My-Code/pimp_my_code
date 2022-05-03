@@ -13,7 +13,7 @@ class ApiGroupModel with _$ApiGroupModel {
     required String confidentiality,
     @JsonKey(name: 'principal_picture_url')
     String? principalPictureUrl,
-    required ApiUserModel creator,
+    ApiUserModel? creator,
   }) = _ApiGroupModel;
 
   factory ApiGroupModel.fromJson(Map<String, dynamic> json) =>

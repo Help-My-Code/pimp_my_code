@@ -1,19 +1,28 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/repositories/group_member_repository.dart';
 import 'package:pimp_my_code/domain/services/program_service.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/group/find_member_groups.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+import 'package:pimp_my_code/infrastructure/converter/group_member_mapper.dart';
+import 'package:pimp_my_code/infrastructure/repositories/api_group_member_repository.dart';
 import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
+import 'package:pimp_my_code/infrastructure/source/api/command/group_member.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
+import 'package:pimp_my_code/infrastructure/source/api/model/group_member/group_member_model.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
+import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
 import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
+import 'package:pimp_my_code/state/retrive_member_groups/retrieve_group_members_cubit.dart';
 
 import 'config/env/base.dart';
 import 'domain/repositories/auth_repository.dart';
@@ -64,6 +73,7 @@ void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<ProgramInteractor>());
   sl.registerSingleton(chopper.getService<UserInteractor>());
   sl.registerSingleton(chopper.getService<GroupInteractor>());
+  sl.registerSingleton(chopper.getService<GroupMemberInteractor>());
 
 }
 
@@ -71,6 +81,7 @@ void registerMapper() {
   sl.registerFactory(() => ContentMapper());
   sl.registerFactory(() => UserMapper());
   sl.registerFactory(() => GroupMapper(sl()));
+  sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
 }
 
 void registerRepositories() {
@@ -78,6 +89,7 @@ void registerRepositories() {
   sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl(), sl()));
   sl.registerSingleton<GroupRepository>(ApiGroupRepository(sl(), sl()));
+  sl.registerSingleton<GroupMemberRepository>(ApiGroupMemberRepository(sl(), sl()));
 }
 
 void registerServices() {
@@ -93,6 +105,8 @@ void registerUseCases() {
   sl.registerSingleton(CreatePublicationUseCase(sl()));
   sl.registerSingleton(FindUserByNameUseCase(sl()));
   sl.registerSingleton(FindGroupByNameUseCase(sl()));
+  sl.registerSingleton(FindMyGroupsUseCase(sl()));
+  sl.registerSingleton(FindGroupMembersUseCase(sl()));
 }
 
 void registerBloc() {
@@ -105,6 +119,8 @@ void registerBloc() {
   sl.registerSingleton(CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
+  sl.registerFactory(() => RetrieveMyGroupsCubit(sl(), sl()));
+  sl.registerFactory(() => RetrieveGroupMembersCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {
@@ -116,6 +132,7 @@ ChopperClient createChopper(Config config) {
       ProgramInteractor.create(),
       UserInteractor.create(),
       GroupInteractor.create(),
+      GroupMemberInteractor.create(),
     ],
     interceptors: [
       const HeadersInterceptor(
