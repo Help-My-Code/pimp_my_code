@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pimp_my_code/domain/entities/enum/notification_type.dart';
 import 'package:pimp_my_code/domain/entities/notification.dart' as notification;
@@ -69,53 +70,53 @@ class NotificationsLoaded extends StatelessWidget {
             notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' n\'a pas aimé votre publication',
+                'didnt_like_your_publication'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.comment:
         return Text(
             notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' a commenté votre publication',
+                'commented_your_publication'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.share:
         return Text(
             notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' a partagé votre publication',
+                'shared_your_publication'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.groupJoinDemand:
         return Text(
-            'Vous avez reçu une demande d\'adhésion pour le groupe ' +
+            'received_membership_demand_for_group'.tr() +
                 notification.groupLinked!.name,
             style: const TextStyle(fontSize: 16));
       case NotificationType.groupAccepted:
         return Text(
-            'Votre demande d\'adhésion au groupe ' +
+            'membership_demand_for_group'.tr() +
                 notification.groupLinked!.name +
-                ' a été acceptée',
+                'was_accepted_feminine'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.groupRefused:
         return Text(
-            'Votre demande d\'adhésion au groupe ' +
+            'membership_demand_for_group'.tr() +
                 notification.groupLinked!.name +
-                ' a été refusée',
+                'was_refused_feminine'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.followDemand:
         return Text(
             notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' demande à vous suivre',
+                'asks_to_follow_you'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.followAccepted:
         return Text(
-            'Votre demande de follow à ' +
+            'follow_request_to'.tr() +
                 notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' a été accepté',
+                'was_accepted_masculine'.tr(),
             style: const TextStyle(fontSize: 16));
       case NotificationType.followRefused:
         return Text(
@@ -123,14 +124,14 @@ class NotificationsLoaded extends StatelessWidget {
                 notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' a été refusé',
+                'was_refused_masculine'.tr(),
             style: const TextStyle(fontSize: 16));
       default:
         return Text(
             notification.userLinked!.firstname +
                 ' ' +
                 notification.userLinked!.lastname +
-                ' a aimé votre publication',
+                'liked_your_publication'.tr(),
             style: const TextStyle(fontSize: 16));
     }
   }

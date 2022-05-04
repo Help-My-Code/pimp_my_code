@@ -45,5 +45,17 @@
   "title_hint": "Title",
   "content_hint": "Content",
   "add_post": "Add a post",
-  "media_hint": "Add a photo"
+  "media_hint": "Add a photo",
+  "liked_your_publication": " liked your publication",
+  "commented_your_publication": " commented your publication",
+  "shared_your_publication": " shared your publication",
+  "didnt_like_your_publication": " didn't like your publication",
+  "received_membership_demand_for_group": "You have received a membership application for the group ",
+  "membership_demand_for_group": "Your membership application for the group ",
+  "was_accepted_feminine": " was accepted",
+  "was_refused_feminine": " was refused",
+  "was_accepted_masculine": " was accepted",
+  "was_refused_masculine": " was refused",
+  "follow_request_to": "Your request for a follow to ",
+  "asks_to_follow_you": " asks to follow you"
 }

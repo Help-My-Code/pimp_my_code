@@ -38,28 +38,6 @@ class NotificationModal extends StatelessWidget {
               loaded: (notifications) => NotificationsLoaded(notifications: notifications),
             );
           }),
-          const SizedBox(height: 10),
-          /*BlocConsumer<RetrieveNotificationMembersCubit, RetrieveNotificationMembersState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  orElse: () {},
-                  failure: () {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Failed_to_load_notification_members').tr(),
-                      backgroundColor: Theme.of(context).errorColor,
-                    ));
-                  },
-                );
-              }, builder: (context, state) {
-            return state.maybeWhen(
-              initial: () {
-                context.read<RetrieveNotificationMembersCubit>().loadNotificationMembers();
-                return const Loading();
-              },
-              orElse: () => const Loading(),
-              loaded: (notificationMembers) => NotificationMembersLoaded(notificationMembers: notificationMembers),
-            );
-          }),*/
         ],
       ),
     );
