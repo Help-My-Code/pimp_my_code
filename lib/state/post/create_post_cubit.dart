@@ -12,7 +12,6 @@ import '../../core/failure.dart';
 
 part 'create_post_state.dart';
 part 'create_post_cubit.freezed.dart';
-part 'create_post_state.dart';
 
 class CreatePostCubit extends Cubit<CreatePostState> {
   final CreatePublicationUseCase _createPublicationUseCase;
