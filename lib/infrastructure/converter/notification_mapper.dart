@@ -1,8 +1,8 @@
-import 'package:pimp_my_code/domain/entities/enum/notification-type.dart';
 import 'package:pimp_my_code/infrastructure/converter/content_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/group_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 
+import '../../domain/entities/enum/notification_type.dart';
 import '../../domain/entities/notification.dart';
 import '../source/api/model/notification/notification_model.dart';
 
@@ -42,36 +42,19 @@ class NotificationMapper {
 
   Notification mapApiNotificationToNotification(
       ApiNotificationModel apiNotificationModel) {
-    if (apiNotificationModel.groupLinked != null) {
-      if (apiNotificationModel.contentLinked != null) {
-        if (apiNotificationModel.userLinked != null) {
-        } else {}
-      } else {
-        if (apiNotificationModel.userLinked != null) {
-        } else {}
-      }
-    } else {
-      if (apiNotificationModel.contentLinked != null) {
-        if (apiNotificationModel.userLinked != null) {
-        } else {}
-      } else {
-        if (apiNotificationModel.userLinked != null) {
-        } else {}
-      }
-    }
     return Notification(
       id: apiNotificationModel.id,
       dateHour: apiNotificationModel.dateHour,
       isSeen: apiNotificationModel.isSeen,
       notificationType:
-          _notificationTypeFromString(apiNotificationModel.notificationType),
-      groupLinked:
-          _groupMapper.mapApiGroupToGroup(apiNotificationModel.groupLinked),
-      contentLinked: _contentMapper
-          .mapApiContentToContent(apiNotificationModel.contentLinked),
-      userRecipient:
-          _userMapper.mapApiUserToUser(apiNotificationModel.userRecipient),
-      userLinked: _userMapper.mapApiUserToUser(apiNotificationModel.userLinked),
+      _notificationTypeFromString(apiNotificationModel.notificationType),
+      groupLinked: apiNotificationModel.groupLinked == null ? null :
+      _groupMapper.mapApiGroupToGroup(apiNotificationModel.groupLinked!),
+      contentLinked: apiNotificationModel.contentLinked == null ? null :
+      _contentMapper.mapApiContentToContent(apiNotificationModel.contentLinked!),
+      userRecipient: _userMapper.mapApiUserToUser(apiNotificationModel.userRecipient),
+      userLinked: apiNotificationModel.userLinked == null ? null :
+      _userMapper.mapApiUserToUser(apiNotificationModel.userLinked!),
     );
   }
 }

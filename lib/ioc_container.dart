@@ -3,26 +3,25 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/repositories/group_member_repository.dart';
 import 'package:pimp_my_code/domain/repositories/notification_repository.dart';
+import 'package:pimp_my_code/domain/repositories/user_repository.dart';
 import 'package:pimp_my_code/domain/services/program_service.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
 import 'package:pimp_my_code/domain/usecases/notification/find_notifications.dart';
 import 'package:pimp_my_code/domain/usecases/notification/see_all_notifications.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/group_member_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/notification_mapper.dart';
+import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_group_member_repository.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_notification_repository.dart';
+import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
 import 'package:pimp_my_code/infrastructure/services/api_program_service.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/group_member.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
-import 'package:pimp_my_code/infrastructure/source/api/model/group_member/group_member_model.dart';
-import 'package:pimp_my_code/state/post/create_post_cubit.dart';
-import 'package:pimp_my_code/domain/repositories/user_repository.dart';
-import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
-import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
-import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
-import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
+import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
@@ -86,9 +85,9 @@ void registerInteractor(ChopperClient chopper) {
 }
 
 void registerMapper() {
-  sl.registerFactory(() => ContentMapper());
+  sl.registerFactory(() => ContentMapper(sl()));
   sl.registerFactory(() => UserMapper());
-  sl.registerFactory(() => GroupMapper(sl()));
+  sl.registerFactory(() => GroupMapper());
   sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
   sl.registerFactory(() => NotificationMapper(sl(), sl(), sl()));
 }

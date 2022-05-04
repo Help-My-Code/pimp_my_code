@@ -1,10 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/domain/entities/enum/role.dart';
 import 'package:pimp_my_code/domain/entities/notification.dart' as notification;
-
-import '../../../default_pictures.dart';
 
 class NotificationsLoaded extends StatelessWidget {
   final List<notification.Notification> notifications;
@@ -20,23 +16,8 @@ class NotificationsLoaded extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          if (notifications.isNotEmpty)
-            RichText(
-              text: TextSpan(
-                children: [
-                  const WidgetSpan(
-                    child: Icon(Icons.group),
-                  ),
-                  TextSpan(
-                    text: '   ' + 'groups_im_member_of'.tr(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.7,
             child: ListView.builder(
               itemCount: notifications.length,
               itemBuilder: (context, index) {
@@ -44,6 +25,7 @@ class NotificationsLoaded extends StatelessWidget {
                   //if(notifications[index].userRole == Role.member)
                   Row(
                     children: <Widget>[
+                      const Icon(Icons.thumb_up),
                       /*GFAvatar(
                         size: 20,
                         backgroundImage: NetworkImage(

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 
-import '../../core/failure.dart';
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
 import '../../domain/usecases/group/find_group_by_name.dart';

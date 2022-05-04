@@ -5,9 +5,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/ui/pages/home/widgets/create_post_card.dart';
-import '../../../state/retrieve_content/retrieve_content_cubit.dart';
-import '../../widgets/loading.dart';
-import 'widgets/home_loaded.dart';
+
 import '../../widgets/app-bar/app_bar_menu.dart';
 
 class HomePage extends StatelessWidget {

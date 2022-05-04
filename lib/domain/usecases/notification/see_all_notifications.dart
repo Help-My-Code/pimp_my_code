@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/entities/notification.dart';
 
 import '../../../core/failure.dart';
 import '../../../core/usecase.dart';

@@ -1,7 +1,7 @@
 import 'package:pimp_my_code/domain/entities/content.dart';
-import 'package:pimp_my_code/domain/entities/enum/notification-type.dart';
 import 'package:pimp_my_code/domain/entities/user.dart';
 
+import 'enum/notification_type.dart';
 import 'group.dart';
 
 class Notification {

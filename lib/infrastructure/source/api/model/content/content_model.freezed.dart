@@ -30,11 +30,12 @@ class _$ApiContentModelTearOff {
       String? codeResult,
       @JsonKey(name: 'createdAt') required DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
-      @JsonKey(name: 'creatorId') required String creatorId,
+      @JsonKey(name: 'creatorId') String? creatorId,
+      ApiUserModel? creator,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') required String contentType,
-      required List<String> medias,
-      required String username,
+      required List<String>? medias,
+      required String? username,
       String? userImage}) {
     return _ApiContentModel(
       id: id,
@@ -45,6 +46,7 @@ class _$ApiContentModelTearOff {
       createdAt: createdAt,
       groupId: groupId,
       creatorId: creatorId,
+      creator: creator,
       parentId: parentId,
       contentType: contentType,
       medias: medias,
@@ -73,13 +75,14 @@ mixin _$ApiContentModel {
   @JsonKey(name: 'groupId')
   String? get groupId => throw _privateConstructorUsedError;
   @JsonKey(name: 'creatorId')
-  String get creatorId => throw _privateConstructorUsedError;
+  String? get creatorId => throw _privateConstructorUsedError;
+  ApiUserModel? get creator => throw _privateConstructorUsedError;
   @JsonKey(name: 'parentId')
   String? get parentId => throw _privateConstructorUsedError;
   @JsonKey(name: 'contentType')
   String get contentType => throw _privateConstructorUsedError;
-  List<String> get medias => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
+  List<String>? get medias => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   String? get userImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -101,12 +104,15 @@ abstract class $ApiContentModelCopyWith<$Res> {
       String? codeResult,
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
-      @JsonKey(name: 'creatorId') String creatorId,
+      @JsonKey(name: 'creatorId') String? creatorId,
+      ApiUserModel? creator,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') String contentType,
-      List<String> medias,
-      String username,
+      List<String>? medias,
+      String? username,
       String? userImage});
+
+  $ApiUserModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -128,6 +134,7 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? groupId = freezed,
     Object? creatorId = freezed,
+    Object? creator = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
     Object? medias = freezed,
@@ -166,7 +173,11 @@ class _$ApiContentModelCopyWithImpl<$Res>
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as ApiUserModel?,
       parentId: parentId == freezed
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
@@ -178,16 +189,27 @@ class _$ApiContentModelCopyWithImpl<$Res>
       medias: medias == freezed
           ? _value.medias
           : medias // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       userImage: userImage == freezed
           ? _value.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+
+  @override
+  $ApiUserModelCopyWith<$Res>? get creator {
+    if (_value.creator == null) {
+      return null;
+    }
+
+    return $ApiUserModelCopyWith<$Res>(_value.creator!, (value) {
+      return _then(_value.copyWith(creator: value));
+    });
   }
 }
 
@@ -206,12 +228,16 @@ abstract class _$ApiContentModelCopyWith<$Res>
       String? codeResult,
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
-      @JsonKey(name: 'creatorId') String creatorId,
+      @JsonKey(name: 'creatorId') String? creatorId,
+      ApiUserModel? creator,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') String contentType,
-      List<String> medias,
-      String username,
+      List<String>? medias,
+      String? username,
       String? userImage});
+
+  @override
+  $ApiUserModelCopyWith<$Res>? get creator;
 }
 
 /// @nodoc
@@ -235,6 +261,7 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? groupId = freezed,
     Object? creatorId = freezed,
+    Object? creator = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
     Object? medias = freezed,
@@ -273,7 +300,11 @@ class __$ApiContentModelCopyWithImpl<$Res>
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as ApiUserModel?,
       parentId: parentId == freezed
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
@@ -285,11 +316,11 @@ class __$ApiContentModelCopyWithImpl<$Res>
       medias: medias == freezed
           ? _value.medias
           : medias // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       userImage: userImage == freezed
           ? _value.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
@@ -309,7 +340,8 @@ class _$_ApiContentModel implements _ApiContentModel {
       this.codeResult,
       @JsonKey(name: 'createdAt') required this.createdAt,
       @JsonKey(name: 'groupId') this.groupId,
-      @JsonKey(name: 'creatorId') required this.creatorId,
+      @JsonKey(name: 'creatorId') this.creatorId,
+      this.creator,
       @JsonKey(name: 'parentId') this.parentId,
       @JsonKey(name: 'contentType') required this.contentType,
       required this.medias,
@@ -337,7 +369,9 @@ class _$_ApiContentModel implements _ApiContentModel {
   final String? groupId;
   @override
   @JsonKey(name: 'creatorId')
-  final String creatorId;
+  final String? creatorId;
+  @override
+  final ApiUserModel? creator;
   @override
   @JsonKey(name: 'parentId')
   final String? parentId;
@@ -345,15 +379,15 @@ class _$_ApiContentModel implements _ApiContentModel {
   @JsonKey(name: 'contentType')
   final String contentType;
   @override
-  final List<String> medias;
+  final List<String>? medias;
   @override
-  final String username;
+  final String? username;
   @override
   final String? userImage;
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, title: $title, content: $content, code: $code, codeResult: $codeResult, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, parentId: $parentId, contentType: $contentType, medias: $medias, username: $username, userImage: $userImage)';
+    return 'ApiContentModel(id: $id, title: $title, content: $content, code: $code, codeResult: $codeResult, createdAt: $createdAt, groupId: $groupId, creatorId: $creatorId, creator: $creator, parentId: $parentId, contentType: $contentType, medias: $medias, username: $username, userImage: $userImage)';
   }
 
   @override
@@ -370,6 +404,7 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
+            const DeepCollectionEquality().equals(other.creator, creator) &&
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality()
                 .equals(other.contentType, contentType) &&
@@ -389,6 +424,7 @@ class _$_ApiContentModel implements _ApiContentModel {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(groupId),
       const DeepCollectionEquality().hash(creatorId),
+      const DeepCollectionEquality().hash(creator),
       const DeepCollectionEquality().hash(parentId),
       const DeepCollectionEquality().hash(contentType),
       const DeepCollectionEquality().hash(medias),
@@ -415,11 +451,12 @@ abstract class _ApiContentModel implements ApiContentModel {
       String? codeResult,
       @JsonKey(name: 'createdAt') required DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
-      @JsonKey(name: 'creatorId') required String creatorId,
+      @JsonKey(name: 'creatorId') String? creatorId,
+      ApiUserModel? creator,
       @JsonKey(name: 'parentId') String? parentId,
       @JsonKey(name: 'contentType') required String contentType,
-      required List<String> medias,
-      required String username,
+      required List<String>? medias,
+      required String? username,
       String? userImage}) = _$_ApiContentModel;
 
   factory _ApiContentModel.fromJson(Map<String, dynamic> json) =
@@ -443,7 +480,9 @@ abstract class _ApiContentModel implements ApiContentModel {
   String? get groupId;
   @override
   @JsonKey(name: 'creatorId')
-  String get creatorId;
+  String? get creatorId;
+  @override
+  ApiUserModel? get creator;
   @override
   @JsonKey(name: 'parentId')
   String? get parentId;
@@ -451,9 +490,9 @@ abstract class _ApiContentModel implements ApiContentModel {
   @JsonKey(name: 'contentType')
   String get contentType;
   @override
-  List<String> get medias;
+  List<String>? get medias;
   @override
-  String get username;
+  String? get username;
   @override
   String? get userImage;
   @override

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/content.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+
 import '../../core/failure.dart';
 
-part 'create_post_state.dart';
 part 'create_post_cubit.freezed.dart';
+part 'create_post_state.dart';
 
 class CreatePostCubit extends Cubit<CreatePostState> {
   final CreatePublicationUseCase _createPublicationUseCase;

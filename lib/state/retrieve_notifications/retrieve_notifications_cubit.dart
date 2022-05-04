@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/domain/entities/notification.dart';
 
 import '../../domain/usecases/notification/find_notifications.dart';

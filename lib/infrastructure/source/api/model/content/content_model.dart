@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../user/user_model.dart';
+
 part 'content_model.freezed.dart';
 part 'content_model.g.dart';
 
@@ -13,11 +15,12 @@ class ApiContentModel with _$ApiContentModel {
     String? codeResult,
     @JsonKey(name: 'createdAt') required DateTime createdAt,
     @JsonKey(name: 'groupId') String? groupId,
-    @JsonKey(name: 'creatorId') required String creatorId,
+    @JsonKey(name: 'creatorId') String? creatorId,
+    ApiUserModel? creator,
     @JsonKey(name: 'parentId') String? parentId,
     @JsonKey(name: 'contentType') required String contentType,
-    required List<String> medias,
-    required String username,
+    required List<String>? medias,
+    required String? username,
     String? userImage,
   }) = _ApiContentModel;
 

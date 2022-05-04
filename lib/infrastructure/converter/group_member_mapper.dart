@@ -2,11 +2,8 @@ import 'package:pimp_my_code/domain/entities/enum/status.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 
-import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/entities/enum/role.dart';
-import '../../domain/entities/group.dart';
 import '../source/api/model/group_member/group_member_model.dart';
-import '../source/api/model/group/group_model.dart';
 import 'group_mapper.dart';
 
 class GroupMemberMapper {
