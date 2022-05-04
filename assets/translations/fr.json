@@ -57,5 +57,7 @@
   "was_accepted_masculine": " a été acceptée",
   "was_refused_masculine": " a été refusée",
   "follow_request_to": "Votre demande de follow à ",
-  "asks_to_follow_you": " demande à vous suivre"
+  "asks_to_follow_you": " demande à vous suivre",
+  "create_content_failure": "Erreur inatendue s'est passée durant la création de la publication",
+  "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation..."
 }

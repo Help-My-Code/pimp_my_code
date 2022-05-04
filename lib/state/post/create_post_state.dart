@@ -14,9 +14,10 @@ const factory CreatePostState({
   String? codeResult,
   required String language,
   required bool isLoading,
+  required bool isCompiling,
   required Option<Either<Failure, Unit>> failureOrSuccessOption,
 }) = _CreatePostState;
 
-factory CreatePostState.initial() => CreatePostState(isLoading: false, language: 'PYTHON', failureOrSuccessOption: none());
+factory CreatePostState.initial() => CreatePostState(isLoading: false, isCompiling: false, language: 'PYTHON', failureOrSuccessOption: none());
 }
 

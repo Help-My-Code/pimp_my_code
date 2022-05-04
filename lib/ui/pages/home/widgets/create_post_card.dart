@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
+import 'package:pimp_my_code/state/session/session_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_editor.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_showroom.dart';
 
@@ -11,13 +12,13 @@ import 'package:timeago/timeago.dart' as timeago;
 class CreatePostCard extends StatelessWidget {
   const CreatePostCard({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePostCubit, CreatePostState>(
         builder: (context, state) {
       return GFCard(
-        padding: const EdgeInsets.only(bottom: 50, left: 20, right: 20, top: 20),
+        padding:
+            const EdgeInsets.only(bottom: 50, left: 20, right: 20, top: 20),
         boxFit: BoxFit.cover,
         title: GFListTile(
           // avatar: GFAvatar(
@@ -39,16 +40,16 @@ class CreatePostCard extends StatelessWidget {
                       onChanged: context.read<CreatePostCubit>().onTitleChange,
                       decoration: InputDecoration(hintText: tr('title_hint')),
                     ))),
-              const SizedBox(
-                height: 20,
-              ),
+            const SizedBox(
+              height: 20,
+            ),
             Align(
                 child: SizedBox(
                     width: 250,
                     child: TextFormField(
                       maxLines: 1,
                       onChanged:
-                      context.read<CreatePostCubit>().onContentChange,
+                          context.read<CreatePostCubit>().onContentChange,
                       decoration: InputDecoration(hintText: tr('media_hint')),
                     ))),
             Align(
@@ -57,7 +58,7 @@ class CreatePostCard extends StatelessWidget {
                     child: TextFormField(
                       maxLines: 1,
                       onChanged:
-                      context.read<CreatePostCubit>().onContentChange,
+                          context.read<CreatePostCubit>().onContentChange,
                       decoration: InputDecoration(hintText: tr('media_hint')),
                     ))),
             Align(
@@ -66,13 +67,12 @@ class CreatePostCard extends StatelessWidget {
                     child: TextFormField(
                       maxLines: 1,
                       onChanged:
-                      context.read<CreatePostCubit>().onContentChange,
+                          context.read<CreatePostCubit>().onContentChange,
                       decoration: InputDecoration(hintText: tr('media_hint')),
                     ))),
             const SizedBox(
               height: 20,
             ),
-
             Align(
                 child: SizedBox(
                     width: 500,
@@ -125,8 +125,23 @@ class CreatePostCard extends StatelessWidget {
                 context.read<CreatePostCubit>().onCodeChange(code);
               }
             })),
-            if(state.codeResult  != null && state.codeResult!.isNotEmpty)
-              Align(child: CodeShowRoom(data: state.codeResult!, language: state.language.toLowerCase(),)),
+            if(state.isCompiling)
+              Align(child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 10),
+                    Text(tr('code_compiling'))
+                  ],
+                ),
+              ),),
+            if (state.codeResult != null && state.codeResult!.isNotEmpty)
+              Align(
+                  child: CodeShowRoom(
+                data: state.codeResult!,
+                language: state.language.toLowerCase(),
+              )),
           ],
         ),
         buttonBar: GFButtonBar(
@@ -140,15 +155,20 @@ class CreatePostCard extends StatelessWidget {
             ),
             GFButton(
               textColor: Colors.white,
-              onPressed: !context.read<CreatePostCubit>().isValidForCompilation ? null : context.read<CreatePostCubit>().onSubmitCompilation,
+              onPressed: !context.read<CreatePostCubit>().isValidForCompilation
+                  ? null
+                  : context.read<CreatePostCubit>().onSubmitCompilation,
               color: GFColors.DARK,
               text: tr('compile'),
               shape: GFButtonShape.pills,
             ),
             GFButton(
               textColor: Colors.white,
-              onPressed: !context.read<CreatePostCubit>().isValid ? null : () =>
-                  context.read<CreatePostCubit>().onSubmitPost('user_id', context),
+              onPressed: !context.read<CreatePostCubit>().isValid
+                  ? null
+                  : () => context
+                      .read<CreatePostCubit>()
+                      .onSubmitPost(context),
               text: tr('submit'),
               shape: GFButtonShape.pills,
             ),
@@ -190,7 +210,10 @@ class CreatePostCardRadio extends StatelessWidget {
         ),
         SizedBox(
             width: 100,
-            child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold),))
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ))
       ],
     );
   }
