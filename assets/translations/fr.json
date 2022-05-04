@@ -45,5 +45,8 @@
   "title_hint": "Titre",
   "content_hint": "Contenu",
   "add_post": "Ajouter une publication",
-  "media_hint": "Ajouter une photo"
+  "media_hint": "Ajouter une photo",
+  "create_content_failure": "Erreur inatendue s'est passée durant la création de la publication",
+  "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation..."
+
 }

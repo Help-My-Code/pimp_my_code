@@ -45,5 +45,7 @@
   "title_hint": "Title",
   "content_hint": "Content",
   "add_post": "Add a post",
-  "media_hint": "Add a photo"
+  "media_hint": "Add a photo",
+  "create_content_failure": "Something unexpected occured during the creation of a publication",
+  "code_compiling": "Please wait... your code is compiling..."
 }

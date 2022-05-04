@@ -29,6 +29,7 @@ class _$CreatePostStateTearOff {
       String? codeResult,
       required String language,
       required bool isLoading,
+      required bool isCompiling,
       required Option<Either<Failure, Unit>> failureOrSuccessOption}) {
     return _CreatePostState(
       title: title,
@@ -41,6 +42,7 @@ class _$CreatePostStateTearOff {
       codeResult: codeResult,
       language: language,
       isLoading: isLoading,
+      isCompiling: isCompiling,
       failureOrSuccessOption: failureOrSuccessOption,
     );
   }
@@ -61,6 +63,7 @@ mixin _$CreatePostState {
   String? get codeResult => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isCompiling => throw _privateConstructorUsedError;
   Option<Either<Failure, Unit>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -85,6 +88,7 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String? codeResult,
       String language,
       bool isLoading,
+      bool isCompiling,
       Option<Either<Failure, Unit>> failureOrSuccessOption});
 }
 
@@ -109,6 +113,7 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
+    Object? isCompiling = freezed,
     Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
@@ -152,6 +157,10 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCompiling: isCompiling == freezed
+          ? _value.isCompiling
+          : isCompiling // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: failureOrSuccessOption == freezed
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -178,6 +187,7 @@ abstract class _$CreatePostStateCopyWith<$Res>
       String? codeResult,
       String language,
       bool isLoading,
+      bool isCompiling,
       Option<Either<Failure, Unit>> failureOrSuccessOption});
 }
 
@@ -204,6 +214,7 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
+    Object? isCompiling = freezed,
     Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_CreatePostState(
@@ -247,6 +258,10 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCompiling: isCompiling == freezed
+          ? _value.isCompiling
+          : isCompiling // ignore: cast_nullable_to_non_nullable
+              as bool,
       failureOrSuccessOption: failureOrSuccessOption == freezed
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -269,6 +284,7 @@ class _$_CreatePostState extends _CreatePostState {
       this.codeResult,
       required this.language,
       required this.isLoading,
+      required this.isCompiling,
       required this.failureOrSuccessOption})
       : super._();
 
@@ -293,11 +309,13 @@ class _$_CreatePostState extends _CreatePostState {
   @override
   final bool isLoading;
   @override
+  final bool isCompiling;
+  @override
   final Option<Either<Failure, Unit>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, language: $language, isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -318,6 +336,8 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality().equals(other.language, language) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
+                .equals(other.isCompiling, isCompiling) &&
+            const DeepCollectionEquality()
                 .equals(other.failureOrSuccessOption, failureOrSuccessOption));
   }
 
@@ -334,6 +354,7 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(language),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(isCompiling),
       const DeepCollectionEquality().hash(failureOrSuccessOption));
 
   @JsonKey(ignore: true)
@@ -354,6 +375,7 @@ abstract class _CreatePostState extends CreatePostState {
           String? codeResult,
           required String language,
           required bool isLoading,
+          required bool isCompiling,
           required Option<Either<Failure, Unit>> failureOrSuccessOption}) =
       _$_CreatePostState;
   const _CreatePostState._() : super._();
@@ -378,6 +400,8 @@ abstract class _CreatePostState extends CreatePostState {
   String get language;
   @override
   bool get isLoading;
+  @override
+  bool get isCompiling;
   @override
   Option<Either<Failure, Unit>> get failureOrSuccessOption;
   @override

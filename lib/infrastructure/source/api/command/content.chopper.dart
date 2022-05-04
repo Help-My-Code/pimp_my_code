@@ -23,4 +23,13 @@ class _$ContentInteractor extends ContentInteractor {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> createContent(
+      {required Map<String, String> fields}) {
+    final $url = '/content/create';
+    final $body = fields;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

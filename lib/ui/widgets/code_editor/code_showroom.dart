@@ -11,27 +11,30 @@ class CodeShowRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
-      child: HighlightView(
-        // The original code to be highlighted
-        data,
+      child: SingleChildScrollView(
+        child: HighlightView(
+          // The original code to be highlighted
+          data,
 
-        // Specify language
-        // It is recommended to give it a value for performance
-        language: language,
+          // Specify language
+          // It is recommended to give it a value for performance
+          language: language,
 
-        // Specify highlight theme
-        // All available themes are listed in `themes` folder
-        theme: githubTheme,
+          // Specify highlight theme
+          // All available themes are listed in `themes` folder
+          theme: githubTheme,
 
-        // Specify padding
-        padding: const EdgeInsets.all(12),
+          // Specify padding
+          padding: const EdgeInsets.all(12),
 
-        // Specify text style
-        textStyle: const TextStyle(
-          fontFamily: 'arial',
-          fontSize: 16,
+          // Specify text style
+          textStyle: const TextStyle(
+            fontFamily: 'arial',
+            fontSize: 16,
+          ),
         ),
       ),
     );
