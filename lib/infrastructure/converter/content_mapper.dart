@@ -7,12 +7,10 @@ import '../../domain/entities/content.dart';
 class ContentMapper {
   ContentType _contentTypefromString(String string) {
     switch (string) {
-      case 'PUBLICATION':
-        return ContentType.publication;
       case 'COMMENT':
         return ContentType.comment;
       default:
-        throw AssertionError();
+        return ContentType.publication;
     }
   }
 

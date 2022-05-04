@@ -39,3 +39,11 @@ class CreatePublicationParam {
     required this.username,
   });
 }
+
+
+class CreatePublicationFailure extends Failure {
+  String message;
+
+  CreatePublicationFailure(this.message);
+
+}
