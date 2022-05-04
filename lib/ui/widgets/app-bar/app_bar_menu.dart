@@ -79,54 +79,6 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       ),
       buttons: [],
     ).show();
-    /*Alert(
-      context: context,
-      title: 'notifications'.tr(),
-      content: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-              onTap: () {
-                print('Container 1 clicked');
-              },
-              child: RichText(
-                text: const TextSpan(
-                  children: [
-                    WidgetSpan(
-                      //TODO mettre l'icone selon de type de notif
-                      child: Icon(Icons.thumb_up),
-                    ),
-                    TextSpan(
-                      text: '   Juliette Romarin a aimé votre publication',
-                    ),
-                  ],
-                ),
-              )),
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-              onTap: () {
-                print('Container 2 clicked');
-              },
-              child: RichText(
-                text: const TextSpan(
-                  children: [
-                    WidgetSpan(
-                      child: Icon(Icons.insert_comment),
-                    ),
-                    TextSpan(
-                      text: '   Juliette Romarin a commenté votre publication',
-                    ),
-                  ],
-                ),
-              )),
-        ],
-      ),
-      buttons: [],
-    ).show();*/
   }
 
   void _onSelectMenu(MenuValues item) {
