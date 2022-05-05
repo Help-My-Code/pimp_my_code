@@ -130,7 +130,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           },
         ),*/
         IconButton(
-          icon: const Icon(Icons.account_circle_rounded),
+          icon: const Icon(Icons.person),
           tooltip: 'my_account'.tr(),
           onPressed: () {
             GoRouter.of(context).go('/account');
