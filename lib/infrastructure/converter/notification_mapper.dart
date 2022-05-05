@@ -31,12 +31,10 @@ class NotificationMapper {
         return NotificationType.followRefused;
       case 'FOLLOW_ACCEPTED':
         return NotificationType.followAccepted;
-      case 'LIKE':
-        return NotificationType.like;
       case 'DISLIKE':
         return NotificationType.dislike;
       default:
-        throw AssertionError();
+        return NotificationType.like;
     }
   }
 

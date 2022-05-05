@@ -17,23 +17,19 @@ class GroupMemberMapper {
     switch (string) {
       case 'ADMIN':
         return Role.admin;
-      case 'MEMBER':
-        return Role.member;
       default:
-        throw AssertionError();
+        return Role.member;
     }
   }
 
   Status _statusFromString(String string) {
     switch (string) {
-      case 'PENDING_INVIT':
-        return Status.pendingInvit;
       case 'ACCEPTED':
         return Status.accepted;
       case 'REFUSED':
         return Status.refused;
       default:
-        throw AssertionError();
+        return Status.pendingInvit;
     }
   }
 
