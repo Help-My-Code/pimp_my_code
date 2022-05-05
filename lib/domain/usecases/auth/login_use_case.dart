@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:pimp_my_code/core/usecase.dart';
 import 'package:pimp_my_code/infrastructure/converter/token_decoder.dart';
 
+import '../../entities/user.dart';
 import '../../repositories/auth_repository.dart';
 
 class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
@@ -38,9 +39,9 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
 class UserIdNotFoundInLocalStorage implements Exception {}
 
 class LoginResponse {
+  final User user;
   final String token;
-
-  LoginResponse(this.token);
+  LoginResponse(this.user, this.token);
 }
 
 class LoginFailure extends Failure {

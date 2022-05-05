@@ -1,14 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/auth/login_use_case.dart';
 import '../../domain/usecases/auth/register_use_case.dart';
 import '../source/api/command/authentication.dart';
+import '../source/api/model/user/user_model.dart';
 
 class ApiAuthRepository extends AuthRepository {
-  ApiAuthRepository(this._dataSource);
-
+  ApiAuthRepository(this._dataSource, this._userMapper);
+  final UserMapper _userMapper;
   final AuthenticationInteractor _dataSource;
 
   @override
@@ -43,7 +45,15 @@ class ApiAuthRepository extends AuthRepository {
         'email': email,
         'password': password,
       });
-      return Right(LoginResponse(response.body['accessToken']));
+
+      return Right(
+        LoginResponse(
+          _userMapper.mapApiUserToUser(
+            ApiUserModel.fromJson(response.body['user']),
+          ),
+          response.body['accessToken'],
+        ),
+      );
     } catch (e) {
       return Left(LoginFailure(tr('wrong_credentials')));
     }

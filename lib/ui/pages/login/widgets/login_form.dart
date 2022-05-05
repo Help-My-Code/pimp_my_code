@@ -152,21 +152,21 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-
   Widget _buildStubButtonConnection() {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: TextButton(onPressed: () {
-        context
-            .read<LoginBloc>()
-            .add(const LoginEvent.updateEmail('example@example.com'));
-        context
-            .read<LoginBloc>()
-            .add(const LoginEvent.updatePassword('azertY1234'));
-        context
-            .read<LoginBloc>()
-            .add(const LoginEvent.submit());
-      }, child: Text('quick login'.toUpperCase())),
+      child: TextButton(
+        onPressed: () {
+          context
+              .read<LoginBloc>()
+              .add(const LoginEvent.updateEmail('example@example.com'));
+          context
+              .read<LoginBloc>()
+              .add(const LoginEvent.updatePassword('azertY1234'));
+          context.read<LoginBloc>().add(const LoginEvent.submit());
+        },
+        child: Text('quick login'.toUpperCase()),
+      ),
     );
   }
 }

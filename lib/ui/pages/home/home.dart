@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
@@ -24,7 +23,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             BlocBuilder<CreatePostCubit, CreatePostState>(
-              buildWhen: (p,c) => p.createdAt != c.createdAt,
+                buildWhen: (p, c) => p.createdAt != c.createdAt,
                 builder: (context, state) {
               if (state.createdAt != null) {
                 return const CreatePostCard();

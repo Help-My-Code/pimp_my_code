@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,8 +108,4 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
     emit(state.copyWith(isLoading: false));
   }
-}
-
-void main() {
-  var x = '0';
 }
