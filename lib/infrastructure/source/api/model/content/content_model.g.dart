@@ -15,12 +15,15 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       codeResult: json['codeResult'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       groupId: json['groupId'] as String?,
-      creatorId: json['creatorId'] as String,
+      creatorId: json['creatorId'] as String?,
+      creator: json['creator'] == null
+          ? null
+          : ApiUserModel.fromJson(json['creator'] as Map<String, dynamic>),
       parentId: json['parentId'] as String?,
       contentType: json['contentType'] as String,
       medias:
-          (json['medias'] as List<dynamic>).map((e) => e as String).toList(),
-      username: json['username'] as String,
+          (json['medias'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      username: json['username'] as String?,
       userImage: json['userImage'] as String?,
     );
 
@@ -34,6 +37,7 @@ Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'groupId': instance.groupId,
       'creatorId': instance.creatorId,
+      'creator': instance.creator,
       'parentId': instance.parentId,
       'contentType': instance.contentType,
       'medias': instance.medias,

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/domain/entities/content.dart';
+
 import 'post_card.dart';
 
 class HomeLoaded extends StatelessWidget {
@@ -36,7 +36,7 @@ class HomeLoaded extends StatelessWidget {
                   imageURL: publications[index].userPicture != null
                       ? publications[index].userPicture!
                       : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                  username: publications[index].username,
+                  username: publications[index].username!,
                   date: DateFormat('dd MMMM yyyy')
                       .format(publications[index].createdAt),
                 );

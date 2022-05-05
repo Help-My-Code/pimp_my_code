@@ -4,14 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/group/group_modal.dart';
+import 'package:pimp_my_code/ui/widgets/app-bar/notification/notification_modal.dart';
 import 'package:pimp_my_code/ui/widgets/app-bar/search/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
 import '../../../ioc_container.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
-import '../../../state/retrive_member_groups/retrieve_group_members_cubit.dart';
+import '../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
@@ -65,103 +67,15 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       ),
       buttons: [],
     ).show();
-    /*Alert(
-      context: context,
-      title: 'groups'.tr(),
-      content: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                const WidgetSpan(
-                  child: Icon(Icons.group),
-                ),
-                TextSpan(
-                  text: '   ' + 'my_groups'.tr(),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          // TODO afficher groupes
-          const SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                const WidgetSpan(
-                  child: Icon(Icons.group),
-                ),
-                TextSpan(
-                  text: '   ' + 'groups_im_member_of'.tr(),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          // TODO afficher groupes
-        ],
-      ),
-      buttons: [],
-    ).show();*/
   }
 
   void printNotifications() {
     Alert(
       context: context,
       title: 'notifications'.tr(),
-      content: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-              onTap: () {
-                print('Container 1 clicked');
-              },
-              child: RichText(
-                text: const TextSpan(
-                  children: [
-                    WidgetSpan(
-                      //TODO mettre l'icone selon de type de notif
-                      child: Icon(Icons.thumb_up),
-                    ),
-                    TextSpan(
-                      text: '   Juliette Romarin a aimé votre publication',
-                    ),
-                  ],
-                ),
-              )),
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-              onTap: () {
-                print('Container 2 clicked');
-              },
-              child: RichText(
-                text: const TextSpan(
-                  children: [
-                    WidgetSpan(
-                      child: Icon(Icons.insert_comment),
-                    ),
-                    TextSpan(
-                      text: '   Juliette Romarin a commenté votre publication',
-                    ),
-                  ],
-                ),
-              )),
-        ],
+      content: BlocProvider(
+        create: (context) => sl.get<RetrieveNotificationsCubit>(),
+        child: const NotificationModal(),
       ),
       buttons: [],
     ).show();

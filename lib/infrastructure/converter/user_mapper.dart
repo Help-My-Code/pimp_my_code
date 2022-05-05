@@ -4,25 +4,21 @@ import '../../domain/entities/user.dart';
 import '../source/api/model/user/user_model.dart';
 
 class UserMapper {
-  Confidentiality _confidentialityFromString(String string) {
+  Confidentiality _confidentialityFromString(String? string) {
     switch (string) {
-      case 'PUBLIC':
-        return Confidentiality.public;
       case 'PRIVATE':
         return Confidentiality.private;
       default:
-        throw AssertionError();
+        return Confidentiality.public;
     }
   }
 
-  Role _roleFromString(String string) {
+  Role _roleFromString(String? string) {
     switch (string) {
       case 'ADMIN':
         return Role.admin;
-      case 'MEMBER':
-        return Role.member;
       default:
-        throw AssertionError();
+        return Role.member;
     }
   }
 

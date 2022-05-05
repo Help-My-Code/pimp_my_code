@@ -5,6 +5,7 @@ import 'package:pimp_my_code/domain/repositories/content_repository.dart';
 import 'package:pimp_my_code/infrastructure/converter/content_mapper.dart';
 
 import '../../../core/usecase.dart';
+import '../../../ioc_container.dart';
 
 class CreatePublicationUseCase extends UseCase<Content, CreatePublicationParam> {
   final ContentRepository _contentRepository;
@@ -13,7 +14,7 @@ class CreatePublicationUseCase extends UseCase<Content, CreatePublicationParam> 
 
   @override
   Future<Either<Failure, Content>> call(CreatePublicationParam params) async{
-    final either = _contentRepository.createContent(ContentMapper().fromParam(params));
+    final either = _contentRepository.createContent(ContentMapper(sl()).fromParam(params));
     return either;
   }
 }

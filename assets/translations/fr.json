@@ -46,7 +46,18 @@
   "content_hint": "Contenu",
   "add_post": "Ajouter une publication",
   "media_hint": "Ajouter une photo",
+  "liked_your_publication": " a aimé votre publication",
+  "commented_your_publication": " a commenté votre publication",
+  "shared_your_publication": " a partagé votre publication",
+  "didnt_like_your_publication": " n'a pas aimé votre publication",
+  "received_membership_demand_for_group": "Vous avez reçu une demande d'adhésion pour le groupe ",
+  "membership_demand_for_group": "Votre demande d'adhésion au groupe ",
+  "was_accepted_feminine": " a été acceptée",
+  "was_refused_feminine": " a été refusée",
+  "was_accepted_masculine": " a été acceptée",
+  "was_refused_masculine": " a été refusée",
+  "follow_request_to": "Votre demande de follow à ",
+  "asks_to_follow_you": " demande à vous suivre",
   "create_content_failure": "Erreur inatendue s'est passée durant la création de la publication",
   "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation..."
-
 }

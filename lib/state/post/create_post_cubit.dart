@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +11,6 @@ import 'package:pimp_my_code/state/session/session_cubit.dart';
 import '../../core/failure.dart';
 
 part 'create_post_state.dart';
-
 part 'create_post_cubit.freezed.dart';
 
 class CreatePostCubit extends Cubit<CreatePostState> {
