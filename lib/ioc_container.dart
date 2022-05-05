@@ -81,7 +81,6 @@ void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<GroupInteractor>());
   sl.registerSingleton(chopper.getService<GroupMemberInteractor>());
   sl.registerSingleton(chopper.getService<NotificationInteractor>());
-
 }
 
 void registerMapper() {
@@ -93,12 +92,14 @@ void registerMapper() {
 }
 
 void registerRepositories() {
-  sl.registerSingleton<AuthRepository>(ApiAuthRepository(sl()));
+  sl.registerSingleton<AuthRepository>(ApiAuthRepository(sl(), sl()));
   sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl(), sl()));
   sl.registerSingleton<GroupRepository>(ApiGroupRepository(sl(), sl()));
-  sl.registerSingleton<GroupMemberRepository>(ApiGroupMemberRepository(sl(), sl()));
-  sl.registerSingleton<NotificationRepository>(ApiNotificationRepository(sl(), sl()));
+  sl.registerSingleton<GroupMemberRepository>(
+      ApiGroupMemberRepository(sl(), sl()));
+  sl.registerSingleton<NotificationRepository>(
+      ApiNotificationRepository(sl(), sl()));
 }
 
 void registerServices() {

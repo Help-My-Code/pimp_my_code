@@ -1,11 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
-import 'package:pimp_my_code/domain/entities/enum/role.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/entities/user.dart';
 import '../../domain/usecases/auth/login_use_case.dart';
 
 part 'login_event.dart';
@@ -40,9 +37,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(status: const FormSubmissionSuccessful()),
       );
-      // TODO build user from another way
-      _sessionCubit.showHome(User(id: success.token, email: '', password: '', firstname: '', lastname: '',
-          userRole: Role.member, confidentiality: Confidentiality.public));
+      print(success.user);
+      _sessionCubit.showHome(success.user);
     });
   }
 }

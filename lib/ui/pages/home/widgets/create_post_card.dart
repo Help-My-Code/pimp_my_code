@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_editor.dart';
 import 'package:pimp_my_code/ui/widgets/code_editor/code_showroom.dart';
 
@@ -21,9 +20,6 @@ class CreatePostCard extends StatelessWidget {
             const EdgeInsets.only(bottom: 50, left: 20, right: 20, top: 20),
         boxFit: BoxFit.cover,
         title: GFListTile(
-          // avatar: GFAvatar(
-          //   backgroundImage: NetworkImage(state.userPicture ?? ''),
-          // ),
           title: const Text(
             'username',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -125,17 +121,19 @@ class CreatePostCard extends StatelessWidget {
                 context.read<CreatePostCubit>().onCodeChange(code);
               }
             })),
-            if(state.isCompiling)
-              Align(child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    const CircularProgressIndicator(),
-                    const SizedBox(height: 10),
-                    Text(tr('code_compiling'))
-                  ],
+            if (state.isCompiling)
+              Align(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const CircularProgressIndicator(),
+                      const SizedBox(height: 10),
+                      Text(tr('code_compiling'))
+                    ],
+                  ),
                 ),
-              ),),
+              ),
             if (state.codeResult != null && state.codeResult!.isNotEmpty)
               Align(
                   child: CodeShowRoom(
@@ -166,9 +164,7 @@ class CreatePostCard extends StatelessWidget {
               textColor: Colors.white,
               onPressed: !context.read<CreatePostCubit>().isValid
                   ? null
-                  : () => context
-                      .read<CreatePostCubit>()
-                      .onSubmitPost(context),
+                  : () => context.read<CreatePostCubit>().onSubmitPost(context),
               text: tr('submit'),
               shape: GFButtonShape.pills,
             ),
