@@ -103,7 +103,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       either.fold((f) {
         emit(state.copyWith(failureOrSuccessOption: some(left(f))));
       }, (r) {
-        emit(CreatePostState.initial());
+        emit(CreatePostState.initial().copyWith(createdAt:  null));
         GoRouter.of(context).refresh();
       });
     }
