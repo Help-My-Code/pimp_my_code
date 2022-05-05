@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
@@ -33,6 +34,8 @@ class HomePage extends StatelessWidget {
                   text: tr('add_post'),
                   // icon: Icon(Icons.add),
                   shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.add, color: Colors.white),
                   // type: GFButtonType.transparent,
                 ),
               );
