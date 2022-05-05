@@ -23,12 +23,19 @@ class NotificationsLoaded extends StatelessWidget {
               itemCount: notifications.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      _initIcon(notifications[index]),
-                      const SizedBox(width: 10),
-                      _initText(notifications[index]),
-                    ],
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      //TODO aller sur la page du groupe
+                      print(notifications[index].userLinked!.lastname);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        _initIcon(notifications[index]),
+                        const SizedBox(width: 10),
+                        _initText(notifications[index]),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 5),
                 ]);

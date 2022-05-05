@@ -27,19 +27,29 @@ class SearchedUsersLoaded extends StatelessWidget {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      GFAvatar(
-                        size: 20,
-                        backgroundImage: NetworkImage(
-                          users[index].principalPictureUrl ??
-                              DefaultPictures.defaultUserPicture,
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      //TODO aller sur la page de l'user
+                      print(users[index].lastname);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        GFAvatar(
+                          size: 20,
+                          backgroundImage: NetworkImage(
+                            users[index].principalPictureUrl ??
+                                DefaultPictures.defaultUserPicture,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(users[index].firstname + ' ' + users[index].lastname,
-                          style: const TextStyle(fontSize: 16)),
-                    ],
+                        const SizedBox(width: 10),
+                        Text(
+                            users[index].firstname +
+                                ' ' +
+                                users[index].lastname,
+                            style: const TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 10),
                 ]);

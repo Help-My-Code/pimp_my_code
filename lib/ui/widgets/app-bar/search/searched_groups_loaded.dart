@@ -27,7 +27,13 @@ class SearchedGroupsLoaded extends StatelessWidget {
               itemCount: groups.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  Row(
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      //TODO aller sur la page du groupe
+                      print(groups[index].name);
+                    },
+                    child: Row(
                     children: <Widget>[
                       GFAvatar(
                         size: 20,
@@ -40,6 +46,7 @@ class SearchedGroupsLoaded extends StatelessWidget {
                       Text(groups[index].name,
                           style: const TextStyle(fontSize: 16)),
                     ],
+                  ),
                   ),
                   const SizedBox(height: 5),
                 ]);
