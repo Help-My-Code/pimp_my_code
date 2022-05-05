@@ -24,6 +24,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp.router(
         locale: context.locale,
+        debugShowCheckedModeBanner: false,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
         routeInformationParser: router.router.routeInformationParser,
