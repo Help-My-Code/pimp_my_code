@@ -41,21 +41,28 @@ class GroupMembersLoaded extends StatelessWidget {
               itemCount: groupMembers.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  if(groupMembers[index].userRole == Role.member)
-                  Row(
-                    children: <Widget>[
-                      GFAvatar(
-                        size: 20,
-                        backgroundImage: NetworkImage(
-                          groupMembers[index].group.principalPictureUrl ??
-                              DefaultPictures.defaultUserPicture,
-                        ),
+                  if (groupMembers[index].userRole == Role.member)
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        //TODO aller sur la page du groupe
+                        print(groupMembers[index].group.name);
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          GFAvatar(
+                            size: 20,
+                            backgroundImage: NetworkImage(
+                              groupMembers[index].group.principalPictureUrl ??
+                                  DefaultPictures.defaultUserPicture,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(groupMembers[index].group.name,
+                              style: const TextStyle(fontSize: 16)),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Text(groupMembers[index].group.name,
-                          style: const TextStyle(fontSize: 16)),
-                    ],
-                  ),
+                    ),
                   const SizedBox(height: 5),
                 ]);
               },
@@ -83,20 +90,27 @@ class GroupMembersLoaded extends StatelessWidget {
               itemCount: groupMembers.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  if(groupMembers[index].userRole == Role.admin)
-                    Row(
-                      children: <Widget>[
-                        GFAvatar(
-                          size: 20,
-                          backgroundImage: NetworkImage(
-                            groupMembers[index].group.principalPictureUrl ??
-                                DefaultPictures.defaultUserPicture,
+                  if (groupMembers[index].userRole == Role.admin)
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        //TODO aller sur la page du groupe
+                        print(groupMembers[index].group.name);
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          GFAvatar(
+                            size: 20,
+                            backgroundImage: NetworkImage(
+                              groupMembers[index].group.principalPictureUrl ??
+                                  DefaultPictures.defaultUserPicture,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(groupMembers[index].group.name,
-                            style: const TextStyle(fontSize: 16)),
-                      ],
+                          const SizedBox(width: 10),
+                          Text(groupMembers[index].group.name,
+                              style: const TextStyle(fontSize: 16)),
+                        ],
+                      ),
                     ),
                   const SizedBox(height: 5),
                 ]);

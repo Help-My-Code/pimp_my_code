@@ -39,19 +39,26 @@ class MyGroupsLoaded extends StatelessWidget {
               itemCount: groups.length,
               itemBuilder: (context, index) {
                 return Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      GFAvatar(
-                        size: 20,
-                        backgroundImage: NetworkImage(
-                          groups[index].principalPictureUrl ??
-                              DefaultPictures.defaultUserPicture,
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      //TODO aller sur la page du groupe
+                      print(groups[index].name);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        GFAvatar(
+                          size: 20,
+                          backgroundImage: NetworkImage(
+                            groups[index].principalPictureUrl ??
+                                DefaultPictures.defaultUserPicture,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(groups[index].name,
-                          style: const TextStyle(fontSize: 16)),
-                    ],
+                        const SizedBox(width: 10),
+                        Text(groups[index].name,
+                            style: const TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 5),
                 ]);
