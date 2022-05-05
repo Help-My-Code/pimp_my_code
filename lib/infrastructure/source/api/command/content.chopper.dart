@@ -26,7 +26,7 @@ class _$ContentInteractor extends ContentInteractor {
 
   @override
   Future<Response<dynamic>> createContent(
-      {required Map<String, String?> fields}) {
+      {required Map<String, String> fields}) {
     final $url = '/content/create';
     final $body = fields;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
