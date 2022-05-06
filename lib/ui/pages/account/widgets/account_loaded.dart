@@ -8,6 +8,7 @@ import 'package:pimp_my_code/state/retrieve_follow_by_follower_id/retrieve_follo
 
 import '../../../../domain/entities/user.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
 import '../../home/widgets/home_loaded.dart';
@@ -70,8 +71,28 @@ class AccountLoaded extends StatelessWidget {
                         loaded: (followers) => Text(followers.length.toString() + 'followers'.tr(), style: const TextStyle(fontSize: 16)),
                       );
                     }),
-                    const Text('147 Abonnements',
-                        style: TextStyle(fontSize: 16)),
+                    BlocConsumer<RetrieveFollowByUserIdCubit, RetrieveFollowByUserIdState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            orElse: () {},
+                            failure: () {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: const Text('Failed_to_load_follows').tr(),
+                                backgroundColor: Theme.of(context).errorColor,
+                              ));
+                            },
+                          );
+                        }, builder: (context, state) {
+                      return state.maybeWhen(
+                        initial: () {
+                          context.read<RetrieveFollowByUserIdCubit>().loadFollowByUserId(user.id);
+                          return const Loading();
+                        },
+                        orElse: () => const Loading(),
+                        loaded: (followers) => Text(followers.length.toString() + 'following'.tr(),
+                            style: const TextStyle(fontSize: 16)),
+                      );
+                    }),
                     const SizedBox(height: 10),
                     Text(
                         user.description ?? '',

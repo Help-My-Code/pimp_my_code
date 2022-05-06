@@ -28,6 +28,7 @@ import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
@@ -44,6 +45,7 @@ import 'domain/usecases/auth/logout_use_case.dart';
 import 'domain/usecases/auth/register_use_case.dart';
 import 'domain/usecases/content/get_following_publication.dart';
 import 'domain/usecases/content/get_publications_by_user_id.dart';
+import 'domain/usecases/follow/find_follow_by_user_id.dart';
 import 'domain/usecases/group-member/find_group_members.dart';
 import 'domain/usecases/group/find_group_by_name.dart';
 import 'infrastructure/converter/content_mapper.dart';
@@ -136,6 +138,7 @@ void registerUseCases() {
   sl.registerSingleton(FindUserByIdUseCase(sl()));
   sl.registerSingleton(GetPublicationsByUserIdUseCase(sl()));
   sl.registerSingleton(FindFollowByFollowerIdUseCase(sl()));
+  sl.registerSingleton(FindFollowByUserIdUseCase(sl()));
 }
 
 void registerBloc() {
@@ -154,6 +157,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveUserByIdCubit(sl()));
   sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
+  sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {

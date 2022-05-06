@@ -9,4 +9,7 @@ abstract class FollowInteractor extends ChopperService {
 
   @Get(path: '/getByFollowerId')
   Future<Response> getByFollowerId(@Query() String followerId);
+
+  @Get(path: '/getByUserId')
+  Future<Response> getByUserId(@Query() String userId);
 }
