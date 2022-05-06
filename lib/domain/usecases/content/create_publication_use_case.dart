@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:pimp_my_code/core/failure.dart';
-import 'package:pimp_my_code/domain/entities/content.dart';
 import 'package:pimp_my_code/domain/repositories/content_repository.dart';
 import 'package:pimp_my_code/infrastructure/converter/content_mapper.dart';
 

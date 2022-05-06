@@ -73,7 +73,7 @@ class ApiContentRepository extends ContentRepository {
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId}) async {
     final response = await _dataSource.getPublicationsByUserId(userId);
-    final List<Map<String, dynamic>> apiContents = List.from(response.body['contents']);
+    final List<Map<String, dynamic>> apiContents = List.from(response.body);
     return Right(
       apiContents
           .map(ApiContentModel.fromJson)

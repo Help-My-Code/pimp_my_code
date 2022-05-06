@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/domain/entities/content.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
+
 import '../../core/failure.dart';
 
-part 'create_post_state.dart';
 part 'create_post_cubit.freezed.dart';
+part 'create_post_state.dart';
 
 class CreatePostCubit extends Cubit<CreatePostState> {
   final CreatePublicationUseCase _createPublicationUseCase;

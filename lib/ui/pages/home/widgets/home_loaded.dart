@@ -13,7 +13,6 @@ class HomeLoaded extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(publications);
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
