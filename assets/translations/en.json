@@ -59,5 +59,8 @@
   "follow_request_to": "Your request for a follow to ",
   "asks_to_follow_you": " asks to follow you",
   "create_content_failure": "Something unexpected occured during the creation of a publication",
-  "code_compiling": "Please wait... your code is compiling..."
+  "code_compiling": "Please wait... your code is compiling...",
+  "edit_profile": "Edit profile",
+  "follow": "Follow",
+  "unfollow": "Unfollow"
 }

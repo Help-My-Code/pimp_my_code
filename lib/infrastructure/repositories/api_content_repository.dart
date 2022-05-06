@@ -70,6 +70,19 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
+  Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
+      {required String userId}) async {
+    final response = await _dataSource.getPublicationsByUserId(userId);
+    final List<Map<String, dynamic>> apiContents = List.from(response.body['contents']);
+    return Right(
+      apiContents
+          .map(ApiContentModel.fromJson)
+          .map(_contentMapper.mapApiContentToContent)
+          .toList(),
+    );
+  }
+
+  @override
   Future<Either<Failure, Content>> updateContent(Content content) {
     throw UnimplementedError();
   }

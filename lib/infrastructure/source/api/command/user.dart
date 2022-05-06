@@ -9,4 +9,7 @@ abstract class UserInteractor extends ChopperService {
 
   @Get(path: '/getByName')
   Future<Response> getByName(@Query() String name);
+
+  @Get(path: '/getById')
+  Future<Response> getById(@Query() String id);
 }

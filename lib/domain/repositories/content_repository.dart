@@ -11,6 +11,8 @@ abstract class ContentRepository {
   Future<Either<Failure, void>> deleteContent(String id);
   Future<Either<GetPublicationFailed, List<Content>>> getFollowingPublications(
       {required String userId});
+  Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
+      {required String userId});
 }
 
 class GetPublicationFailed extends Failure {}
