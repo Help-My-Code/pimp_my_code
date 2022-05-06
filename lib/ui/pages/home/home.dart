@@ -14,8 +14,7 @@ import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,6 @@ class HomePage extends StatelessWidget {
                 shape: GFButtonShape.standard,
                 color: Colors.amber,
                 icon: const Icon(Icons.add, color: Colors.white),
-                // type: GFButtonType.transparent,
               ),
             ),
             SizedBox(
