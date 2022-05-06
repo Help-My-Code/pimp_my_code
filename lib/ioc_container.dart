@@ -1,11 +1,13 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/repositories/follow_repository.dart';
 import 'package:pimp_my_code/domain/repositories/group_member_repository.dart';
 import 'package:pimp_my_code/domain/repositories/notification_repository.dart';
 import 'package:pimp_my_code/domain/repositories/user_repository.dart';
 import 'package:pimp_my_code/domain/services/program_service.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/follow/find_follow_by_follower_id.dart';
 import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
 import 'package:pimp_my_code/domain/usecases/notification/find_notifications.dart';
 import 'package:pimp_my_code/domain/usecases/notification/see_all_notifications.dart';
@@ -15,6 +17,7 @@ import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/group_member_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/notification_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
+import 'package:pimp_my_code/infrastructure/repositories/api_follow_repository.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_group_member_repository.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_notification_repository.dart';
 import 'package:pimp_my_code/infrastructure/repositories/api_user_repository.dart';
@@ -24,6 +27,7 @@ import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
@@ -43,12 +47,14 @@ import 'domain/usecases/content/get_publications_by_user_id.dart';
 import 'domain/usecases/group-member/find_group_members.dart';
 import 'domain/usecases/group/find_group_by_name.dart';
 import 'infrastructure/converter/content_mapper.dart';
+import 'infrastructure/converter/follow_mapper.dart';
 import 'infrastructure/converter/group_mapper.dart';
 import 'infrastructure/repositories/api_auth_repository.dart';
 import 'infrastructure/repositories/api_content_repository.dart';
 import 'infrastructure/repositories/api_group_repository.dart';
 import 'infrastructure/source/api/command/authentication.dart';
 import 'infrastructure/source/api/command/content.dart';
+import 'infrastructure/source/api/command/follow.dart';
 import 'infrastructure/source/api/command/group.dart';
 import 'infrastructure/source/api/command/notification.dart';
 import 'infrastructure/source/api/interceptor/add_token_interceptor.dart';
@@ -85,6 +91,7 @@ void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<GroupInteractor>());
   sl.registerSingleton(chopper.getService<GroupMemberInteractor>());
   sl.registerSingleton(chopper.getService<NotificationInteractor>());
+  sl.registerSingleton(chopper.getService<FollowInteractor>());
 }
 
 void registerMapper() {
@@ -93,6 +100,7 @@ void registerMapper() {
   sl.registerFactory(() => GroupMapper());
   sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
   sl.registerFactory(() => NotificationMapper(sl(), sl(), sl()));
+  sl.registerFactory(() => FollowMapper(sl()));
 }
 
 void registerRepositories() {
@@ -104,6 +112,8 @@ void registerRepositories() {
       ApiGroupMemberRepository(sl(), sl()));
   sl.registerSingleton<NotificationRepository>(
       ApiNotificationRepository(sl(), sl()));
+  sl.registerSingleton<FollowRepository>(
+      ApiFollowRepository(sl(), sl()));
 }
 
 void registerServices() {
@@ -125,6 +135,7 @@ void registerUseCases() {
   sl.registerSingleton(SeeAllNotificationsUseCase(sl()));
   sl.registerSingleton(FindUserByIdUseCase(sl()));
   sl.registerSingleton(GetPublicationsByUserIdUseCase(sl()));
+  sl.registerSingleton(FindFollowByFollowerIdUseCase(sl()));
 }
 
 void registerBloc() {
@@ -142,6 +153,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveNotificationsCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserByIdCubit(sl()));
   sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
+  sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
@@ -155,6 +167,7 @@ ChopperClient createChopper(Config config) {
       GroupInteractor.create(),
       GroupMemberInteractor.create(),
       NotificationInteractor.create(),
+      FollowInteractor.create(),
     ],
     interceptors: [
       const HeadersInterceptor(

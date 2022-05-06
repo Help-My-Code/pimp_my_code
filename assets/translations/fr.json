@@ -62,5 +62,7 @@
   "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation...",
   "edit_profile": "Modifier le profil",
   "follow": "S'abonner",
-  "unfollow": "Se désabonner"
+  "unfollow": "Se désabonner",
+  "followers": " Abonnés",
+  "following": " Abonnements"
 }

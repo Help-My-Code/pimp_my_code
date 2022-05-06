@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:pimp_my_code/state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 
 import '../../../../domain/entities/user.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
@@ -48,7 +49,27 @@ class AccountLoaded extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 10),
-                    const Text('256 Abonnés', style: TextStyle(fontSize: 16)),
+                    BlocConsumer<RetrieveFollowByFollowerIdCubit, RetrieveFollowByFollowerIdState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            orElse: () {},
+                            failure: () {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: const Text('Failed_to_load_follows').tr(),
+                                backgroundColor: Theme.of(context).errorColor,
+                              ));
+                            },
+                          );
+                        }, builder: (context, state) {
+                      return state.maybeWhen(
+                        initial: () {
+                          context.read<RetrieveFollowByFollowerIdCubit>().loadFollowByFollowerId(user.id);
+                          return const Loading();
+                        },
+                        orElse: () => const Loading(),
+                        loaded: (followers) => Text(followers.length.toString() + 'followers'.tr(), style: const TextStyle(fontSize: 16)),
+                      );
+                    }),
                     const Text('147 Abonnements',
                         style: TextStyle(fontSize: 16)),
                     const SizedBox(height: 10),
@@ -58,7 +79,7 @@ class AccountLoaded extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.07),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.09),
               //TODO activer le bon bouton selon
               // GFButton(
               //   onPressed: () {},

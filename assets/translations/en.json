@@ -62,5 +62,7 @@
   "code_compiling": "Please wait... your code is compiling...",
   "edit_profile": "Edit profile",
   "follow": "Follow",
-  "unfollow": "Unfollow"
+  "unfollow": "Unfollow",
+  "followers": " Followers",
+  "following": " Following"
 }
