@@ -61,7 +61,7 @@ class AppRouter {
           BlocProvider(
               create: (context) => sl<RetrieveContentByUserIdCubit>()
           ),
-        ], child: const AccountPage())
+        ], child: AccountPage(userId: state.queryParams['userId']!))
       ),
     ],
     redirect: (state) {
