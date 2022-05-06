@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/app-bar/app_bar_menu.dart';
 
 class MessagingPage extends StatefulWidget {
-  const MessagingPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MessagingPage({Key? key}) : super(key: key);
 
   @override
   State<MessagingPage> createState() => _MessagingPageState();

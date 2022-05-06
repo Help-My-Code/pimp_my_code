@@ -4,9 +4,7 @@ import 'package:pimp_my_code/ui/pages/register/widgets/register_form.dart';
 import '../../widgets/app-bar/app_bar.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

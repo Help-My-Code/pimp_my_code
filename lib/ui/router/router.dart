@@ -9,6 +9,8 @@ import '../../state/login/login_bloc.dart';
 import '../../state/register/register_bloc.dart';
 import '../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import '../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import '../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../state/session/session_cubit.dart';
 import '../pages/account/account.dart';
@@ -61,7 +63,13 @@ class AppRouter {
           BlocProvider(
               create: (context) => sl<RetrieveContentByUserIdCubit>()
           ),
-        ], child: const AccountPage())
+          BlocProvider(
+              create: (context) => sl<RetrieveFollowByFollowerIdCubit>()
+          ),
+          BlocProvider(
+              create: (context) => sl<RetrieveFollowByUserIdCubit>()
+          ),
+        ], child: AccountPage(userId: state.queryParams['userId']!))
       ),
     ],
     redirect: (state) {

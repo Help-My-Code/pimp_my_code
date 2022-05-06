@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pimp_my_code/state/post/create_post_cubit.dart';
 import 'package:pimp_my_code/ui/pages/home/widgets/create_post_card.dart';
 import 'package:pimp_my_code/ui/pages/home/widgets/home_loaded.dart';
 
-import '../../../ioc_container.dart';
 import '../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';

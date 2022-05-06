@@ -25,6 +25,14 @@ class _$ContentInteractor extends ContentInteractor {
   }
 
   @override
+  Future<Response<dynamic>> getPublicationsByUserId(String userId) {
+    final $url = '/content/getPublicationsByUserId';
+    final $params = <String, dynamic>{'userId': userId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> createContent(
       {required Map<String, dynamic> fields}) {
     final $url = '/content/create';

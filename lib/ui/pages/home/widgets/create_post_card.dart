@@ -105,7 +105,7 @@ class CreatePostCard extends StatelessWidget {
                     onChanged:
                         context.read<CreatePostCubit>().onContentChange,
                     decoration:
-                        InputDecoration(hintText: tr('content_hint') + "*"),
+                        InputDecoration(hintText: tr('content_hint') + '*'),
                   ),
                   const SizedBox(
                     height: 50,

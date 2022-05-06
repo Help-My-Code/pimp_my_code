@@ -4,8 +4,7 @@ import 'package:pimp_my_code/ui/pages/login/widgets/login_form.dart';
 import '../../widgets/app-bar/app_bar.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
