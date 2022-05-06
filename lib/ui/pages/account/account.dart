@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/ui/pages/account/widgets/account_loaded.dart';
 
+import '../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import '../../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
+import '../../../state/session/session_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
 
@@ -17,6 +19,21 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AccountPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.userId != widget.userId) {
+      context.read<RetrieveUserByIdCubit>().loadUserById(widget.userId);
+    }
+    context.read<RetrieveContentByUserIdCubit>().loadPublication(widget.userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +57,7 @@ class _AccountPageState extends State<AccountPage> {
           }, builder: (context, state) {
             return state.maybeWhen(
                 initial: () {
-                  context
-                      .read<RetrieveUserByIdCubit>()
-                      .loadUserById(widget.userId);
+                  context.read<RetrieveUserByIdCubit>().loadUserById(widget.userId);
                   return const Loading();
                 },
                 orElse: () => const Loading(),
