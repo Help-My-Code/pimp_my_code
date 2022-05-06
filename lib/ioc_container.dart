@@ -10,6 +10,7 @@ import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
 import 'package:pimp_my_code/domain/usecases/notification/find_notifications.dart';
 import 'package:pimp_my_code/domain/usecases/notification/see_all_notifications.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
+import 'package:pimp_my_code/domain/usecases/user/find_user_by_id.dart';
 import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
 import 'package:pimp_my_code/infrastructure/converter/group_member_mapper.dart';
 import 'package:pimp_my_code/infrastructure/converter/notification_mapper.dart';
@@ -22,10 +23,12 @@ import 'package:pimp_my_code/infrastructure/source/api/command/group_member.dart
 import 'package:pimp_my_code/infrastructure/source/api/command/program.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user.dart';
 import 'package:pimp_my_code/state/post/create_post_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import 'package:pimp_my_code/state/retrive_group_members/retrieve_group_members_cubit.dart';
 
 import 'config/env/base.dart';
@@ -36,6 +39,7 @@ import 'domain/usecases/auth/login_use_case.dart';
 import 'domain/usecases/auth/logout_use_case.dart';
 import 'domain/usecases/auth/register_use_case.dart';
 import 'domain/usecases/content/get_following_publication.dart';
+import 'domain/usecases/content/get_publications_by_user_id.dart';
 import 'domain/usecases/group-member/find_group_members.dart';
 import 'domain/usecases/group/find_group_by_name.dart';
 import 'infrastructure/converter/content_mapper.dart';
@@ -119,6 +123,8 @@ void registerUseCases() {
   sl.registerSingleton(FindGroupMembersUseCase(sl()));
   sl.registerSingleton(FindNotificationsUseCase(sl()));
   sl.registerSingleton(SeeAllNotificationsUseCase(sl()));
+  sl.registerSingleton(FindUserByIdUseCase(sl()));
+  sl.registerSingleton(GetPublicationsByUserIdUseCase(sl()));
 }
 
 void registerBloc() {
@@ -134,6 +140,8 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveMyGroupsCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveGroupMembersCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveNotificationsCubit(sl(), sl()));
+  sl.registerFactory(() => RetrieveUserByIdCubit(sl()));
+  sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {

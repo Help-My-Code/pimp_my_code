@@ -13,10 +13,11 @@ class HomeLoaded extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(publications);
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
-      height: double.infinity,
+      height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           Flexible(
@@ -36,7 +37,7 @@ class HomeLoaded extends StatelessWidget {
                   imageURL: publications[index].userPicture != null
                       ? publications[index].userPicture!
                       : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                  username: publications[index].username!,
+                  username: publications[index].username != null ? publications[index].username! : 'oui',
                   date: DateFormat('dd MMMM yyyy')
                       .format(publications[index].createdAt),
                 );
