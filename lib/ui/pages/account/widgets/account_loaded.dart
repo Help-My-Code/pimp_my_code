@@ -23,9 +23,6 @@ class AccountLoaded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    context.read<RetrieveContentByUserIdCubit>().loadPublication(user.id);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
