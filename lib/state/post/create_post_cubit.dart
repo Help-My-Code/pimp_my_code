@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/content.dart';
+import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
 import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
@@ -20,11 +21,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       : super(CreatePostState.initial());
 
   bool get isValid {
-    return (state.content != null && state.content!.isNotEmpty) &&
+    final valid =(state.content != null && state.content!.isNotEmpty) &&
         state.userPicture != null &&
         state.username != null &&
         state.createdAt != null &&
         state.medias != null;
+    return valid;
   }
 
   bool get isValidForCompilation {
@@ -33,15 +35,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
   void onCancel() {
     emit(CreatePostState.initial());
-  }
-
-  void onNewTemporaryPost(String userPicture, String username) {
-    final nextState = state.copyWith(
-        userPicture: userPicture,
-        username: username,
-        createdAt: DateTime.now(),
-        medias: []);
-    emit(nextState);
   }
 
   void onTitleChange(String title) {
@@ -102,8 +95,9 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       either.fold((f) {
         emit(state.copyWith(failureOrSuccessOption: some(left(f))));
       }, (r) {
-        emit(CreatePostState.initial().copyWith(createdAt:  null));
+        Navigator.of(context).pop();
         GoRouter.of(context).refresh();
+
       });
     }
     emit(state.copyWith(isLoading: false));

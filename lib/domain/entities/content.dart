@@ -1,3 +1,4 @@
+import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/domain/entities/user.dart';
 
 class Content {
@@ -35,18 +36,3 @@ class Content {
 
 }
 
-enum ContentType {
-  publication,
-  comment,
-}
-
-extension ContentTypeExtension on ContentType {
-  String get string {
-    switch (this) {
-      case ContentType.publication:
-        return 'publication';
-      case ContentType.comment:
-        return 'comment';
-    }
-  }
-}

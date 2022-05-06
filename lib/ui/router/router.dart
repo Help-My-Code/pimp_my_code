@@ -28,7 +28,6 @@ class AppRouter {
           BlocProvider(
             create: (context) => sl<RetrieveContentCubit>(),
           ),
-          BlocProvider(create: (context) => sl<CreatePostCubit>())
         ], child: HomePage(title: title)),
       ),
       GoRoute(

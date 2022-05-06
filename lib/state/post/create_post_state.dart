@@ -20,6 +20,10 @@ class CreatePostState with _$CreatePostState {
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => CreatePostState(
+    username: 'username',
+      userPicture: 'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png',
+      createdAt: DateTime.now(),
+      medias: [],
       isLoading: false,
       isCompiling: false,
       language: 'PYTHON',

@@ -1,3 +1,4 @@
+import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
 import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
 

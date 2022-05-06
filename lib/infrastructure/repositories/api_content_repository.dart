@@ -17,7 +17,7 @@ class ApiContentRepository extends ContentRepository {
   ApiContentRepository(this._dataSource, this._contentMapper);
 
   @override
-  Future<Either<Failure, Content>> createContent(Content content) async {
+  Future<Either<Failure, Unit>> createContent(Content content) async {
     try{
       final fields = {
         'content': content.content,
@@ -33,8 +33,8 @@ class ApiContentRepository extends ContentRepository {
       fields['stdin'] = content.code!;
       fields['stdout'] = content.codeResult!;
     }
-      final response = await _dataSource.createContent(fields: fields);
-      return right(response.body);
+      await _dataSource.createContent(fields: fields);
+      return right(unit);
     }catch(e){
       return left(CreatePublicationFailure(tr('create_content_failure')));
     }
