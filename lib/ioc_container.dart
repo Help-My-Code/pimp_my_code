@@ -2,7 +2,6 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
-import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
 import 'domain/repositories/notification_repository.dart';
