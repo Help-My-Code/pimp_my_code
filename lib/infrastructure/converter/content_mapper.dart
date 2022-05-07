@@ -4,7 +4,7 @@ import 'user_mapper.dart';
 
 import '../source/api/model/content/content_model.dart';
 
-import '../../domain/entities/content.dart';
+import '../../domain/entities/content/content.dart';
 
 class ContentMapper {
   final UserMapper _userMapper;

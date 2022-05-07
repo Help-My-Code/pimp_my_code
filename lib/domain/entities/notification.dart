@@ -1,4 +1,4 @@
-import 'content.dart';
+import 'content/content.dart';
 import 'user.dart';
 
 import 'enum/notification_type.dart';

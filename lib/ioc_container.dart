@@ -1,6 +1,8 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
 import 'domain/repositories/notification_repository.dart';
@@ -94,6 +96,7 @@ void registerInteractor(ChopperClient chopper) {
   sl.registerSingleton(chopper.getService<GroupMemberInteractor>());
   sl.registerSingleton(chopper.getService<NotificationInteractor>());
   sl.registerSingleton(chopper.getService<FollowInteractor>());
+  sl.registerSingleton(chopper.getService<UserLikeInteractor>());
 }
 
 void registerMapper() {
@@ -107,7 +110,8 @@ void registerMapper() {
 
 void registerRepositories() {
   sl.registerSingleton<AuthRepository>(ApiAuthRepository(sl(), sl()));
-  sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
+  sl.registerSingleton<ContentRepository>(
+      ApiContentRepository(sl(), sl(), sl()));
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl(), sl()));
   sl.registerSingleton<GroupRepository>(ApiGroupRepository(sl(), sl()));
   sl.registerSingleton<GroupMemberRepository>(
@@ -171,6 +175,7 @@ ChopperClient createChopper(Config config) {
       GroupMemberInteractor.create(),
       NotificationInteractor.create(),
       FollowInteractor.create(),
+      UserLikeInteractor.create(),
     ],
     interceptors: [
       const HeadersInterceptor(

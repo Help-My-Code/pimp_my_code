@@ -125,9 +125,11 @@ class PostCard extends StatelessWidget {
                 textColor: Colors.black,
                 onPressed: onUnlikePressed,
                 text: unlikeCount,
-                icon: Icon(isLiked
-                    ? Icons.thumb_down_alt_outlined
-                    : Icons.thumb_down_alt),
+                icon: Icon(
+                  isLiked
+                      ? Icons.thumb_down_alt_outlined
+                      : Icons.thumb_down_alt,
+                ),
                 shape: GFButtonShape.square,
                 type: GFButtonType.transparent,
               ),
