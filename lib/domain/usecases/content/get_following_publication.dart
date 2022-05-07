@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import '../../../core/usecase.dart';
 import '../../repositories/content_repository.dart';
 
-import '../../entities/content.dart';
+import '../../entities/content/content.dart';
 
 class GetFollowingPublicationUseCase extends UseCase<List<Content>, String> {
   final ContentRepository contents;

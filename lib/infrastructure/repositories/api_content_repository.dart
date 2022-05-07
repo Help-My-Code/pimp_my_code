@@ -7,7 +7,7 @@ import '../source/api/command/content.dart';
 import '../source/api/command/user_like.dart';
 import '../source/api/model/content/content_model.dart';
 
-import '../../domain/entities/content.dart';
+import '../../domain/entities/content/content.dart';
 import '../../domain/repositories/content_repository.dart';
 import '../converter/content_mapper.dart';
 
@@ -93,9 +93,9 @@ class ApiContentRepository extends ContentRepository {
   @override
   Future<void> like(String publicationId, String userId) async {
     final field = {
-      "userId": userId,
-      "contentId": publicationId,
-      "reactionType": "LIKE"
+      'userId': userId,
+      'contentId': publicationId,
+      'reactionType': 'LIKE'
     };
     await _userLikeInteractor.createLikeOrDislike(field);
   }
@@ -103,9 +103,9 @@ class ApiContentRepository extends ContentRepository {
   @override
   Future<void> dislike(String publicationId, String userId) async {
     final field = {
-      "userId": userId,
-      "contentId": publicationId,
-      "reactionType": "DISLIKE"
+      'userId': userId,
+      'contentId': publicationId,
+      'reactionType': 'DISLIKE'
     };
     await _userLikeInteractor.createLikeOrDislike(field);
   }

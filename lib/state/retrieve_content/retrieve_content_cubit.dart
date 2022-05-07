@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/usecases/content/get_following_publication.dart';
 import '../session/session_cubit.dart';
 
-import '../../domain/entities/content.dart';
+import '../../domain/entities/content/content.dart';
 
 part 'retrieve_content_state.dart';
 part 'retrieve_content_cubit.freezed.dart';
@@ -33,8 +33,7 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              content.isLike = true;
-              content.isDislike = false;
+              return content.copyWith(isLike: true, isDislike: false);
             }
             return content;
           }).toList(),
@@ -51,8 +50,7 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              content.isLike = false;
-              content.isDislike = true;
+              return content.copyWith(isLike: false, isDislike: true);
             }
             return content;
           }).toList(),

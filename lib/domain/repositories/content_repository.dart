@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../../core/failure.dart';
 
-import '../entities/content.dart';
+import '../entities/content/content.dart';
 
 abstract class ContentRepository {
   Future<Either<GetPublicationFailed, List<Content>>> getContents();
