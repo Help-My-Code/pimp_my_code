@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/domain/entities/enum/role.dart';
-import 'package:pimp_my_code/domain/entities/group_member.dart';
+import '../../../../domain/entities/enum/role.dart';
+import '../../../../domain/entities/group_member.dart';
 
 import '../../../default_pictures.dart';
 

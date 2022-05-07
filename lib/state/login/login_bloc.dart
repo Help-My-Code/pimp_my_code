@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
+import '../session/session_cubit.dart';
 
 import '../../core/form_status.dart';
 import '../../domain/usecases/auth/login_use_case.dart';

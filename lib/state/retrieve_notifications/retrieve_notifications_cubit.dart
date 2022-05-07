@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/entities/notification.dart';
+import '../../domain/entities/notification.dart';
 
 import '../../domain/usecases/notification/find_notifications.dart';
 import '../session/session_cubit.dart';
@@ -17,7 +17,8 @@ class RetrieveNotificationsCubit extends Cubit<RetrieveNotificationsState> {
   void loadNotifications() async {
     emit(const RetrieveNotificationsState.loading());
     String userId = await _sessionCubit.getUserId();
-    final notifications = await _findNotifications(FindNotificationsParam(userId));
+    final notifications =
+        await _findNotifications(FindNotificationsParam(userId));
     notifications.fold((l) {
       emit(const RetrieveNotificationsState.failure());
     }, (r) {
@@ -25,4 +26,3 @@ class RetrieveNotificationsCubit extends Cubit<RetrieveNotificationsState> {
     });
   }
 }
-

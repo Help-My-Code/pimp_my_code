@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:pimp_my_code/core/failure.dart';
+import '../../../core/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/usecase.dart';
-import 'package:pimp_my_code/infrastructure/converter/token_decoder.dart';
+import '../../../core/usecase.dart';
+import '../../../infrastructure/converter/token_decoder.dart';
 
 import '../../entities/user.dart';
 import '../../repositories/auth_repository.dart';

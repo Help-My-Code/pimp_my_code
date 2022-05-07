@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:pimp_my_code/core/usecase.dart';
+import '../../../core/usecase.dart';
 
 class LogoutUseCase extends NoParamsUseCase {
   final FlutterSecureStorage _storage;

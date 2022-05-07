@@ -1,4 +1,4 @@
-import 'package:pimp_my_code/domain/entities/user.dart';
+import 'user.dart';
 
 import 'enum/confidentiality.dart';
 
@@ -20,9 +20,9 @@ class Group {
 
   Group.withoutCreator(
       {required this.id,
-        required this.name,
-        this.description,
-        required this.confidentiality,
-        this.creator,
-        this.principalPictureUrl});
+      required this.name,
+      this.description,
+      required this.confidentiality,
+      this.creator,
+      this.principalPictureUrl});
 }

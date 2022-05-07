@@ -1,13 +1,12 @@
-import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
-import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
-import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
+import '../../domain/entities/enum/content_type.dart';
+import '../../domain/usecases/content/create_publication_use_case.dart';
+import 'user_mapper.dart';
 
 import '../source/api/model/content/content_model.dart';
 
 import '../../domain/entities/content.dart';
 
 class ContentMapper {
-
   final UserMapper _userMapper;
 
   ContentMapper(this._userMapper);
@@ -28,8 +27,9 @@ class ContentMapper {
       content: apiContentModel.content,
       createdAt: apiContentModel.createdAt,
       creatorId: apiContentModel.creatorId,
-      creator: apiContentModel.creator == null ? null :
-      _userMapper.mapApiUserToUser(apiContentModel.creator!),
+      creator: apiContentModel.creator == null
+          ? null
+          : _userMapper.mapApiUserToUser(apiContentModel.creator!),
       contentType: _contentTypefromString(apiContentModel.contentType),
       medias: apiContentModel.medias,
       username: apiContentModel.username,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/state/post/create_post_cubit.dart';
-import 'package:pimp_my_code/ui/router/routes.dart';
+import '../../state/post/create_post_cubit.dart';
+import 'routes.dart';
 
 import '../../ioc_container.dart';
 import '../../state/login/login_bloc.dart';
@@ -55,22 +55,17 @@ class AppRouter {
             const MessagingPage(),
       ),
       GoRoute(
-        path: Routes.account.path,
-        builder: (BuildContext context, GoRouterState state) => MultiBlocProvider(providers: [
-          BlocProvider(
-              create: (context) => sl<RetrieveUserByIdCubit>()
-          ),
-          BlocProvider(
-              create: (context) => sl<RetrieveContentByUserIdCubit>()
-          ),
-          BlocProvider(
-              create: (context) => sl<RetrieveFollowByFollowerIdCubit>()
-          ),
-          BlocProvider(
-              create: (context) => sl<RetrieveFollowByUserIdCubit>()
-          ),
-        ], child: AccountPage(userId: state.queryParams['userId']!))
-      ),
+          path: Routes.account.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              MultiBlocProvider(providers: [
+                BlocProvider(create: (context) => sl<RetrieveUserByIdCubit>()),
+                BlocProvider(
+                    create: (context) => sl<RetrieveContentByUserIdCubit>()),
+                BlocProvider(
+                    create: (context) => sl<RetrieveFollowByFollowerIdCubit>()),
+                BlocProvider(
+                    create: (context) => sl<RetrieveFollowByUserIdCubit>()),
+              ], child: AccountPage(userId: state.queryParams['userId']!))),
     ],
     redirect: (state) {
       final bool isInUnAuthPage = state.location == Routes.login.path ||

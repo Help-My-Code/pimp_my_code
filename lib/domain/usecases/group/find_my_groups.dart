@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/usecase.dart';
+import '../../../core/usecase.dart';
 
 import '../../../core/failure.dart';
 import '../../entities/group.dart';
@@ -12,7 +12,7 @@ class FindMyGroupsUseCase extends UseCase<List<Group>, FindMyGroupsParam> {
 
   @override
   Future<Either<FindMyGroupsFailure, List<Group>>> call(
-      FindMyGroupsParam params,
+    FindMyGroupsParam params,
   ) async {
     return await _repository.getByCreatorId(id: params.id);
   }

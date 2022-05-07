@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/state/retrieve_group/retrieve_group_cubit.dart';
-import 'package:pimp_my_code/state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
-import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/group/group_modal.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/notification/notification_modal.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/search/search_modal.dart';
+import '../../../state/retrieve_group/retrieve_group_cubit.dart';
+import '../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
+import '../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
+import 'group/group_modal.dart';
+import 'notification/notification_modal.dart';
+import 'search/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';

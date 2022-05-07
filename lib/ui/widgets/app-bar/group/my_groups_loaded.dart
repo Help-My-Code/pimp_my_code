@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/domain/entities/group.dart';
-import 'package:pimp_my_code/ui/default_pictures.dart';
+import '../../../../domain/entities/group.dart';
+import '../../../default_pictures.dart';
 
 class MyGroupsLoaded extends StatelessWidget {
   final List<Group> groups;

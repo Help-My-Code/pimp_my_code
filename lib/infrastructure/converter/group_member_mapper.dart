@@ -1,13 +1,12 @@
-import 'package:pimp_my_code/domain/entities/enum/status.dart';
-import 'package:pimp_my_code/domain/entities/group_member.dart';
-import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
+import '../../domain/entities/enum/status.dart';
+import '../../domain/entities/group_member.dart';
+import 'user_mapper.dart';
 
 import '../../domain/entities/enum/role.dart';
 import '../source/api/model/group_member/group_member_model.dart';
 import 'group_mapper.dart';
 
 class GroupMemberMapper {
-
   final UserMapper _userMapper;
   final GroupMapper _groupMapper;
 
@@ -33,7 +32,8 @@ class GroupMemberMapper {
     }
   }
 
-  GroupMember mapApiGroupMemberToGroupMember(ApiGroupMemberModel apiGroupMemberModel) {
+  GroupMember mapApiGroupMemberToGroupMember(
+      ApiGroupMemberModel apiGroupMemberModel) {
     return GroupMember(
       groupMemberId: apiGroupMemberModel.groupMemberId,
       membershipStatus: _statusFromString(apiGroupMemberModel.membershipStatus),

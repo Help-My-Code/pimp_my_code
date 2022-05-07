@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/domain/entities/group.dart';
+import '../../../../domain/entities/group.dart';
 
 import '../../../default_pictures.dart';
 
@@ -34,19 +34,19 @@ class SearchedGroupsLoaded extends StatelessWidget {
                       print(groups[index].name);
                     },
                     child: Row(
-                    children: <Widget>[
-                      GFAvatar(
-                        size: 20,
-                        backgroundImage: NetworkImage(
-                          groups[index].principalPictureUrl ??
-                              DefaultPictures.defaultUserPicture,
+                      children: <Widget>[
+                        GFAvatar(
+                          size: 20,
+                          backgroundImage: NetworkImage(
+                            groups[index].principalPictureUrl ??
+                                DefaultPictures.defaultUserPicture,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(groups[index].name,
-                          style: const TextStyle(fontSize: 16)),
-                    ],
-                  ),
+                        const SizedBox(width: 10),
+                        Text(groups[index].name,
+                            style: const TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 5),
                 ]);

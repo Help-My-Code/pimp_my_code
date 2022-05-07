@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_groups_loaded.dart';
-import 'package:pimp_my_code/ui/widgets/app-bar/search/searched_users_loaded.dart';
+import '../../../../state/retrieve_user/retrieve_user_cubit.dart';
+import 'searched_groups_loaded.dart';
+import 'searched_users_loaded.dart';
 
 import '../../../../state/retrieve_group/retrieve_group_cubit.dart';
 import '../../loading.dart';
@@ -21,7 +21,7 @@ class SearchModal extends StatelessWidget {
         children: <Widget>[
           TextField(
             onChanged: (text) {
-              if(text != '') {
+              if (text != '') {
                 context.read<RetrieveUserCubit>().loadUser(text);
                 context.read<RetrieveGroupCubit>().loadGroup(text);
               }
@@ -54,16 +54,16 @@ class SearchModal extends StatelessWidget {
           const SizedBox(height: 10),
           BlocConsumer<RetrieveGroupCubit, RetrieveGroupState>(
               listener: (context, state) {
-                state.maybeWhen(
-                  orElse: () {},
-                  failure: () {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Failed_to_load_groups').tr(),
-                      backgroundColor: Theme.of(context).errorColor,
-                    ));
-                  },
-                );
-              }, builder: (context, state) {
+            state.maybeWhen(
+              orElse: () {},
+              failure: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text('Failed_to_load_groups').tr(),
+                  backgroundColor: Theme.of(context).errorColor,
+                ));
+              },
+            );
+          }, builder: (context, state) {
             return state.maybeWhen(
               initial: () {
                 return const SizedBox();

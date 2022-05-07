@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/usecases/user/find_user_by_name.dart';
+import '../../domain/usecases/user/find_user_by_name.dart';
 
 import '../../domain/entities/user.dart';
 

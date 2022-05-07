@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:pimp_my_code/state/post/create_post_cubit.dart';
-import 'package:pimp_my_code/ui/pages/home/widgets/create_post_card_radio.dart';
-import 'package:pimp_my_code/ui/widgets/code_editor/code_editor.dart';
-import 'package:pimp_my_code/ui/widgets/code_editor/code_showroom.dart';
+import '../../../../state/post/create_post_cubit.dart';
+import 'create_post_card_radio.dart';
+import '../../../widgets/code_editor/code_editor.dart';
+import '../../../widgets/code_editor/code_showroom.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -81,8 +81,7 @@ class CreatePostCard extends StatelessWidget {
                         maxLines: 1,
                         onChanged:
                             context.read<CreatePostCubit>().onContentChange,
-                        decoration:
-                            InputDecoration(hintText: tr('media_hint')),
+                        decoration: InputDecoration(hintText: tr('media_hint')),
                       )),
                       const SizedBox(
                         width: 20,
@@ -92,8 +91,7 @@ class CreatePostCard extends StatelessWidget {
                         maxLines: 1,
                         onChanged:
                             context.read<CreatePostCubit>().onContentChange,
-                        decoration:
-                            InputDecoration(hintText: tr('media_hint')),
+                        decoration: InputDecoration(hintText: tr('media_hint')),
                       )),
                     ],
                   ),
@@ -102,8 +100,7 @@ class CreatePostCard extends StatelessWidget {
                   ),
                   TextFormField(
                     maxLines: 5,
-                    onChanged:
-                        context.read<CreatePostCubit>().onContentChange,
+                    onChanged: context.read<CreatePostCubit>().onContentChange,
                     decoration:
                         InputDecoration(hintText: tr('content_hint') + '*'),
                   ),
@@ -169,8 +166,7 @@ class CreatePostCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (state.codeResult != null &&
-                      state.codeResult!.isNotEmpty)
+                  if (state.codeResult != null && state.codeResult!.isNotEmpty)
                     Align(
                         child: CodeShowRoom(
                       data: state.codeResult!,
@@ -217,5 +213,3 @@ class CreatePostCard extends StatelessWidget {
     );
   }
 }
-
-

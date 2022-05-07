@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
-import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
-import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
-import 'package:pimp_my_code/state/session/session_cubit.dart';
+import '../../domain/entities/enum/content_type.dart';
+import '../../domain/usecases/content/create_publication_use_case.dart';
+import '../../domain/usecases/program/execute_program_use_case.dart';
+import '../session/session_cubit.dart';
 
 import '../../core/failure.dart';
 
@@ -21,7 +21,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       : super(CreatePostState.initial());
 
   bool get isValid {
-    final valid =(state.content != null && state.content!.isNotEmpty) &&
+    final valid = (state.content != null && state.content!.isNotEmpty) &&
         state.userPicture != null &&
         state.username != null &&
         state.createdAt != null &&
@@ -97,7 +97,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       }, (r) {
         Navigator.of(context).pop();
         GoRouter.of(context).refresh();
-
       });
     }
     emit(state.copyWith(isLoading: false));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pimp_my_code/ui/pages/login/widgets/login_form.dart';
+import 'widgets/login_form.dart';
 
 import '../../widgets/app-bar/app_bar.dart';
 
