@@ -7,7 +7,6 @@ import 'package:pimp_my_code/ui/pages/account/widgets/account_loaded.dart';
 
 import '../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import '../../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
-import '../../../state/session/session_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
 
@@ -32,9 +31,15 @@ class _AccountPageState extends State<AccountPage> {
 
     if (oldWidget.userId != widget.userId) {
       context.read<RetrieveUserByIdCubit>().loadUserById(widget.userId);
-      context.read<RetrieveFollowByFollowerIdCubit>().loadFollowByFollowerId(widget.userId);
-      context.read<RetrieveFollowByUserIdCubit>().loadFollowByUserId(widget.userId);
-      context.read<RetrieveContentByUserIdCubit>().loadPublication(widget.userId);
+      context
+          .read<RetrieveFollowByFollowerIdCubit>()
+          .loadFollowByFollowerId(widget.userId);
+      context
+          .read<RetrieveFollowByUserIdCubit>()
+          .loadFollowByUserId(widget.userId);
+      context
+          .read<RetrieveContentByUserIdCubit>()
+          .loadPublication(widget.userId);
     }
   }
 
@@ -61,7 +66,9 @@ class _AccountPageState extends State<AccountPage> {
           }, builder: (context, state) {
             return state.maybeWhen(
                 initial: () {
-                  context.read<RetrieveUserByIdCubit>().loadUserById(widget.userId);
+                  context
+                      .read<RetrieveUserByIdCubit>()
+                      .loadUserById(widget.userId);
                   return const Loading();
                 },
                 orElse: () => const Loading(),
