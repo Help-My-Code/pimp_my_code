@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/entities/group_member.dart';
+import '../../entities/group_member.dart';
 
 import '../../../core/failure.dart';
 import '../../../core/usecase.dart';

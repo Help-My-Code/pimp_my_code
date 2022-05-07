@@ -1,9 +1,7 @@
-
-
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/failure.dart';
-import 'package:pimp_my_code/core/usecase.dart';
-import 'package:pimp_my_code/domain/services/program_service.dart';
+import '../../../core/failure.dart';
+import '../../../core/usecase.dart';
+import '../../services/program_service.dart';
 
 class ExecuteProgramUseCase extends UseCase<String, ExecuteProgramParams> {
   final ProgramService _programService;
@@ -14,7 +12,6 @@ class ExecuteProgramUseCase extends UseCase<String, ExecuteProgramParams> {
   Future<Either<Failure, String>> call(ExecuteProgramParams params) {
     return _programService.execute(params.language, params.stdin);
   }
-
 }
 
 class ExecuteProgramParams {
@@ -27,5 +24,4 @@ class ExecuteProgramFailure extends Failure {
   String message;
 
   ExecuteProgramFailure(this.message);
-
 }

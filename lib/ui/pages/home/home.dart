@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pimp_my_code/ui/pages/home/widgets/create_post_card.dart';
-import 'package:pimp_my_code/ui/pages/home/widgets/home_loaded.dart';
+import 'widgets/create_post_card.dart';
+import 'widgets/home_loaded.dart';
 
 import '../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
@@ -21,7 +21,9 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Align(
               child: GFButton(
                 onPressed: () {
@@ -46,7 +48,8 @@ class HomePage extends StatelessWidget {
                     failure: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: const Text('Failed_to_load_publications').tr(),
+                          content:
+                              const Text('Failed_to_load_publications').tr(),
                         ),
                       );
                     },

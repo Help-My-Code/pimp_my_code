@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pimp_my_code/domain/entities/user.dart';
+import '../../../../domain/entities/user.dart';
 
 import '../../../default_pictures.dart';
 import '../../../router/routes.dart';
@@ -33,7 +33,8 @@ class SearchedUsersLoaded extends StatelessWidget {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).pop();
-                      GoRouter.of(context).go(Routes.account.path + '?userId=' + users[index].id);
+                      GoRouter.of(context).go(
+                          Routes.account.path + '?userId=' + users[index].id);
                     },
                     child: Row(
                       children: <Widget>[

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pimp_my_code/core/form_status.dart';
+import '../../../../core/form_status.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../state/login/login_bloc.dart';
 import '../../../router/routes.dart';

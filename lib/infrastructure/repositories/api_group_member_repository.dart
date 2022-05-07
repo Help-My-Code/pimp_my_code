@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/infrastructure/source/api/command/group_member.dart';
-import 'package:pimp_my_code/infrastructure/source/api/model/group_member/group_member_model.dart';
+import '../source/api/command/group_member.dart';
+import '../source/api/model/group_member/group_member_model.dart';
 
 import '../../domain/entities/group_member.dart';
 import '../../domain/repositories/group_member_repository.dart';

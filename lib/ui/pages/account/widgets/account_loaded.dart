@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:pimp_my_code/state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 
 import '../../../../domain/entities/user.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
@@ -47,52 +47,60 @@ class AccountLoaded extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 10),
-                    BlocConsumer<RetrieveFollowByFollowerIdCubit, RetrieveFollowByFollowerIdState>(
+                    BlocConsumer<RetrieveFollowByFollowerIdCubit,
+                            RetrieveFollowByFollowerIdState>(
                         listener: (context, state) {
-                          state.maybeWhen(
-                            orElse: () {},
-                            failure: () {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: const Text('Failed_to_load_follows').tr(),
-                                backgroundColor: Theme.of(context).errorColor,
-                              ));
-                            },
-                          );
-                        }, builder: (context, state) {
+                      state.maybeWhen(
+                        orElse: () {},
+                        failure: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Failed_to_load_follows').tr(),
+                            backgroundColor: Theme.of(context).errorColor,
+                          ));
+                        },
+                      );
+                    }, builder: (context, state) {
                       return state.maybeWhen(
                         initial: () {
-                          context.read<RetrieveFollowByFollowerIdCubit>().loadFollowByFollowerId(user.id);
+                          context
+                              .read<RetrieveFollowByFollowerIdCubit>()
+                              .loadFollowByFollowerId(user.id);
                           return const Loading();
                         },
                         orElse: () => const Loading(),
-                        loaded: (followers) => Text(followers.length.toString() + 'followers'.tr(), style: const TextStyle(fontSize: 16)),
+                        loaded: (followers) => Text(
+                            followers.length.toString() + 'followers'.tr(),
+                            style: const TextStyle(fontSize: 16)),
                       );
                     }),
-                    BlocConsumer<RetrieveFollowByUserIdCubit, RetrieveFollowByUserIdState>(
+                    BlocConsumer<RetrieveFollowByUserIdCubit,
+                            RetrieveFollowByUserIdState>(
                         listener: (context, state) {
-                          state.maybeWhen(
-                            orElse: () {},
-                            failure: () {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: const Text('Failed_to_load_follows').tr(),
-                                backgroundColor: Theme.of(context).errorColor,
-                              ));
-                            },
-                          );
-                        }, builder: (context, state) {
+                      state.maybeWhen(
+                        orElse: () {},
+                        failure: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Failed_to_load_follows').tr(),
+                            backgroundColor: Theme.of(context).errorColor,
+                          ));
+                        },
+                      );
+                    }, builder: (context, state) {
                       return state.maybeWhen(
                         initial: () {
-                          context.read<RetrieveFollowByUserIdCubit>().loadFollowByUserId(user.id);
+                          context
+                              .read<RetrieveFollowByUserIdCubit>()
+                              .loadFollowByUserId(user.id);
                           return const Loading();
                         },
                         orElse: () => const Loading(),
-                        loaded: (followers) => Text(followers.length.toString() + 'following'.tr(),
+                        loaded: (followers) => Text(
+                            followers.length.toString() + 'following'.tr(),
                             style: const TextStyle(fontSize: 16)),
                       );
                     }),
                     const SizedBox(height: 10),
-                    Text(
-                        user.description ?? '',
+                    Text(user.description ?? '',
                         style: const TextStyle(fontSize: 16)),
                   ],
                 ),
@@ -123,7 +131,8 @@ class AccountLoaded extends StatelessWidget {
             ],
           ),
         ),
-        BlocConsumer<RetrieveContentByUserIdCubit, RetrieveContentByUserIdState>(
+        BlocConsumer<RetrieveContentByUserIdCubit,
+            RetrieveContentByUserIdState>(
           listener: (context, state) {
             state.maybeWhen(
               orElse: () {},
@@ -139,12 +148,13 @@ class AccountLoaded extends StatelessWidget {
           builder: (context, state) {
             return state.maybeWhen(
               initial: () {
-                context.read<RetrieveContentByUserIdCubit>().loadPublication(user.id);
+                context
+                    .read<RetrieveContentByUserIdCubit>()
+                    .loadPublication(user.id);
                 return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (publications) =>
-                  HomeLoaded(publications: publications),
+              loaded: (publications) => HomeLoaded(publications: publications),
             );
           },
         ),

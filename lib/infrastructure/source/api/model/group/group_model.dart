@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/infrastructure/source/api/model/user/user_model.dart';
+
+import '../user/user_model.dart';
 
 part 'group_model.freezed.dart';
 part 'group_model.g.dart';
@@ -11,8 +12,7 @@ class ApiGroupModel with _$ApiGroupModel {
     required String name,
     String? description,
     required String confidentiality,
-    @JsonKey(name: 'principal_picture_url')
-    String? principalPictureUrl,
+    @JsonKey(name: 'principal_picture_url') String? principalPictureUrl,
     ApiUserModel? creator,
   }) = _ApiGroupModel;
 

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pimp_my_code/domain/entities/enum/notification_type.dart';
-import 'package:pimp_my_code/domain/entities/notification.dart' as notification;
+import '../../../../domain/entities/enum/notification_type.dart';
+import '../../../../domain/entities/notification.dart' as notification;
 
 class NotificationsLoaded extends StatelessWidget {
   final List<notification.Notification> notifications;

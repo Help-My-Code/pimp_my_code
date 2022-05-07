@@ -1,5 +1,5 @@
-import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
-import 'package:pimp_my_code/domain/entities/user.dart';
+import 'enum/content_type.dart';
+import 'user.dart';
 
 class Content {
   final String? id;
@@ -33,6 +33,4 @@ class Content {
     this.code,
     this.codeResult,
   });
-
 }
-

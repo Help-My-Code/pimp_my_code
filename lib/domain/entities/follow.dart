@@ -1,5 +1,5 @@
-import 'package:pimp_my_code/domain/entities/enum/status.dart';
-import 'package:pimp_my_code/domain/entities/user.dart';
+import 'enum/status.dart';
+import 'user.dart';
 
 class Follow {
   final String id;

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/usecase.dart';
-import 'package:pimp_my_code/domain/entities/follow.dart';
+import '../../../core/usecase.dart';
+import '../../entities/follow.dart';
 
 import '../../../core/failure.dart';
 import '../../repositories/follow_repository.dart';

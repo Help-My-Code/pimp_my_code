@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/core/failure.dart';
+import '../../core/failure.dart';
 
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/usecases/content/create_publication_use_case.dart';
-import 'package:pimp_my_code/infrastructure/source/api/command/content.dart';
-import 'package:pimp_my_code/infrastructure/source/api/model/content/content_model.dart';
+import '../../domain/usecases/content/create_publication_use_case.dart';
+import '../source/api/command/content.dart';
+import '../source/api/model/content/content_model.dart';
 
 import '../../domain/entities/content.dart';
 import '../../domain/repositories/content_repository.dart';
@@ -18,24 +18,24 @@ class ApiContentRepository extends ContentRepository {
 
   @override
   Future<Either<Failure, Unit>> createContent(Content content) async {
-    try{
+    try {
       final fields = {
         'content': content.content,
-    'contentType': content.contentType.name.toUpperCase(),
-    'creatorId': content.creatorId,
-    };
+        'contentType': content.contentType.name.toUpperCase(),
+        'creatorId': content.creatorId,
+      };
 
-    if(content.title != null){
-      fields['title'] = content.title!;
-    }
+      if (content.title != null) {
+        fields['title'] = content.title!;
+      }
 
-    if(content.code != null && content.codeResult != null){
-      fields['stdin'] = content.code!;
-      fields['stdout'] = content.codeResult!;
-    }
+      if (content.code != null && content.codeResult != null) {
+        fields['stdin'] = content.code!;
+        fields['stdout'] = content.codeResult!;
+      }
       await _dataSource.createContent(fields: fields);
       return right(unit);
-    }catch(e){
+    } catch (e) {
       return left(CreatePublicationFailure(tr('create_content_failure')));
     }
   }

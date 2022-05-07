@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/entities/group.dart';
-import 'package:pimp_my_code/domain/usecases/group/find_my_groups.dart';
+import '../../domain/entities/group.dart';
+import '../../domain/usecases/group/find_my_groups.dart';
 
 import '../session/session_cubit.dart';
 
@@ -25,4 +25,3 @@ class RetrieveMyGroupsCubit extends Cubit<RetrieveMyGroupsState> {
     });
   }
 }
-

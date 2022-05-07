@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pimp_my_code/core/form_status.dart';
-import 'package:pimp_my_code/state/register/register_bloc.dart';
+import '../../../../core/form_status.dart';
+import '../../../../state/register/register_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../validator/validators.dart';
 

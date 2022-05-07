@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/infrastructure/converter/user_mapper.dart';
+import '../converter/user_mapper.dart';
 
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/auth/login_use_case.dart';

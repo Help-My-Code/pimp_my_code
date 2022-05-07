@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/failure.dart';
+import '../../core/failure.dart';
 
 import '../entities/content.dart';
 
