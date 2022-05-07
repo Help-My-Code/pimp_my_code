@@ -1,11 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import '../../../../domain/entities/content.dart';
 
 import 'post_card.dart';
 
 class HomeLoaded extends StatelessWidget {
   final List<Content> publications;
+
+  void onLikePress(LikeCubit likeCubit, String publicationId) {
+    likeCubit.like(publicationId);
+  }
+
+  void onDislikePress(LikeCubit likeCubit, String publicationId) {
+    likeCubit.dislike(publicationId);
+  }
 
   const HomeLoaded({
     Key? key,
@@ -24,8 +34,10 @@ class HomeLoaded extends StatelessWidget {
               itemCount: publications.length,
               itemBuilder: (context, index) {
                 return PostCard(
-                  onLikePressed: () {},
-                  onUnlikePressed: () {},
+                  onLikePressed: () => onLikePress(
+                      context.read<LikeCubit>(), publications[index].id!),
+                  onUnlikePressed: () => onDislikePress(
+                      context.read<LikeCubit>(), publications[index].id!),
                   onCommentaryPressed: () {},
                   codes: publications[index].code == null
                       ? ['']

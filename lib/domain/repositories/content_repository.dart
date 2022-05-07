@@ -13,6 +13,10 @@ abstract class ContentRepository {
       {required String userId});
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId});
+
+  Future<void> like(String publicationId, String userId);
+
+  Future<void> dislike(String publicationId, String userId);
 }
 
 class GetPublicationFailed extends Failure {}

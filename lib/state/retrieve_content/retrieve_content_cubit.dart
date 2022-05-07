@@ -17,11 +17,47 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   void loadPublication() async {
     emit(const RetrieveContentState.loading());
     String userId = await _sessionCubit.getUserId();
-   final publications = await _getFollowingPublication(userId);
-   publications.fold((l) {
-     emit(const RetrieveContentState.failure());
-   }, (r) {
-     emit(RetrieveContentState.loaded(r));
-   });
+    final publications = await _getFollowingPublication(userId);
+    publications.fold((l) {
+      emit(const RetrieveContentState.failure());
+    }, (r) {
+      emit(RetrieveContentState.loaded(r));
+    });
+  }
+
+  void like(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              content.isLike = true;
+              content.isDislike = false;
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
+
+  void dislike(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              content.isLike = false;
+              content.isDislike = true;
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
   }
 }

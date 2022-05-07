@@ -4,6 +4,7 @@ import '../../core/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/usecases/content/create_publication_use_case.dart';
 import '../source/api/command/content.dart';
+import '../source/api/command/user_like.dart';
 import '../source/api/model/content/content_model.dart';
 
 import '../../domain/entities/content.dart';
@@ -11,10 +12,12 @@ import '../../domain/repositories/content_repository.dart';
 import '../converter/content_mapper.dart';
 
 class ApiContentRepository extends ContentRepository {
+  final UserLikeInteractor _userLikeInteractor;
   final ContentInteractor _dataSource;
   final ContentMapper _contentMapper;
 
-  ApiContentRepository(this._dataSource, this._contentMapper);
+  ApiContentRepository(
+      this._dataSource, this._contentMapper, this._userLikeInteractor);
 
   @override
   Future<Either<Failure, Unit>> createContent(Content content) async {
@@ -85,5 +88,25 @@ class ApiContentRepository extends ContentRepository {
   @override
   Future<Either<Failure, Content>> updateContent(Content content) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> like(String publicationId, String userId) async {
+    final field = {
+      "userId": userId,
+      "contentId": publicationId,
+      "reactionType": "LIKE"
+    };
+    await _userLikeInteractor.createLikeOrDislike(field);
+  }
+
+  @override
+  Future<void> dislike(String publicationId, String userId) async {
+    final field = {
+      "userId": userId,
+      "contentId": publicationId,
+      "reactionType": "DISLIKE"
+    };
+    await _userLikeInteractor.createLikeOrDislike(field);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
 import 'domain/repositories/notification_repository.dart';
@@ -107,7 +108,8 @@ void registerMapper() {
 
 void registerRepositories() {
   sl.registerSingleton<AuthRepository>(ApiAuthRepository(sl(), sl()));
-  sl.registerSingleton<ContentRepository>(ApiContentRepository(sl(), sl()));
+  sl.registerSingleton<ContentRepository>(
+      ApiContentRepository(sl(), sl(), sl()));
   sl.registerSingleton<UserRepository>(ApiUserRepository(sl(), sl()));
   sl.registerSingleton<GroupRepository>(ApiGroupRepository(sl(), sl()));
   sl.registerSingleton<GroupMemberRepository>(
@@ -157,6 +159,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
+  sl.registerFactory(() => LikeCubit(sl(), sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {

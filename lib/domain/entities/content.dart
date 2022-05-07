@@ -16,6 +16,8 @@ class Content {
   final String? code;
   final String? codeResult;
   final String? username;
+  bool isLike;
+  bool isDislike;
 
   Content({
     required this.content,
@@ -32,5 +34,7 @@ class Content {
     this.userPicture,
     this.code,
     this.codeResult,
+    this.isLike = false,
+    this.isDislike = false,
   });
 }
