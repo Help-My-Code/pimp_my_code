@@ -4,16 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import '../../../../ioc_container.dart';
-import '../../../../state/like/like_cubit.dart';
-import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 
 import '../../../../domain/entities/user.dart';
+import '../../../../ioc_container.dart';
+import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
-import '../../home/widgets/home_loaded.dart';
 import '../../home/widgets/publications_loaded.dart';
 
 class AccountLoaded extends StatelessWidget {

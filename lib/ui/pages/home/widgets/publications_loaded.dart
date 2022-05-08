@@ -2,11 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
-import 'package:pimp_my_code/state/retrieve_content/retrieve_content_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import '../../../../domain/entities/content/content.dart';
 
-import '../../../../ioc_container.dart';
+import '../../../../domain/entities/content/content.dart';
 import 'post_card.dart';
 import 'share_modal.dart';
 

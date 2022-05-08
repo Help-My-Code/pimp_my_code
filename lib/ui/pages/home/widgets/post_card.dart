@@ -149,7 +149,6 @@ class PostCard extends StatelessWidget {
           right: 50,
           child: InkWell(
             onTap: () {
-              print('hit button');
               onSharePress();
             },
             child: const Icon(Icons.share),
