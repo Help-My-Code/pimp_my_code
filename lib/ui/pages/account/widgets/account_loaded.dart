@@ -22,30 +22,19 @@ class AccountLoaded extends StatelessWidget {
   final bool isUserConnected;
   final BuildContext context;
 
-  const AccountLoaded({
-    Key? key,
-    required this.user,
-    required this.isUserConnected,
-    required this.context
-  }) : super(key: key);
+  const AccountLoaded(
+      {Key? key,
+      required this.user,
+      required this.isUserConnected,
+      required this.context})
+      : super(key: key);
 
   void printUpdate() {
     Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: UpdateUserModal(),
-      buttons: [
-        DialogButton(
-        child: Text(
-          'save'.tr(),
-          style: const TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        onPressed: () {
-          //TODO save
-        },
-        width: 120,
-      )
-      ],
+      buttons: [],
     ).show();
   }
 
@@ -134,7 +123,7 @@ class AccountLoaded extends StatelessWidget {
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.09),
-              if(isUserConnected)
+              if (isUserConnected)
                 GFButton(
                   onPressed: () => printUpdate(),
                   text: tr('edit_profile'),
@@ -142,15 +131,15 @@ class AccountLoaded extends StatelessWidget {
                   color: Colors.amber,
                   icon: const Icon(Icons.edit, color: Colors.white),
                 ),
-              if(!isUserConnected)
+              if (!isUserConnected)
                 //TODO afficher follow/unflollow selon
-              GFButton(
-                onPressed: () {},
-                text: tr('follow'),
-                shape: GFButtonShape.standard,
-                color: Colors.amber,
-                icon: const Icon(Icons.add, color: Colors.white),
-              ),
+                GFButton(
+                  onPressed: () {},
+                  text: tr('follow'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.add, color: Colors.white),
+                ),
               // GFButton(
               //   onPressed: () {},
               //   text: tr('unfollow'),
@@ -193,13 +182,13 @@ class AccountLoaded extends StatelessWidget {
                     Flexible(
                       child: BlocProvider(
                           create: (context) => LikeCubit(
-                            sl(),
-                            null,
-                            context.read<RetrieveContentByUserIdCubit>(),
-                            sl(),
-                          ),
-                          child: PublicationsLoaded(publications: publications)
-                      ),
+                                sl(),
+                                null,
+                                context.read<RetrieveContentByUserIdCubit>(),
+                                sl(),
+                              ),
+                          child:
+                              PublicationsLoaded(publications: publications)),
                     ),
                   ],
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../validator/validators.dart';
 
@@ -122,6 +123,17 @@ class UpdateUserModal extends StatelessWidget {
                   type: GFToggleType.ios,
                 )
               ],
+            ),
+            const SizedBox(height: 10),
+            DialogButton(
+              child: Text(
+                'save'.tr(),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                //TODO save
+              },
+              width: 120,
             )
             // BlocConsumer<RetrieveUpdateUserCubit, RetrieveUpdateUserState>(
             //     listener: (context, state) {
