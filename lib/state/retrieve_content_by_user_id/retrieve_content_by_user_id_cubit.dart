@@ -21,4 +21,38 @@ class RetrieveContentByUserIdCubit extends Cubit<RetrieveContentByUserIdState> {
       emit(RetrieveContentByUserIdState.loaded(r));
     });
   }
+
+  void like(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              return content.copyWith(isLike: true, isDislike: false);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
+
+  void dislike(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              return content.copyWith(isLike: false, isDislike: true);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
 }
