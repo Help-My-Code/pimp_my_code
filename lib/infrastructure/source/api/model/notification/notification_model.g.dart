@@ -17,10 +17,6 @@ _$_ApiNotificationModel _$$_ApiNotificationModelFromJson(
           ? null
           : ApiGroupModel.fromJson(
               json['group_linked'] as Map<String, dynamic>),
-      contentLinked: json['content_linked'] == null
-          ? null
-          : ApiContentModel.fromJson(
-              json['content_linked'] as Map<String, dynamic>),
       userRecipient:
           ApiUserModel.fromJson(json['user_recipient'] as Map<String, dynamic>),
       userLinked: json['user_linked'] == null
@@ -36,7 +32,6 @@ Map<String, dynamic> _$$_ApiNotificationModelToJson(
       'is_seen': instance.isSeen,
       'notification_type': instance.notificationType,
       'group_linked': instance.groupLinked,
-      'content_linked': instance.contentLinked,
       'user_recipient': instance.userRecipient,
       'user_linked': instance.userLinked,
     };

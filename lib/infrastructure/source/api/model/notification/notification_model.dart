@@ -14,7 +14,7 @@ class ApiNotificationModel with _$ApiNotificationModel {
     @JsonKey(name: 'is_seen') required bool isSeen,
     @JsonKey(name: 'notification_type') required String notificationType,
     @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
-    @JsonKey(name: 'content_linked') ApiContentModel? contentLinked,
+    //@JsonKey(name: 'content_linked') ApiContentModel? contentLinked,
     @JsonKey(name: 'user_recipient') required ApiUserModel userRecipient,
     @JsonKey(name: 'user_linked') ApiUserModel? userLinked,
   }) = _ApiNotificationModel;
