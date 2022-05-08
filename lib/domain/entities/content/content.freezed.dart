@@ -34,7 +34,10 @@ class _$ContentTearOff {
       String? code,
       String? codeResult,
       bool isLike = false,
-      bool isDislike = false}) {
+      bool isDislike = false,
+      required int numberOfLikes,
+      required int numberOfDislikes,
+      required int numberOfComments}) {
     return _Content(
       content: content,
       createdAt: createdAt,
@@ -52,6 +55,9 @@ class _$ContentTearOff {
       codeResult: codeResult,
       isLike: isLike,
       isDislike: isDislike,
+      numberOfLikes: numberOfLikes,
+      numberOfDislikes: numberOfDislikes,
+      numberOfComments: numberOfComments,
     );
   }
 }
@@ -77,6 +83,9 @@ mixin _$Content {
   String? get codeResult => throw _privateConstructorUsedError;
   bool get isLike => throw _privateConstructorUsedError;
   bool get isDislike => throw _privateConstructorUsedError;
+  int get numberOfLikes => throw _privateConstructorUsedError;
+  int get numberOfDislikes => throw _privateConstructorUsedError;
+  int get numberOfComments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ContentCopyWith<Content> get copyWith => throw _privateConstructorUsedError;
@@ -102,7 +111,10 @@ abstract class $ContentCopyWith<$Res> {
       String? code,
       String? codeResult,
       bool isLike,
-      bool isDislike});
+      bool isDislike,
+      int numberOfLikes,
+      int numberOfDislikes,
+      int numberOfComments});
 }
 
 /// @nodoc
@@ -131,6 +143,9 @@ class _$ContentCopyWithImpl<$Res> implements $ContentCopyWith<$Res> {
     Object? codeResult = freezed,
     Object? isLike = freezed,
     Object? isDislike = freezed,
+    Object? numberOfLikes = freezed,
+    Object? numberOfDislikes = freezed,
+    Object? numberOfComments = freezed,
   }) {
     return _then(_value.copyWith(
       content: content == freezed
@@ -197,6 +212,18 @@ class _$ContentCopyWithImpl<$Res> implements $ContentCopyWith<$Res> {
           ? _value.isDislike
           : isDislike // ignore: cast_nullable_to_non_nullable
               as bool,
+      numberOfLikes: numberOfLikes == freezed
+          ? _value.numberOfLikes
+          : numberOfLikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfDislikes: numberOfDislikes == freezed
+          ? _value.numberOfDislikes
+          : numberOfDislikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfComments: numberOfComments == freezed
+          ? _value.numberOfComments
+          : numberOfComments // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -222,7 +249,10 @@ abstract class _$ContentCopyWith<$Res> implements $ContentCopyWith<$Res> {
       String? code,
       String? codeResult,
       bool isLike,
-      bool isDislike});
+      bool isDislike,
+      int numberOfLikes,
+      int numberOfDislikes,
+      int numberOfComments});
 }
 
 /// @nodoc
@@ -252,6 +282,9 @@ class __$ContentCopyWithImpl<$Res> extends _$ContentCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? isLike = freezed,
     Object? isDislike = freezed,
+    Object? numberOfLikes = freezed,
+    Object? numberOfDislikes = freezed,
+    Object? numberOfComments = freezed,
   }) {
     return _then(_Content(
       content: content == freezed
@@ -318,6 +351,18 @@ class __$ContentCopyWithImpl<$Res> extends _$ContentCopyWithImpl<$Res>
           ? _value.isDislike
           : isDislike // ignore: cast_nullable_to_non_nullable
               as bool,
+      numberOfLikes: numberOfLikes == freezed
+          ? _value.numberOfLikes
+          : numberOfLikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfDislikes: numberOfDislikes == freezed
+          ? _value.numberOfDislikes
+          : numberOfDislikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfComments: numberOfComments == freezed
+          ? _value.numberOfComments
+          : numberOfComments // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -341,7 +386,10 @@ class _$_Content implements _Content {
       this.code,
       this.codeResult,
       this.isLike = false,
-      this.isDislike = false});
+      this.isDislike = false,
+      required this.numberOfLikes,
+      required this.numberOfDislikes,
+      required this.numberOfComments});
 
   @override
   final String content;
@@ -377,10 +425,16 @@ class _$_Content implements _Content {
   @JsonKey()
   @override
   final bool isDislike;
+  @override
+  final int numberOfLikes;
+  @override
+  final int numberOfDislikes;
+  @override
+  final int numberOfComments;
 
   @override
   String toString() {
-    return 'Content(content: $content, createdAt: $createdAt, creatorId: $creatorId, contentType: $contentType, medias: $medias, username: $username, id: $id, groupId: $groupId, creator: $creator, title: $title, parentId: $parentId, userPicture: $userPicture, code: $code, codeResult: $codeResult, isLike: $isLike, isDislike: $isDislike)';
+    return 'Content(content: $content, createdAt: $createdAt, creatorId: $creatorId, contentType: $contentType, medias: $medias, username: $username, id: $id, groupId: $groupId, creator: $creator, title: $title, parentId: $parentId, userPicture: $userPicture, code: $code, codeResult: $codeResult, isLike: $isLike, isDislike: $isDislike, numberOfLikes: $numberOfLikes, numberOfDislikes: $numberOfDislikes, numberOfComments: $numberOfComments)';
   }
 
   @override
@@ -406,28 +460,38 @@ class _$_Content implements _Content {
             const DeepCollectionEquality()
                 .equals(other.codeResult, codeResult) &&
             const DeepCollectionEquality().equals(other.isLike, isLike) &&
-            const DeepCollectionEquality().equals(other.isDislike, isDislike));
+            const DeepCollectionEquality().equals(other.isDislike, isDislike) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfLikes, numberOfLikes) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfDislikes, numberOfDislikes) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfComments, numberOfComments));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(creatorId),
-      const DeepCollectionEquality().hash(contentType),
-      const DeepCollectionEquality().hash(medias),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(groupId),
-      const DeepCollectionEquality().hash(creator),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(userPicture),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(codeResult),
-      const DeepCollectionEquality().hash(isLike),
-      const DeepCollectionEquality().hash(isDislike));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(content),
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(creatorId),
+        const DeepCollectionEquality().hash(contentType),
+        const DeepCollectionEquality().hash(medias),
+        const DeepCollectionEquality().hash(username),
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(groupId),
+        const DeepCollectionEquality().hash(creator),
+        const DeepCollectionEquality().hash(title),
+        const DeepCollectionEquality().hash(parentId),
+        const DeepCollectionEquality().hash(userPicture),
+        const DeepCollectionEquality().hash(code),
+        const DeepCollectionEquality().hash(codeResult),
+        const DeepCollectionEquality().hash(isLike),
+        const DeepCollectionEquality().hash(isDislike),
+        const DeepCollectionEquality().hash(numberOfLikes),
+        const DeepCollectionEquality().hash(numberOfDislikes),
+        const DeepCollectionEquality().hash(numberOfComments)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -452,7 +516,10 @@ abstract class _Content implements Content {
       String? code,
       String? codeResult,
       bool isLike,
-      bool isDislike}) = _$_Content;
+      bool isDislike,
+      required int numberOfLikes,
+      required int numberOfDislikes,
+      required int numberOfComments}) = _$_Content;
 
   @override
   String get content;
@@ -486,6 +553,12 @@ abstract class _Content implements Content {
   bool get isLike;
   @override
   bool get isDislike;
+  @override
+  int get numberOfLikes;
+  @override
+  int get numberOfDislikes;
+  @override
+  int get numberOfComments;
   @override
   @JsonKey(ignore: true)
   _$ContentCopyWith<_Content> get copyWith =>

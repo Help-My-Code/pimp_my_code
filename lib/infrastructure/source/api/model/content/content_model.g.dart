@@ -25,6 +25,9 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       groupId: json['groupId'] as String?,
       parentId: json['parentId'] as String?,
       contentType: json['contentType'] as String,
+      numberOfLikes: json['numberOfLikes'] as int,
+      numberOfDislikes: json['numberOfDislikes'] as int,
+      numberOfComments: json['numberOfComments'] as int,
     );
 
 Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
@@ -43,4 +46,7 @@ Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
       'groupId': instance.groupId,
       'parentId': instance.parentId,
       'contentType': instance.contentType,
+      'numberOfLikes': instance.numberOfLikes,
+      'numberOfDislikes': instance.numberOfDislikes,
+      'numberOfComments': instance.numberOfComments,
     };
