@@ -13,12 +13,20 @@ import 'share_modal.dart';
 class PublicationsLoaded extends StatelessWidget {
   final List<Content> publications;
 
-  void onLikePress(LikeCubit likeCubit, String publicationId) {
-    likeCubit.like(publicationId);
+  void onLikePress(LikeCubit likeCubit, Content publication) {
+    if (publication.isLike) {
+      likeCubit.unlike(publication.id!);
+    } else {
+      likeCubit.like(publication.id!);
+    }
   }
 
-  void onDislikePress(LikeCubit likeCubit, String publicationId) {
-    likeCubit.dislike(publicationId);
+  void onDislikePress(LikeCubit likeCubit, Content publication) {
+    if (publication.isDislike) {
+      likeCubit.undislike(publication.id!);
+    } else {
+      likeCubit.dislike(publication.id!);
+    }
   }
 
   void onSharePress(BuildContext context, Content content) {
@@ -41,9 +49,9 @@ class PublicationsLoaded extends StatelessWidget {
       itemBuilder: (context, index) {
         return PostCard(
           onLikePressed: () =>
-              onLikePress(context.read<LikeCubit>(), publications[index].id!),
-          onUnlikePressed: () => onDislikePress(
-              context.read<LikeCubit>(), publications[index].id!),
+              onLikePress(context.read<LikeCubit>(), publications[index]),
+          onUnlikePressed: () =>
+              onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () {},
           codes: publications[index].code == null
               ? ['']
@@ -58,6 +66,7 @@ class PublicationsLoaded extends StatelessWidget {
           date:
               DateFormat('dd MMMM yyyy').format(publications[index].createdAt),
           isLiked: publications[index].isLike,
+          isDisliked: publications[index].isDislike,
           likeCount: publications[index].numberOfLikes.toString(),
           unlikeCount: publications[index].numberOfDislikes.toString(),
           commentaryCount: publications[index].numberOfComments.toString(),

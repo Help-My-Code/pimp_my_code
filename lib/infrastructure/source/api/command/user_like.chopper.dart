@@ -23,4 +23,13 @@ class _$UserLikeInteractor extends UserLikeInteractor {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> deleteUserReactToContent(
+      Map<String, dynamic> body) {
+    final $url = 'userReactToContent/delete';
+    final $body = body;
+    final $request = Request('DELETE', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

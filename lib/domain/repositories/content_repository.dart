@@ -14,6 +14,8 @@ abstract class ContentRepository {
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId});
 
+  Future<void> unreact(String publicationId, String userId);
+
   Future<void> like(String publicationId, String userId);
 
   Future<void> dislike(String publicationId, String userId);
