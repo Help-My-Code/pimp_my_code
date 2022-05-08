@@ -8,4 +8,7 @@ abstract class UserLikeInteractor extends ChopperService {
       _$UserLikeInteractor(client);
   @Post(path: '/create')
   Future<Response> createLikeOrDislike(@Body() Map<String, dynamic> body);
+
+  @Delete(path: '/delete')
+  Future<Response> deleteUserReactToContent(@Body() Map<String, dynamic> body);
 }

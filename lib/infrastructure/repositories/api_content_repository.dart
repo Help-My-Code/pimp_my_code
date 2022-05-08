@@ -91,6 +91,15 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
+  Future<void> unreact(String publicationId, String userId) async {
+    final field = {
+      'userId': userId,
+      'contentId': publicationId,
+    };
+    await _userLikeInteractor.deleteUserReactToContent(field);
+  }
+
+  @override
   Future<void> like(String publicationId, String userId) async {
     final field = {
       'userId': userId,
