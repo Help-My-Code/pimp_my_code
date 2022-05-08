@@ -2,40 +2,28 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pimp_my_code/domain/repositories/content_repository.dart';
 import 'package:pimp_my_code/state/retrieve_content/retrieve_content_cubit.dart';
-import 'package:pimp_my_code/state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/session/session_cubit.dart';
 
 part 'like_state.dart';
-
 part 'like_cubit.freezed.dart';
 
 class LikeCubit extends Cubit<LikeState> {
   final SessionCubit _sessionCubit;
   final ContentRepository _contentRepository;
-  final RetrieveContentCubit? _retrieveContentCubit;
-  final RetrieveContentByUserIdCubit? _retrieveContentByUserIdCubit;
-
-  LikeCubit(this._contentRepository, this._retrieveContentCubit,
-      this._retrieveContentByUserIdCubit, this._sessionCubit)
+  final RetrieveContentCubit _retrieveContentCubit;
+  LikeCubit(
+      this._contentRepository, this._retrieveContentCubit, this._sessionCubit)
       : super(const LikeState.initial());
 
   Future<void> like(String publicationId) async {
     String userId = await _sessionCubit.getUserId();
     await _contentRepository.like(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.like(publicationId);
-    } else {
-      _retrieveContentByUserIdCubit!.like(publicationId);
-    }
+    _retrieveContentCubit.like(publicationId);
   }
 
   Future<void> dislike(String publicationId) async {
     String userId = await _sessionCubit.getUserId();
     await _contentRepository.dislike(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.dislike(publicationId);
-    } else {
-      _retrieveContentByUserIdCubit!.dislike(publicationId);
-    }
+    _retrieveContentCubit.dislike(publicationId);
   }
 }
