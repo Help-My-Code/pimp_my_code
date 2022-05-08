@@ -17,10 +17,12 @@ import '../../home/widgets/publications_loaded.dart';
 
 class AccountLoaded extends StatelessWidget {
   final User user;
+  final bool isUserConnected;
 
   const AccountLoaded({
     Key? key,
     required this.user,
+    required this.isUserConnected
   }) : super(key: key);
 
   @override
@@ -108,14 +110,23 @@ class AccountLoaded extends StatelessWidget {
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.09),
-              //TODO activer le bon bouton selon
-              // GFButton(
-              //   onPressed: () {},
-              //   text: tr('follow'),
-              //   shape: GFButtonShape.standard,
-              //   color: Colors.amber,
-              //   icon: const Icon(Icons.add, color: Colors.white),
-              // ),
+              if(isUserConnected)
+                GFButton(
+                  onPressed: () {},
+                  text: tr('edit_profile'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.edit, color: Colors.white),
+                ),
+              if(!isUserConnected)
+                //TODO afficher follow/unflollow selon
+              GFButton(
+                onPressed: () {},
+                text: tr('follow'),
+                shape: GFButtonShape.standard,
+                color: Colors.amber,
+                icon: const Icon(Icons.add, color: Colors.white),
+              ),
               // GFButton(
               //   onPressed: () {},
               //   text: tr('unfollow'),
@@ -123,13 +134,6 @@ class AccountLoaded extends StatelessWidget {
               //   color: Colors.amber,
               //   icon: const Icon(Icons.remove, color: Colors.white),
               // ),
-              GFButton(
-                onPressed: () {},
-                text: tr('edit_profile'),
-                shape: GFButtonShape.standard,
-                color: Colors.amber,
-                icon: const Icon(Icons.edit, color: Colors.white),
-              ),
             ],
           ),
         ),

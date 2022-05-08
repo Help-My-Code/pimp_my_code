@@ -57,15 +57,24 @@ class AppRouter {
       GoRoute(
           path: Routes.account.path,
           builder: (BuildContext context, GoRouterState state) =>
-              MultiBlocProvider(providers: [
-                BlocProvider(create: (context) => sl<RetrieveUserByIdCubit>()),
-                BlocProvider(
-                    create: (context) => sl<RetrieveContentByUserIdCubit>()),
-                BlocProvider(
-                    create: (context) => sl<RetrieveFollowByFollowerIdCubit>()),
-                BlocProvider(
-                    create: (context) => sl<RetrieveFollowByUserIdCubit>()),
-              ], child: AccountPage(userId: state.queryParams['userId']!))),
+              MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                        create: (context) => sl<RetrieveUserByIdCubit>()),
+                    BlocProvider(
+                        create: (context) =>
+                            sl<RetrieveContentByUserIdCubit>()),
+                    BlocProvider(
+                        create: (context) =>
+                            sl<RetrieveFollowByFollowerIdCubit>()),
+                    BlocProvider(
+                        create: (context) => sl<RetrieveFollowByUserIdCubit>()),
+                  ],
+                  child: AccountPage(
+                    userId: state.queryParams['userId']!,
+                    isUserConnected:
+                        state.queryParams['connected']!.toLowerCase() == 'true',
+                  ))),
     ],
     redirect: (state) {
       final bool isInUnAuthPage = state.location == Routes.login.path ||

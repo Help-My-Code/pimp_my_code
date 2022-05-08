@@ -161,7 +161,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                 tooltip: 'my_account'.tr(),
                 onPressed: () {
                   GoRouter.of(context)
-                      .go(Routes.account.path + '?userId=' + userId);
+                      .go(Routes.account.path + '?userId=' + userId + '&connected=true');
                 },
               ),
               IconButton(
