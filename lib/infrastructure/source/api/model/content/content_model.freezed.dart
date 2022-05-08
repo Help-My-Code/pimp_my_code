@@ -36,7 +36,10 @@ class _$ApiContentModelTearOff {
       @JsonKey(name: 'createdAt') required DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'parentId') String? parentId,
-      @JsonKey(name: 'contentType') required String contentType}) {
+      @JsonKey(name: 'contentType') required String contentType,
+      required int numberOfLikes,
+      required int numberOfDislikes,
+      required int numberOfComments}) {
     return _ApiContentModel(
       id: id,
       content: content,
@@ -52,6 +55,9 @@ class _$ApiContentModelTearOff {
       groupId: groupId,
       parentId: parentId,
       contentType: contentType,
+      numberOfLikes: numberOfLikes,
+      numberOfDislikes: numberOfDislikes,
+      numberOfComments: numberOfComments,
     );
   }
 
@@ -83,6 +89,9 @@ mixin _$ApiContentModel {
   String? get parentId => throw _privateConstructorUsedError;
   @JsonKey(name: 'contentType')
   String get contentType => throw _privateConstructorUsedError;
+  int get numberOfLikes => throw _privateConstructorUsedError;
+  int get numberOfDislikes => throw _privateConstructorUsedError;
+  int get numberOfComments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -109,7 +118,10 @@ abstract class $ApiContentModelCopyWith<$Res> {
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'parentId') String? parentId,
-      @JsonKey(name: 'contentType') String contentType});
+      @JsonKey(name: 'contentType') String contentType,
+      int numberOfLikes,
+      int numberOfDislikes,
+      int numberOfComments});
 
   $ApiUserModelCopyWith<$Res>? get creator;
 }
@@ -139,6 +151,9 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? groupId = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
+    Object? numberOfLikes = freezed,
+    Object? numberOfDislikes = freezed,
+    Object? numberOfComments = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -197,6 +212,18 @@ class _$ApiContentModelCopyWithImpl<$Res>
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
               as String,
+      numberOfLikes: numberOfLikes == freezed
+          ? _value.numberOfLikes
+          : numberOfLikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfDislikes: numberOfDislikes == freezed
+          ? _value.numberOfDislikes
+          : numberOfDislikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfComments: numberOfComments == freezed
+          ? _value.numberOfComments
+          : numberOfComments // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -233,7 +260,10 @@ abstract class _$ApiContentModelCopyWith<$Res>
       @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'groupId') String? groupId,
       @JsonKey(name: 'parentId') String? parentId,
-      @JsonKey(name: 'contentType') String contentType});
+      @JsonKey(name: 'contentType') String contentType,
+      int numberOfLikes,
+      int numberOfDislikes,
+      int numberOfComments});
 
   @override
   $ApiUserModelCopyWith<$Res>? get creator;
@@ -266,6 +296,9 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? groupId = freezed,
     Object? parentId = freezed,
     Object? contentType = freezed,
+    Object? numberOfLikes = freezed,
+    Object? numberOfDislikes = freezed,
+    Object? numberOfComments = freezed,
   }) {
     return _then(_ApiContentModel(
       id: id == freezed
@@ -324,6 +357,18 @@ class __$ApiContentModelCopyWithImpl<$Res>
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
               as String,
+      numberOfLikes: numberOfLikes == freezed
+          ? _value.numberOfLikes
+          : numberOfLikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfDislikes: numberOfDislikes == freezed
+          ? _value.numberOfDislikes
+          : numberOfDislikes // ignore: cast_nullable_to_non_nullable
+              as int,
+      numberOfComments: numberOfComments == freezed
+          ? _value.numberOfComments
+          : numberOfComments // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -345,7 +390,10 @@ class _$_ApiContentModel implements _ApiContentModel {
       @JsonKey(name: 'createdAt') required this.createdAt,
       @JsonKey(name: 'groupId') this.groupId,
       @JsonKey(name: 'parentId') this.parentId,
-      @JsonKey(name: 'contentType') required this.contentType});
+      @JsonKey(name: 'contentType') required this.contentType,
+      required this.numberOfLikes,
+      required this.numberOfDislikes,
+      required this.numberOfComments});
 
   factory _$_ApiContentModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiContentModelFromJson(json);
@@ -382,10 +430,16 @@ class _$_ApiContentModel implements _ApiContentModel {
   @override
   @JsonKey(name: 'contentType')
   final String contentType;
+  @override
+  final int numberOfLikes;
+  @override
+  final int numberOfDislikes;
+  @override
+  final int numberOfComments;
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, content: $content, creatorId: $creatorId, medias: $medias, username: $username, title: $title, code: $code, codeResult: $codeResult, creator: $creator, userImage: $userImage, createdAt: $createdAt, groupId: $groupId, parentId: $parentId, contentType: $contentType)';
+    return 'ApiContentModel(id: $id, content: $content, creatorId: $creatorId, medias: $medias, username: $username, title: $title, code: $code, codeResult: $codeResult, creator: $creator, userImage: $userImage, createdAt: $createdAt, groupId: $groupId, parentId: $parentId, contentType: $contentType, numberOfLikes: $numberOfLikes, numberOfDislikes: $numberOfDislikes, numberOfComments: $numberOfComments)';
   }
 
   @override
@@ -408,7 +462,13 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality()
-                .equals(other.contentType, contentType));
+                .equals(other.contentType, contentType) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfLikes, numberOfLikes) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfDislikes, numberOfDislikes) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfComments, numberOfComments));
   }
 
   @override
@@ -427,7 +487,10 @@ class _$_ApiContentModel implements _ApiContentModel {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(groupId),
       const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(contentType));
+      const DeepCollectionEquality().hash(contentType),
+      const DeepCollectionEquality().hash(numberOfLikes),
+      const DeepCollectionEquality().hash(numberOfDislikes),
+      const DeepCollectionEquality().hash(numberOfComments));
 
   @JsonKey(ignore: true)
   @override
@@ -442,21 +505,23 @@ class _$_ApiContentModel implements _ApiContentModel {
 
 abstract class _ApiContentModel implements ApiContentModel {
   const factory _ApiContentModel(
-          {required String id,
-          required String content,
-          required String creatorId,
-          required List<String> medias,
-          required String username,
-          String? title,
-          String? code,
-          String? codeResult,
-          ApiUserModel? creator,
-          String? userImage,
-          @JsonKey(name: 'createdAt') required DateTime createdAt,
-          @JsonKey(name: 'groupId') String? groupId,
-          @JsonKey(name: 'parentId') String? parentId,
-          @JsonKey(name: 'contentType') required String contentType}) =
-      _$_ApiContentModel;
+      {required String id,
+      required String content,
+      required String creatorId,
+      required List<String> medias,
+      required String username,
+      String? title,
+      String? code,
+      String? codeResult,
+      ApiUserModel? creator,
+      String? userImage,
+      @JsonKey(name: 'createdAt') required DateTime createdAt,
+      @JsonKey(name: 'groupId') String? groupId,
+      @JsonKey(name: 'parentId') String? parentId,
+      @JsonKey(name: 'contentType') required String contentType,
+      required int numberOfLikes,
+      required int numberOfDislikes,
+      required int numberOfComments}) = _$_ApiContentModel;
 
   factory _ApiContentModel.fromJson(Map<String, dynamic> json) =
       _$_ApiContentModel.fromJson;
@@ -493,6 +558,12 @@ abstract class _ApiContentModel implements ApiContentModel {
   @override
   @JsonKey(name: 'contentType')
   String get contentType;
+  @override
+  int get numberOfLikes;
+  @override
+  int get numberOfDislikes;
+  @override
+  int get numberOfComments;
   @override
   @JsonKey(ignore: true)
   _$ApiContentModelCopyWith<_ApiContentModel> get copyWith =>

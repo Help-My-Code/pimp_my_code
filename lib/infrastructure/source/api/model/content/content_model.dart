@@ -22,6 +22,9 @@ class ApiContentModel with _$ApiContentModel {
     @JsonKey(name: 'groupId') String? groupId,
     @JsonKey(name: 'parentId') String? parentId,
     @JsonKey(name: 'contentType') required String contentType,
+    required int numberOfLikes,
+    required int numberOfDislikes,
+    required int numberOfComments,
   }) = _ApiContentModel;
 
   factory ApiContentModel.fromJson(Map<String, dynamic> json) =>

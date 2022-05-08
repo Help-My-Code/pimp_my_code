@@ -10,6 +10,7 @@ class PostCard extends StatelessWidget {
     required this.imageURL,
     required this.username,
     required this.date,
+    required this.onSharePress,
     this.language = 'dart',
     this.title,
     this.images,
@@ -20,7 +21,6 @@ class PostCard extends StatelessWidget {
     this.onLikePressed,
     this.onUnlikePressed,
     this.onCommentaryPressed,
-    this.onSharePressed,
     this.isLiked = false,
   }) : super(key: key);
 
@@ -33,10 +33,8 @@ class PostCard extends StatelessWidget {
   final String post;
   final List<String>? codes;
   final String likeCount, unlikeCount, commentaryCount;
-  final Function()? onLikePressed,
-      onUnlikePressed,
-      onCommentaryPressed,
-      onSharePressed;
+  final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
+  final Function() onSharePress;
   final bool isLiked;
 
   @override
@@ -148,7 +146,10 @@ class PostCard extends StatelessWidget {
           top: 50,
           right: 50,
           child: InkWell(
-            onTap: onSharePressed,
+            onTap: () {
+              print('hit button');
+              onSharePress();
+            },
             child: const Icon(Icons.share),
           ),
         )

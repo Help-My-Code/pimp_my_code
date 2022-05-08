@@ -38,6 +38,9 @@ class ContentMapper {
       userPicture: apiContentModel.userImage,
       code: apiContentModel.code,
       codeResult: apiContentModel.codeResult,
+      numberOfLikes: apiContentModel.numberOfLikes,
+      numberOfDislikes: apiContentModel.numberOfDislikes,
+      numberOfComments: apiContentModel.numberOfComments,
     );
   }
 
@@ -56,6 +59,9 @@ class ContentMapper {
       userPicture: params.userPicture,
       code: params.code,
       codeResult: params.codeResult,
+      numberOfLikes: 0,
+      numberOfDislikes: 0,
+      numberOfComments: 0,
     );
   }
 }

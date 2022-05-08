@@ -64,5 +64,7 @@
   "follow": "S'abonner",
   "unfollow": "Se désabonner",
   "followers": " Abonnés",
-  "following": " Abonnements"
+  "following": " Abonnements",
+  "copy": "Copier",
+  "url copied": "URL copiée"
 }

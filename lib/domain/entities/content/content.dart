@@ -24,5 +24,8 @@ class Content with _$Content {
     String? codeResult,
     @Default(false) bool isLike,
     @Default(false) bool isDislike,
+    required int numberOfLikes,
+    required int numberOfDislikes,
+    required int numberOfComments,
   }) = _Content;
 }
