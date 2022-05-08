@@ -78,7 +78,7 @@ class _AccountPageState extends State<AccountPage> {
                   return const Loading();
                 },
                 orElse: () => const Loading(),
-                loaded: (user) => AccountLoaded(user: user, isUserConnected: widget.isUserConnected));
+                loaded: (user) => AccountLoaded(user: user, isUserConnected: widget.isUserConnected, context: context,));
           }),
         ),
       ),

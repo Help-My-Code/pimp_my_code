@@ -204,7 +204,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: const Text('register_success').tr(),
                 backgroundColor: Colors.green,
               ));
-              //TODO enregistrer token
               GoRouter.of(context).go('/');
             }
             if (state.status is FormSubmissionFailed) {

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../domain/entities/user.dart';
 import '../../../../ioc_container.dart';
@@ -18,12 +20,34 @@ import '../../home/widgets/publications_loaded.dart';
 class AccountLoaded extends StatelessWidget {
   final User user;
   final bool isUserConnected;
+  final BuildContext context;
 
   const AccountLoaded({
     Key? key,
     required this.user,
-    required this.isUserConnected
+    required this.isUserConnected,
+    required this.context
   }) : super(key: key);
+
+  void printUpdate() {
+    Alert(
+      context: context,
+      title: 'update_informations'.tr(),
+      content: UpdateUserModal(),
+      buttons: [
+        DialogButton(
+        child: Text(
+          'save'.tr(),
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        onPressed: () {
+          //TODO save
+        },
+        width: 120,
+      )
+      ],
+    ).show();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +59,9 @@ class AccountLoaded extends StatelessWidget {
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
           child: Row(
             children: <Widget>[
-              const GFAvatar(
-                size: 100,
-                backgroundImage: NetworkImage(
+              GFAvatar(
+                size: MediaQuery.of(context).size.width * 0.08,
+                backgroundImage: const NetworkImage(
                   DefaultPictures.defaultUserPicture,
                 ),
               ),
@@ -112,7 +136,7 @@ class AccountLoaded extends StatelessWidget {
               SizedBox(width: MediaQuery.of(context).size.width * 0.09),
               if(isUserConnected)
                 GFButton(
-                  onPressed: () {},
+                  onPressed: () => printUpdate(),
                   text: tr('edit_profile'),
                   shape: GFButtonShape.standard,
                   color: Colors.amber,
