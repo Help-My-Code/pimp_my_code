@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../../domain/entities/content/content.dart';
 
 import '../../../../ioc_container.dart';
+import 'comment_modal.dart';
 import 'post_card.dart';
 import 'share_modal.dart';
 
@@ -29,6 +30,14 @@ class HomeLoaded extends StatelessWidget {
     ).show();
   }
 
+  void showComments(BuildContext context, Content content) {
+    Alert(
+      context: context,
+      title: 'comments'.tr(),
+      content: const CommentModal(),
+    ).show();
+  }
+
   const HomeLoaded({
     Key? key,
     required this.publications,
@@ -39,50 +48,54 @@ class HomeLoaded extends StatelessWidget {
       alignment: Alignment.center,
       width: double.infinity,
       height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          Flexible(
-            child: BlocProvider(
-              create: (context) => LikeCubit(
-                sl(),
-                context.read<RetrieveContentCubit>(),
-                sl(),
-              ),
-              child: ListView.builder(
-                itemCount: publications.length,
-                itemBuilder: (context, index) {
-                  return PostCard(
-                    onLikePressed: () => onLikePress(
-                        context.read<LikeCubit>(), publications[index].id!),
-                    onUnlikePressed: () => onDislikePress(
-                        context.read<LikeCubit>(), publications[index].id!),
-                    onCommentaryPressed: () {},
-                    codes: publications[index].code == null
-                        ? ['']
-                        : [publications[index].code!],
-                    title: publications[index].title,
-                    post: publications[index].content,
-                    images: publications[index].medias,
-                    imageURL: publications[index].userPicture != null
-                        ? publications[index].userPicture!
-                        : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                    username: publications[index].username,
-                    date: DateFormat('dd MMMM yyyy')
-                        .format(publications[index].createdAt),
-                    isLiked: publications[index].isLike,
-                    likeCount: publications[index].numberOfLikes.toString(),
-                    unlikeCount:
-                        publications[index].numberOfDislikes.toString(),
-                    commentaryCount:
-                        publications[index].numberOfComments.toString(),
-                    onSharePress: () =>
-                        onSharePress(context, publications[index]),
-                  );
-                },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 120.0),
+        child: Column(
+          children: [
+            Flexible(
+              child: BlocProvider(
+                create: (context) => LikeCubit(
+                  sl(),
+                  context.read<RetrieveContentCubit>(),
+                  sl(),
+                ),
+                child: ListView.builder(
+                  itemCount: publications.length,
+                  itemBuilder: (context, index) {
+                    return PostCard(
+                      onLikePressed: () => onLikePress(
+                          context.read<LikeCubit>(), publications[index].id!),
+                      onUnlikePressed: () => onDislikePress(
+                          context.read<LikeCubit>(), publications[index].id!),
+                      onCommentaryPressed: () =>
+                          showComments(context, publications[index]),
+                      codes: publications[index].code == null
+                          ? ['']
+                          : [publications[index].code!],
+                      title: publications[index].title,
+                      post: publications[index].content,
+                      images: publications[index].medias,
+                      imageURL: publications[index].userPicture != null
+                          ? publications[index].userPicture!
+                          : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+                      username: publications[index].username,
+                      date: DateFormat('dd MMMM yyyy')
+                          .format(publications[index].createdAt),
+                      isLiked: publications[index].isLike,
+                      likeCount: publications[index].numberOfLikes.toString(),
+                      unlikeCount:
+                          publications[index].numberOfDislikes.toString(),
+                      commentaryCount:
+                          publications[index].numberOfComments.toString(),
+                      onSharePress: () =>
+                          onSharePress(context, publications[index]),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
