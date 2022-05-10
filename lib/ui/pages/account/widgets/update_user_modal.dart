@@ -189,6 +189,7 @@ class UpdateUserModal extends StatelessWidget {
             backgroundColor: Colors.green,
           ));
           Navigator.pop(context);
+          //TODO recharger la page
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -197,6 +198,7 @@ class UpdateUserModal extends StatelessWidget {
           ));
           Navigator.pop(context);
           build(context);
+          //TODO recharger la page
         }
       },
       builder: (context, state) {
