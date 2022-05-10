@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
+import 'package:pimp_my_code/domain/entities/enum/role.dart';
 
-import '../../core/failure.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../domain/usecases/user/find_user_by_id.dart';
 import '../../domain/usecases/user/find_user_by_name.dart';
+import '../../domain/usecases/user/update_user_use_case.dart';
 import '../converter/user_mapper.dart';
 import '../source/api/command/user.dart';
 import '../source/api/model/user/user_model.dart';
@@ -16,7 +18,8 @@ class ApiUserRepository extends UserRepository {
   ApiUserRepository(this._dataSource, this._userMapper);
 
   @override
-  Future<Either<FindUserByIdFailure, User>> getById({required String id}) async {
+  Future<Either<FindUserByIdFailure, User>> getById(
+      {required String id}) async {
     final response = await _dataSource.getById(id);
     final Map<String, dynamic> apiUser = response.body['user'];
     return Right(
@@ -39,7 +42,26 @@ class ApiUserRepository extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateUser(User user) {
-    throw UnimplementedError();
+  Future<Either<UpdateUserFailed, UpdateUserSuccess>> updateUser(
+      String userId,
+      String description,
+      String profilePictureURL,
+      String password,
+      String confirmPassword,
+      Confidentiality confidentiality) async {
+    try {
+      await _dataSource.update(fields: {
+        'userId': userId,
+        'password': password,
+        'passwordConfirmation': confirmPassword,
+        'description': description,
+        'userRole': Role.member.name.toUpperCase(),
+        'confidentiality': confidentiality.name.toUpperCase(),
+        'principalPictureURL': profilePictureURL,
+      });
+      return Right(UpdateUserSuccess());
+    } catch (e) {
+      return Left(UpdateUserFailed());
+    }
   }
 }

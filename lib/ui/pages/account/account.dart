@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import 'widgets/account_loaded.dart';
@@ -11,9 +12,14 @@ import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
 
 class AccountPage extends StatefulWidget {
-  const AccountPage({Key? key, required this.userId}) : super(key: key);
+  const AccountPage({
+    Key? key,
+    required this.userId,
+    required this.isUserConnected,
+  }) : super(key: key);
 
   final String userId;
+  final bool isUserConnected;
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -72,7 +78,7 @@ class _AccountPageState extends State<AccountPage> {
                   return const Loading();
                 },
                 orElse: () => const Loading(),
-                loaded: (user) => AccountLoaded(user: user));
+                loaded: (user) => AccountLoaded(user: user, isUserConnected: widget.isUserConnected, context: context,));
           }),
         ),
       ),

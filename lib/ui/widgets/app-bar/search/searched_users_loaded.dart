@@ -34,7 +34,7 @@ class SearchedUsersLoaded extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).pop();
                       GoRouter.of(context).go(
-                          Routes.account.path + '?userId=' + users[index].id);
+                          Routes.account.path + '?userId=' + users[index].id + '&connected=false');
                     },
                     child: Row(
                       children: <Widget>[

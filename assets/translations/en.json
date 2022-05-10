@@ -64,5 +64,10 @@
   "follow": "Follow",
   "unfollow": "Unfollow",
   "followers": " Followers",
-  "following": " Following"
+  "following": " Following",
+  "update_informations": "Update my informations",
+  "description": "Description",
+  "principal_picture_url": "profile picture URL",
+  "private_account": "Private account",
+  "save": "Save"
 }
