@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import '../../core/failure.dart';
 
 import '../entities/content/content.dart';
+import '../entities/content/comment.dart';
 
 abstract class ContentRepository {
   Future<Either<GetPublicationFailed, List<Content>>> getContents();
@@ -13,10 +14,13 @@ abstract class ContentRepository {
       {required String userId});
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId});
+  Future<Either<GetCommentFailed, List<Comment>>> getComment(String postId);
 
   Future<void> like(String publicationId, String userId);
 
   Future<void> dislike(String publicationId, String userId);
 }
+
+class GetCommentFailed extends Failure {}
 
 class GetPublicationFailed extends Failure {}

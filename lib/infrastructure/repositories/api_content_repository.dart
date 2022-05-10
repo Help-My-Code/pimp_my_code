@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:pimp_my_code/domain/entities/content/comment.dart';
 import '../../core/failure.dart';
 
 import 'package:dartz/dartz.dart';
@@ -108,5 +109,11 @@ class ApiContentRepository extends ContentRepository {
       'reactionType': 'DISLIKE'
     };
     await _userLikeInteractor.createLikeOrDislike(field);
+  }
+
+  @override
+  Future<Either<GetCommentFailed, List<Comment>>> getComment(String postId) {
+    _dataSource.getComment(postId);
+    throw new UnimplementedError();
   }
 }
