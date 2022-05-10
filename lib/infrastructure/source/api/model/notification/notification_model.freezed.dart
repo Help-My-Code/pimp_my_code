@@ -28,6 +28,7 @@ class _$ApiNotificationModelTearOff {
       @JsonKey(name: 'is_seen') required bool isSeen,
       @JsonKey(name: 'notification_type') required String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
+      @JsonKey(name: 'content_id') String? contentLinked,
       @JsonKey(name: 'user_recipient') required ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked}) {
     return _ApiNotificationModel(
@@ -36,6 +37,7 @@ class _$ApiNotificationModelTearOff {
       isSeen: isSeen,
       notificationType: notificationType,
       groupLinked: groupLinked,
+      contentLinked: contentLinked,
       userRecipient: userRecipient,
       userLinked: userLinked,
     );
@@ -59,8 +61,9 @@ mixin _$ApiNotificationModel {
   @JsonKey(name: 'notification_type')
   String get notificationType => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_linked')
-  ApiGroupModel? get groupLinked =>
-      throw _privateConstructorUsedError; //@JsonKey(name: 'content_linked') ApiContentModel? contentLinked,
+  ApiGroupModel? get groupLinked => throw _privateConstructorUsedError;
+  @JsonKey(name: 'content_id')
+  String? get contentLinked => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_recipient')
   ApiUserModel get userRecipient => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_linked')
@@ -83,6 +86,7 @@ abstract class $ApiNotificationModelCopyWith<$Res> {
       @JsonKey(name: 'is_seen') bool isSeen,
       @JsonKey(name: 'notification_type') String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
+      @JsonKey(name: 'content_id') String? contentLinked,
       @JsonKey(name: 'user_recipient') ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked});
 
@@ -107,6 +111,7 @@ class _$ApiNotificationModelCopyWithImpl<$Res>
     Object? isSeen = freezed,
     Object? notificationType = freezed,
     Object? groupLinked = freezed,
+    Object? contentLinked = freezed,
     Object? userRecipient = freezed,
     Object? userLinked = freezed,
   }) {
@@ -131,6 +136,10 @@ class _$ApiNotificationModelCopyWithImpl<$Res>
           ? _value.groupLinked
           : groupLinked // ignore: cast_nullable_to_non_nullable
               as ApiGroupModel?,
+      contentLinked: contentLinked == freezed
+          ? _value.contentLinked
+          : contentLinked // ignore: cast_nullable_to_non_nullable
+              as String?,
       userRecipient: userRecipient == freezed
           ? _value.userRecipient
           : userRecipient // ignore: cast_nullable_to_non_nullable
@@ -185,6 +194,7 @@ abstract class _$ApiNotificationModelCopyWith<$Res>
       @JsonKey(name: 'is_seen') bool isSeen,
       @JsonKey(name: 'notification_type') String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
+      @JsonKey(name: 'content_id') String? contentLinked,
       @JsonKey(name: 'user_recipient') ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked});
 
@@ -214,6 +224,7 @@ class __$ApiNotificationModelCopyWithImpl<$Res>
     Object? isSeen = freezed,
     Object? notificationType = freezed,
     Object? groupLinked = freezed,
+    Object? contentLinked = freezed,
     Object? userRecipient = freezed,
     Object? userLinked = freezed,
   }) {
@@ -238,6 +249,10 @@ class __$ApiNotificationModelCopyWithImpl<$Res>
           ? _value.groupLinked
           : groupLinked // ignore: cast_nullable_to_non_nullable
               as ApiGroupModel?,
+      contentLinked: contentLinked == freezed
+          ? _value.contentLinked
+          : contentLinked // ignore: cast_nullable_to_non_nullable
+              as String?,
       userRecipient: userRecipient == freezed
           ? _value.userRecipient
           : userRecipient // ignore: cast_nullable_to_non_nullable
@@ -259,6 +274,7 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
       @JsonKey(name: 'is_seen') required this.isSeen,
       @JsonKey(name: 'notification_type') required this.notificationType,
       @JsonKey(name: 'group_linked') this.groupLinked,
+      @JsonKey(name: 'content_id') this.contentLinked,
       @JsonKey(name: 'user_recipient') required this.userRecipient,
       @JsonKey(name: 'user_linked') this.userLinked});
 
@@ -279,7 +295,10 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
   @override
   @JsonKey(name: 'group_linked')
   final ApiGroupModel? groupLinked;
-  @override //@JsonKey(name: 'content_linked') ApiContentModel? contentLinked,
+  @override
+  @JsonKey(name: 'content_id')
+  final String? contentLinked;
+  @override
   @JsonKey(name: 'user_recipient')
   final ApiUserModel userRecipient;
   @override
@@ -288,7 +307,7 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
 
   @override
   String toString() {
-    return 'ApiNotificationModel(id: $id, dateHour: $dateHour, isSeen: $isSeen, notificationType: $notificationType, groupLinked: $groupLinked, userRecipient: $userRecipient, userLinked: $userLinked)';
+    return 'ApiNotificationModel(id: $id, dateHour: $dateHour, isSeen: $isSeen, notificationType: $notificationType, groupLinked: $groupLinked, contentLinked: $contentLinked, userRecipient: $userRecipient, userLinked: $userLinked)';
   }
 
   @override
@@ -304,6 +323,8 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
             const DeepCollectionEquality()
                 .equals(other.groupLinked, groupLinked) &&
             const DeepCollectionEquality()
+                .equals(other.contentLinked, contentLinked) &&
+            const DeepCollectionEquality()
                 .equals(other.userRecipient, userRecipient) &&
             const DeepCollectionEquality()
                 .equals(other.userLinked, userLinked));
@@ -317,6 +338,7 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
       const DeepCollectionEquality().hash(isSeen),
       const DeepCollectionEquality().hash(notificationType),
       const DeepCollectionEquality().hash(groupLinked),
+      const DeepCollectionEquality().hash(contentLinked),
       const DeepCollectionEquality().hash(userRecipient),
       const DeepCollectionEquality().hash(userLinked));
 
@@ -339,6 +361,7 @@ abstract class _ApiNotificationModel implements ApiNotificationModel {
           @JsonKey(name: 'is_seen') required bool isSeen,
           @JsonKey(name: 'notification_type') required String notificationType,
           @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
+          @JsonKey(name: 'content_id') String? contentLinked,
           @JsonKey(name: 'user_recipient') required ApiUserModel userRecipient,
           @JsonKey(name: 'user_linked') ApiUserModel? userLinked}) =
       _$_ApiNotificationModel;
@@ -360,7 +383,10 @@ abstract class _ApiNotificationModel implements ApiNotificationModel {
   @override
   @JsonKey(name: 'group_linked')
   ApiGroupModel? get groupLinked;
-  @override //@JsonKey(name: 'content_linked') ApiContentModel? contentLinked,
+  @override
+  @JsonKey(name: 'content_id')
+  String? get contentLinked;
+  @override
   @JsonKey(name: 'user_recipient')
   ApiUserModel get userRecipient;
   @override
