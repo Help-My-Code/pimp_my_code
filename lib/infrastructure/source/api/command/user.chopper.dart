@@ -31,4 +31,12 @@ class _$UserInteractor extends UserInteractor {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> update({required Map<String, String> fields}) {
+    final $url = '/user/update';
+    final $body = fields;
+    final $request = Request('PUT', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -12,4 +12,7 @@ abstract class UserInteractor extends ChopperService {
 
   @Get(path: '/getById')
   Future<Response> getById(@Query() String id);
+
+  @Put(path: '/update')
+  Future<Response> update({@Body() required Map<String, String> fields});
 }

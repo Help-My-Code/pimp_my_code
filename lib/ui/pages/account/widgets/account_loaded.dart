@@ -13,6 +13,7 @@ import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
+import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
 import '../../home/widgets/publications_loaded.dart';
@@ -33,7 +34,8 @@ class AccountLoaded extends StatelessWidget {
     Alert(
       context: context,
       title: 'update_informations'.tr(),
-      content: UpdateUserModal(),
+      content: BlocProvider(
+          create: (context) => sl<UpdateUserBloc>(), child: UpdateUserModal(user: user)),
       buttons: [],
     ).show();
   }
@@ -50,8 +52,9 @@ class AccountLoaded extends StatelessWidget {
             children: <Widget>[
               GFAvatar(
                 size: MediaQuery.of(context).size.width * 0.08,
-                backgroundImage: const NetworkImage(
-                  DefaultPictures.defaultUserPicture,
+                backgroundImage: NetworkImage(
+                  user.principalPictureUrl ??
+                      DefaultPictures.defaultUserPicture,
                 ),
               ),
               const SizedBox(width: 30),

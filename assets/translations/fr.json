@@ -71,5 +71,7 @@
   "description": "Description",
   "principal_picture_url": "URL de la photo de profil",
   "private_account": "Compte privé",
-  "save": "Enregistrer"
+  "save": "Enregistrer",
+  "user_updated": "L'utilisateur a été modifié",
+  "user_updated_failed": "La modification de l'utilisateur a échoué"
 }

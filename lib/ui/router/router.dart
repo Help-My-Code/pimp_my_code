@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../state/post/create_post_cubit.dart';
-import 'routes.dart';
 
 import '../../ioc_container.dart';
 import '../../state/login/login_bloc.dart';
+import '../../state/post/create_post_cubit.dart';
 import '../../state/register/register_bloc.dart';
 import '../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
@@ -18,6 +17,7 @@ import '../pages/home/home.dart';
 import '../pages/login/login.dart';
 import '../pages/messaging.dart';
 import '../pages/register/register.dart';
+import 'routes.dart';
 
 class AppRouter {
   final SessionCubit _sessionCubit;

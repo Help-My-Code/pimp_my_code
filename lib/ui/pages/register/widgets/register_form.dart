@@ -215,7 +215,6 @@ class _RegisterFormState extends State<RegisterForm> {
           },
           builder: (context, state) {
             return FloatingActionButton(
-              heroTag: 'register',
               onPressed: () {
                 if (_formKey.currentState != null &&
                     _formKey.currentState!.validate() &&
