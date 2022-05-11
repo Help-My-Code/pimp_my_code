@@ -24,7 +24,7 @@ class SearchedUsersLoaded extends StatelessWidget {
           if (users.isNotEmpty) const Text('users').tr(),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.20,
             child: ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {

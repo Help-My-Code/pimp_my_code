@@ -12,4 +12,10 @@ abstract class FollowInteractor extends ChopperService {
 
   @Get(path: '/getByUserId')
   Future<Response> getByUserId(@Query() String userId);
+
+  @Post(path: '/create')
+  Future<Response> createFollow({@Body() required Map<String, String> fields});
+
+  @Delete(path: '/delete')
+  Future<Response> deleteFollow({@Body() required Map<String, String> fields});
 }

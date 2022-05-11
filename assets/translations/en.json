@@ -69,5 +69,10 @@
   "description": "Description",
   "principal_picture_url": "profile picture URL",
   "private_account": "Private account",
-  "save": "Save"
+  "save": "Save",
+  "private_user": "Private user",
+  "unfollow_success": "You unfollowed",
+  "unfollow_failed": "Unfollow could not be performed",
+  "follow_success": "You followed",
+  "follow_failed": "Follow could not be performed"
 }
