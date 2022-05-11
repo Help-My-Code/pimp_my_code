@@ -2,9 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
-import 'package:pimp_my_code/state/retrieve_comment_by_publication/retrieve_comment_by_publication_cubit.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
+import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import 'post_card.dart';
 
 class CommentModal extends StatelessWidget {
@@ -13,14 +14,24 @@ class CommentModal extends StatelessWidget {
   final List<Content> comments = [];
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          sl<RetrieveCommentByPublicationCubit>()..loadComment(parentId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              sl<RetrieveContentCubit>()..loadComment(parentId),
+        ),
+        BlocProvider(
+          create: (context) => LikeCubit(
+            contentRepository: sl(),
+            retrieveContentCubit: context.read<RetrieveContentCubit>(),
+            sessionCubit: sl(),
+          ),
+        ),
+      ],
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.8,
-        child: BlocBuilder<RetrieveCommentByPublicationCubit,
-            RetrieveCommentByPublicationState>(
+        child: BlocBuilder<RetrieveContentCubit, RetrieveContentState>(
           builder: (context, state) {
             return state.maybeWhen(
               loaded: (comments) => _buildCommentList(comments),

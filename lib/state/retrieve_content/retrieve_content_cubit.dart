@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../domain/repositories/content_repository.dart';
 import '../../domain/usecases/content/get_following_publication.dart';
 import '../../domain/usecases/content/get_publications_by_user_id.dart';
 import '../session/session_cubit.dart';
@@ -13,10 +14,12 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   final SessionCubit _sessionCubit;
   final GetPublicationsByUserIdUseCase _getPublicationsByUserId;
   final GetFollowingPublicationUseCase _getFollowingPublication;
+  final ContentRepository contentRepository;
   RetrieveContentCubit(
     this._sessionCubit,
     this._getFollowingPublication,
     this._getPublicationsByUserId,
+    this.contentRepository,
   ) : super(const RetrieveContentState.initial());
 
   void loadPublication() async {
@@ -38,6 +41,20 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
     }, (r) {
       emit(RetrieveContentState.loaded(r));
     });
+  }
+
+  Future<void> loadComment(String publicationId) async {
+    emit(const RetrieveContentState.loading());
+    final errorOrComments = await contentRepository.getComments(publicationId);
+    errorOrComments.fold(
+      (failure) {
+        emit(const RetrieveContentState.initial());
+        addError('failed to load comment');
+      },
+      (comments) {
+        emit(RetrieveContentState.loaded(comments));
+      },
+    );
   }
 
   void unlike(String publicationId) {
