@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
@@ -26,9 +27,11 @@ class PostCard extends StatelessWidget {
     required this.isLiked,
     required this.isDisliked,
     required this.contentId,
+    required this.contentType,
   }) : super(key: key);
 
   final String language;
+  final ContentType contentType;
   final String? title;
   final List<String>? images;
   final String imageURL;
@@ -142,14 +145,15 @@ class PostCard extends StatelessWidget {
                 shape: GFButtonShape.square,
                 type: GFButtonType.transparent,
               ),
-              GFButton(
-                textColor: Colors.black,
-                onPressed: onCommentaryPressed,
-                text: commentaryCount,
-                icon: const Icon(Icons.comment_outlined),
-                shape: GFButtonShape.square,
-                type: GFButtonType.transparent,
-              ),
+              if (contentType == ContentType.publication)
+                GFButton(
+                  textColor: Colors.black,
+                  onPressed: onCommentaryPressed,
+                  text: commentaryCount,
+                  icon: const Icon(Icons.comment_outlined),
+                  shape: GFButtonShape.square,
+                  type: GFButtonType.transparent,
+                ),
             ],
           ),
         ),

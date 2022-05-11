@@ -59,6 +59,7 @@ class CommentModal extends StatelessWidget {
             child: ListView.builder(
               itemBuilder: ((context, index) {
                 return PostCard(
+                  contentType: ContentType.comment,
                   contentId: comments[index].id!,
                   onLikePressed: () {},
                   onUnlikePressed: () {},
