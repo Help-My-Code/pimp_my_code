@@ -197,7 +197,6 @@ class UpdateUserModal extends StatelessWidget {
             backgroundColor: Theme.of(context).errorColor,
           ));
           Navigator.pop(context);
-          build(context);
           //TODO recharger la page
         }
       },
