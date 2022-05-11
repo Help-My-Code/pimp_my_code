@@ -73,5 +73,10 @@
   "private_account": "Compte privé",
   "save": "Enregistrer",
   "user_updated": "L'utilisateur a été modifié",
-  "user_updated_failed": "La modification de l'utilisateur a échoué"
+  "user_updated_failed": "La modification de l'utilisateur a échoué",
+  "private_user": "Utilisateur privé",
+  "unfollow_success": "Vous vous êtes désabonné",
+  "unfollow_failed": "Le désabonnement n'a pas pu être effectué",
+  "follow_success": "Vous vous êtes abonné",
+  "follow_failed": "L'abonnement n'a pas pu être effectué"
 }
