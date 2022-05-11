@@ -289,7 +289,9 @@ class AccountLoaded extends StatelessWidget {
                                       sessionCubit: sl(),
                                     ),
                                 child: PublicationsLoaded(
-                                    publications: publications)),
+                                    publications: publications,
+                                ),
+                            ),
                           ),
                         ],
                       ),
