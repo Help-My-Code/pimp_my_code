@@ -55,9 +55,9 @@ class HomeLoaded extends StatelessWidget {
             Flexible(
               child: BlocProvider(
                 create: (context) => LikeCubit(
-                  sl(),
-                  context.read<RetrieveContentCubit>(),
-                  sl(),
+                  contentRepository: sl(),
+                  retrieveContentCubit: context.read<RetrieveContentCubit>(),
+                  sessionCubit: sl(),
                 ),
                 child: ListView.builder(
                   itemCount: publications.length,
@@ -82,6 +82,7 @@ class HomeLoaded extends StatelessWidget {
                       date: DateFormat('dd MMMM yyyy')
                           .format(publications[index].createdAt),
                       isLiked: publications[index].isLike,
+                      isDisliked: publications[index].isDislike,
                       likeCount: publications[index].numberOfLikes.toString(),
                       unlikeCount:
                           publications[index].numberOfDislikes.toString(),
