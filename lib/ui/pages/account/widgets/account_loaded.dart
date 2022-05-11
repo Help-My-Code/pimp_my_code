@@ -14,7 +14,7 @@ import '../../../../domain/entities/user.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/follow_user/follow_user_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
-import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
@@ -33,12 +33,12 @@ class AccountLoaded extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  AccountLoaded(
-      {Key? key,
-      required this.user,
-      required this.isUserConnected,
-      required this.context})
-      : super(key: key);
+  AccountLoaded({
+    Key? key,
+    required this.user,
+    required this.isUserConnected,
+    required this.context,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -251,8 +251,7 @@ class AccountLoaded extends StatelessWidget {
             if (user.confidentiality == Confidentiality.public ||
                 followersContainCurrentUser(snapshot.data!) ||
                 user.id == snapshot.data) {
-              return BlocConsumer<RetrieveContentByUserIdCubit,
-                  RetrieveContentByUserIdState>(
+              return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                 listener: (context, state) {
                   state.maybeWhen(
                     orElse: () {},
@@ -270,8 +269,8 @@ class AccountLoaded extends StatelessWidget {
                   return state.maybeWhen(
                     initial: () {
                       context
-                          .read<RetrieveContentByUserIdCubit>()
-                          .loadPublication(user.id);
+                          .read<RetrieveContentCubit>()
+                          .loadPublicationByUserId(user.id);
                       return const Loading();
                     },
                     orElse: () => const Loading(),
@@ -284,11 +283,10 @@ class AccountLoaded extends StatelessWidget {
                           Flexible(
                             child: BlocProvider(
                                 create: (context) => LikeCubit(
-                                      sl(),
-                                      null,
-                                      context
-                                          .read<RetrieveContentByUserIdCubit>(),
-                                      sl(),
+                                      contentRepository: sl(),
+                                      retrieveContentCubit:
+                                          context.read<RetrieveContentCubit>(),
+                                      sessionCubit: sl(),
                                     ),
                                 child: PublicationsLoaded(
                                     publications: publications)),
@@ -301,14 +299,17 @@ class AccountLoaded extends StatelessWidget {
               );
             } else {
               return Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: Text('private_user'.tr(),
-                      style: const TextStyle(fontSize: 16)));
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: Text(
+                  'private_user'.tr(),
+                  style: const TextStyle(fontSize: 16),
+                ),
+              );
             }
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         });
   }

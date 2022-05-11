@@ -1,15 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
+import 'package:pimp_my_code/state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../ioc_container.dart';
 import '../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../state/unfollow_user/unfollow_user_bloc.dart';
 import 'widgets/account_loaded.dart';
 
-import '../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import '../../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
@@ -47,8 +46,8 @@ class _AccountPageState extends State<AccountPage> {
           .read<RetrieveFollowByUserIdCubit>()
           .loadFollowByUserId(widget.userId);
       context
-          .read<RetrieveContentByUserIdCubit>()
-          .loadPublication(widget.userId);
+          .read<RetrieveContentCubit>()
+          .loadPublicationByUserId(widget.userId);
     }
   }
 

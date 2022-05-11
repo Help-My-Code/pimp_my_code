@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/usecases/content/get_following_publication.dart';
+import '../../domain/usecases/content/get_publications_by_user_id.dart';
 import '../session/session_cubit.dart';
 
 import '../../domain/entities/content/content.dart';
@@ -10,14 +11,28 @@ part 'retrieve_content_cubit.freezed.dart';
 
 class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   final SessionCubit _sessionCubit;
+  final GetPublicationsByUserIdUseCase _getPublicationsByUserId;
   final GetFollowingPublicationUseCase _getFollowingPublication;
-  RetrieveContentCubit(this._sessionCubit, this._getFollowingPublication)
-      : super(const RetrieveContentState.initial());
+  RetrieveContentCubit(
+    this._sessionCubit,
+    this._getFollowingPublication,
+    this._getPublicationsByUserId,
+  ) : super(const RetrieveContentState.initial());
 
   void loadPublication() async {
     emit(const RetrieveContentState.loading());
     String userId = await _sessionCubit.getUserId();
     final publications = await _getFollowingPublication(userId);
+    publications.fold((l) {
+      emit(const RetrieveContentState.failure());
+    }, (r) {
+      emit(RetrieveContentState.loaded(r));
+    });
+  }
+
+  void loadPublicationByUserId(String id) async {
+    emit(const RetrieveContentState.loading());
+    final publications = await _getPublicationsByUserId(id);
     publications.fold((l) {
       emit(const RetrieveContentState.failure());
     }, (r) {
@@ -33,7 +48,10 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              return content.copyWith(isLike: false, isDislike: false, numberOfLikes: content.numberOfLikes - 1);
+              return content.copyWith(
+                  isLike: false,
+                  isDislike: false,
+                  numberOfLikes: content.numberOfLikes - 1);
             }
             return content;
           }).toList(),
@@ -50,7 +68,10 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              return content.copyWith(isLike: false, isDislike: false, numberOfDislikes: content.numberOfDislikes - 1);
+              return content.copyWith(
+                  isLike: false,
+                  isDislike: false,
+                  numberOfDislikes: content.numberOfDislikes - 1);
             }
             return content;
           }).toList(),
@@ -67,10 +88,17 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              if(content.isDislike) {
-                return content.copyWith(isLike: true, isDislike: false, numberOfLikes: content.numberOfLikes + 1, numberOfDislikes: content.numberOfDislikes - 1);
+              if (content.isDislike) {
+                return content.copyWith(
+                    isLike: true,
+                    isDislike: false,
+                    numberOfLikes: content.numberOfLikes + 1,
+                    numberOfDislikes: content.numberOfDislikes - 1);
               }
-              return content.copyWith(isLike: true, isDislike: false, numberOfLikes: content.numberOfLikes + 1);
+              return content.copyWith(
+                  isLike: true,
+                  isDislike: false,
+                  numberOfLikes: content.numberOfLikes + 1);
             }
             return content;
           }).toList(),
@@ -87,10 +115,17 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
         emit(loadedState.copyWith(
           publications: loadedState.publications.map((content) {
             if (content.id == publicationId) {
-              if(content.isLike) {
-                return content.copyWith(isLike: false, isDislike: true, numberOfDislikes: content.numberOfDislikes + 1, numberOfLikes: content.numberOfLikes - 1);
+              if (content.isLike) {
+                return content.copyWith(
+                    isLike: false,
+                    isDislike: true,
+                    numberOfDislikes: content.numberOfDislikes + 1,
+                    numberOfLikes: content.numberOfLikes - 1);
               }
-              return content.copyWith(isLike: false, isDislike: true, numberOfDislikes: content.numberOfDislikes + 1);
+              return content.copyWith(
+                  isLike: false,
+                  isDislike: true,
+                  numberOfDislikes: content.numberOfDislikes + 1);
             }
             return content;
           }).toList(),
