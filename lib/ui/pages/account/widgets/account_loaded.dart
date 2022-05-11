@@ -35,7 +35,9 @@ class AccountLoaded extends StatelessWidget {
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
-          create: (context) => sl<UpdateUserBloc>(), child: UpdateUserModal(user: user)),
+        create: (context) => sl<UpdateUserBloc>(),
+        child: UpdateUserModal(user: user),
+      ),
       buttons: [],
     ).show();
   }
@@ -184,14 +186,14 @@ class AccountLoaded extends StatelessWidget {
                   children: [
                     Flexible(
                       child: BlocProvider(
-                          create: (context) => LikeCubit(
-                                sl(),
-                                null,
-                                context.read<RetrieveContentByUserIdCubit>(),
-                                sl(),
-                              ),
-                          child:
-                              PublicationsLoaded(publications: publications)),
+                        create: (context) => LikeCubit(
+                          contentRepository: sl(),
+                          sessionCubit: sl(),
+                          retrieveContentByUserIdCubit:
+                              context.read<RetrieveContentByUserIdCubit>(),
+                        ),
+                        child: PublicationsLoaded(publications: publications),
+                      ),
                     ),
                   ],
                 ),

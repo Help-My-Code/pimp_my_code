@@ -20,12 +20,12 @@ class LikeCubit extends Cubit<LikeState> {
       : super(const LikeState.initial());
 
   Future<void> unlike(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.unreact(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.unlike(publicationId);
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.unreact(publicationId, userId);
+    if (retrieveContentCubit != null) {
+      retrieveContentCubit!.unlike(publicationId);
     } else {
-      _retrieveContentByUserIdCubit!.unlike(publicationId);
+      retrieveContentByUserIdCubit!.unlike(publicationId);
     }
   }
 
@@ -40,12 +40,12 @@ class LikeCubit extends Cubit<LikeState> {
   }
 
   Future<void> undislike(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.unreact(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.undislike(publicationId);
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.unreact(publicationId, userId);
+    if (retrieveContentCubit != null) {
+      retrieveContentCubit!.undislike(publicationId);
     } else {
-      _retrieveContentByUserIdCubit!.undislike(publicationId);
+      retrieveContentByUserIdCubit!.undislike(publicationId);
     }
   }
 
