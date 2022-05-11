@@ -2,9 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/usecases/follow/create_follow.dart';
-import '../../domain/usecases/user/update_user_use_case.dart';
 import '../session/session_cubit.dart';
 
 part 'follow_user_bloc.freezed.dart';
@@ -26,7 +24,8 @@ class FollowUserBloc extends Bloc<FollowUserEvent, FollowUserState> {
     emit(state.copyWith(status: const FormSubmitting()));
     String followerId = await _sessionCubit.getUserId();
     final successOrFailure = await _createFollowUseCase(CreateFollowParam(
-      event.userId, followerId,
+      event.userId,
+      followerId,
     ));
     successOrFailure.fold(
       (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),

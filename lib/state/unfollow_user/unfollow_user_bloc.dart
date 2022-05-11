@@ -2,10 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/entities/enum/confidentiality.dart';
-import '../../domain/usecases/follow/create_follow.dart';
 import '../../domain/usecases/follow/delete_follow.dart';
-import '../../domain/usecases/user/update_user_use_case.dart';
 import '../session/session_cubit.dart';
 
 part 'unfollow_user_bloc.freezed.dart';
@@ -27,7 +24,8 @@ class UnfollowUserBloc extends Bloc<UnfollowUserEvent, UnfollowUserState> {
     emit(state.copyWith(status: const FormSubmitting()));
     String followerId = await _sessionCubit.getUserId();
     final successOrFailure = await _deleteFollowUseCase(DeleteFollowParam(
-      event.userId, followerId,
+      event.userId,
+      followerId,
     ));
     successOrFailure.fold(
       (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),

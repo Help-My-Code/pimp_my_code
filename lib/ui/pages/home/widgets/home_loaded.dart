@@ -25,12 +25,11 @@ class HomeLoaded extends StatelessWidget {
           Flexible(
             child: BlocProvider(
               create: (context) => LikeCubit(
-                sl(),
-                context.read<RetrieveContentCubit>(),
-                null,
-                sl(),
+                contentRepository: sl(),
+                sessionCubit: sl(),
+                retrieveContentCubit: context.read<RetrieveContentCubit>(),
               ),
-              child: PublicationsLoaded(publications: publications)
+              child: PublicationsLoaded(publications: publications),
             ),
           ),
         ],

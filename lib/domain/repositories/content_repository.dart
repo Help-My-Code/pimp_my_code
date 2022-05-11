@@ -13,6 +13,7 @@ abstract class ContentRepository {
       {required String userId});
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId});
+  Future<Either<GetCommentFailed, List<Content>>> getComments(String postId);
 
   Future<void> unreact(String publicationId, String userId);
 
@@ -20,5 +21,7 @@ abstract class ContentRepository {
 
   Future<void> dislike(String publicationId, String userId);
 }
+
+class GetCommentFailed extends Failure {}
 
 class GetPublicationFailed extends Failure {}

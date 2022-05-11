@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 import '../../../core/usecase.dart';
-import '../../entities/follow.dart';
 
 import '../../../core/failure.dart';
 import '../../repositories/follow_repository.dart';
 
-class CreateFollowUseCase
-    extends UseCase<void, CreateFollowParam> {
+class CreateFollowUseCase extends UseCase<void, CreateFollowParam> {
   final FollowRepository _repository;
 
   CreateFollowUseCase(this._repository);
@@ -15,7 +13,8 @@ class CreateFollowUseCase
   Future<Either<CreateFollowFailed, CreateFollowSuccess>> call(
     CreateFollowParam params,
   ) async {
-    return await _repository.createFollow(userId: params.userId, followerId: params.followerId);
+    return await _repository.createFollow(
+        userId: params.userId, followerId: params.followerId);
   }
 }
 

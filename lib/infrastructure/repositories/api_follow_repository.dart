@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/core/failure.dart';
 
 import '../../domain/entities/follow.dart';
 import '../../domain/repositories/follow_repository.dart';
@@ -7,7 +6,6 @@ import '../../domain/usecases/follow/create_follow.dart';
 import '../../domain/usecases/follow/delete_follow.dart';
 import '../../domain/usecases/follow/find_follow_by_follower_id.dart';
 import '../../domain/usecases/follow/find_follow_by_user_id.dart';
-import '../../domain/usecases/user/update_user_use_case.dart';
 import '../converter/follow_mapper.dart';
 import '../source/api/command/follow.dart';
 import '../source/api/model/follow/follow_model.dart';

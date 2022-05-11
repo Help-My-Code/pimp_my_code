@@ -118,4 +118,18 @@ class ApiContentRepository extends ContentRepository {
     };
     await _userLikeInteractor.createLikeOrDislike(field);
   }
+
+  @override
+  Future<Either<GetCommentFailed, List<Content>>> getComments(
+      String postId) async {
+    final response = await _dataSource.getComments(postId);
+    final List<Map<String, dynamic>> apiComments =
+        List.from(response.body['contents']);
+    return Right(
+      apiComments
+          .map(ApiContentModel.fromJson)
+          .map(_contentMapper.mapApiContentToContent)
+          .toList(),
+    );
+  }
 }

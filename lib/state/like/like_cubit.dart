@@ -6,56 +6,49 @@ import 'package:pimp_my_code/state/retrieve_content_by_user_id/retrieve_content_
 import 'package:pimp_my_code/state/session/session_cubit.dart';
 
 part 'like_state.dart';
-
 part 'like_cubit.freezed.dart';
 
 class LikeCubit extends Cubit<LikeState> {
-  final SessionCubit _sessionCubit;
-  final ContentRepository _contentRepository;
-  final RetrieveContentCubit? _retrieveContentCubit;
-  final RetrieveContentByUserIdCubit? _retrieveContentByUserIdCubit;
-
-  LikeCubit(this._contentRepository, this._retrieveContentCubit,
-      this._retrieveContentByUserIdCubit, this._sessionCubit)
-      : super(const LikeState.initial());
+  final SessionCubit sessionCubit;
+  final ContentRepository contentRepository;
+  final RetrieveContentCubit? retrieveContentCubit;
+  final RetrieveContentByUserIdCubit? retrieveContentByUserIdCubit;
+  LikeCubit({
+    required this.contentRepository,
+    required this.sessionCubit,
+    this.retrieveContentCubit,
+    this.retrieveContentByUserIdCubit,
+  }) : super(const LikeState.initial());
 
   Future<void> unlike(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.unreact(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.unlike(publicationId);
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.unreact(publicationId, userId);
+    if (retrieveContentCubit != null) {
+      retrieveContentCubit!.unlike(publicationId);
     } else {
-      _retrieveContentByUserIdCubit!.unlike(publicationId);
+      retrieveContentByUserIdCubit!.unlike(publicationId);
     }
   }
 
   Future<void> like(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.like(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.like(publicationId);
-    } else {
-      _retrieveContentByUserIdCubit!.like(publicationId);
-    }
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.like(publicationId, userId);
+    retrieveContentCubit!.like(publicationId);
   }
 
   Future<void> undislike(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.unreact(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.undislike(publicationId);
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.unreact(publicationId, userId);
+    if (retrieveContentCubit != null) {
+      retrieveContentCubit!.undislike(publicationId);
     } else {
-      _retrieveContentByUserIdCubit!.undislike(publicationId);
+      retrieveContentByUserIdCubit!.undislike(publicationId);
     }
   }
 
   Future<void> dislike(String publicationId) async {
-    String userId = await _sessionCubit.getUserId();
-    await _contentRepository.dislike(publicationId, userId);
-    if (_retrieveContentCubit != null) {
-      _retrieveContentCubit!.dislike(publicationId);
-    } else {
-      _retrieveContentByUserIdCubit!.dislike(publicationId);
-    }
+    String userId = await sessionCubit.getUserId();
+    await contentRepository.dislike(publicationId, userId);
+    retrieveContentCubit!.dislike(publicationId);
   }
 }

@@ -33,6 +33,7 @@ import 'infrastructure/source/api/command/group_member.dart';
 import 'infrastructure/source/api/command/program.dart';
 import 'infrastructure/source/api/command/user.dart';
 import 'state/post/create_post_cubit.dart';
+import 'state/retrieve_comment_by_publication/retrieve_comment_by_publication_cubit.dart';
 import 'state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import 'state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import 'state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
@@ -109,7 +110,7 @@ void registerMapper() {
   sl.registerFactory(() => UserMapper());
   sl.registerFactory(() => GroupMapper());
   sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
-  sl.registerFactory(() => NotificationMapper(sl(), sl(), sl()));
+  sl.registerFactory(() => NotificationMapper(sl(), sl()));
   sl.registerFactory(() => FollowMapper(sl()));
 }
 
@@ -172,6 +173,7 @@ void registerBloc() {
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
   sl.registerFactory(() => UnfollowUserBloc(sl(), sl()));
+  sl.registerFactory(() => RetrieveCommentByPublicationCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {

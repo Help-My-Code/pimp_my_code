@@ -79,4 +79,6 @@
   "unfollow_failed": "Le désabonnement n'a pas pu être effectué",
   "follow_success": "Vous vous êtes abonné",
   "follow_failed": "L'abonnement n'a pas pu être effectué"
+  "add_comment": "Commenter",
+  "add_your_comment": "Ajouter votre commentaire"
 }

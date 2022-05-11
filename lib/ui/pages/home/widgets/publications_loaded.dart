@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../domain/entities/content/content.dart';
+import 'comment_modal.dart';
 import 'post_card.dart';
-import 'share_modal.dart';
 
 class PublicationsLoaded extends StatelessWidget {
   final List<Content> publications;
@@ -27,11 +28,14 @@ class PublicationsLoaded extends StatelessWidget {
     }
   }
 
-  void onSharePress(BuildContext context, Content content) {
+  void showComments(BuildContext context, Content content) {
     Alert(
       context: context,
-      title: 'share'.tr(),
-      content: ShareModal(content),
+      title: 'comments'.tr(),
+      content: CommentModal(content.id!),
+      buttons: [
+        DialogButton(onPressed: () {}, child: const Text('add_comment').tr()),
+      ],
     ).show();
   }
 
@@ -46,11 +50,13 @@ class PublicationsLoaded extends StatelessWidget {
       itemCount: publications.length,
       itemBuilder: (context, index) {
         return PostCard(
+          contentType: ContentType.publication,
+          contentId: publications[index].id!,
           onLikePressed: () =>
               onLikePress(context.read<LikeCubit>(), publications[index]),
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
-          onCommentaryPressed: () {},
+          onCommentaryPressed: () => showComments(context, publications[index]),
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
@@ -68,7 +74,6 @@ class PublicationsLoaded extends StatelessWidget {
           likeCount: publications[index].numberOfLikes.toString(),
           unlikeCount: publications[index].numberOfDislikes.toString(),
           commentaryCount: publications[index].numberOfComments.toString(),
-          onSharePress: () => onSharePress(context, publications[index]),
         );
       },
     );

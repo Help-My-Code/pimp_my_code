@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 
-import '../../core/failure.dart';
 import '../entities/follow.dart';
 import '../usecases/follow/create_follow.dart';
 import '../usecases/follow/delete_follow.dart';

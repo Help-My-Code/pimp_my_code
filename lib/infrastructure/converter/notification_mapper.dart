@@ -1,4 +1,3 @@
-import 'content_mapper.dart';
 import 'group_mapper.dart';
 import 'user_mapper.dart';
 
@@ -8,10 +7,9 @@ import '../source/api/model/notification/notification_model.dart';
 
 class NotificationMapper {
   final UserMapper _userMapper;
-  final ContentMapper _contentMapper;
   final GroupMapper _groupMapper;
 
-  NotificationMapper(this._userMapper, this._contentMapper, this._groupMapper);
+  NotificationMapper(this._userMapper, this._groupMapper);
 
   NotificationType _notificationTypeFromString(String string) {
     switch (string) {
@@ -49,10 +47,6 @@ class NotificationMapper {
       groupLinked: apiNotificationModel.groupLinked == null
           ? null
           : _groupMapper.mapApiGroupToGroup(apiNotificationModel.groupLinked!),
-      // contentLinked: apiNotificationModel.contentLinked == null
-      //     ? null
-      //     : _contentMapper
-      //         .mapApiContentToContent(apiNotificationModel.contentLinked!),
       userRecipient:
           _userMapper.mapApiUserToUser(apiNotificationModel.userRecipient),
       userLinked: apiNotificationModel.userLinked == null
