@@ -33,6 +33,10 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     return state.code != null && state.code!.isNotEmpty;
   }
 
+  void makeComment(String parentId) {
+    emit(state.copyWith(contentType: ContentType.comment, parentId: parentId));
+  }
+
   void onCancel() {
     emit(CreatePostState.initial());
   }
@@ -75,23 +79,24 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(state.copyWith(isCompiling: false));
   }
 
-  void onSubmitPost(
-    BuildContext context,
-  ) async {
+  void onSubmitPost(BuildContext context) async {
     emit(state.copyWith(isLoading: true));
     final creatorId = await context.read<SessionCubit>().getUserId();
     if (isValid) {
       final either = await _createPublicationUseCase.call(
-          CreatePublicationParam(
-              code: state.code,
-              codeResult: state.codeResult,
-              createdAt: state.createdAt!,
-              creatorId: creatorId,
-              contentType: ContentType.publication.name,
-              medias: state.medias!,
-              content: state.content!,
-              userPicture: state.userPicture!,
-              username: state.username ?? ''));
+        CreatePublicationParam(
+          code: state.code,
+          codeResult: state.codeResult,
+          createdAt: state.createdAt!,
+          creatorId: creatorId,
+          contentType: ContentType.publication.name,
+          medias: state.medias!,
+          content: state.content!,
+          userPicture: state.userPicture!,
+          username: state.username ?? '',
+          parentId: state.parentId,
+        ),
+      );
       either.fold((f) {
         emit(state.copyWith(failureOrSuccessOption: some(left(f))));
       }, (r) {

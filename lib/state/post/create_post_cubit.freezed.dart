@@ -27,6 +27,8 @@ class _$CreatePostStateTearOff {
       List<String>? medias,
       String? code,
       String? codeResult,
+      String? parentId,
+      required ContentType contentType,
       required String language,
       required bool isLoading,
       required bool isCompiling,
@@ -40,6 +42,8 @@ class _$CreatePostStateTearOff {
       medias: medias,
       code: code,
       codeResult: codeResult,
+      parentId: parentId,
+      contentType: contentType,
       language: language,
       isLoading: isLoading,
       isCompiling: isCompiling,
@@ -61,6 +65,8 @@ mixin _$CreatePostState {
   List<String>? get medias => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   String? get codeResult => throw _privateConstructorUsedError;
+  String? get parentId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isCompiling => throw _privateConstructorUsedError;
@@ -86,6 +92,8 @@ abstract class $CreatePostStateCopyWith<$Res> {
       List<String>? medias,
       String? code,
       String? codeResult,
+      String? parentId,
+      ContentType contentType,
       String language,
       bool isLoading,
       bool isCompiling,
@@ -111,6 +119,8 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? medias = freezed,
     Object? code = freezed,
     Object? codeResult = freezed,
+    Object? parentId = freezed,
+    Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
     Object? isCompiling = freezed,
@@ -149,6 +159,14 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.codeResult
           : codeResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      parentId: parentId == freezed
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentType: contentType == freezed
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       language: language == freezed
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -185,6 +203,8 @@ abstract class _$CreatePostStateCopyWith<$Res>
       List<String>? medias,
       String? code,
       String? codeResult,
+      String? parentId,
+      ContentType contentType,
       String language,
       bool isLoading,
       bool isCompiling,
@@ -212,6 +232,8 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? medias = freezed,
     Object? code = freezed,
     Object? codeResult = freezed,
+    Object? parentId = freezed,
+    Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
     Object? isCompiling = freezed,
@@ -250,6 +272,14 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.codeResult
           : codeResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      parentId: parentId == freezed
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentType: contentType == freezed
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       language: language == freezed
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -282,6 +312,8 @@ class _$_CreatePostState extends _CreatePostState {
       this.medias,
       this.code,
       this.codeResult,
+      this.parentId,
+      required this.contentType,
       required this.language,
       required this.isLoading,
       required this.isCompiling,
@@ -305,6 +337,10 @@ class _$_CreatePostState extends _CreatePostState {
   @override
   final String? codeResult;
   @override
+  final String? parentId;
+  @override
+  final ContentType contentType;
+  @override
   final String language;
   @override
   final bool isLoading;
@@ -315,7 +351,7 @@ class _$_CreatePostState extends _CreatePostState {
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -333,6 +369,9 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality()
                 .equals(other.codeResult, codeResult) &&
+            const DeepCollectionEquality().equals(other.parentId, parentId) &&
+            const DeepCollectionEquality()
+                .equals(other.contentType, contentType) &&
             const DeepCollectionEquality().equals(other.language, language) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
@@ -352,6 +391,8 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(medias),
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(codeResult),
+      const DeepCollectionEquality().hash(parentId),
+      const DeepCollectionEquality().hash(contentType),
       const DeepCollectionEquality().hash(language),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(isCompiling),
@@ -373,6 +414,8 @@ abstract class _CreatePostState extends CreatePostState {
           List<String>? medias,
           String? code,
           String? codeResult,
+          String? parentId,
+          required ContentType contentType,
           required String language,
           required bool isLoading,
           required bool isCompiling,
@@ -396,6 +439,10 @@ abstract class _CreatePostState extends CreatePostState {
   String? get code;
   @override
   String? get codeResult;
+  @override
+  String? get parentId;
+  @override
+  ContentType get contentType;
   @override
   String get language;
   @override
