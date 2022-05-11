@@ -32,7 +32,7 @@ class PublicationsLoaded extends StatelessWidget {
     Alert(
       context: context,
       title: 'comments'.tr(),
-      content: CommentModal(),
+      content: CommentModal(content.id!),
       buttons: [
         DialogButton(onPressed: () {}, child: const Text('add_comment').tr()),
       ],

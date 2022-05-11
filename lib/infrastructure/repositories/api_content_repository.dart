@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:pimp_my_code/domain/entities/content/comment.dart';
 import '../../core/failure.dart';
 
 import 'package:dartz/dartz.dart';
@@ -121,8 +120,15 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
-  Future<Either<GetCommentFailed, List<Comment>>> getComment(String postId) {
-    _dataSource.getComment(postId);
-    throw UnimplementedError();
+  Future<Either<GetCommentFailed, List<Content>>> getComments(
+      String postId) async {
+    final response = await _dataSource.getComments(postId);
+    final List<Map<String, dynamic>> apiComments = List.from(response.body);
+    return Right(
+      apiComments
+          .map(ApiContentModel.fromJson)
+          .map(_contentMapper.mapApiContentToContent)
+          .toList(),
+    );
   }
 }

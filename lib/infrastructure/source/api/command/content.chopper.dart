@@ -42,7 +42,7 @@ class _$ContentInteractor extends ContentInteractor {
   }
 
   @override
-  Future<Response<dynamic>> getComment(String postId) {
+  Future<Response<dynamic>> getComments(String postId) {
     final $url = '/content/${postId}/comment';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
