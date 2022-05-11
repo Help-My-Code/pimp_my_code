@@ -17,6 +17,6 @@ abstract class ContentInteractor extends ChopperService {
   Future<Response> createContent(
       {@Body() required Map<String, dynamic> fields});
 
-  @Get(path: '{postId}/comment')
-  Future<Response> getComments(@Path() String postId);
+  @Get(path: 'getResponsesToContentById')
+  Future<Response> getComments(@Query() String contentId);
 }
