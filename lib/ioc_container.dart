@@ -1,7 +1,9 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/usecases/user/update_user_use_case.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
+import 'package:pimp_my_code/state/update_user/update_user_bloc.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
 import 'domain/repositories/notification_repository.dart';
@@ -141,6 +143,7 @@ void registerUseCases() {
   sl.registerSingleton(GetPublicationsByUserIdUseCase(sl()));
   sl.registerSingleton(FindFollowByFollowerIdUseCase(sl()));
   sl.registerSingleton(FindFollowByUserIdUseCase(sl()));
+  sl.registerSingleton(UpdateUserUseCase(sl()));
 }
 
 void registerBloc() {
@@ -160,6 +163,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
+  sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {

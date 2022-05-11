@@ -21,7 +21,8 @@ class PostCard extends StatelessWidget {
     this.onLikePressed,
     this.onUnlikePressed,
     this.onCommentaryPressed,
-    this.isLiked = false,
+    required this.isLiked,
+    required this.isDisliked,
   }) : super(key: key);
 
   final String language;
@@ -36,6 +37,7 @@ class PostCard extends StatelessWidget {
   final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
   final Function() onSharePress;
   final bool isLiked;
+  final bool isDisliked;
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +126,9 @@ class PostCard extends StatelessWidget {
                 onPressed: onUnlikePressed,
                 text: unlikeCount,
                 icon: Icon(
-                  isLiked
-                      ? Icons.thumb_down_alt_outlined
-                      : Icons.thumb_down_alt,
+                  isDisliked
+                      ? Icons.thumb_down
+                      : Icons.thumb_down_outlined,
                 ),
                 shape: GFButtonShape.square,
                 type: GFButtonType.transparent,
@@ -147,7 +149,6 @@ class PostCard extends StatelessWidget {
           right: 50,
           child: InkWell(
             onTap: () {
-              print('hit button');
               onSharePress();
             },
             child: const Icon(Icons.share),

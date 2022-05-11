@@ -21,4 +21,78 @@ class RetrieveContentByUserIdCubit extends Cubit<RetrieveContentByUserIdState> {
       emit(RetrieveContentByUserIdState.loaded(r));
     });
   }
+
+  void unlike(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              return content.copyWith(isLike: false, isDislike: false, numberOfLikes: content.numberOfLikes - 1);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
+
+  void undislike(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              return content.copyWith(isLike: false, isDislike: false, numberOfDislikes: content.numberOfDislikes - 1);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
+
+  void like(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              if(content.isDislike) {
+                return content.copyWith(isLike: true, isDislike: false, numberOfLikes: content.numberOfLikes + 1, numberOfDislikes: content.numberOfDislikes - 1);
+              }
+              return content.copyWith(isLike: true, isDislike: false, numberOfLikes: content.numberOfLikes + 1);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
+
+  void dislike(String publicationId) {
+    state.maybeWhen(
+      orElse: () {},
+      loaded: (contents) {
+        final loadedState = state as _Loaded;
+        emit(loadedState.copyWith(
+          publications: loadedState.publications.map((content) {
+            if (content.id == publicationId) {
+              if(content.isLike) {
+                return content.copyWith(isLike: false, isDislike: true, numberOfDislikes: content.numberOfDislikes + 1, numberOfLikes: content.numberOfLikes - 1);
+              }
+              return content.copyWith(isLike: false, isDislike: true, numberOfDislikes: content.numberOfDislikes + 1);
+            }
+            return content;
+          }).toList(),
+        ));
+      },
+    );
+  }
 }

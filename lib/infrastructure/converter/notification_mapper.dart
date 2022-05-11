@@ -49,10 +49,10 @@ class NotificationMapper {
       groupLinked: apiNotificationModel.groupLinked == null
           ? null
           : _groupMapper.mapApiGroupToGroup(apiNotificationModel.groupLinked!),
-      contentLinked: apiNotificationModel.contentLinked == null
-          ? null
-          : _contentMapper
-              .mapApiContentToContent(apiNotificationModel.contentLinked!),
+      // contentLinked: apiNotificationModel.contentLinked == null
+      //     ? null
+      //     : _contentMapper
+      //         .mapApiContentToContent(apiNotificationModel.contentLinked!),
       userRecipient:
           _userMapper.mapApiUserToUser(apiNotificationModel.userRecipient),
       userLinked: apiNotificationModel.userLinked == null

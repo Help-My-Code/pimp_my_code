@@ -150,7 +150,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                 onPressed: () => printSearch(),
               ),
               IconButton(
-                //TODO activer bonne icone selon s'il y a des nouvelles notifs
+                //TODO activer bonne icone selon s'il y a des nouvelles notifs (voir Badges getwidget)
                 icon: const Icon(Icons.notifications_none),
                 //icon: const Icon(Icons.notifications_active),
                 tooltip: 'notifications'.tr(),
@@ -161,7 +161,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                 tooltip: 'my_account'.tr(),
                 onPressed: () {
                   GoRouter.of(context)
-                      .go(Routes.account.path + '?userId=' + userId);
+                      .go(Routes.account.path + '?userId=' + userId + '&connected=true');
                 },
               ),
               IconButton(

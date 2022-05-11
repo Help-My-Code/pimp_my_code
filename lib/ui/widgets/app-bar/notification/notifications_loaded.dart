@@ -18,7 +18,7 @@ class NotificationsLoaded extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.68,
             child: ListView.builder(
               itemCount: notifications.length,
               itemBuilder: (context, index) {

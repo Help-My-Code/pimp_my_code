@@ -4,22 +4,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../domain/entities/user.dart';
+import '../../../../ioc_container.dart';
+import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
+import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
-import '../../home/widgets/home_loaded.dart';
+import '../../home/widgets/publications_loaded.dart';
 
 class AccountLoaded extends StatelessWidget {
   final User user;
+  final bool isUserConnected;
+  final BuildContext context;
 
-  const AccountLoaded({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
+  const AccountLoaded(
+      {Key? key,
+      required this.user,
+      required this.isUserConnected,
+      required this.context})
+      : super(key: key);
+
+  void printUpdate() {
+    Alert(
+      context: context,
+      title: 'update_informations'.tr(),
+      content: BlocProvider(
+          create: (context) => sl<UpdateUserBloc>(), child: UpdateUserModal(user: user)),
+      buttons: [],
+    ).show();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +50,11 @@ class AccountLoaded extends StatelessWidget {
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
           child: Row(
             children: <Widget>[
-              const GFAvatar(
-                size: 100,
+              GFAvatar(
+                size: MediaQuery.of(context).size.width * 0.08,
                 backgroundImage: NetworkImage(
-                  DefaultPictures.defaultUserPicture,
+                  user.principalPictureUrl ??
+                      DefaultPictures.defaultUserPicture,
                 ),
               ),
               const SizedBox(width: 30),
@@ -106,14 +126,23 @@ class AccountLoaded extends StatelessWidget {
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.09),
-              //TODO activer le bon bouton selon
-              // GFButton(
-              //   onPressed: () {},
-              //   text: tr('follow'),
-              //   shape: GFButtonShape.standard,
-              //   color: Colors.amber,
-              //   icon: const Icon(Icons.add, color: Colors.white),
-              // ),
+              if (isUserConnected)
+                GFButton(
+                  onPressed: () => printUpdate(),
+                  text: tr('edit_profile'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.edit, color: Colors.white),
+                ),
+              if (!isUserConnected)
+                //TODO afficher follow/unflollow selon
+                GFButton(
+                  onPressed: () {},
+                  text: tr('follow'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.add, color: Colors.white),
+                ),
               // GFButton(
               //   onPressed: () {},
               //   text: tr('unfollow'),
@@ -121,13 +150,6 @@ class AccountLoaded extends StatelessWidget {
               //   color: Colors.amber,
               //   icon: const Icon(Icons.remove, color: Colors.white),
               // ),
-              GFButton(
-                onPressed: () {},
-                text: tr('edit_profile'),
-                shape: GFButtonShape.standard,
-                color: Colors.amber,
-                icon: const Icon(Icons.edit, color: Colors.white),
-              ),
             ],
           ),
         ),
@@ -154,7 +176,26 @@ class AccountLoaded extends StatelessWidget {
                 return const Loading();
               },
               orElse: () => const Loading(),
-              loaded: (publications) => HomeLoaded(publications: publications),
+              loaded: (publications) => Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: BlocProvider(
+                          create: (context) => LikeCubit(
+                                sl(),
+                                null,
+                                context.read<RetrieveContentByUserIdCubit>(),
+                                sl(),
+                              ),
+                          child:
+                              PublicationsLoaded(publications: publications)),
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         ),

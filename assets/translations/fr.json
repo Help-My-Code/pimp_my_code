@@ -66,5 +66,12 @@
   "followers": " Abonnés",
   "following": " Abonnements",
   "copy": "Copier",
-  "url copied": "URL copiée"
+  "url copied": "URL copiée",
+  "update_informations": "Modifier mes informations",
+  "description": "Description",
+  "principal_picture_url": "URL de la photo de profil",
+  "private_account": "Compte privé",
+  "save": "Enregistrer",
+  "user_updated": "L'utilisateur a été modifié",
+  "user_updated_failed": "La modification de l'utilisateur a échoué"
 }

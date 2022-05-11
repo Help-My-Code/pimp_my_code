@@ -14,7 +14,7 @@ class GroupModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.7,
       width: MediaQuery.of(context).size.width * 0.6,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -15,10 +15,30 @@ class LikeCubit extends Cubit<LikeState> {
       this._contentRepository, this._retrieveContentCubit, this._sessionCubit)
       : super(const LikeState.initial());
 
+  Future<void> unlike(String publicationId) async {
+    String userId = await _sessionCubit.getUserId();
+    await _contentRepository.unreact(publicationId, userId);
+    if (_retrieveContentCubit != null) {
+      _retrieveContentCubit!.unlike(publicationId);
+    } else {
+      _retrieveContentByUserIdCubit!.unlike(publicationId);
+    }
+  }
+
   Future<void> like(String publicationId) async {
     String userId = await _sessionCubit.getUserId();
     await _contentRepository.like(publicationId, userId);
     _retrieveContentCubit.like(publicationId);
+  }
+
+  Future<void> undislike(String publicationId) async {
+    String userId = await _sessionCubit.getUserId();
+    await _contentRepository.unreact(publicationId, userId);
+    if (_retrieveContentCubit != null) {
+      _retrieveContentCubit!.undislike(publicationId);
+    } else {
+      _retrieveContentByUserIdCubit!.undislike(publicationId);
+    }
   }
 
   Future<void> dislike(String publicationId) async {

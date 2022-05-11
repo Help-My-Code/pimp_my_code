@@ -1,4 +1,3 @@
-import 'content/content.dart';
 import 'user.dart';
 
 import 'enum/notification_type.dart';
@@ -10,7 +9,7 @@ class Notification {
   final bool isSeen;
   final NotificationType notificationType;
   final Group? groupLinked;
-  final Content? contentLinked;
+  final String? contentLinked;
   final User userRecipient;
   final User? userLinked;
 
