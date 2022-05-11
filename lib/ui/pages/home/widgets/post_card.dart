@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
+import 'share_modal.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
@@ -10,7 +13,6 @@ class PostCard extends StatelessWidget {
     required this.imageURL,
     required this.username,
     required this.date,
-    required this.onSharePress,
     this.language = 'dart',
     this.title,
     this.images,
@@ -23,21 +25,30 @@ class PostCard extends StatelessWidget {
     this.onCommentaryPressed,
     required this.isLiked,
     required this.isDisliked,
+    required this.contentId,
   }) : super(key: key);
 
   final String language;
   final String? title;
   final List<String>? images;
   final String imageURL;
+  final String contentId;
   final String username;
   final String date;
   final String post;
   final List<String>? codes;
   final String likeCount, unlikeCount, commentaryCount;
   final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
-  final Function() onSharePress;
   final bool isLiked;
   final bool isDisliked;
+
+  void onSharePress(BuildContext context) {
+    Alert(
+      context: context,
+      title: 'share'.tr(),
+      content: ShareModal(contentId),
+    ).show();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +84,7 @@ class PostCard extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-              if (images != null)
+              if (images != null && images!.isNotEmpty)
                 GFItemsCarousel(
                   rowCount: 3,
                   children: images!.map(
@@ -126,9 +137,7 @@ class PostCard extends StatelessWidget {
                 onPressed: onUnlikePressed,
                 text: unlikeCount,
                 icon: Icon(
-                  isDisliked
-                      ? Icons.thumb_down
-                      : Icons.thumb_down_outlined,
+                  isDisliked ? Icons.thumb_down : Icons.thumb_down_outlined,
                 ),
                 shape: GFButtonShape.square,
                 type: GFButtonType.transparent,
@@ -149,7 +158,7 @@ class PostCard extends StatelessWidget {
           right: 50,
           child: InkWell(
             onTap: () {
-              onSharePress();
+              onSharePress(context);
             },
             child: const Icon(Icons.share),
           ),

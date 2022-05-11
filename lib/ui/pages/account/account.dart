@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import 'widgets/account_loaded.dart';
@@ -71,14 +70,19 @@ class _AccountPageState extends State<AccountPage> {
             );
           }, builder: (context, state) {
             return state.maybeWhen(
-                initial: () {
-                  context
-                      .read<RetrieveUserByIdCubit>()
-                      .loadUserById(widget.userId);
-                  return const Loading();
-                },
-                orElse: () => const Loading(),
-                loaded: (user) => AccountLoaded(user: user, isUserConnected: widget.isUserConnected, context: context,));
+              initial: () {
+                context
+                    .read<RetrieveUserByIdCubit>()
+                    .loadUserById(widget.userId);
+                return const Loading();
+              },
+              orElse: () => const Loading(),
+              loaded: (user) => AccountLoaded(
+                user: user,
+                isUserConnected: widget.isUserConnected,
+                context: context,
+              ),
+            );
           }),
         ),
       ),

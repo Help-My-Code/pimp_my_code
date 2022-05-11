@@ -73,5 +73,7 @@
   "private_account": "Compte privé",
   "save": "Enregistrer",
   "user_updated": "L'utilisateur a été modifié",
-  "user_updated_failed": "La modification de l'utilisateur a échoué"
+  "user_updated_failed": "La modification de l'utilisateur a échoué",
+  "add_comment": "Commenter",
+  "add_your_comment": "Ajouter votre commentaire"
 }

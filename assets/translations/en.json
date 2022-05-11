@@ -69,5 +69,7 @@
   "description": "Description",
   "principal_picture_url": "profile picture URL",
   "private_account": "Private account",
-  "save": "Save"
+  "save": "Save",
+  "add_comment": "Comment",
+  "add_your_comment": "Add your comment"
 }

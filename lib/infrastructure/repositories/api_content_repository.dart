@@ -123,6 +123,6 @@ class ApiContentRepository extends ContentRepository {
   @override
   Future<Either<GetCommentFailed, List<Comment>>> getComment(String postId) {
     _dataSource.getComment(postId);
-    throw new UnimplementedError();
+    throw UnimplementedError();
   }
 }

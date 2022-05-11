@@ -105,7 +105,7 @@ void registerMapper() {
   sl.registerFactory(() => UserMapper());
   sl.registerFactory(() => GroupMapper());
   sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
-  sl.registerFactory(() => NotificationMapper(sl(), sl(), sl()));
+  sl.registerFactory(() => NotificationMapper(sl(), sl()));
   sl.registerFactory(() => FollowMapper(sl()));
 }
 
