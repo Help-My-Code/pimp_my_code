@@ -33,12 +33,12 @@ class AccountLoaded extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  AccountLoaded({
-    Key? key,
-    required this.user,
-    required this.isUserConnected,
-    required this.context,
-  }) : super(key: key);
+  AccountLoaded(
+      {Key? key,
+      required this.user,
+      required this.isUserConnected,
+      required this.context})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +289,9 @@ class AccountLoaded extends StatelessWidget {
                                       sessionCubit: sl(),
                                     ),
                                 child: PublicationsLoaded(
-                                    publications: publications)),
+                                    publications: publications,
+                                ),
+                            ),
                           ),
                         ],
                       ),
