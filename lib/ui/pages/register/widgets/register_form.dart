@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/ui/router/routes.dart';
 import '../../../../core/form_status.dart';
 import '../../../../state/register/register_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -158,7 +159,6 @@ class _RegisterFormState extends State<RegisterForm> {
         normalCharCount: 1,
         width: 400,
         height: 150,
-        // TODO les strings pour les traductions
         onSuccess: () {
           isValidPassword = true;
         },
@@ -245,7 +245,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: FloatingActionButton(
         heroTag: 'login',
         onPressed: () {
-          GoRouter.of(context).go('/login');
+          GoRouter.of(context).go(Routes.login.path);
         },
         child: const Text(
           'to_login?',

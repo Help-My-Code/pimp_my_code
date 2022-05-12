@@ -86,9 +86,6 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
 
   void _onSelectMenu(MenuValues item) {
     switch (item) {
-      case MenuValues.login:
-        GoRouter.of(context).go('/login');
-        break;
       case MenuValues.logout:
         context.read<SessionCubit>().logout();
         break;
@@ -161,7 +158,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
                 tooltip: 'my_account'.tr(),
                 onPressed: () {
                   GoRouter.of(context)
-                      .go(Routes.account.path + '?userId=' + userId + '&connected=true');
+                      .go(Routes.account.path + '?userId=' + userId, extra: true);
                 },
               ),
               IconButton(

@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../domain/entities/group.dart';
 import '../../../default_pictures.dart';
+import '../../../router/routes.dart';
 
 class MyGroupsLoaded extends StatelessWidget {
   final List<Group> groups;
@@ -42,8 +44,9 @@ class MyGroupsLoaded extends StatelessWidget {
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      //TODO aller sur la page du groupe
-                      print(groups[index].name);
+                      Navigator.pop(context);
+                      GoRouter.of(context)
+                          .go(Routes.group.path + '?groupId=' + groups[index].id, extra: true);
                     },
                     child: Row(
                       children: <Widget>[
