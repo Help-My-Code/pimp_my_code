@@ -25,20 +25,17 @@ import '../../../widgets/loading.dart';
 import '../../home/widgets/publications_loaded.dart';
 
 class AccountLoaded extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final User user;
   final bool isUserConnected;
   final BuildContext context;
-  List<Follow> followers = [];
-  List<Follow> followings = [];
 
-  final _formKey = GlobalKey<FormState>();
-
-  AccountLoaded(
-      {Key? key,
-      required this.user,
-      required this.isUserConnected,
-      required this.context})
-      : super(key: key);
+  AccountLoaded({
+    Key? key,
+    required this.user,
+    required this.isUserConnected,
+    required this.context,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +56,17 @@ class AccountLoaded extends StatelessWidget {
                   children: <Widget>[
                     Text(user.firstname + ' ' + user.lastname,
                         style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        )),
                     const SizedBox(height: 10),
                     _buildFollowers(context),
                     _buildFollowings(context),
                     const SizedBox(height: 10),
-                    Text(user.description ?? '',
-                        style: const TextStyle(fontSize: 16)),
+                    Text(
+                      user.description ?? '',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ],
                 ),
               ),
@@ -152,7 +153,12 @@ class AccountLoaded extends StatelessWidget {
                 icon: const Icon(Icons.edit, color: Colors.white),
               );
             } else {
-              if (followersContainCurrentUser(snapshot.data!)) {
+              final followers =
+                  context.read<RetrieveFollowByUserIdCubit>().state.maybeMap(
+                        loaded: (follow) => follow.follows,
+                        orElse: () => [] as List<Follow>,
+                      );
+              if (followersContainCurrentUser(snapshot.data!, followers)) {
                 return _buildUnfollowButton(context);
               }
               return _buildFollowButton(context);
@@ -248,8 +254,13 @@ class AccountLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
+            final followers =
+                context.read<RetrieveFollowByFollowerIdCubit>().state.maybeMap(
+                      loaded: (value) => value.followers,
+                      orElse: () => [],
+                    );
             if (user.confidentiality == Confidentiality.public ||
-                followersContainCurrentUser(snapshot.data!) ||
+                followersContainCurrentUser(snapshot.data!, followers) ||
                 user.id == snapshot.data) {
               return BlocConsumer<RetrieveContentByUserIdCubit,
                   RetrieveContentByUserIdState>(
@@ -326,18 +337,18 @@ class AccountLoaded extends StatelessWidget {
   }
 
   loadFollowers(followers) {
-    this.followers = followers;
     return Text(followers.length.toString() + 'followers'.tr(),
         style: const TextStyle(fontSize: 16));
   }
 
   loadFollowings(followings) {
-    this.followings = followings;
-    return Text(followings.length.toString() + 'following'.tr(),
-        style: const TextStyle(fontSize: 16));
+    return Text(
+      followings.length.toString() + 'following'.tr(),
+      style: const TextStyle(fontSize: 16),
+    );
   }
 
-  bool followersContainCurrentUser(String userId) {
+  bool followersContainCurrentUser(String userId, List<dynamic> followers) {
     for (var follower in followers) {
       if (follower.follower.id == userId) return true;
     }
