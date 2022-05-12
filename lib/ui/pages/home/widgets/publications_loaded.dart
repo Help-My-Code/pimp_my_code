@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../domain/entities/content/content.dart';
 import 'comment_modal.dart';
+import 'create_post_card.dart';
 import 'post_card.dart';
 
 class PublicationsLoaded extends StatelessWidget {
@@ -34,7 +36,16 @@ class PublicationsLoaded extends StatelessWidget {
       title: 'comments'.tr(),
       content: CommentModal(content.id!),
       buttons: [
-        DialogButton(onPressed: () {}, child: const Text('add_comment').tr()),
+        DialogButton(onPressed: () {}, child: const Text('add_message').tr()),
+        DialogButton(
+            onPressed: () {
+              showMaterialModalBottomSheet(
+                context: context,
+                builder: (context) =>
+                    const CreatePostCard(), // TODO make comment
+              );
+            },
+            child: const Text('add_comment').tr()),
       ],
     ).show();
   }

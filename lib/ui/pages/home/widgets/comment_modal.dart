@@ -23,13 +23,13 @@ class CommentModal extends StatelessWidget {
         BlocProvider(
           create: (context) => LikeCubit(
             contentRepository: sl(),
-            retrieveContentCubit: context.read<RetrieveContentCubit>(),
             sessionCubit: sl(),
+            retrieveContentCubit: context.read<RetrieveContentCubit>(),
           ),
         ),
       ],
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.7,
         width: MediaQuery.of(context).size.width * 0.8,
         child: BlocBuilder<RetrieveContentCubit, RetrieveContentState>(
           builder: (context, state) {
@@ -82,7 +82,7 @@ class CommentModal extends StatelessWidget {
             border: const OutlineInputBorder(),
             hintText: 'add_your_comment'.tr(),
           ),
-          minLines: 6,
+          minLines: 4,
           maxLines: 20,
         ),
       ],
