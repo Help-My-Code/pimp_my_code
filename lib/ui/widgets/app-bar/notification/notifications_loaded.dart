@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pimp_my_code/ui/router/routes.dart';
 import '../../../../domain/entities/enum/notification_type.dart';
 import '../../../../domain/entities/notification.dart' as notification;
 
@@ -26,8 +28,9 @@ class NotificationsLoaded extends StatelessWidget {
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      //TODO aller sur la page du groupe
-                      print(notifications[index].userLinked!.lastname);
+                      Navigator.pop(context);
+                      GoRouter.of(context)
+                          .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id, extra: false);
                     },
                     child: Row(
                       children: <Widget>[

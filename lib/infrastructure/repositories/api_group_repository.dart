@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
+import '../../domain/usecases/group/find_group_by_id.dart';
 import '../../domain/usecases/group/find_group_by_name.dart';
 import '../../domain/usecases/group/find_my_groups.dart';
 import '../converter/group_mapper.dart';
@@ -25,6 +26,15 @@ class ApiGroupRepository extends GroupRepository {
           .map(ApiGroupModel.fromJson)
           .map(_groupMapper.mapApiGroupToGroup)
           .toList(),
+    );
+  }
+
+  @override
+  Future<Either<FindGroupByIdFailure, Group>> getById({required String id}) async {
+    final response = await _dataSource.getById(id);
+    final Map<String, dynamic> apiGroup = response.body['group'];
+    return Right(
+        _groupMapper.mapApiGroupToGroup(ApiGroupModel.fromJson(apiGroup)),
     );
   }
 

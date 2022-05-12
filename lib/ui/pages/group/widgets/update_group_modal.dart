@@ -12,10 +12,10 @@ import '../../../../domain/entities/user.dart';
 import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../validator/validators.dart';
 
-class UpdateUserModal extends StatelessWidget {
-  UpdateUserModal({Key? key, required this.user}) : super(key: key);
+class UpdateGroupModal extends StatelessWidget {
+  UpdateGroupModal({Key? key, required this.user}) : super(key: key);
 
-  final User user;
+  final Group user;
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   bool isValidPassword = false;
@@ -29,9 +29,9 @@ class UpdateUserModal extends StatelessWidget {
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: BlocBuilder<UpdateUserBloc, UpdateUserState>(
+          child: BlocBuilder<UpdateGroupBloc, UpdateGroupState>(
             builder: (context, state) {
-              context.read<UpdateUserBloc>().add(UpdateUserEvent.init(
+              context.read<UpdateGroupBloc>().add(UpdateGroupEvent.init(
                   user.description,
                   user.principalPictureUrl,
                   user.confidentiality));
@@ -62,8 +62,8 @@ class UpdateUserModal extends StatelessWidget {
         validator: requiredValidator,
         initialValue: user.description,
         onChanged: (value) => context
-            .read<UpdateUserBloc>()
-            .add(UpdateUserEvent.updateDescription(value)),
+            .read<UpdateGroupBloc>()
+            .add(UpdateGroupEvent.updateDescription(value)),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'description'.tr(),
@@ -81,8 +81,8 @@ class UpdateUserModal extends StatelessWidget {
         validator: requiredValidator,
         initialValue: user.principalPictureUrl,
         onChanged: (value) => context
-            .read<UpdateUserBloc>()
-            .add(UpdateUserEvent.updateProfilePictureURL(value)),
+            .read<UpdateGroupBloc>()
+            .add(UpdateGroupEvent.updateProfilePictureURL(value)),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'principal_picture_url'.tr(),
@@ -108,8 +108,8 @@ class UpdateUserModal extends StatelessWidget {
         },
         obscureText: true,
         onChanged: (value) => context
-            .read<UpdateUserBloc>()
-            .add(UpdateUserEvent.updatePassword(value)),
+            .read<UpdateGroupBloc>()
+            .add(UpdateGroupEvent.updatePassword(value)),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'password*'.tr(),
@@ -151,8 +151,8 @@ class UpdateUserModal extends StatelessWidget {
         validator: (validator) =>
             requiredConfirmPasswordValidator(validator, password),
         onChanged: (value) => context
-            .read<UpdateUserBloc>()
-            .add(UpdateUserEvent.updateConfirmPassword(value)),
+            .read<UpdateGroupBloc>()
+            .add(UpdateGroupEvent.updateConfirmPassword(value)),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'password_confirmation*'.tr(),
@@ -169,8 +169,8 @@ class UpdateUserModal extends StatelessWidget {
         const Text('private_account', style: TextStyle(fontSize: 14)).tr(),
         const SizedBox(width: 10),
         GFToggle(
-          onChanged: (value) => context.read<UpdateUserBloc>().add(
-              UpdateUserEvent.updateConfidentiality(
+          onChanged: (value) => context.read<UpdateGroupBloc>().add(
+              UpdateGroupEvent.updateConfidentiality(
                   value! ? Confidentiality.private : Confidentiality.public)),
           value: user.confidentiality == Confidentiality.public ? false : true,
           type: GFToggleType.ios,
@@ -180,7 +180,7 @@ class UpdateUserModal extends StatelessWidget {
   }
 
   Widget _buildUpdate(BuildContext context) {
-    return BlocConsumer<UpdateUserBloc, UpdateUserState>(
+    return BlocConsumer<UpdateGroupBloc, UpdateGroupState>(
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -210,8 +210,8 @@ class UpdateUserModal extends StatelessWidget {
                 _formKey.currentState!.validate() &&
                 state.status is FormNotSent) {
               context
-                  .read<UpdateUserBloc>()
-                  .add(const UpdateUserEvent.submit());
+                  .read<UpdateGroupBloc>()
+                  .add(const UpdateGroupEvent.submit());
             }
           },
           width: 120,

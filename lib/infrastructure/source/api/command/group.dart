@@ -10,6 +10,9 @@ abstract class GroupInteractor extends ChopperService {
   @Get(path: '/getByName')
   Future<Response> getByName(@Query() String name);
 
+  @Get(path: '/getById')
+  Future<Response> getById(@Query() String groupId);
+
   @Get(path: '/getByCreatorId')
   Future<Response> getByCreatorId(@Query() String creatorId);
 }

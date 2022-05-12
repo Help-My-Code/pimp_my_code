@@ -9,9 +9,11 @@ import '../../state/register/register_bloc.dart';
 import '../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
+import '../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import '../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../state/session/session_cubit.dart';
 import '../pages/account/account.dart';
+import '../pages/group/group.dart';
 import '../pages/home/home.dart';
 import '../pages/login/login.dart';
 import '../pages/messaging.dart';
@@ -74,8 +76,30 @@ class AppRouter {
                   ],
                   child: AccountPage(
                     userId: state.queryParams['userId']!,
-                    isUserConnected:
-                        state.queryParams['connected']!.toLowerCase() == 'true',
+                    isUserConnected: state.extra! as bool,
+                  ))),
+      GoRoute(
+          path: Routes.group.path,
+          builder: (BuildContext context, GoRouterState state) =>
+              MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => sl<RetrieveGroupByIdCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => sl<RetrieveContentCubit>(),
+                    ),
+                    // BlocProvider(
+                    //   create: (context) =>
+                    //       sl<RetrieveGroupMemberByMemberIdCubit>(),
+                    // ),
+                    // BlocProvider(
+                    //   create: (context) => sl<RetrieveGroupMemberByGroupIdCubit>(),
+                    // ),
+                  ],
+                  child: GroupPage(
+                    groupId: state.queryParams['groupId']!,
+                    isCreatorOrAdmin: state.extra! as bool,
                   ))),
     ],
     redirect: (state) {

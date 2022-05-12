@@ -32,9 +32,9 @@ class SearchedUsersLoaded extends StatelessWidget {
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      Navigator.of(context, rootNavigator: true).pop();
+                      Navigator.pop(context);
                       GoRouter.of(context).go(
-                          Routes.account.path + '?userId=' + users[index].id + '&connected=false');
+                          Routes.account.path + '?userId=' + users[index].id, extra: false);
                     },
                     child: Row(
                       children: <Widget>[
