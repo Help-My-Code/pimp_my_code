@@ -26,9 +26,9 @@ class _$RetrieveFollowByUserIdStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded(List<Follow> follows) {
+  _Loaded loaded(List<Follow> publications) {
     return _Loaded(
-      follows,
+      publications,
     );
   }
 
@@ -46,7 +46,7 @@ mixin _$RetrieveFollowByUserIdState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Follow> follows) loaded,
+    required TResult Function(List<Follow> publications) loaded,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ mixin _$RetrieveFollowByUserIdState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +62,7 @@ mixin _$RetrieveFollowByUserIdState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -153,7 +153,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Follow> follows) loaded,
+    required TResult Function(List<Follow> publications) loaded,
     required TResult Function() failure,
   }) {
     return initial();
@@ -164,7 +164,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
   }) {
     return initial?.call();
@@ -175,7 +175,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -268,7 +268,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Follow> follows) loaded,
+    required TResult Function(List<Follow> publications) loaded,
     required TResult Function() failure,
   }) {
     return loading();
@@ -279,7 +279,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
   }) {
     return loading?.call();
@@ -290,7 +290,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -346,7 +346,7 @@ abstract class _Loading implements RetrieveFollowByUserIdState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Follow> follows});
+  $Res call({List<Follow> publications});
 }
 
 /// @nodoc
@@ -361,12 +361,12 @@ class __$LoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? follows = freezed,
+    Object? publications = freezed,
   }) {
     return _then(_Loaded(
-      follows == freezed
-          ? _value.follows
-          : follows // ignore: cast_nullable_to_non_nullable
+      publications == freezed
+          ? _value.publications
+          : publications // ignore: cast_nullable_to_non_nullable
               as List<Follow>,
     ));
   }
@@ -375,14 +375,14 @@ class __$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.follows);
+  const _$_Loaded(this.publications);
 
   @override
-  final List<Follow> follows;
+  final List<Follow> publications;
 
   @override
   String toString() {
-    return 'RetrieveFollowByUserIdState.loaded(follows: $follows)';
+    return 'RetrieveFollowByUserIdState.loaded(publications: $publications)';
   }
 
   @override
@@ -390,12 +390,13 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Loaded &&
-            const DeepCollectionEquality().equals(other.follows, follows));
+            const DeepCollectionEquality()
+                .equals(other.publications, publications));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(follows));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(publications));
 
   @JsonKey(ignore: true)
   @override
@@ -407,10 +408,10 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Follow> follows) loaded,
+    required TResult Function(List<Follow> publications) loaded,
     required TResult Function() failure,
   }) {
-    return loaded(follows);
+    return loaded(publications);
   }
 
   @override
@@ -418,10 +419,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
   }) {
-    return loaded?.call(follows);
+    return loaded?.call(publications);
   }
 
   @override
@@ -429,12 +430,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(follows);
+      return loaded(publications);
     }
     return orElse();
   }
@@ -478,9 +479,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements RetrieveFollowByUserIdState {
-  const factory _Loaded(List<Follow> follows) = _$_Loaded;
+  const factory _Loaded(List<Follow> publications) = _$_Loaded;
 
-  List<Follow> get follows;
+  List<Follow> get publications;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -526,7 +527,7 @@ class _$_Failure implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Follow> follows) loaded,
+    required TResult Function(List<Follow> publications) loaded,
     required TResult Function() failure,
   }) {
     return failure();
@@ -537,7 +538,7 @@ class _$_Failure implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
   }) {
     return failure?.call();
@@ -548,7 +549,7 @@ class _$_Failure implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Follow> follows)? loaded,
+    TResult Function(List<Follow> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
