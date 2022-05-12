@@ -33,8 +33,6 @@ import 'infrastructure/source/api/command/group_member.dart';
 import 'infrastructure/source/api/command/program.dart';
 import 'infrastructure/source/api/command/user.dart';
 import 'state/post/create_post_cubit.dart';
-import 'state/retrieve_comment_by_publication/retrieve_comment_by_publication_cubit.dart';
-import 'state/retrieve_content_by_user_id/retrieve_content_by_user_id_cubit.dart';
 import 'state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import 'state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import 'state/retrieve_group/retrieve_group_cubit.dart';
@@ -159,7 +157,7 @@ void registerBloc() {
   sl.registerFactory(() => LoginBloc(sl(), sl()));
   sl.registerSingleton(ErrorHandlerBloc());
   sl.registerSingleton(AppObserver(sl(), sl()));
-  sl.registerFactory(() => RetrieveContentCubit(sl(), sl()));
+  sl.registerFactory(() => RetrieveContentCubit(sl(), sl(), sl(), sl()));
   sl.registerSingleton(CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
@@ -167,13 +165,11 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveGroupMembersCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveNotificationsCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserByIdCubit(sl()));
-  sl.registerFactory(() => RetrieveContentByUserIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
   sl.registerFactory(() => UnfollowUserBloc(sl(), sl()));
-  sl.registerFactory(() => RetrieveCommentByPublicationCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
