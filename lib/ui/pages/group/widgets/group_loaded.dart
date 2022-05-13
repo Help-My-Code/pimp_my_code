@@ -43,14 +43,18 @@ class GroupLoaded extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(group.name,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(
+                      group.name,
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
                     _buildMembers(context),
                     const SizedBox(height: 10),
-                    Text(group.description ?? '',
-                        style: const TextStyle(fontSize: 16)),
+                    Text(
+                      group.description ?? '',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ],
                 ),
               ),
