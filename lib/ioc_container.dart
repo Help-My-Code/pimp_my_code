@@ -3,9 +3,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/usecases/follow/create_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/delete_follow.dart';
+import 'package:pimp_my_code/domain/usecases/group/find_group_by_id.dart';
 import 'package:pimp_my_code/domain/usecases/user/update_user_use_case.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
+import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import 'package:pimp_my_code/state/unfollow_user/unfollow_user_bloc.dart';
 import 'package:pimp_my_code/state/update_user/update_user_bloc.dart';
 import 'domain/repositories/follow_repository.dart';
@@ -149,6 +151,7 @@ void registerUseCases() {
   sl.registerSingleton(UpdateUserUseCase(sl()));
   sl.registerSingleton(CreateFollowUseCase(sl()));
   sl.registerSingleton(DeleteFollowUseCase(sl()));
+  sl.registerSingleton(FindGroupByIdUseCase(sl()));
 }
 
 void registerBloc() {
@@ -170,6 +173,7 @@ void registerBloc() {
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
   sl.registerFactory(() => UnfollowUserBloc(sl(), sl()));
+  sl.registerFactory(() => RetrieveGroupByIdCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
