@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'retrieve_group_by_id_cubit.dart';
+part of 'retrieve_group_members_by_user_id_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$RetrieveGroupByIdStateTearOff {
-  const _$RetrieveGroupByIdStateTearOff();
+class _$RetrieveGroupMembersByGroupIdStateTearOff {
+  const _$RetrieveGroupMembersByGroupIdStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -26,9 +26,9 @@ class _$RetrieveGroupByIdStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded(Group group) {
+  _Loaded loaded(List<GroupMember> publications) {
     return _Loaded(
-      group,
+      publications,
     );
   }
 
@@ -38,15 +38,16 @@ class _$RetrieveGroupByIdStateTearOff {
 }
 
 /// @nodoc
-const $RetrieveGroupByIdState = _$RetrieveGroupByIdStateTearOff();
+const $RetrieveGroupMembersByGroupIdState =
+    _$RetrieveGroupMembersByGroupIdStateTearOff();
 
 /// @nodoc
-mixin _$RetrieveGroupByIdState {
+mixin _$RetrieveGroupMembersByGroupIdState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Group group) loaded,
+    required TResult Function(List<GroupMember> publications) loaded,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +55,7 @@ mixin _$RetrieveGroupByIdState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +63,7 @@ mixin _$RetrieveGroupByIdState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -95,20 +96,21 @@ mixin _$RetrieveGroupByIdState {
 }
 
 /// @nodoc
-abstract class $RetrieveGroupByIdStateCopyWith<$Res> {
-  factory $RetrieveGroupByIdStateCopyWith(RetrieveGroupByIdState value,
-          $Res Function(RetrieveGroupByIdState) then) =
-      _$RetrieveGroupByIdStateCopyWithImpl<$Res>;
+abstract class $RetrieveGroupMembersByGroupIdStateCopyWith<$Res> {
+  factory $RetrieveGroupMembersByGroupIdStateCopyWith(
+          RetrieveGroupMembersByGroupIdState value,
+          $Res Function(RetrieveGroupMembersByGroupIdState) then) =
+      _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RetrieveGroupByIdStateCopyWithImpl<$Res>
-    implements $RetrieveGroupByIdStateCopyWith<$Res> {
-  _$RetrieveGroupByIdStateCopyWithImpl(this._value, this._then);
+class _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>
+    implements $RetrieveGroupMembersByGroupIdStateCopyWith<$Res> {
+  _$RetrieveGroupMembersByGroupIdStateCopyWithImpl(this._value, this._then);
 
-  final RetrieveGroupByIdState _value;
+  final RetrieveGroupMembersByGroupIdState _value;
   // ignore: unused_field
-  final $Res Function(RetrieveGroupByIdState) _then;
+  final $Res Function(RetrieveGroupMembersByGroupIdState) _then;
 }
 
 /// @nodoc
@@ -119,7 +121,7 @@ abstract class _$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$InitialCopyWithImpl<$Res>
-    extends _$RetrieveGroupByIdStateCopyWithImpl<$Res>
+    extends _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -135,7 +137,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'RetrieveGroupByIdState.initial()';
+    return 'RetrieveGroupMembersByGroupIdState.initial()';
   }
 
   @override
@@ -152,7 +154,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Group group) loaded,
+    required TResult Function(List<GroupMember> publications) loaded,
     required TResult Function() failure,
   }) {
     return initial();
@@ -163,7 +165,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
   }) {
     return initial?.call();
@@ -174,7 +176,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -222,7 +224,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements RetrieveGroupByIdState {
+abstract class _Initial implements RetrieveGroupMembersByGroupIdState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -234,7 +236,7 @@ abstract class _$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$LoadingCopyWithImpl<$Res>
-    extends _$RetrieveGroupByIdStateCopyWithImpl<$Res>
+    extends _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -250,7 +252,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'RetrieveGroupByIdState.loading()';
+    return 'RetrieveGroupMembersByGroupIdState.loading()';
   }
 
   @override
@@ -267,7 +269,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Group group) loaded,
+    required TResult Function(List<GroupMember> publications) loaded,
     required TResult Function() failure,
   }) {
     return loading();
@@ -278,7 +280,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
   }) {
     return loading?.call();
@@ -289,7 +291,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -337,7 +339,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements RetrieveGroupByIdState {
+abstract class _Loading implements RetrieveGroupMembersByGroupIdState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -345,12 +347,12 @@ abstract class _Loading implements RetrieveGroupByIdState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({Group group});
+  $Res call({List<GroupMember> publications});
 }
 
 /// @nodoc
 class __$LoadedCopyWithImpl<$Res>
-    extends _$RetrieveGroupByIdStateCopyWithImpl<$Res>
+    extends _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -360,13 +362,13 @@ class __$LoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? group = freezed,
+    Object? publications = freezed,
   }) {
     return _then(_Loaded(
-      group == freezed
-          ? _value.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as Group,
+      publications == freezed
+          ? _value.publications
+          : publications // ignore: cast_nullable_to_non_nullable
+              as List<GroupMember>,
     ));
   }
 }
@@ -374,14 +376,14 @@ class __$LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.group);
+  const _$_Loaded(this.publications);
 
   @override
-  final Group group;
+  final List<GroupMember> publications;
 
   @override
   String toString() {
-    return 'RetrieveGroupByIdState.loaded(group: $group)';
+    return 'RetrieveGroupMembersByGroupIdState.loaded(publications: $publications)';
   }
 
   @override
@@ -389,12 +391,13 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Loaded &&
-            const DeepCollectionEquality().equals(other.group, group));
+            const DeepCollectionEquality()
+                .equals(other.publications, publications));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(group));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(publications));
 
   @JsonKey(ignore: true)
   @override
@@ -406,10 +409,10 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Group group) loaded,
+    required TResult Function(List<GroupMember> publications) loaded,
     required TResult Function() failure,
   }) {
-    return loaded(group);
+    return loaded(publications);
   }
 
   @override
@@ -417,10 +420,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
   }) {
-    return loaded?.call(group);
+    return loaded?.call(publications);
   }
 
   @override
@@ -428,12 +431,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(group);
+      return loaded(publications);
     }
     return orElse();
   }
@@ -476,10 +479,10 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements RetrieveGroupByIdState {
-  const factory _Loaded(Group group) = _$_Loaded;
+abstract class _Loaded implements RetrieveGroupMembersByGroupIdState {
+  const factory _Loaded(List<GroupMember> publications) = _$_Loaded;
 
-  Group get group;
+  List<GroupMember> get publications;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -492,7 +495,7 @@ abstract class _$FailureCopyWith<$Res> {
 
 /// @nodoc
 class __$FailureCopyWithImpl<$Res>
-    extends _$RetrieveGroupByIdStateCopyWithImpl<$Res>
+    extends _$RetrieveGroupMembersByGroupIdStateCopyWithImpl<$Res>
     implements _$FailureCopyWith<$Res> {
   __$FailureCopyWithImpl(_Failure _value, $Res Function(_Failure) _then)
       : super(_value, (v) => _then(v as _Failure));
@@ -508,7 +511,7 @@ class _$_Failure implements _Failure {
 
   @override
   String toString() {
-    return 'RetrieveGroupByIdState.failure()';
+    return 'RetrieveGroupMembersByGroupIdState.failure()';
   }
 
   @override
@@ -525,7 +528,7 @@ class _$_Failure implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Group group) loaded,
+    required TResult Function(List<GroupMember> publications) loaded,
     required TResult Function() failure,
   }) {
     return failure();
@@ -536,7 +539,7 @@ class _$_Failure implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
   }) {
     return failure?.call();
@@ -547,7 +550,7 @@ class _$_Failure implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Group group)? loaded,
+    TResult Function(List<GroupMember> publications)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -595,6 +598,6 @@ class _$_Failure implements _Failure {
   }
 }
 
-abstract class _Failure implements RetrieveGroupByIdState {
+abstract class _Failure implements RetrieveGroupMembersByGroupIdState {
   const factory _Failure() = _$_Failure;
 }

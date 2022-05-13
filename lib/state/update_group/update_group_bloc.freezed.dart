@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'update_user_bloc.dart';
+part of 'update_group_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,11 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$UpdateUserEventTearOff {
-  const _$UpdateUserEventTearOff();
+class _$UpdateGroupEventTearOff {
+  const _$UpdateGroupEventTearOff();
 
-  _Submit submit() {
-    return const _Submit();
+  _Submit submit(String groupId) {
+    return _Submit(
+      groupId,
+    );
+  }
+
+  _UpdateName updateName(String name) {
+    return _UpdateName(
+      name,
+    );
   }
 
   _UpdateDescription updateDescription(String description) {
@@ -34,191 +42,208 @@ class _$UpdateUserEventTearOff {
     );
   }
 
-  _UpdatePassword updatePassword(String password) {
-    return _UpdatePassword(
-      password,
-    );
-  }
-
-  _UpdateConfirmPassword updateConfirmPassword(String confirmPassword) {
-    return _UpdateConfirmPassword(
-      confirmPassword,
-    );
-  }
-
   _UpdateConfidentiality updateConfidentiality(
       Confidentiality confidentiality) {
     return _UpdateConfidentiality(
       confidentiality,
     );
   }
+
+  _Loaded loaded(Group group) {
+    return _Loaded(
+      group,
+    );
+  }
 }
 
 /// @nodoc
-const $UpdateUserEvent = _$UpdateUserEventTearOff();
+const $UpdateGroupEvent = _$UpdateGroupEventTearOff();
 
 /// @nodoc
-mixin _$UpdateUserEvent {
+mixin _$UpdateGroupEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() submit,
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
     required TResult Function(String description) updateDescription,
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
     required TResult Function(_UpdateDescription value) updateDescription,
     required TResult Function(_UpdateProfilePictureURL value)
         updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UpdateUserEventCopyWith<$Res> {
-  factory $UpdateUserEventCopyWith(
-          UpdateUserEvent value, $Res Function(UpdateUserEvent) then) =
-      _$UpdateUserEventCopyWithImpl<$Res>;
+abstract class $UpdateGroupEventCopyWith<$Res> {
+  factory $UpdateGroupEventCopyWith(
+          UpdateGroupEvent value, $Res Function(UpdateGroupEvent) then) =
+      _$UpdateGroupEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UpdateUserEventCopyWithImpl<$Res>
-    implements $UpdateUserEventCopyWith<$Res> {
-  _$UpdateUserEventCopyWithImpl(this._value, this._then);
+class _$UpdateGroupEventCopyWithImpl<$Res>
+    implements $UpdateGroupEventCopyWith<$Res> {
+  _$UpdateGroupEventCopyWithImpl(this._value, this._then);
 
-  final UpdateUserEvent _value;
+  final UpdateGroupEvent _value;
   // ignore: unused_field
-  final $Res Function(UpdateUserEvent) _then;
+  final $Res Function(UpdateGroupEvent) _then;
 }
 
 /// @nodoc
 abstract class _$SubmitCopyWith<$Res> {
   factory _$SubmitCopyWith(_Submit value, $Res Function(_Submit) then) =
       __$SubmitCopyWithImpl<$Res>;
+  $Res call({String groupId});
 }
 
 /// @nodoc
-class __$SubmitCopyWithImpl<$Res> extends _$UpdateUserEventCopyWithImpl<$Res>
+class __$SubmitCopyWithImpl<$Res> extends _$UpdateGroupEventCopyWithImpl<$Res>
     implements _$SubmitCopyWith<$Res> {
   __$SubmitCopyWithImpl(_Submit _value, $Res Function(_Submit) _then)
       : super(_value, (v) => _then(v as _Submit));
 
   @override
   _Submit get _value => super._value as _Submit;
+
+  @override
+  $Res call({
+    Object? groupId = freezed,
+  }) {
+    return _then(_Submit(
+      groupId == freezed
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Submit implements _Submit {
-  const _$_Submit();
+  const _$_Submit(this.groupId);
+
+  @override
+  final String groupId;
 
   @override
   String toString() {
-    return 'UpdateUserEvent.submit()';
+    return 'UpdateGroupEvent.submit(groupId: $groupId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Submit);
+        (other.runtimeType == runtimeType &&
+            other is _Submit &&
+            const DeepCollectionEquality().equals(other.groupId, groupId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(groupId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$SubmitCopyWith<_Submit> get copyWith =>
+      __$SubmitCopyWithImpl<_Submit>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() submit,
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
     required TResult Function(String description) updateDescription,
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
-    return submit();
+    return submit(groupId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
-    return submit?.call();
+    return submit?.call(groupId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
-      return submit();
+      return submit(groupId);
     }
     return orElse();
   }
@@ -227,14 +252,13 @@ class _$_Submit implements _Submit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
     required TResult Function(_UpdateDescription value) updateDescription,
     required TResult Function(_UpdateProfilePictureURL value)
         updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return submit(this);
   }
@@ -243,11 +267,11 @@ class _$_Submit implements _Submit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return submit?.call(this);
   }
@@ -256,11 +280,11 @@ class _$_Submit implements _Submit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -270,8 +294,173 @@ class _$_Submit implements _Submit {
   }
 }
 
-abstract class _Submit implements UpdateUserEvent {
-  const factory _Submit() = _$_Submit;
+abstract class _Submit implements UpdateGroupEvent {
+  const factory _Submit(String groupId) = _$_Submit;
+
+  String get groupId;
+  @JsonKey(ignore: true)
+  _$SubmitCopyWith<_Submit> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$UpdateNameCopyWith<$Res> {
+  factory _$UpdateNameCopyWith(
+          _UpdateName value, $Res Function(_UpdateName) then) =
+      __$UpdateNameCopyWithImpl<$Res>;
+  $Res call({String name});
+}
+
+/// @nodoc
+class __$UpdateNameCopyWithImpl<$Res>
+    extends _$UpdateGroupEventCopyWithImpl<$Res>
+    implements _$UpdateNameCopyWith<$Res> {
+  __$UpdateNameCopyWithImpl(
+      _UpdateName _value, $Res Function(_UpdateName) _then)
+      : super(_value, (v) => _then(v as _UpdateName));
+
+  @override
+  _UpdateName get _value => super._value as _UpdateName;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+  }) {
+    return _then(_UpdateName(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateName implements _UpdateName {
+  const _$_UpdateName(this.name);
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'UpdateGroupEvent.updateName(name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UpdateName &&
+            const DeepCollectionEquality().equals(other.name, name));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateNameCopyWith<_UpdateName> get copyWith =>
+      __$UpdateNameCopyWithImpl<_UpdateName>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
+    required TResult Function(String description) updateDescription,
+    required TResult Function(String profilePictureURL) updateProfilePictureURL,
+    required TResult Function(Confidentiality confidentiality)
+        updateConfidentiality,
+    required TResult Function(Group group) loaded,
+  }) {
+    return updateName(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+  }) {
+    return updateName?.call(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+    required TResult orElse(),
+  }) {
+    if (updateName != null) {
+      return updateName(name);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
+    required TResult Function(_UpdateDescription value) updateDescription,
+    required TResult Function(_UpdateProfilePictureURL value)
+        updateProfilePictureURL,
+    required TResult Function(_UpdateConfidentiality value)
+        updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return updateName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+  }) {
+    return updateName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (updateName != null) {
+      return updateName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateName implements UpdateGroupEvent {
+  const factory _UpdateName(String name) = _$_UpdateName;
+
+  String get name;
+  @JsonKey(ignore: true)
+  _$UpdateNameCopyWith<_UpdateName> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -284,7 +473,7 @@ abstract class _$UpdateDescriptionCopyWith<$Res> {
 
 /// @nodoc
 class __$UpdateDescriptionCopyWithImpl<$Res>
-    extends _$UpdateUserEventCopyWithImpl<$Res>
+    extends _$UpdateGroupEventCopyWithImpl<$Res>
     implements _$UpdateDescriptionCopyWith<$Res> {
   __$UpdateDescriptionCopyWithImpl(
       _UpdateDescription _value, $Res Function(_UpdateDescription) _then)
@@ -316,7 +505,7 @@ class _$_UpdateDescription implements _UpdateDescription {
 
   @override
   String toString() {
-    return 'UpdateUserEvent.updateDescription(description: $description)';
+    return 'UpdateGroupEvent.updateDescription(description: $description)';
   }
 
   @override
@@ -340,13 +529,13 @@ class _$_UpdateDescription implements _UpdateDescription {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() submit,
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
     required TResult Function(String description) updateDescription,
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateDescription(description);
   }
@@ -354,12 +543,12 @@ class _$_UpdateDescription implements _UpdateDescription {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateDescription?.call(description);
   }
@@ -367,12 +556,12 @@ class _$_UpdateDescription implements _UpdateDescription {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -385,14 +574,13 @@ class _$_UpdateDescription implements _UpdateDescription {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
     required TResult Function(_UpdateDescription value) updateDescription,
     required TResult Function(_UpdateProfilePictureURL value)
         updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateDescription(this);
   }
@@ -401,11 +589,11 @@ class _$_UpdateDescription implements _UpdateDescription {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateDescription?.call(this);
   }
@@ -414,11 +602,11 @@ class _$_UpdateDescription implements _UpdateDescription {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -428,7 +616,7 @@ class _$_UpdateDescription implements _UpdateDescription {
   }
 }
 
-abstract class _UpdateDescription implements UpdateUserEvent {
+abstract class _UpdateDescription implements UpdateGroupEvent {
   const factory _UpdateDescription(String description) = _$_UpdateDescription;
 
   String get description;
@@ -447,7 +635,7 @@ abstract class _$UpdateProfilePictureURLCopyWith<$Res> {
 
 /// @nodoc
 class __$UpdateProfilePictureURLCopyWithImpl<$Res>
-    extends _$UpdateUserEventCopyWithImpl<$Res>
+    extends _$UpdateGroupEventCopyWithImpl<$Res>
     implements _$UpdateProfilePictureURLCopyWith<$Res> {
   __$UpdateProfilePictureURLCopyWithImpl(_UpdateProfilePictureURL _value,
       $Res Function(_UpdateProfilePictureURL) _then)
@@ -480,7 +668,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
 
   @override
   String toString() {
-    return 'UpdateUserEvent.updateProfilePictureURL(profilePictureURL: $profilePictureURL)';
+    return 'UpdateGroupEvent.updateProfilePictureURL(profilePictureURL: $profilePictureURL)';
   }
 
   @override
@@ -505,13 +693,13 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() submit,
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
     required TResult Function(String description) updateDescription,
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateProfilePictureURL(profilePictureURL);
   }
@@ -519,12 +707,12 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateProfilePictureURL?.call(profilePictureURL);
   }
@@ -532,12 +720,12 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -550,14 +738,13 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
     required TResult Function(_UpdateDescription value) updateDescription,
     required TResult Function(_UpdateProfilePictureURL value)
         updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateProfilePictureURL(this);
   }
@@ -566,11 +753,11 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateProfilePictureURL?.call(this);
   }
@@ -579,11 +766,11 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -593,340 +780,13 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
   }
 }
 
-abstract class _UpdateProfilePictureURL implements UpdateUserEvent {
+abstract class _UpdateProfilePictureURL implements UpdateGroupEvent {
   const factory _UpdateProfilePictureURL(String profilePictureURL) =
       _$_UpdateProfilePictureURL;
 
   String get profilePictureURL;
   @JsonKey(ignore: true)
   _$UpdateProfilePictureURLCopyWith<_UpdateProfilePictureURL> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$UpdatePasswordCopyWith<$Res> {
-  factory _$UpdatePasswordCopyWith(
-          _UpdatePassword value, $Res Function(_UpdatePassword) then) =
-      __$UpdatePasswordCopyWithImpl<$Res>;
-  $Res call({String password});
-}
-
-/// @nodoc
-class __$UpdatePasswordCopyWithImpl<$Res>
-    extends _$UpdateUserEventCopyWithImpl<$Res>
-    implements _$UpdatePasswordCopyWith<$Res> {
-  __$UpdatePasswordCopyWithImpl(
-      _UpdatePassword _value, $Res Function(_UpdatePassword) _then)
-      : super(_value, (v) => _then(v as _UpdatePassword));
-
-  @override
-  _UpdatePassword get _value => super._value as _UpdatePassword;
-
-  @override
-  $Res call({
-    Object? password = freezed,
-  }) {
-    return _then(_UpdatePassword(
-      password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_UpdatePassword implements _UpdatePassword {
-  const _$_UpdatePassword(this.password);
-
-  @override
-  final String password;
-
-  @override
-  String toString() {
-    return 'UpdateUserEvent.updatePassword(password: $password)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _UpdatePassword &&
-            const DeepCollectionEquality().equals(other.password, password));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(password));
-
-  @JsonKey(ignore: true)
-  @override
-  _$UpdatePasswordCopyWith<_UpdatePassword> get copyWith =>
-      __$UpdatePasswordCopyWithImpl<_UpdatePassword>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() submit,
-    required TResult Function(String description) updateDescription,
-    required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
-    required TResult Function(Confidentiality confidentiality)
-        updateConfidentiality,
-  }) {
-    return updatePassword(password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
-    TResult Function(String description)? updateDescription,
-    TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
-    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
-  }) {
-    return updatePassword?.call(password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
-    TResult Function(String description)? updateDescription,
-    TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
-    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
-    required TResult orElse(),
-  }) {
-    if (updatePassword != null) {
-      return updatePassword(password);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Submit value) submit,
-    required TResult Function(_UpdateDescription value) updateDescription,
-    required TResult Function(_UpdateProfilePictureURL value)
-        updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
-    required TResult Function(_UpdateConfidentiality value)
-        updateConfidentiality,
-  }) {
-    return updatePassword(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
-    TResult Function(_UpdateDescription value)? updateDescription,
-    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
-    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
-  }) {
-    return updatePassword?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
-    TResult Function(_UpdateDescription value)? updateDescription,
-    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
-    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
-    required TResult orElse(),
-  }) {
-    if (updatePassword != null) {
-      return updatePassword(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdatePassword implements UpdateUserEvent {
-  const factory _UpdatePassword(String password) = _$_UpdatePassword;
-
-  String get password;
-  @JsonKey(ignore: true)
-  _$UpdatePasswordCopyWith<_UpdatePassword> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$UpdateConfirmPasswordCopyWith<$Res> {
-  factory _$UpdateConfirmPasswordCopyWith(_UpdateConfirmPassword value,
-          $Res Function(_UpdateConfirmPassword) then) =
-      __$UpdateConfirmPasswordCopyWithImpl<$Res>;
-  $Res call({String confirmPassword});
-}
-
-/// @nodoc
-class __$UpdateConfirmPasswordCopyWithImpl<$Res>
-    extends _$UpdateUserEventCopyWithImpl<$Res>
-    implements _$UpdateConfirmPasswordCopyWith<$Res> {
-  __$UpdateConfirmPasswordCopyWithImpl(_UpdateConfirmPassword _value,
-      $Res Function(_UpdateConfirmPassword) _then)
-      : super(_value, (v) => _then(v as _UpdateConfirmPassword));
-
-  @override
-  _UpdateConfirmPassword get _value => super._value as _UpdateConfirmPassword;
-
-  @override
-  $Res call({
-    Object? confirmPassword = freezed,
-  }) {
-    return _then(_UpdateConfirmPassword(
-      confirmPassword == freezed
-          ? _value.confirmPassword
-          : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
-  const _$_UpdateConfirmPassword(this.confirmPassword);
-
-  @override
-  final String confirmPassword;
-
-  @override
-  String toString() {
-    return 'UpdateUserEvent.updateConfirmPassword(confirmPassword: $confirmPassword)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _UpdateConfirmPassword &&
-            const DeepCollectionEquality()
-                .equals(other.confirmPassword, confirmPassword));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(confirmPassword));
-
-  @JsonKey(ignore: true)
-  @override
-  _$UpdateConfirmPasswordCopyWith<_UpdateConfirmPassword> get copyWith =>
-      __$UpdateConfirmPasswordCopyWithImpl<_UpdateConfirmPassword>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() submit,
-    required TResult Function(String description) updateDescription,
-    required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
-    required TResult Function(Confidentiality confidentiality)
-        updateConfidentiality,
-  }) {
-    return updateConfirmPassword(confirmPassword);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
-    TResult Function(String description)? updateDescription,
-    TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
-    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
-  }) {
-    return updateConfirmPassword?.call(confirmPassword);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
-    TResult Function(String description)? updateDescription,
-    TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
-    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
-    required TResult orElse(),
-  }) {
-    if (updateConfirmPassword != null) {
-      return updateConfirmPassword(confirmPassword);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Submit value) submit,
-    required TResult Function(_UpdateDescription value) updateDescription,
-    required TResult Function(_UpdateProfilePictureURL value)
-        updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
-    required TResult Function(_UpdateConfidentiality value)
-        updateConfidentiality,
-  }) {
-    return updateConfirmPassword(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
-    TResult Function(_UpdateDescription value)? updateDescription,
-    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
-    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
-  }) {
-    return updateConfirmPassword?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Submit value)? submit,
-    TResult Function(_UpdateDescription value)? updateDescription,
-    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
-    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
-    required TResult orElse(),
-  }) {
-    if (updateConfirmPassword != null) {
-      return updateConfirmPassword(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateConfirmPassword implements UpdateUserEvent {
-  const factory _UpdateConfirmPassword(String confirmPassword) =
-      _$_UpdateConfirmPassword;
-
-  String get confirmPassword;
-  @JsonKey(ignore: true)
-  _$UpdateConfirmPasswordCopyWith<_UpdateConfirmPassword> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -940,7 +800,7 @@ abstract class _$UpdateConfidentialityCopyWith<$Res> {
 
 /// @nodoc
 class __$UpdateConfidentialityCopyWithImpl<$Res>
-    extends _$UpdateUserEventCopyWithImpl<$Res>
+    extends _$UpdateGroupEventCopyWithImpl<$Res>
     implements _$UpdateConfidentialityCopyWith<$Res> {
   __$UpdateConfidentialityCopyWithImpl(_UpdateConfidentiality _value,
       $Res Function(_UpdateConfidentiality) _then)
@@ -972,7 +832,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
 
   @override
   String toString() {
-    return 'UpdateUserEvent.updateConfidentiality(confidentiality: $confidentiality)';
+    return 'UpdateGroupEvent.updateConfidentiality(confidentiality: $confidentiality)';
   }
 
   @override
@@ -997,13 +857,13 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() submit,
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
     required TResult Function(String description) updateDescription,
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
-    required TResult Function(String password) updatePassword,
-    required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateConfidentiality(confidentiality);
   }
@@ -1011,12 +871,12 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateConfidentiality?.call(confidentiality);
   }
@@ -1024,12 +884,12 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? submit,
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
-    TResult Function(String password)? updatePassword,
-    TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -1042,14 +902,13 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
     required TResult Function(_UpdateDescription value) updateDescription,
     required TResult Function(_UpdateProfilePictureURL value)
         updateProfilePictureURL,
-    required TResult Function(_UpdatePassword value) updatePassword,
-    required TResult Function(_UpdateConfirmPassword value)
-        updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateConfidentiality(this);
   }
@@ -1058,11 +917,11 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateConfidentiality?.call(this);
   }
@@ -1071,11 +930,11 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
-    TResult Function(_UpdatePassword value)? updatePassword,
-    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -1085,7 +944,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
   }
 }
 
-abstract class _UpdateConfidentiality implements UpdateUserEvent {
+abstract class _UpdateConfidentiality implements UpdateGroupEvent {
   const factory _UpdateConfidentiality(Confidentiality confidentiality) =
       _$_UpdateConfidentiality;
 
@@ -1096,21 +955,176 @@ abstract class _UpdateConfidentiality implements UpdateUserEvent {
 }
 
 /// @nodoc
-class _$UpdateUserStateTearOff {
-  const _$UpdateUserStateTearOff();
+abstract class _$LoadedCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
+      __$LoadedCopyWithImpl<$Res>;
+  $Res call({Group group});
+}
+
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res> extends _$UpdateGroupEventCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
+      : super(_value, (v) => _then(v as _Loaded));
+
+  @override
+  _Loaded get _value => super._value as _Loaded;
+
+  @override
+  $Res call({
+    Object? group = freezed,
+  }) {
+    return _then(_Loaded(
+      group == freezed
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as Group,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Loaded implements _Loaded {
+  const _$_Loaded(this.group);
+
+  @override
+  final Group group;
+
+  @override
+  String toString() {
+    return 'UpdateGroupEvent.loaded(group: $group)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Loaded &&
+            const DeepCollectionEquality().equals(other.group, group));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(group));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadedCopyWith<_Loaded> get copyWith =>
+      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
+    required TResult Function(String description) updateDescription,
+    required TResult Function(String profilePictureURL) updateProfilePictureURL,
+    required TResult Function(Confidentiality confidentiality)
+        updateConfidentiality,
+    required TResult Function(Group group) loaded,
+  }) {
+    return loaded(group);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+  }) {
+    return loaded?.call(group);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(group);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
+    required TResult Function(_UpdateDescription value) updateDescription,
+    required TResult Function(_UpdateProfilePictureURL value)
+        updateProfilePictureURL,
+    required TResult Function(_UpdateConfidentiality value)
+        updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loaded implements UpdateGroupEvent {
+  const factory _Loaded(Group group) = _$_Loaded;
+
+  Group get group;
+  @JsonKey(ignore: true)
+  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$UpdateGroupStateTearOff {
+  const _$UpdateGroupStateTearOff();
 
   _State state(
-      {String? description = '',
+      {String name = '',
+      String? description = '',
       String? profilePictureURL = '',
-      String password = '',
-      String confirmPassword = '',
       Confidentiality confidentiality = Confidentiality.public,
       FormStatus status = const FormNotSent()}) {
     return _State(
+      name: name,
       description: description,
       profilePictureURL: profilePictureURL,
-      password: password,
-      confirmPassword: confirmPassword,
       confidentiality: confidentiality,
       status: status,
     );
@@ -1118,24 +1132,22 @@ class _$UpdateUserStateTearOff {
 }
 
 /// @nodoc
-const $UpdateUserState = _$UpdateUserStateTearOff();
+const $UpdateGroupState = _$UpdateGroupStateTearOff();
 
 /// @nodoc
-mixin _$UpdateUserState {
+mixin _$UpdateGroupState {
+  String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get profilePictureURL => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  String get confirmPassword => throw _privateConstructorUsedError;
   Confidentiality get confidentiality => throw _privateConstructorUsedError;
   FormStatus get status => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)
         state,
@@ -1144,10 +1156,9 @@ mixin _$UpdateUserState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)?
         state,
@@ -1156,10 +1167,9 @@ mixin _$UpdateUserState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)?
         state,
@@ -1184,43 +1194,45 @@ mixin _$UpdateUserState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UpdateUserStateCopyWith<UpdateUserState> get copyWith =>
+  $UpdateGroupStateCopyWith<UpdateGroupState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UpdateUserStateCopyWith<$Res> {
-  factory $UpdateUserStateCopyWith(
-          UpdateUserState value, $Res Function(UpdateUserState) then) =
-      _$UpdateUserStateCopyWithImpl<$Res>;
+abstract class $UpdateGroupStateCopyWith<$Res> {
+  factory $UpdateGroupStateCopyWith(
+          UpdateGroupState value, $Res Function(UpdateGroupState) then) =
+      _$UpdateGroupStateCopyWithImpl<$Res>;
   $Res call(
-      {String? description,
+      {String name,
+      String? description,
       String? profilePictureURL,
-      String password,
-      String confirmPassword,
       Confidentiality confidentiality,
       FormStatus status});
 }
 
 /// @nodoc
-class _$UpdateUserStateCopyWithImpl<$Res>
-    implements $UpdateUserStateCopyWith<$Res> {
-  _$UpdateUserStateCopyWithImpl(this._value, this._then);
+class _$UpdateGroupStateCopyWithImpl<$Res>
+    implements $UpdateGroupStateCopyWith<$Res> {
+  _$UpdateGroupStateCopyWithImpl(this._value, this._then);
 
-  final UpdateUserState _value;
+  final UpdateGroupState _value;
   // ignore: unused_field
-  final $Res Function(UpdateUserState) _then;
+  final $Res Function(UpdateGroupState) _then;
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? description = freezed,
     Object? profilePictureURL = freezed,
-    Object? password = freezed,
-    Object? confirmPassword = freezed,
     Object? confidentiality = freezed,
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1229,14 +1241,6 @@ class _$UpdateUserStateCopyWithImpl<$Res>
           ? _value.profilePictureURL
           : profilePictureURL // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      confirmPassword: confirmPassword == freezed
-          ? _value.confirmPassword
-          : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as String,
       confidentiality: confidentiality == freezed
           ? _value.confidentiality
           : confidentiality // ignore: cast_nullable_to_non_nullable
@@ -1250,21 +1254,21 @@ class _$UpdateUserStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$StateCopyWith<$Res> implements $UpdateUserStateCopyWith<$Res> {
+abstract class _$StateCopyWith<$Res>
+    implements $UpdateGroupStateCopyWith<$Res> {
   factory _$StateCopyWith(_State value, $Res Function(_State) then) =
       __$StateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? description,
+      {String name,
+      String? description,
       String? profilePictureURL,
-      String password,
-      String confirmPassword,
       Confidentiality confidentiality,
       FormStatus status});
 }
 
 /// @nodoc
-class __$StateCopyWithImpl<$Res> extends _$UpdateUserStateCopyWithImpl<$Res>
+class __$StateCopyWithImpl<$Res> extends _$UpdateGroupStateCopyWithImpl<$Res>
     implements _$StateCopyWith<$Res> {
   __$StateCopyWithImpl(_State _value, $Res Function(_State) _then)
       : super(_value, (v) => _then(v as _State));
@@ -1274,14 +1278,17 @@ class __$StateCopyWithImpl<$Res> extends _$UpdateUserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? description = freezed,
     Object? profilePictureURL = freezed,
-    Object? password = freezed,
-    Object? confirmPassword = freezed,
     Object? confidentiality = freezed,
     Object? status = freezed,
   }) {
     return _then(_State(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1290,14 +1297,6 @@ class __$StateCopyWithImpl<$Res> extends _$UpdateUserStateCopyWithImpl<$Res>
           ? _value.profilePictureURL
           : profilePictureURL // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      confirmPassword: confirmPassword == freezed
-          ? _value.confirmPassword
-          : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as String,
       confidentiality: confidentiality == freezed
           ? _value.confidentiality
           : confidentiality // ignore: cast_nullable_to_non_nullable
@@ -1314,25 +1313,21 @@ class __$StateCopyWithImpl<$Res> extends _$UpdateUserStateCopyWithImpl<$Res>
 
 class _$_State implements _State {
   const _$_State(
-      {this.description = '',
+      {this.name = '',
+      this.description = '',
       this.profilePictureURL = '',
-      this.password = '',
-      this.confirmPassword = '',
       this.confidentiality = Confidentiality.public,
       this.status = const FormNotSent()});
 
+  @JsonKey()
+  @override
+  final String name;
   @JsonKey()
   @override
   final String? description;
   @JsonKey()
   @override
   final String? profilePictureURL;
-  @JsonKey()
-  @override
-  final String password;
-  @JsonKey()
-  @override
-  final String confirmPassword;
   @JsonKey()
   @override
   final Confidentiality confidentiality;
@@ -1342,7 +1337,7 @@ class _$_State implements _State {
 
   @override
   String toString() {
-    return 'UpdateUserState.state(description: $description, profilePictureURL: $profilePictureURL, password: $password, confirmPassword: $confirmPassword, confidentiality: $confidentiality, status: $status)';
+    return 'UpdateGroupState.state(name: $name, description: $description, profilePictureURL: $profilePictureURL, confidentiality: $confidentiality, status: $status)';
   }
 
   @override
@@ -1350,13 +1345,11 @@ class _$_State implements _State {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _State &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality()
                 .equals(other.profilePictureURL, profilePictureURL) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.confirmPassword, confirmPassword) &&
             const DeepCollectionEquality()
                 .equals(other.confidentiality, confidentiality) &&
             const DeepCollectionEquality().equals(other.status, status));
@@ -1365,10 +1358,9 @@ class _$_State implements _State {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(profilePictureURL),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(confirmPassword),
       const DeepCollectionEquality().hash(confidentiality),
       const DeepCollectionEquality().hash(status));
 
@@ -1381,50 +1373,46 @@ class _$_State implements _State {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)
         state,
   }) {
-    return state(description, profilePictureURL, password, confirmPassword,
-        confidentiality, status);
+    return state(name, description, profilePictureURL, confidentiality, status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)?
         state,
   }) {
-    return state?.call(description, profilePictureURL, password,
-        confirmPassword, confidentiality, status);
+    return state?.call(
+        name, description, profilePictureURL, confidentiality, status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            String name,
             String? description,
             String? profilePictureURL,
-            String password,
-            String confirmPassword,
             Confidentiality confidentiality,
             FormStatus status)?
         state,
     required TResult orElse(),
   }) {
     if (state != null) {
-      return state(description, profilePictureURL, password, confirmPassword,
-          confidentiality, status);
+      return state(
+          name, description, profilePictureURL, confidentiality, status);
     }
     return orElse();
   }
@@ -1458,23 +1446,20 @@ class _$_State implements _State {
   }
 }
 
-abstract class _State implements UpdateUserState {
+abstract class _State implements UpdateGroupState {
   const factory _State(
-      {String? description,
+      {String name,
+      String? description,
       String? profilePictureURL,
-      String password,
-      String confirmPassword,
       Confidentiality confidentiality,
       FormStatus status}) = _$_State;
 
   @override
+  String get name;
+  @override
   String? get description;
   @override
   String? get profilePictureURL;
-  @override
-  String get password;
-  @override
-  String get confirmPassword;
   @override
   Confidentiality get confidentiality;
   @override

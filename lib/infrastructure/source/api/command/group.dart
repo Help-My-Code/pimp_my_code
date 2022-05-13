@@ -15,4 +15,7 @@ abstract class GroupInteractor extends ChopperService {
 
   @Get(path: '/getByCreatorId')
   Future<Response> getByCreatorId(@Query() String creatorId);
+
+  @Put(path: '/update')
+  Future<Response> update({@Body() required Map<String, String> fields});
 }

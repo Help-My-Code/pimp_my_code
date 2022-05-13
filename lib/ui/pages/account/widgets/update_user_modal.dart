@@ -31,10 +31,6 @@ class UpdateUserModal extends StatelessWidget {
           key: _formKey,
           child: BlocBuilder<UpdateUserBloc, UpdateUserState>(
             builder: (context, state) {
-              context.read<UpdateUserBloc>().add(UpdateUserEvent.init(
-                  user.description,
-                  user.principalPictureUrl,
-                  user.confidentiality));
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

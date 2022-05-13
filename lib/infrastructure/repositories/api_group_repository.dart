@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 
+import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
 import '../../domain/usecases/group/find_group_by_id.dart';
 import '../../domain/usecases/group/find_group_by_name.dart';
 import '../../domain/usecases/group/find_my_groups.dart';
+import '../../domain/usecases/group/update_group.dart';
 import '../converter/group_mapper.dart';
 import '../source/api/command/group.dart';
 import '../source/api/model/group/group_model.dart';
@@ -30,11 +32,12 @@ class ApiGroupRepository extends GroupRepository {
   }
 
   @override
-  Future<Either<FindGroupByIdFailure, Group>> getById({required String id}) async {
+  Future<Either<FindGroupByIdFailure, Group>> getById(
+      {required String id}) async {
     final response = await _dataSource.getById(id);
     final Map<String, dynamic> apiGroup = response.body['group'];
     return Right(
-        _groupMapper.mapApiGroupToGroup(ApiGroupModel.fromJson(apiGroup)),
+      _groupMapper.mapApiGroupToGroup(ApiGroupModel.fromJson(apiGroup)),
     );
   }
 
@@ -50,5 +53,26 @@ class ApiGroupRepository extends GroupRepository {
           .map(_groupMapper.mapApiGroupToGroup)
           .toList(),
     );
+  }
+
+  @override
+  Future<Either<UpdateGroupFailed, UpdateGroupSuccess>> updateGroup(
+      String groupId,
+      String name,
+      String description,
+      String profilePictureURL,
+      Confidentiality confidentiality) async {
+    try {
+      await _dataSource.update(fields: {
+        'groupId': groupId,
+        'name': name,
+        'description': description,
+        'confidentiality': confidentiality.name.toUpperCase(),
+        'principalPictureId': profilePictureURL,
+      });
+      return Right(UpdateGroupSuccess());
+    } catch (e) {
+      return Left(UpdateGroupFailed());
+    }
   }
 }
