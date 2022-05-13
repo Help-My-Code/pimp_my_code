@@ -23,4 +23,30 @@ class _$GroupMemberInteractor extends GroupMemberInteractor {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getByGroupId(String groupId) {
+    final $url = '/groupMember/getByGroupId';
+    final $params = <String, dynamic>{'groupId': groupId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> createGroupMember(
+      {required Map<String, String> fields}) {
+    final $url = '/groupMember/create';
+    final $body = fields;
+    final $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> deleteGroupMember(
+      {required Map<String, String> fields}) {
+    final $url = '/groupMember/delete';
+    final $body = fields;
+    final $request = Request('DELETE', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

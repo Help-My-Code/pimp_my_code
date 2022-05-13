@@ -61,6 +61,7 @@
   "create_content_failure": "Erreur inatendue s'est passée durant la création de la publication",
   "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation...",
   "edit_profile": "Modifier le profil",
+  "edit_group": "Modifier le groupe",
   "follow": "S'abonner",
   "unfollow": "Se désabonner",
   "followers": " Abonnés",
@@ -75,11 +76,13 @@
   "user_updated": "L'utilisateur a été modifié",
   "user_updated_failed": "La modification de l'utilisateur a échoué",
   "private_user": "Utilisateur privé",
+  "private_group": "Groupe privé",
   "unfollow_success": "Vous vous êtes désabonné",
   "unfollow_failed": "Le désabonnement n'a pas pu être effectué",
   "follow_success": "Vous vous êtes abonné",
   "follow_failed": "L'abonnement n'a pas pu être effectué",
   "add_message": "Ajouter un message",
   "add_comment": "Commenter",
-  "add_your_comment": "Ajouter votre commentaire"
+  "add_your_comment": "Ajouter votre commentaire",
+  "members": "Membres"
 }

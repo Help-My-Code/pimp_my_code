@@ -1,24 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../core/form_status.dart';
-import '../../../../domain/entities/user.dart';
-import '../../../../state/update_user/update_user_bloc.dart';
+import '../../../../domain/entities/group.dart';
+import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../validator/validators.dart';
 
 class UpdateGroupModal extends StatelessWidget {
-  UpdateGroupModal({Key? key, required this.user}) : super(key: key);
+  UpdateGroupModal({Key? key, required this.group}) : super(key: key);
 
-  final Group user;
+  final Group group;
   final _formKey = GlobalKey<FormState>();
-  final _passwordController = TextEditingController();
-  bool isValidPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +28,13 @@ class UpdateGroupModal extends StatelessWidget {
           key: _formKey,
           child: BlocBuilder<UpdateGroupBloc, UpdateGroupState>(
             builder: (context, state) {
-              context.read<UpdateGroupBloc>().add(UpdateGroupEvent.init(
-                  user.description,
-                  user.principalPictureUrl,
-                  user.confidentiality));
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  _buildName(context, width),
                   _buildDescription(context, width),
                   _buildProfilPictureURL(context, width),
-                  _buildPassword(context, width),
-                  _buildValidationBar(context),
-                  _buildPasswordConfirmation(context, width, state.password),
+                  const SizedBox(height: 10),
                   _buildConfidentiality(context, width),
                   const SizedBox(height: 10),
                   _buildUpdate(context),
@@ -55,12 +47,31 @@ class UpdateGroupModal extends StatelessWidget {
     );
   }
 
+  Widget _buildName(BuildContext context, double width) {
+    return SizedBox(
+      width: width,
+      child: TextFormField(
+        validator: requiredValidator,
+        initialValue: group.name,
+        onChanged: (value) => context
+            .read<UpdateGroupBloc>()
+            .add(UpdateGroupEvent.updateName(value)),
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          labelText: 'name'.tr(),
+          icon: const Icon(Icons.edit),
+        ),
+        maxLength: 255,
+      ),
+    );
+  }
+
   Widget _buildDescription(BuildContext context, double width) {
     return SizedBox(
       width: width,
       child: TextFormField(
         validator: requiredValidator,
-        initialValue: user.description,
+        initialValue: group.description,
         onChanged: (value) => context
             .read<UpdateGroupBloc>()
             .add(UpdateGroupEvent.updateDescription(value)),
@@ -79,7 +90,7 @@ class UpdateGroupModal extends StatelessWidget {
       width: width,
       child: TextFormField(
         validator: requiredValidator,
-        initialValue: user.principalPictureUrl,
+        initialValue: group.principalPictureUrl,
         onChanged: (value) => context
             .read<UpdateGroupBloc>()
             .add(UpdateGroupEvent.updateProfilePictureURL(value)),
@@ -92,87 +103,16 @@ class UpdateGroupModal extends StatelessWidget {
     );
   }
 
-  SizedBox _buildPassword(BuildContext context, double width) {
-    return SizedBox(
-      width: width,
-      child: TextFormField(
-        controller: _passwordController,
-        validator: (validator) {
-          if (validator!.isEmpty) {
-            return 'required_password'.tr();
-          }
-          if (!isValidPassword) {
-            return 'conditions_password'.tr();
-          }
-          return null;
-        },
-        obscureText: true,
-        onChanged: (value) => context
-            .read<UpdateGroupBloc>()
-            .add(UpdateGroupEvent.updatePassword(value)),
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          labelText: 'password*'.tr(),
-          icon: const Icon(Icons.password),
-        ),
-        maxLength: 20,
-      ),
-    );
-  }
-
-  Widget _buildValidationBar(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03),
-      child: FlutterPwValidator(
-        controller: _passwordController,
-        minLength: 8,
-        uppercaseCharCount: 1,
-        numericCharCount: 1,
-        specialCharCount: 1,
-        normalCharCount: 1,
-        width: 400,
-        height: 150,
-        onSuccess: () {
-          isValidPassword = true;
-        },
-        onFail: () {
-          isValidPassword = false;
-        },
-      ),
-    );
-  }
-
-  Widget _buildPasswordConfirmation(
-      BuildContext context, double width, String? password) {
-    return SizedBox(
-      width: width,
-      child: TextFormField(
-        obscureText: true,
-        validator: (validator) =>
-            requiredConfirmPasswordValidator(validator, password),
-        onChanged: (value) => context
-            .read<UpdateGroupBloc>()
-            .add(UpdateGroupEvent.updateConfirmPassword(value)),
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          labelText: 'password_confirmation*'.tr(),
-          icon: const Icon(Icons.password),
-        ),
-        maxLength: 20,
-      ),
-    );
-  }
-
   Widget _buildConfidentiality(BuildContext context, double width) {
     return Row(
       children: [
-        const Text('private_account', style: TextStyle(fontSize: 14)).tr(),
+        const Text('private_group', style: TextStyle(fontSize: 14)).tr(),
         const SizedBox(width: 10),
         GFToggle(
           onChanged: (value) => context.read<UpdateGroupBloc>().add(
               UpdateGroupEvent.updateConfidentiality(
                   value! ? Confidentiality.private : Confidentiality.public)),
-          value: user.confidentiality == Confidentiality.public ? false : true,
+          value: group.confidentiality == Confidentiality.public ? false : true,
           type: GFToggleType.ios,
         )
       ],
@@ -184,7 +124,7 @@ class UpdateGroupModal extends StatelessWidget {
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('user_updated').tr(),
+            content: const Text('group_updated').tr(),
             backgroundColor: Colors.green,
           ));
           Navigator.pop(context);
@@ -192,7 +132,7 @@ class UpdateGroupModal extends StatelessWidget {
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('user_updated_failed').tr(),
+            content: const Text('group_updated_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
           Navigator.pop(context);
@@ -211,7 +151,7 @@ class UpdateGroupModal extends StatelessWidget {
                 state.status is FormNotSent) {
               context
                   .read<UpdateGroupBloc>()
-                  .add(const UpdateGroupEvent.submit());
+                  .add(UpdateGroupEvent.submit(group.id));
             }
           },
           width: 120,

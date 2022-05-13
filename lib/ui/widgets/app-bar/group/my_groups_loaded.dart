@@ -45,8 +45,10 @@ class MyGroupsLoaded extends StatelessWidget {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Navigator.pop(context);
-                      GoRouter.of(context)
-                          .go(Routes.group.path + '?groupId=' + groups[index].id, extra: true);
+                      GoRouter.of(context).go(
+                        Routes.group.path + '?groupId=' + groups[index].id,
+                        extra: true,
+                      );
                     },
                     child: Row(
                       children: <Widget>[
@@ -58,8 +60,10 @@ class MyGroupsLoaded extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Text(groups[index].name,
-                            style: const TextStyle(fontSize: 16)),
+                        Text(
+                          groups[index].name,
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ],
                     ),
                   ),

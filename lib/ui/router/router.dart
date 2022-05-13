@@ -10,6 +10,7 @@ import '../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
 import '../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
+import '../../state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import '../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../state/session/session_cubit.dart';
 import '../pages/account/account.dart';
@@ -89,13 +90,10 @@ class AppRouter {
                     BlocProvider(
                       create: (context) => sl<RetrieveContentCubit>(),
                     ),
-                    // BlocProvider(
-                    //   create: (context) =>
-                    //       sl<RetrieveGroupMemberByMemberIdCubit>(),
-                    // ),
-                    // BlocProvider(
-                    //   create: (context) => sl<RetrieveGroupMemberByGroupIdCubit>(),
-                    // ),
+                    BlocProvider(
+                      create: (context) =>
+                          sl<RetrieveGroupMembersByGroupIdCubit>(),
+                    ),
                   ],
                   child: GroupPage(
                     groupId: state.queryParams['groupId']!,

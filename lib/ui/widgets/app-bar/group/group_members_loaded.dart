@@ -48,8 +48,11 @@ class GroupMembersLoaded extends StatelessWidget {
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
                         Navigator.pop(context);
-                        GoRouter.of(context)
-                            .go(Routes.group.path + '?groupId=' + groupMembers[index].group.id, extra: false);
+                        GoRouter.of(context).go(
+                            Routes.group.path +
+                                '?groupId=' +
+                                groupMembers[index].group.id,
+                            extra: false);
                       },
                       child: Row(
                         children: <Widget>[
@@ -61,8 +64,10 @@ class GroupMembersLoaded extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Text(groupMembers[index].group.name,
-                              style: const TextStyle(fontSize: 16)),
+                          Text(
+                            groupMembers[index].group.name,
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ],
                       ),
                     ),
@@ -98,8 +103,11 @@ class GroupMembersLoaded extends StatelessWidget {
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
                         Navigator.pop(context);
-                        GoRouter.of(context)
-                            .go(Routes.group.path + '?groupId=' + groupMembers[index].group.id, extra: true);
+                        GoRouter.of(context).go(
+                            Routes.group.path +
+                                '?groupId=' +
+                                groupMembers[index].group.id,
+                            extra: true);
                       },
                       child: Row(
                         children: <Widget>[
@@ -111,8 +119,10 @@ class GroupMembersLoaded extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Text(groupMembers[index].group.name,
-                              style: const TextStyle(fontSize: 16)),
+                          Text(
+                            groupMembers[index].group.name,
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ],
                       ),
                     ),

@@ -61,6 +61,7 @@
   "create_content_failure": "Something unexpected occured during the creation of a publication",
   "code_compiling": "Please wait... your code is compiling...",
   "edit_profile": "Edit profile",
+  "edit_group": "Edit group",
   "follow": "Follow",
   "unfollow": "Unfollow",
   "followers": " Followers",
@@ -69,6 +70,7 @@
   "description": "Description",
   "principal_picture_url": "profile picture URL",
   "private_account": "Private account",
+  "private_group": "Private group",
   "save": "Save",
   "private_user": "Private user",
   "unfollow_success": "You unfollowed",
@@ -77,5 +79,6 @@
   "follow_failed": "Follow could not be performed",
   "add_message": "Add a message",
   "add_comment": "Comment",
-  "add_your_comment": "Add your comment"
+  "add_your_comment": "Add your comment",
+  "members": "Members"
 }

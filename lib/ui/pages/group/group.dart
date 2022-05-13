@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/ui/pages/group/widgets/group_loaded.dart';
 
+import '../../../ioc_container.dart';
+import '../../../state/join_group/join_group_bloc.dart';
+import '../../../state/quit_group/quit_group_bloc.dart';
 import '../../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import '../../widgets/app-bar/app_bar_menu.dart';
 import '../../widgets/loading.dart';
@@ -73,21 +77,19 @@ class _GroupPageState extends State<GroupPage> {
                   return const Loading();
                 },
                 orElse: () => const Loading(),
-                loaded: (user) => Text(widget.isCreatorOrAdmin.toString()));
-                    // MultiBlocProvider(
-                    //   providers: [
-                    //     BlocProvider(
-                    //       create: (context) => sl<FollowUserBloc>(),
-                    //     ),
-                    //     BlocProvider(
-                    //       create: (context) => sl<UnfollowUserBloc>(),
-                    //     ),
-                    //   ],
-                    //   child: GroupLoaded(
-                    //     user: user,
-                    //     context: context,
-                    //   ),
-                    // ));
+                loaded: (group) => MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => sl<JoinGroupBloc>(),
+                          ),
+                          BlocProvider(
+                            create: (context) => sl<QuitGroupBloc>(),
+                          ),
+                        ],
+                        child: GroupLoaded(
+                          group: group,
+                          context: context,
+                        )));
           }),
         ),
       ),
