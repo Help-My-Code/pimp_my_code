@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
 import '../../../core/usecase.dart';
-import '../../entities/follow.dart';
 
 import '../../../core/failure.dart';
 import '../../entities/group_member.dart';
-import '../../repositories/follow_repository.dart';
 import '../../repositories/group_member_repository.dart';
 
 class FindGroupMembersByGroupIdUseCase

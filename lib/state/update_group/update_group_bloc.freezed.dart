@@ -48,6 +48,12 @@ class _$UpdateGroupEventTearOff {
       confidentiality,
     );
   }
+
+  _Loaded loaded(Group group) {
+    return _Loaded(
+      group,
+    );
+  }
 }
 
 /// @nodoc
@@ -63,6 +69,7 @@ mixin _$UpdateGroupEvent {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +79,7 @@ mixin _$UpdateGroupEvent {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +89,7 @@ mixin _$UpdateGroupEvent {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,6 +102,7 @@ mixin _$UpdateGroupEvent {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,6 +112,7 @@ mixin _$UpdateGroupEvent {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +122,7 @@ mixin _$UpdateGroupEvent {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -201,6 +213,7 @@ class _$_Submit implements _Submit {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return submit(groupId);
   }
@@ -213,6 +226,7 @@ class _$_Submit implements _Submit {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return submit?.call(groupId);
   }
@@ -225,6 +239,7 @@ class _$_Submit implements _Submit {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -243,6 +258,7 @@ class _$_Submit implements _Submit {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return submit(this);
   }
@@ -255,6 +271,7 @@ class _$_Submit implements _Submit {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return submit?.call(this);
   }
@@ -267,6 +284,7 @@ class _$_Submit implements _Submit {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -355,6 +373,7 @@ class _$_UpdateName implements _UpdateName {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateName(name);
   }
@@ -367,6 +386,7 @@ class _$_UpdateName implements _UpdateName {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateName?.call(name);
   }
@@ -379,6 +399,7 @@ class _$_UpdateName implements _UpdateName {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateName != null) {
@@ -397,6 +418,7 @@ class _$_UpdateName implements _UpdateName {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateName(this);
   }
@@ -409,6 +431,7 @@ class _$_UpdateName implements _UpdateName {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateName?.call(this);
   }
@@ -421,6 +444,7 @@ class _$_UpdateName implements _UpdateName {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateName != null) {
@@ -511,6 +535,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateDescription(description);
   }
@@ -523,6 +548,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateDescription?.call(description);
   }
@@ -535,6 +561,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -553,6 +580,7 @@ class _$_UpdateDescription implements _UpdateDescription {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateDescription(this);
   }
@@ -565,6 +593,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateDescription?.call(this);
   }
@@ -577,6 +606,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -669,6 +699,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateProfilePictureURL(profilePictureURL);
   }
@@ -681,6 +712,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateProfilePictureURL?.call(profilePictureURL);
   }
@@ -693,6 +725,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -711,6 +744,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateProfilePictureURL(this);
   }
@@ -723,6 +757,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateProfilePictureURL?.call(this);
   }
@@ -735,6 +770,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -827,6 +863,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     required TResult Function(String profilePictureURL) updateProfilePictureURL,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(Group group) loaded,
   }) {
     return updateConfidentiality(confidentiality);
   }
@@ -839,6 +876,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
   }) {
     return updateConfidentiality?.call(confidentiality);
   }
@@ -851,6 +889,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(String description)? updateDescription,
     TResult Function(String profilePictureURL)? updateProfilePictureURL,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -869,6 +908,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
         updateProfilePictureURL,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateConfidentiality(this);
   }
@@ -881,6 +921,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateConfidentiality?.call(this);
   }
@@ -893,6 +934,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(_UpdateDescription value)? updateDescription,
     TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -910,6 +952,163 @@ abstract class _UpdateConfidentiality implements UpdateGroupEvent {
   @JsonKey(ignore: true)
   _$UpdateConfidentialityCopyWith<_UpdateConfidentiality> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LoadedCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
+      __$LoadedCopyWithImpl<$Res>;
+  $Res call({Group group});
+}
+
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res> extends _$UpdateGroupEventCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
+      : super(_value, (v) => _then(v as _Loaded));
+
+  @override
+  _Loaded get _value => super._value as _Loaded;
+
+  @override
+  $Res call({
+    Object? group = freezed,
+  }) {
+    return _then(_Loaded(
+      group == freezed
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as Group,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Loaded implements _Loaded {
+  const _$_Loaded(this.group);
+
+  @override
+  final Group group;
+
+  @override
+  String toString() {
+    return 'UpdateGroupEvent.loaded(group: $group)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Loaded &&
+            const DeepCollectionEquality().equals(other.group, group));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(group));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadedCopyWith<_Loaded> get copyWith =>
+      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String groupId) submit,
+    required TResult Function(String name) updateName,
+    required TResult Function(String description) updateDescription,
+    required TResult Function(String profilePictureURL) updateProfilePictureURL,
+    required TResult Function(Confidentiality confidentiality)
+        updateConfidentiality,
+    required TResult Function(Group group) loaded,
+  }) {
+    return loaded(group);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+  }) {
+    return loaded?.call(group);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String groupId)? submit,
+    TResult Function(String name)? updateName,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(Group group)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(group);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateName value) updateName,
+    required TResult Function(_UpdateDescription value) updateDescription,
+    required TResult Function(_UpdateProfilePictureURL value)
+        updateProfilePictureURL,
+    required TResult Function(_UpdateConfidentiality value)
+        updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateName value)? updateName,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loaded implements UpdateGroupEvent {
+  const factory _Loaded(Group group) = _$_Loaded;
+
+  Group get group;
+  @JsonKey(ignore: true)
+  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

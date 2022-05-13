@@ -183,7 +183,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
-  sl.registerFactory(() => UpdateGroupBloc(sl(), sl()));
+  sl.registerFactory(() => UpdateGroupBloc(sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
   sl.registerFactory(() => JoinGroupBloc(sl(), sl()));
   sl.registerFactory(() => UnfollowUserBloc(sl(), sl()));

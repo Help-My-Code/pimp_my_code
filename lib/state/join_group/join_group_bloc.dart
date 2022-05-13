@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/usecases/follow/create_follow.dart';
 import '../../domain/usecases/group-member/create_group_member.dart';
 import '../session/session_cubit.dart';
 
@@ -24,7 +23,8 @@ class JoinGroupBloc extends Bloc<JoinGroupEvent, JoinGroupState> {
   void onSubmit(_Submit event, Emitter emit) async {
     emit(state.copyWith(status: const FormSubmitting()));
     String userId = await _sessionCubit.getUserId();
-    final successOrFailure = await _createGroupMemberUseCase(CreateGroupMemberParam(
+    final successOrFailure =
+        await _createGroupMemberUseCase(CreateGroupMemberParam(
       event.groupId,
       userId,
     ));

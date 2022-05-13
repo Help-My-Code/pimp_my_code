@@ -4,30 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
-import 'package:pimp_my_code/domain/entities/follow.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
-import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../../../core/form_status.dart';
 import '../../../../domain/entities/group.dart';
-import '../../../../domain/entities/user.dart';
 import '../../../../ioc_container.dart';
-import '../../../../state/follow_user/follow_user_bloc.dart';
-import '../../../../state/like/like_cubit.dart';
-import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
-import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
-import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
-import '../../../../state/unfollow_user/unfollow_user_bloc.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
-import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
-import '../../home/widgets/publications_loaded.dart';
 
 class GroupLoaded extends StatelessWidget {
   final Group group;
@@ -36,10 +23,7 @@ class GroupLoaded extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  GroupLoaded(
-      {Key? key,
-      required this.group,
-      required this.context})
+  GroupLoaded({Key? key, required this.group, required this.context})
       : super(key: key);
 
   @override
@@ -50,7 +34,7 @@ class GroupLoaded extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-          child: Row(
+          child: Wrap(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
@@ -120,13 +104,13 @@ class GroupLoaded extends StatelessWidget {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             //if (group.creator!.id == snapshot.data) {
-              return GFButton(
-                onPressed: () => printUpdate(),
-                text: tr('edit_group'),
-                shape: GFButtonShape.standard,
-                color: Colors.amber,
-                icon: const Icon(Icons.edit, color: Colors.white),
-              );
+            return GFButton(
+              onPressed: () => printUpdate(),
+              text: tr('edit_group'),
+              shape: GFButtonShape.standard,
+              color: Colors.amber,
+              icon: const Icon(Icons.edit, color: Colors.white),
+            );
             // } else {
             //   if (followersContainCurrentUser(snapshot.data!)) {
             //     return _buildUnfollowButton(context);
@@ -297,8 +281,10 @@ class GroupLoaded extends StatelessWidget {
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
-          create: (context) => sl<UpdateGroupBloc>(),
-          child: UpdateGroupModal(group: group)),
+        create: (context) =>
+            sl<UpdateGroupBloc>()..add(UpdateGroupEvent.loaded(group)),
+        child: UpdateGroupModal(group: group),
+      ),
       buttons: [],
     ).show();
   }

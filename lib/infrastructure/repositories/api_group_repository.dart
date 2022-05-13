@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/enum/confidentiality.dart';
-import '../../domain/entities/enum/role.dart';
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
 import '../../domain/usecases/group/find_group_by_id.dart';
@@ -33,11 +32,12 @@ class ApiGroupRepository extends GroupRepository {
   }
 
   @override
-  Future<Either<FindGroupByIdFailure, Group>> getById({required String id}) async {
+  Future<Either<FindGroupByIdFailure, Group>> getById(
+      {required String id}) async {
     final response = await _dataSource.getById(id);
     final Map<String, dynamic> apiGroup = response.body['group'];
     return Right(
-        _groupMapper.mapApiGroupToGroup(ApiGroupModel.fromJson(apiGroup)),
+      _groupMapper.mapApiGroupToGroup(ApiGroupModel.fromJson(apiGroup)),
     );
   }
 

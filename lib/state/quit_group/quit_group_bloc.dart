@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/usecases/follow/delete_follow.dart';
 import '../../domain/usecases/group-member/delete_group_member.dart';
 import '../session/session_cubit.dart';
 
@@ -24,7 +23,8 @@ class QuitGroupBloc extends Bloc<QuitGroupEvent, QuitGroupState> {
   void onSubmit(_Submit event, Emitter emit) async {
     emit(state.copyWith(status: const FormSubmitting()));
     String userId = await _sessionCubit.getUserId();
-    final successOrFailure = await _deleteGroupMemberUseCase(DeleteGroupMemberParam(
+    final successOrFailure =
+        await _deleteGroupMemberUseCase(DeleteGroupMemberParam(
       event.groupId,
       userId,
     ));

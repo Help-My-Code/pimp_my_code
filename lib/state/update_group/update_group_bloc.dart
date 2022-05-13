@@ -1,28 +1,34 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pimp_my_code/domain/entities/group.dart';
 
 import '../../core/form_status.dart';
 import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/usecases/group/update_group.dart';
-import '../session/session_cubit.dart';
 
 part 'update_group_bloc.freezed.dart';
-
 part 'update_group_event.dart';
-
 part 'update_group_state.dart';
 
 class UpdateGroupBloc extends Bloc<UpdateGroupEvent, UpdateGroupState> {
   final UpdateGroupUseCase _registerUseCase;
-  final SessionCubit _sessionCubit;
 
-  UpdateGroupBloc(this._registerUseCase, this._sessionCubit)
+  UpdateGroupBloc(this._registerUseCase)
       : super(const UpdateGroupState.state()) {
     on<_Submit>(onSubmit);
     on<_UpdateName>(onUpdateName);
     on<_UpdateDescription>(onUpdateDescription);
     on<_UpdateProfilePictureURL>(onUpdateProfilePictureURL);
     on<_UpdateConfidentiality>(onUpdateConfidentiality);
+    on<_Loaded>(onLoaded);
+  }
+  void onLoaded(_Loaded event, Emitter emit) {
+    emit(state.copyWith(
+      confidentiality: event.group.confidentiality,
+      description: event.group.description,
+      name: event.group.name,
+      profilePictureURL: event.group.principalPictureUrl,
+    ));
   }
 
   void onSubmit(_Submit event, Emitter emit) async {
