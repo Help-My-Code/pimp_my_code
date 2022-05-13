@@ -7,6 +7,8 @@ import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../domain/entities/content/content.dart';
+import '../../../../ioc_container.dart';
+import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
@@ -31,19 +33,36 @@ class PublicationsLoaded extends StatelessWidget {
   }
 
   void showComments(BuildContext context, Content content) {
+    final contentCubit = sl<RetrieveContentCubit>()..loadComment(content.id!);
     Alert(
       context: context,
       title: 'comments'.tr(),
-      content: CommentModal(content.id!),
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => contentCubit,
+          ),
+          BlocProvider(
+            create: (context) => LikeCubit(
+              contentRepository: sl(),
+              sessionCubit: sl(),
+              retrieveContentCubit: context.read<RetrieveContentCubit>(),
+            ),
+          ),
+        ],
+        child: CommentModal(content.id!),
+      ),
       buttons: [
         DialogButton(
-            onPressed: () {
-              showMaterialModalBottomSheet(
-                context: context,
-                builder: (context) => CreatePostCard(contentId: content.id!),
-              );
-            },
-            child: const Text('add_comment').tr()),
+          onPressed: () async {
+            await showMaterialModalBottomSheet(
+              context: context,
+              builder: (context) => CreatePostCard(contentId: content.id!),
+            );
+            contentCubit.loadComment(content.id!);
+          },
+          child: const Text('add_comment').tr(),
+        ),
       ],
     ).show();
   }
