@@ -130,8 +130,7 @@ class ApiContentRepository extends ContentRepository {
   Future<Either<GetCommentFailed, List<Content>>> getComments(
       String postId) async {
     final response = await _dataSource.getComments(postId);
-    final List<Map<String, dynamic>> apiComments =
-        List.from(response.body['contents']);
+    final List<Map<String, dynamic>> apiComments = List.from(response.body);
     return Right(
       apiComments
           .map(ApiContentModel.fromJson)

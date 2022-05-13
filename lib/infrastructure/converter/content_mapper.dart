@@ -45,8 +45,6 @@ class ContentMapper {
   }
 
   Content fromParam(CreatePublicationParam params) {
-    print('parentId ${params.parentId}');
-    print('contentType ${params.contentType}');
     return Content(
       title: params.title,
       content: params.content,
