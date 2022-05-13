@@ -3,12 +3,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/usecases/follow/create_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/delete_follow.dart';
+import 'package:pimp_my_code/domain/usecases/group-member/find_group_members_by_group_id.dart';
 import 'package:pimp_my_code/domain/usecases/group/find_group_by_id.dart';
 import 'package:pimp_my_code/domain/usecases/user/update_user_use_case.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
+import 'package:pimp_my_code/state/join_group/join_group_bloc.dart';
+import 'package:pimp_my_code/state/quit_group/quit_group_bloc.dart';
 import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/unfollow_user/unfollow_user_bloc.dart';
+import 'package:pimp_my_code/state/update_group/update_group_bloc.dart';
 import 'package:pimp_my_code/state/update_user/update_user_bloc.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
@@ -17,7 +22,10 @@ import 'domain/repositories/user_repository.dart';
 import 'domain/services/program_service.dart';
 import 'domain/usecases/content/create_publication_use_case.dart';
 import 'domain/usecases/follow/find_follow_by_follower_id.dart';
+import 'domain/usecases/group-member/create_group_member.dart';
+import 'domain/usecases/group-member/delete_group_member.dart';
 import 'domain/usecases/group/find_my_groups.dart';
+import 'domain/usecases/group/update_group.dart';
 import 'domain/usecases/notification/find_notifications.dart';
 import 'domain/usecases/notification/see_all_notifications.dart';
 import 'domain/usecases/program/execute_program_use_case.dart';
@@ -149,9 +157,13 @@ void registerUseCases() {
   sl.registerSingleton(FindFollowByFollowerIdUseCase(sl()));
   sl.registerSingleton(FindFollowByUserIdUseCase(sl()));
   sl.registerSingleton(UpdateUserUseCase(sl()));
+  sl.registerSingleton(UpdateGroupUseCase(sl()));
   sl.registerSingleton(CreateFollowUseCase(sl()));
+  sl.registerSingleton(CreateGroupMemberUseCase(sl()));
   sl.registerSingleton(DeleteFollowUseCase(sl()));
+  sl.registerSingleton(DeleteGroupMemberUseCase(sl()));
   sl.registerSingleton(FindGroupByIdUseCase(sl()));
+  sl.registerSingleton(FindGroupMembersByGroupIdUseCase(sl()));
 }
 
 void registerBloc() {
@@ -171,9 +183,13 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
+  sl.registerFactory(() => UpdateGroupBloc(sl(), sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
+  sl.registerFactory(() => JoinGroupBloc(sl(), sl()));
   sl.registerFactory(() => UnfollowUserBloc(sl(), sl()));
+  sl.registerFactory(() => QuitGroupBloc(sl(), sl()));
   sl.registerFactory(() => RetrieveGroupByIdCubit(sl()));
+  sl.registerFactory(() => RetrieveGroupMembersByGroupIdCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
