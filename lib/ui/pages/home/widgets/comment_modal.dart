@@ -77,14 +77,6 @@ class CommentModal extends StatelessWidget {
             itemCount: comments.length,
           ),
         ),
-        TextField(
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            hintText: 'add_your_comment'.tr(),
-          ),
-          minLines: 4,
-          maxLines: 20,
-        ),
       ],
     );
   }

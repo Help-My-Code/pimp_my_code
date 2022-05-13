@@ -33,8 +33,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     return state.code != null && state.code!.isNotEmpty;
   }
 
-  void makeComment(String parentId) {
-    emit(state.copyWith(contentType: ContentType.comment, parentId: parentId));
+  void makeComment(String? parentId) {
+    if (parentId != null) {
+      emit(
+        state.copyWith(contentType: ContentType.comment, parentId: parentId),
+      );
+    }
   }
 
   void onCancel() {
@@ -89,7 +93,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           codeResult: state.codeResult,
           createdAt: state.createdAt!,
           creatorId: creatorId,
-          contentType: ContentType.publication.name,
+          contentType: state.contentType.string,
           medias: state.medias!,
           content: state.content!,
           userPicture: state.userPicture!,

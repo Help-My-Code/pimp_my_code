@@ -14,12 +14,13 @@ import '../../../../domain/usecases/content/create_publication_use_case.dart';
 import '../../../../ioc_container.dart';
 
 class CreatePostCard extends StatelessWidget {
-  const CreatePostCard({Key? key}) : super(key: key);
+  final String? contentId;
+  const CreatePostCard({Key? key, this.contentId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (ctx) => sl<CreatePostCubit>(),
+      create: (ctx) => sl<CreatePostCubit>()..makeComment(contentId),
       child: Builder(builder: (context) {
         return BlocConsumer<CreatePostCubit, CreatePostState>(
             listener: (context, state) {

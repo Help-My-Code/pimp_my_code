@@ -36,13 +36,11 @@ class PublicationsLoaded extends StatelessWidget {
       title: 'comments'.tr(),
       content: CommentModal(content.id!),
       buttons: [
-        DialogButton(onPressed: () {}, child: const Text('add_message').tr()),
         DialogButton(
             onPressed: () {
               showMaterialModalBottomSheet(
                 context: context,
-                builder: (context) =>
-                    const CreatePostCard(), // TODO make comment
+                builder: (context) => CreatePostCard(contentId: content.id!),
               );
             },
             child: const Text('add_comment').tr()),

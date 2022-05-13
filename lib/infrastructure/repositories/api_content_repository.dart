@@ -27,15 +27,22 @@ class ApiContentRepository extends ContentRepository {
         'contentType': content.contentType.name.toUpperCase(),
         'creatorId': content.creatorId,
       };
+      if (content.parentId != null) {
+        fields['parentId'] = content.parentId!;
+      }
 
       if (content.title != null) {
         fields['title'] = content.title!;
       }
 
-      if (content.code != null && content.codeResult != null) {
+      if (content.code != null) {
         fields['stdin'] = content.code!;
+      }
+
+      if (content.codeResult != null) {
         fields['stdout'] = content.codeResult!;
       }
+
       await _dataSource.createContent(fields: fields);
       return right(unit);
     } catch (e) {
