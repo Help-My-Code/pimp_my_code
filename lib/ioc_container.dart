@@ -158,7 +158,7 @@ void registerBloc() {
   sl.registerSingleton(ErrorHandlerBloc());
   sl.registerSingleton(AppObserver(sl(), sl()));
   sl.registerFactory(() => RetrieveContentCubit(sl(), sl(), sl(), sl()));
-  sl.registerSingleton(CreatePostCubit(sl(), sl()));
+  sl.registerFactory(() => CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));
   sl.registerFactory(() => RetrieveMyGroupsCubit(sl(), sl()));
