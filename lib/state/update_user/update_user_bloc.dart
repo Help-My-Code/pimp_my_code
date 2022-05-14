@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pimp_my_code/domain/entities/user.dart';
 
 import '../../core/form_status.dart';
 import '../../domain/entities/enum/confidentiality.dart';
@@ -24,6 +25,15 @@ class UpdateUserBloc extends Bloc<UpdateUserEvent, UpdateUserState> {
     on<_UpdatePassword>(onUpdatePassword);
     on<_UpdateConfirmPassword>(onUpdateConfirmPassword);
     on<_UpdateConfidentiality>(onUpdateConfidentiality);
+    on<_Loaded>(onLoaded);
+  }
+
+  void onLoaded(_Loaded event, Emitter emit) {
+    emit(state.copyWith(
+      confidentiality: event.user.confidentiality,
+      description: event.user.description,
+      profilePictureURL: event.user.principalPictureUrl,
+    ));
   }
 
   void onSubmit(_Submit event, Emitter emit) async {

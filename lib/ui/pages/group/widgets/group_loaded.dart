@@ -295,7 +295,7 @@ class GroupLoaded extends StatelessWidget {
 
   loadMembers(members) {
     members = members;
-    return Text(members.length.toString() + ' members'.tr(),
+    return Text(members.length.toString() + 'members'.tr(),
         style: const TextStyle(fontSize: 16));
   }
 
