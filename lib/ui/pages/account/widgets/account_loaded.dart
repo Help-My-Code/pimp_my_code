@@ -16,7 +16,6 @@ import '../../../../state/follow_user/follow_user_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
-import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/unfollow_user/unfollow_user_bloc.dart';
 import '../../../../state/update_user/update_user_bloc.dart';
@@ -24,21 +23,28 @@ import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
 import '../../home/widgets/publications_loaded.dart';
 
-class AccountLoaded extends StatelessWidget {
+class AccountLoaded extends StatefulWidget {
+  const AccountLoaded({
+    Key? key,
+    required this.user,
+    required this.isUserConnected,
+    required this.context,
+    required this.followers,
+  }) : super(key: key);
+
   final User user;
   final bool isUserConnected;
   final BuildContext context;
-  List<Follow> followers = [];
+  final List<Follow> followers;
+
+  @override
+  State<AccountLoaded> createState() => _AccountLoadedState();
+}
+
+class _AccountLoadedState extends State<AccountLoaded> {
   List<Follow> followings = [];
 
   final _formKey = GlobalKey<FormState>();
-
-  AccountLoaded(
-      {Key? key,
-      required this.user,
-      required this.isUserConnected,
-      required this.context})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +63,15 @@ class AccountLoaded extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(user.firstname + ' ' + user.lastname,
+                    Text(widget.user.firstname + ' ' + widget.user.lastname,
                         style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 10),
-                    _buildFollowers(context),
+                    Text(widget.followers.length.toString() + 'followers'.tr(),
+                        style: const TextStyle(fontSize: 16)),
                     _buildFollowings(context),
                     const SizedBox(height: 10),
-                    Text(user.description ?? '',
+                    Text(widget.user.description ?? '',
                         style: const TextStyle(fontSize: 16)),
                   ],
                 ),
@@ -83,7 +90,7 @@ class AccountLoaded extends StatelessWidget {
     return GFAvatar(
       size: MediaQuery.of(context).size.width * 0.08,
       backgroundImage: NetworkImage(
-        user.principalPictureUrl ?? DefaultPictures.defaultUserPicture,
+        widget.user.principalPictureUrl ?? DefaultPictures.defaultUserPicture,
       ),
     );
   }
@@ -105,36 +112,11 @@ class AccountLoaded extends StatelessWidget {
           initial: () {
             context
                 .read<RetrieveFollowByFollowerIdCubit>()
-                .loadFollowByFollowerId(user.id);
+                .loadFollowByFollowerId(widget.user.id);
             return const Loading();
           },
           orElse: () => const Loading(),
-          loaded: (followings) => loadFollowings(followings));
-    });
-  }
-
-  _buildFollowers(BuildContext context) {
-    return BlocConsumer<RetrieveFollowByUserIdCubit,
-        RetrieveFollowByUserIdState>(listener: (context, state) {
-      state.maybeWhen(
-        orElse: () {},
-        failure: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Failed_to_load_follows').tr(),
-            backgroundColor: Theme.of(context).errorColor,
-          ));
-        },
-      );
-    }, builder: (context, state) {
-      return state.maybeWhen(
-          initial: () {
-            context
-                .read<RetrieveFollowByUserIdCubit>()
-                .loadFollowByUserId(user.id);
-            return const Loading();
-          },
-          orElse: () => const Loading(),
-          loaded: (followers) => loadFollowers(followers));
+          loaded: (followings) => _loadFollowings(followings));
     });
   }
 
@@ -143,9 +125,9 @@ class AccountLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (isUserConnected) {
+            if (widget.isUserConnected) {
               return GFButton(
-                onPressed: () => printUpdate(),
+                onPressed: () => _printUpdate(),
                 text: tr('edit_profile'),
                 shape: GFButtonShape.standard,
                 color: Colors.amber,
@@ -191,7 +173,7 @@ class AccountLoaded extends StatelessWidget {
                     state.status is FormNotSent) {
                   context
                       .read<FollowUserBloc>()
-                      .add(FollowUserEvent.submit(user.id));
+                      .add(FollowUserEvent.submit(widget.user.id));
                 }
               },
               text: tr('follow'),
@@ -231,7 +213,7 @@ class AccountLoaded extends StatelessWidget {
                     state.status is FormNotSent) {
                   context
                       .read<UnfollowUserBloc>()
-                      .add(UnfollowUserEvent.submit(user.id));
+                      .add(UnfollowUserEvent.submit(widget.user.id));
                 }
               },
               text: tr('unfollow'),
@@ -248,9 +230,9 @@ class AccountLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (user.confidentiality == Confidentiality.public ||
+            if (widget.user.confidentiality == Confidentiality.public ||
                 followersContainCurrentUser(snapshot.data!) ||
-                user.id == snapshot.data) {
+                widget.user.id == snapshot.data) {
               return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                 listener: (context, state) {
                   state.maybeWhen(
@@ -270,7 +252,7 @@ class AccountLoaded extends StatelessWidget {
                     initial: () {
                       context
                           .read<RetrieveContentCubit>()
-                          .loadPublicationByUserId(user.id);
+                          .loadPublicationByUserId(widget.user.id);
                       return const Loading();
                     },
                     orElse: () => const Loading(),
@@ -282,15 +264,15 @@ class AccountLoaded extends StatelessWidget {
                         children: [
                           Flexible(
                             child: BlocProvider(
-                                create: (context) => LikeCubit(
-                                      contentRepository: sl(),
-                                      retrieveContentCubit:
-                                          context.read<RetrieveContentCubit>(),
-                                      sessionCubit: sl(),
-                                    ),
-                                child: PublicationsLoaded(
-                                    publications: publications,
-                                ),
+                              create: (context) => LikeCubit(
+                                contentRepository: sl(),
+                                retrieveContentCubit:
+                                    context.read<RetrieveContentCubit>(),
+                                sessionCubit: sl(),
+                              ),
+                              child: PublicationsLoaded(
+                                publications: publications,
+                              ),
                             ),
                           ),
                         ],
@@ -316,33 +298,27 @@ class AccountLoaded extends StatelessWidget {
         });
   }
 
-  void printUpdate() {
+  void _printUpdate() {
     Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
         create: (context) =>
-        sl<UpdateUserBloc>()..add(UpdateUserEvent.loaded(user)),
-        child: UpdateUserModal(user: user),
+            sl<UpdateUserBloc>()..add(UpdateUserEvent.loaded(widget.user)),
+        child: UpdateUserModal(user: widget.user),
       ),
       buttons: [],
     ).show();
   }
 
-  loadFollowers(followers) {
-    this.followers = followers;
-    return Text(followers.length.toString() + 'followers'.tr(),
-        style: const TextStyle(fontSize: 16));
-  }
-
-  loadFollowings(followings) {
+  _loadFollowings(followings) {
     this.followings = followings;
     return Text(followings.length.toString() + 'following'.tr(),
         style: const TextStyle(fontSize: 16));
   }
 
   bool followersContainCurrentUser(String userId) {
-    for (var follower in followers) {
+    for (var follower in widget.followers) {
       if (follower.follower.id == userId) return true;
     }
     return false;

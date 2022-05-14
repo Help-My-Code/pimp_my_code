@@ -5,7 +5,6 @@ import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
-import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -23,15 +22,22 @@ import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
 import '../../home/widgets/publications_loaded.dart';
 
-class GroupLoaded extends StatelessWidget {
+class GroupLoaded extends StatefulWidget {
+  const GroupLoaded(
+      {Key? key, required this.group, required this.context, required this.members})
+      : super(key: key);
+
   final Group group;
   final BuildContext context;
-  List<GroupMember> members = [];
+  final List<GroupMember> members;
+
+  @override
+  State<GroupLoaded> createState() => _GroupLoadedState();
+}
+
+class _GroupLoadedState extends State<GroupLoaded> {
 
   final _formKey = GlobalKey<FormState>();
-
-  GroupLoaded({Key? key, required this.group, required this.context})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,32 +46,42 @@ class GroupLoaded extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
+          padding: EdgeInsets.all(MediaQuery
+              .of(context)
+              .size
+              .width * 0.03),
           child: Row(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      group.name,
+                      widget.group.name,
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
-                    _buildMembers(context),
+                    Text(widget.members.length.toString() + 'members'.tr(),
+                        style: const TextStyle(fontSize: 16)),
                     const SizedBox(height: 10),
                     Text(
-                      group.description ?? '',
+                      widget.group.description ?? '',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.09),
+              SizedBox(width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.09),
               _buildButton(context),
             ],
           ),
@@ -77,36 +93,14 @@ class GroupLoaded extends StatelessWidget {
 
   _buildAvatar(BuildContext context) {
     return GFAvatar(
-      size: MediaQuery.of(context).size.width * 0.08,
+      size: MediaQuery
+          .of(context)
+          .size
+          .width * 0.08,
       backgroundImage: NetworkImage(
-        group.principalPictureUrl ?? DefaultPictures.defaultGroupPicture,
+        widget.group.principalPictureUrl ?? DefaultPictures.defaultGroupPicture,
       ),
     );
-  }
-
-  _buildMembers(BuildContext context) {
-    return BlocConsumer<RetrieveGroupMembersByGroupIdCubit,
-        RetrieveGroupMembersByGroupIdState>(listener: (context, state) {
-      state.maybeWhen(
-        orElse: () {},
-        failure: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Failed_to_load_group_members').tr(),
-            backgroundColor: Theme.of(context).errorColor,
-          ));
-        },
-      );
-    }, builder: (context, state) {
-      return state.maybeWhen(
-          initial: () {
-            context
-                .read<RetrieveGroupMembersByGroupIdCubit>()
-                .loadGroupMemberByGroupId(group.id);
-            return const Loading();
-          },
-          orElse: () => const Loading(),
-          loaded: (members) => loadMembers(members));
-    });
   }
 
   _buildButton(BuildContext context) {
@@ -114,7 +108,7 @@ class GroupLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (group.creator!.id == snapshot.data!) {
+            if (widget.group.creator!.id == snapshot.data!) {
               return GFButton(
                 onPressed: () => printUpdate(),
                 text: tr('edit_group'),
@@ -147,7 +141,9 @@ class GroupLoaded extends StatelessWidget {
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('follow_failed').tr(),
-            backgroundColor: Theme.of(context).errorColor,
+            backgroundColor: Theme
+                .of(context)
+                .errorColor,
           ));
           //TODO recharger la page
         }
@@ -162,7 +158,7 @@ class GroupLoaded extends StatelessWidget {
                     state.status is FormNotSent) {
                   context
                       .read<JoinGroupBloc>()
-                      .add(JoinGroupEvent.submit(group.id));
+                      .add(JoinGroupEvent.submit(widget.group.id));
                 }
               },
               text: tr('join'),
@@ -187,7 +183,9 @@ class GroupLoaded extends StatelessWidget {
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('unfollow_failed').tr(),
-            backgroundColor: Theme.of(context).errorColor,
+            backgroundColor: Theme
+                .of(context)
+                .errorColor,
           ));
           //TODO recharger la page
         }
@@ -202,7 +200,7 @@ class GroupLoaded extends StatelessWidget {
                     state.status is FormNotSent) {
                   context
                       .read<QuitGroupBloc>()
-                      .add(QuitGroupEvent.submit(group.id));
+                      .add(QuitGroupEvent.submit(widget.group.id));
                 }
               },
               text: tr('quit'),
@@ -219,9 +217,9 @@ class GroupLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (group.confidentiality == Confidentiality.public ||
+            if (widget.group.confidentiality == Confidentiality.public ||
                 membersContainCurrentUser(snapshot.data!) ||
-                group.id == snapshot.data) {
+                widget.group.id == snapshot.data) {
               return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                 listener: (context, state) {
                   state.maybeWhen(
@@ -230,7 +228,7 @@ class GroupLoaded extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content:
-                              const Text('Failed_to_load_publications').tr(),
+                          const Text('Failed_to_load_publications').tr(),
                         ),
                       );
                     },
@@ -241,32 +239,37 @@ class GroupLoaded extends StatelessWidget {
                     initial: () {
                       context
                           .read<RetrieveContentCubit>()
-                          .loadPublicationByGroupId(group.id);
+                          .loadPublicationByGroupId(widget.group.id);
                       return const Loading();
                     },
                     orElse: () => const Loading(),
-                    loaded: (publications) => Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: BlocProvider(
-                                create: (context) => LikeCubit(
-                                      contentRepository: sl(),
-                                      retrieveContentCubit:
-                                          context.read<RetrieveContentCubit>(),
-                                      sessionCubit: sl(),
-                                    ),
-                                child: PublicationsLoaded(
+                    loaded: (publications) =>
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height,
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: BlocProvider(
+                                  create: (context) =>
+                                      LikeCubit(
+                                        contentRepository: sl(),
+                                        retrieveContentCubit:
+                                        context.read<RetrieveContentCubit>(),
+                                        sessionCubit: sl(),
+                                      ),
+                                  child: PublicationsLoaded(
                                     publications: publications,
+                                  ),
                                 ),
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
                   );
                 },
               );
@@ -274,7 +277,10 @@ class GroupLoaded extends StatelessWidget {
               return Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.5,
                 child: Text(
                   'private_user'.tr(),
                   style: const TextStyle(fontSize: 16),
@@ -293,21 +299,16 @@ class GroupLoaded extends StatelessWidget {
       title: 'update_informations'.tr(),
       content: BlocProvider(
         create: (context) =>
-            sl<UpdateGroupBloc>()..add(UpdateGroupEvent.loaded(group)),
-        child: UpdateGroupModal(group: group),
+        sl<UpdateGroupBloc>()
+          ..add(UpdateGroupEvent.loaded(widget.group)),
+        child: UpdateGroupModal(group: widget.group),
       ),
       buttons: [],
     ).show();
   }
 
-  loadMembers(members) {
-    members = members;
-    return Text(members.length.toString() + 'members'.tr(),
-        style: const TextStyle(fontSize: 16));
-  }
-
   bool membersContainCurrentUser(String userId) {
-    for (var member in members) {
+    for (var member in widget.members) {
       if (member.member!.id == userId) return true;
     }
     return false;

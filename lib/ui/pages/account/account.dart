@@ -73,28 +73,55 @@ class _AccountPageState extends State<AccountPage> {
             );
           }, builder: (context, state) {
             return state.maybeWhen(
-                initial: () {
-                  context
-                      .read<RetrieveUserByIdCubit>()
-                      .loadUserById(widget.userId);
-                  return const Loading();
-                },
-                orElse: () => const Loading(),
-                loaded: (user) => MultiBlocProvider(
-                      providers: [
-                        BlocProvider(
-                          create: (context) => sl<FollowUserBloc>(),
-                        ),
-                        BlocProvider(
-                          create: (context) => sl<UnfollowUserBloc>(),
-                        ),
-                      ],
-                      child: AccountLoaded(
+              initial: () {
+                context
+                    .read<RetrieveUserByIdCubit>()
+                    .loadUserById(widget.userId);
+                return const Loading();
+              },
+              orElse: () => const Loading(),
+              loaded: (user) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => sl<FollowUserBloc>(),
+                  ),
+                  BlocProvider(
+                    create: (context) => sl<UnfollowUserBloc>(),
+                  ),
+                ],
+                child: BlocConsumer<RetrieveFollowByUserIdCubit,
+                    RetrieveFollowByUserIdState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      failure: () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Failed_to_load_follows').tr(),
+                          backgroundColor: Theme.of(context).errorColor,
+                        ));
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      initial: () {
+                        context
+                            .read<RetrieveFollowByUserIdCubit>()
+                            .loadFollowByUserId(user.id);
+                        return const Loading();
+                      },
+                      orElse: () => const Loading(),
+                      loaded: (followers) => AccountLoaded(
                         user: user,
                         isUserConnected: widget.isUserConnected,
                         context: context,
+                        followers: followers,
                       ),
-                    ));
+                    );
+                  },
+                ),
+              ),
+            );
           }),
         ),
       ),
