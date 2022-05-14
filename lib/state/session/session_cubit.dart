@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
@@ -37,6 +39,7 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   }
 
   void showHome(User user) {
+    log(user.id);
     emit(Authenticated(userId: user.id));
     notifyListeners();
   }
