@@ -24,7 +24,10 @@ import '../../home/widgets/publications_loaded.dart';
 
 class GroupLoaded extends StatefulWidget {
   const GroupLoaded(
-      {Key? key, required this.group, required this.context, required this.members})
+      {Key? key,
+      required this.group,
+      required this.context,
+      required this.members})
       : super(key: key);
 
   final Group group;
@@ -36,7 +39,6 @@ class GroupLoaded extends StatefulWidget {
 }
 
 class _GroupLoadedState extends State<GroupLoaded> {
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -46,19 +48,13 @@ class _GroupLoadedState extends State<GroupLoaded> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.all(MediaQuery
-              .of(context)
-              .size
-              .width * 0.03),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
           child: Row(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
               SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -78,10 +74,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                   ],
                 ),
               ),
-              SizedBox(width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.09),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.09),
               _buildButton(context),
             ],
           ),
@@ -93,10 +86,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
 
   _buildAvatar(BuildContext context) {
     return GFAvatar(
-      size: MediaQuery
-          .of(context)
-          .size
-          .width * 0.08,
+      size: MediaQuery.of(context).size.width * 0.08,
       backgroundImage: NetworkImage(
         widget.group.principalPictureUrl ?? DefaultPictures.defaultGroupPicture,
       ),
@@ -141,9 +131,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('follow_failed').tr(),
-            backgroundColor: Theme
-                .of(context)
-                .errorColor,
+            backgroundColor: Theme.of(context).errorColor,
           ));
           //TODO recharger la page
         }
@@ -183,9 +171,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('unfollow_failed').tr(),
-            backgroundColor: Theme
-                .of(context)
-                .errorColor,
+            backgroundColor: Theme.of(context).errorColor,
           ));
           //TODO recharger la page
         }
@@ -228,7 +214,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content:
-                          const Text('Failed_to_load_publications').tr(),
+                              const Text('Failed_to_load_publications').tr(),
                         ),
                       );
                     },
@@ -243,33 +229,28 @@ class _GroupLoadedState extends State<GroupLoaded> {
                       return const Loading();
                     },
                     orElse: () => const Loading(),
-                    loaded: (publications) =>
-                        Container(
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: BlocProvider(
-                                  create: (context) =>
-                                      LikeCubit(
-                                        contentRepository: sl(),
-                                        retrieveContentCubit:
-                                        context.read<RetrieveContentCubit>(),
-                                        sessionCubit: sl(),
-                                      ),
-                                  child: PublicationsLoaded(
-                                    publications: publications,
-                                  ),
-                                ),
+                    loaded: (publications) => Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        children: [
+                          Flexible(
+                            child: BlocProvider(
+                              create: (context) => LikeCubit(
+                                contentRepository: sl(),
+                                retrieveContentCubit:
+                                    context.read<RetrieveContentCubit>(),
+                                sessionCubit: sl(),
                               ),
-                            ],
+                              child: PublicationsLoaded(
+                                publications: publications,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
                   );
                 },
               );
@@ -277,10 +258,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
               return Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.5,
                 child: Text(
                   'private_user'.tr(),
                   style: const TextStyle(fontSize: 16),
@@ -299,8 +277,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
       title: 'update_informations'.tr(),
       content: BlocProvider(
         create: (context) =>
-        sl<UpdateGroupBloc>()
-          ..add(UpdateGroupEvent.loaded(widget.group)),
+            sl<UpdateGroupBloc>()..add(UpdateGroupEvent.loaded(widget.group)),
         child: UpdateGroupModal(group: widget.group),
       ),
       buttons: [],
