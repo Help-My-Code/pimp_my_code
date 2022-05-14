@@ -7,9 +7,9 @@ extension ContentTypeExtension on ContentType {
   String get string {
     switch (this) {
       case ContentType.publication:
-        return 'publication';
+        return 'PUBLICATION';
       case ContentType.comment:
-        return 'comment';
+        return 'COMMENT';
     }
   }
 }

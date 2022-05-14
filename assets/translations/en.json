@@ -77,6 +77,7 @@
   "unfollow_failed": "Unfollow could not be performed",
   "follow_success": "You followed",
   "follow_failed": "Follow could not be performed",
+  "add_message": "Add a message",
   "add_comment": "Comment",
   "add_your_comment": "Add your comment",
   "members": "Members"

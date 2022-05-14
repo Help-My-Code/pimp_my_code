@@ -13,6 +13,8 @@ class CreatePostState with _$CreatePostState {
     List<String>? medias,
     String? code,
     String? codeResult,
+    String? parentId,
+    required ContentType contentType,
     required String language,
     required bool isLoading,
     required bool isCompiling,
@@ -20,12 +22,15 @@ class CreatePostState with _$CreatePostState {
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => CreatePostState(
-    username: 'username',
-      userPicture: 'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png',
-      createdAt: DateTime.now(),
-      medias: [],
-      isLoading: false,
-      isCompiling: false,
-      language: 'PYTHON',
-      failureOrSuccessOption: none());
+        username: 'username',
+        userPicture:
+            'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png',
+        createdAt: DateTime.now(),
+        medias: [],
+        isLoading: false,
+        isCompiling: false,
+        language: 'PYTHON',
+        failureOrSuccessOption: none(),
+        contentType: ContentType.publication,
+      );
 }
