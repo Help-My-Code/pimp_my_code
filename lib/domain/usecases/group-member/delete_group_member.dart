@@ -14,7 +14,7 @@ class DeleteGroupMemberUseCase extends UseCase<void, DeleteGroupMemberParam> {
     DeleteGroupMemberParam params,
   ) async {
     return await _repository.deleteGroupMember(
-        userId: params.userId, groupId: params.followerId);
+        userId: params.userId, groupId: params.groupId);
   }
 }
 
@@ -24,7 +24,7 @@ class DeleteGroupMemberSuccess {}
 
 class DeleteGroupMemberParam {
   final String userId;
-  final String followerId;
+  final String groupId;
 
-  DeleteGroupMemberParam(this.userId, this.followerId);
+  DeleteGroupMemberParam(this.userId, this.groupId);
 }

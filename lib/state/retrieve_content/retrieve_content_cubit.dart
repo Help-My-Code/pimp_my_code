@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/repositories/content_repository.dart';
 import '../../domain/usecases/content/get_following_publication.dart';
+import '../../domain/usecases/content/get_publications_by_group_id.dart';
 import '../../domain/usecases/content/get_publications_by_user_id.dart';
 import '../session/session_cubit.dart';
 
@@ -13,12 +14,14 @@ part 'retrieve_content_cubit.freezed.dart';
 class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   final SessionCubit _sessionCubit;
   final GetPublicationsByUserIdUseCase _getPublicationsByUserId;
+  final GetPublicationsByGroupIdUseCase _getPublicationsByGroupId;
   final GetFollowingPublicationUseCase _getFollowingPublication;
   final ContentRepository contentRepository;
   RetrieveContentCubit(
     this._sessionCubit,
     this._getFollowingPublication,
     this._getPublicationsByUserId,
+    this._getPublicationsByGroupId,
     this.contentRepository,
   ) : super(const RetrieveContentState.initial());
 
@@ -36,6 +39,16 @@ class RetrieveContentCubit extends Cubit<RetrieveContentState> {
   void loadPublicationByUserId(String id) async {
     emit(const RetrieveContentState.loading());
     final publications = await _getPublicationsByUserId(id);
+    publications.fold((l) {
+      emit(const RetrieveContentState.failure());
+    }, (r) {
+      emit(RetrieveContentState.loaded(r));
+    });
+  }
+
+  void loadPublicationByGroupId(String id) async {
+    emit(const RetrieveContentState.loading());
+    final publications = await _getPublicationsByGroupId(id);
     publications.fold((l) {
       emit(const RetrieveContentState.failure());
     }, (r) {

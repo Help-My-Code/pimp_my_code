@@ -13,6 +13,8 @@ abstract class ContentRepository {
       {required String userId});
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(
       {required String userId});
+  Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByGroupId(
+      {required String groupId});
   Future<Either<GetCommentFailed, List<Content>>> getComments(String postId);
 
   Future<void> unreact(String publicationId, String userId);

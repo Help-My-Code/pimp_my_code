@@ -49,8 +49,8 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
       {required String userId, required String groupId}) async {
     try {
       await _dataSource.createGroupMember(fields: {
-        'groupId': groupId,
         'memberId': userId,
+        'groupId': groupId,
       });
       return Right(CreateGroupMemberSuccess());
     } catch (e) {

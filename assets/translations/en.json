@@ -81,5 +81,11 @@
   "add_comment": "Comment",
   "add_your_comment": "Add your comment",
   "members": " Members",
-  "name": "Name"
+  "name": "Name",
+  "user_updated": "User was updated",
+  "user_updated_failed": "The update of user was failed",
+  "group_updated": "Group was updated",
+  "group_updated_failed": "The update of group was failed",
+  "join": "Join",
+  "quit": "Quit"
 }

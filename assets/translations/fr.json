@@ -85,5 +85,9 @@
   "add_comment": "Commenter",
   "add_your_comment": "Ajouter votre commentaire",
   "members": " Membres",
-  "name": "Nom"
+  "name": "Nom",
+  "group_updated": "Le groupe a été modifié",
+  "group_updated_failed": "La modification du groupe a échoué",
+  "join": "Rejoindre",
+  "quit": "Quitter"
 }

@@ -14,7 +14,7 @@ class CreateGroupMemberUseCase extends UseCase<void, CreateGroupMemberParam> {
     CreateGroupMemberParam params,
   ) async {
     return await _repository.createGroupMember(
-        userId: params.userId, groupId: params.followerId);
+        userId: params.userId, groupId: params.groupId);
   }
 }
 
@@ -24,7 +24,7 @@ class CreateGroupMemberSuccess {}
 
 class CreateGroupMemberParam {
   final String userId;
-  final String followerId;
+  final String groupId;
 
-  CreateGroupMemberParam(this.userId, this.followerId);
+  CreateGroupMemberParam(this.userId, this.groupId);
 }
