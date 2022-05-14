@@ -69,26 +69,54 @@ class _GroupPageState extends State<GroupPage> {
             );
           }, builder: (context, state) {
             return state.maybeWhen(
-                initial: () {
-                  context
-                      .read<RetrieveGroupByIdCubit>()
-                      .loadGroup(widget.groupId);
-                  return const Loading();
-                },
-                orElse: () => const Loading(),
-                loaded: (group) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) => sl<JoinGroupBloc>(),
-                          ),
-                          BlocProvider(
-                            create: (context) => sl<QuitGroupBloc>(),
-                          ),
-                        ],
-                        child: GroupLoaded(
-                          group: group,
-                          context: context,
-                        )));
+              initial: () {
+                context
+                    .read<RetrieveGroupByIdCubit>()
+                    .loadGroup(widget.groupId);
+                return const Loading();
+              },
+              orElse: () => const Loading(),
+              loaded: (group) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => sl<JoinGroupBloc>(),
+                  ),
+                  BlocProvider(
+                    create: (context) => sl<QuitGroupBloc>(),
+                  ),
+                ],
+                child: BlocConsumer<RetrieveGroupMembersByGroupIdCubit,
+                    RetrieveGroupMembersByGroupIdState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      failure: () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              const Text('Failed_to_load_group_members').tr(),
+                          backgroundColor: Theme.of(context).errorColor,
+                        ));
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                        initial: () {
+                          context
+                              .read<RetrieveGroupMembersByGroupIdCubit>()
+                              .loadGroupMemberByGroupId(group.id);
+                          return const Loading();
+                        },
+                        orElse: () => const Loading(),
+                        loaded: (members) => GroupLoaded(
+                              group: group,
+                              context: context,
+                              members: members,
+                            ));
+                  },
+                ),
+              ),
+            );
           }),
         ),
       ),

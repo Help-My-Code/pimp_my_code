@@ -12,13 +12,19 @@ import '../../../../domain/entities/user.dart';
 import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../validator/validators.dart';
 
-class UpdateUserModal extends StatelessWidget {
-  UpdateUserModal({Key? key, required this.user}) : super(key: key);
+class UpdateUserModal extends StatefulWidget {
+  const UpdateUserModal({Key? key, required this.user}) : super(key: key);
 
   final User user;
+
+  @override
+  State<UpdateUserModal> createState() => _UpdateUserModalState();
+}
+
+class _UpdateUserModalState extends State<UpdateUserModal> {
   final _formKey = GlobalKey<FormState>();
-  final _passwordController = TextEditingController();
   bool isValidPassword = false;
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class UpdateUserModal extends StatelessWidget {
       width: width,
       child: TextFormField(
         validator: requiredValidator,
-        initialValue: user.description,
+        initialValue: widget.user.description,
         onChanged: (value) => context
             .read<UpdateUserBloc>()
             .add(UpdateUserEvent.updateDescription(value)),
@@ -75,7 +81,7 @@ class UpdateUserModal extends StatelessWidget {
       width: width,
       child: TextFormField(
         validator: requiredValidator,
-        initialValue: user.principalPictureUrl,
+        initialValue: widget.user.principalPictureUrl,
         onChanged: (value) => context
             .read<UpdateUserBloc>()
             .add(UpdateUserEvent.updateProfilePictureURL(value)),
@@ -168,7 +174,7 @@ class UpdateUserModal extends StatelessWidget {
           onChanged: (value) => context.read<UpdateUserBloc>().add(
               UpdateUserEvent.updateConfidentiality(
                   value! ? Confidentiality.private : Confidentiality.public)),
-          value: user.confidentiality == Confidentiality.public ? false : true,
+          value: widget.user.confidentiality == Confidentiality.public ? false : true,
           type: GFToggleType.ios,
         )
       ],
