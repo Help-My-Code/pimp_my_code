@@ -25,8 +25,8 @@ class JoinGroupBloc extends Bloc<JoinGroupEvent, JoinGroupState> {
     String userId = await _sessionCubit.getUserId();
     final successOrFailure =
         await _createGroupMemberUseCase(CreateGroupMemberParam(
-      event.groupId,
       userId,
+      event.groupId,
     ));
     successOrFailure.fold(
       (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),

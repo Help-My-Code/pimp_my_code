@@ -9,12 +9,19 @@ import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_g
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../../../core/form_status.dart';
+import '../../../../domain/entities/enum/confidentiality.dart';
 import '../../../../domain/entities/group.dart';
 import '../../../../ioc_container.dart';
+import '../../../../state/join_group/join_group_bloc.dart';
+import '../../../../state/like/like_cubit.dart';
+import '../../../../state/quit_group/quit_group_bloc.dart';
+import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
+import '../../home/widgets/publications_loaded.dart';
 
 class GroupLoaded extends StatelessWidget {
   final Group group;
@@ -34,7 +41,7 @@ class GroupLoaded extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-          child: Wrap(
+          child: Row(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
@@ -63,7 +70,7 @@ class GroupLoaded extends StatelessWidget {
             ],
           ),
         ),
-        //_buildPublications(context),
+        _buildPublications(context),
       ],
     );
   }
@@ -107,178 +114,178 @@ class GroupLoaded extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            //if (group.creator!.id == snapshot.data) {
-            return GFButton(
-              onPressed: () => printUpdate(),
-              text: tr('edit_group'),
-              shape: GFButtonShape.standard,
-              color: Colors.amber,
-              icon: const Icon(Icons.edit, color: Colors.white),
-            );
-            // } else {
-            //   if (followersContainCurrentUser(snapshot.data!)) {
-            //     return _buildUnfollowButton(context);
-            //   }
-            //   return _buildGroupMemberButton(context);
-            // }
+            if (group.creator!.id == snapshot.data!) {
+              return GFButton(
+                onPressed: () => printUpdate(),
+                text: tr('edit_group'),
+                shape: GFButtonShape.standard,
+                color: Colors.amber,
+                icon: const Icon(Icons.edit, color: Colors.white),
+              );
+            } else {
+              if (membersContainCurrentUser(snapshot.data!)) {
+                return _buildQuitButton(context);
+              }
+              return _buildJoinButton(context);
+            }
           } else {
             return const CircularProgressIndicator();
           }
         });
   }
 
-  // _buildGroupMemberButton(BuildContext context) {
-  //   return BlocConsumer<GroupMemberGroupBloc, GroupMemberGroupState>(
-  //     listener: (context, state) {
-  //       if (state.status is FormSubmissionSuccessful) {
-  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //           content: const Text('follow_success').tr(),
-  //           backgroundColor: Colors.green,
-  //         ));
-  //         //TODO recharger la page
-  //       }
-  //       if (state.status is FormSubmissionFailed) {
-  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //           content: const Text('follow_failed').tr(),
-  //           backgroundColor: Theme.of(context).errorColor,
-  //         ));
-  //         //TODO recharger la page
-  //       }
-  //     },
-  //     builder: (context, state) {
-  //       return Form(
-  //           key: _formKey,
-  //           child: GFButton(
-  //             onPressed: () {
-  //               if (_formKey.currentState != null &&
-  //                   _formKey.currentState!.validate() &&
-  //                   state.status is FormNotSent) {
-  //                 context
-  //                     .read<GroupMemberGroupBloc>()
-  //                     .add(GroupMemberGroupEvent.submit(group.id));
-  //               }
-  //             },
-  //             text: tr('follow'),
-  //             shape: GFButtonShape.standard,
-  //             color: Colors.amber,
-  //             icon: const Icon(Icons.add, color: Colors.white),
-  //           ));
-  //     },
-  //   );
-  // }
-  //
-  // _buildUnfollowButton(BuildContext context) {
-  //   return BlocConsumer<UnfollowGroupBloc, UnfollowGroupState>(
-  //     listener: (context, state) {
-  //       if (state.status is FormSubmissionSuccessful) {
-  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //           content: const Text('unfollow_success').tr(),
-  //           backgroundColor: Colors.green,
-  //         ));
-  //         //TODO recharger la page
-  //       }
-  //       if (state.status is FormSubmissionFailed) {
-  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //           content: const Text('unfollow_failed').tr(),
-  //           backgroundColor: Theme.of(context).errorColor,
-  //         ));
-  //         //TODO recharger la page
-  //       }
-  //     },
-  //     builder: (context, state) {
-  //       return Form(
-  //           key: _formKey,
-  //           child: GFButton(
-  //             onPressed: () {
-  //               if (_formKey.currentState != null &&
-  //                   _formKey.currentState!.validate() &&
-  //                   state.status is FormNotSent) {
-  //                 context
-  //                     .read<UnfollowGroupBloc>()
-  //                     .add(UnfollowGroupEvent.submit(group.id));
-  //               }
-  //             },
-  //             text: tr('unfollow'),
-  //             shape: GFButtonShape.standard,
-  //             color: Colors.amber,
-  //             icon: const Icon(Icons.remove, color: Colors.white),
-  //           ));
-  //     },
-  //   );
-  // }
+  _buildJoinButton(BuildContext context) {
+    return BlocConsumer<JoinGroupBloc, JoinGroupState>(
+      listener: (context, state) {
+        if (state.status is FormSubmissionSuccessful) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('follow_success').tr(),
+            backgroundColor: Colors.green,
+          ));
+          //TODO recharger la page
+        }
+        if (state.status is FormSubmissionFailed) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('follow_failed').tr(),
+            backgroundColor: Theme.of(context).errorColor,
+          ));
+          //TODO recharger la page
+        }
+      },
+      builder: (context, state) {
+        return Form(
+            key: _formKey,
+            child: GFButton(
+              onPressed: () {
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate() &&
+                    state.status is FormNotSent) {
+                  context
+                      .read<JoinGroupBloc>()
+                      .add(JoinGroupEvent.submit(group.id));
+                }
+              },
+              text: tr('join'),
+              shape: GFButtonShape.standard,
+              color: Colors.amber,
+              icon: const Icon(Icons.add, color: Colors.white),
+            ));
+      },
+    );
+  }
 
-  // _buildPublications(BuildContext context) {
-  //   return FutureBuilder<String>(
-  //       future: context.read<SessionCubit>().getUserId(),
-  //       builder: (context, AsyncSnapshot<String> snapshot) {
-  //         if (snapshot.hasData) {
-  //           if (group.confidentiality == Confidentiality.public ||
-  //               membersContainCurrentUser(snapshot.data!) ||
-  //               group.id == snapshot.data) {
-  //             return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
-  //               listener: (context, state) {
-  //                 state.maybeWhen(
-  //                   orElse: () {},
-  //                   failure: () {
-  //                     ScaffoldMessenger.of(context).showSnackBar(
-  //                       SnackBar(
-  //                         content:
-  //                             const Text('Failed_to_load_publications').tr(),
-  //                       ),
-  //                     );
-  //                   },
-  //                 );
-  //               },
-  //               builder: (context, state) {
-  //                 return state.maybeWhen(
-  //                   initial: () {
-  //                     context
-  //                         .read<RetrieveContentCubit>()
-  //                         .loadPublicationByGroupId(group.id);
-  //                     return const Loading();
-  //                   },
-  //                   orElse: () => const Loading(),
-  //                   loaded: (publications) => Container(
-  //                     alignment: Alignment.center,
-  //                     width: double.infinity,
-  //                     height: MediaQuery.of(context).size.height,
-  //                     child: Column(
-  //                       children: [
-  //                         Flexible(
-  //                           child: BlocProvider(
-  //                               create: (context) => LikeCubit(
-  //                                     contentRepository: sl(),
-  //                                     retrieveContentCubit:
-  //                                         context.read<RetrieveContentCubit>(),
-  //                                     sessionCubit: sl(),
-  //                                   ),
-  //                               child: PublicationsLoaded(
-  //                                   publications: publications,
-  //                               ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             );
-  //           } else {
-  //             return Container(
-  //               alignment: Alignment.center,
-  //               width: double.infinity,
-  //               height: MediaQuery.of(context).size.height * 0.5,
-  //               child: Text(
-  //                 'private_user'.tr(),
-  //                 style: const TextStyle(fontSize: 16),
-  //               ),
-  //             );
-  //           }
-  //         } else {
-  //           return const CircularProgressIndicator();
-  //         }
-  //       });
-  // }
+  _buildQuitButton(BuildContext context) {
+    return BlocConsumer<QuitGroupBloc, QuitGroupState>(
+      listener: (context, state) {
+        if (state.status is FormSubmissionSuccessful) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('unfollow_success').tr(),
+            backgroundColor: Colors.green,
+          ));
+          //TODO recharger la page
+        }
+        if (state.status is FormSubmissionFailed) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: const Text('unfollow_failed').tr(),
+            backgroundColor: Theme.of(context).errorColor,
+          ));
+          //TODO recharger la page
+        }
+      },
+      builder: (context, state) {
+        return Form(
+            key: _formKey,
+            child: GFButton(
+              onPressed: () {
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate() &&
+                    state.status is FormNotSent) {
+                  context
+                      .read<QuitGroupBloc>()
+                      .add(QuitGroupEvent.submit(group.id));
+                }
+              },
+              text: tr('quit'),
+              shape: GFButtonShape.standard,
+              color: Colors.amber,
+              icon: const Icon(Icons.remove, color: Colors.white),
+            ));
+      },
+    );
+  }
+
+  _buildPublications(BuildContext context) {
+    return FutureBuilder<String>(
+        future: context.read<SessionCubit>().getUserId(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            if (group.confidentiality == Confidentiality.public ||
+                membersContainCurrentUser(snapshot.data!) ||
+                group.id == snapshot.data) {
+              return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
+                listener: (context, state) {
+                  state.maybeWhen(
+                    orElse: () {},
+                    failure: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                              const Text('Failed_to_load_publications').tr(),
+                        ),
+                      );
+                    },
+                  );
+                },
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    initial: () {
+                      context
+                          .read<RetrieveContentCubit>()
+                          .loadPublicationByGroupId(group.id);
+                      return const Loading();
+                    },
+                    orElse: () => const Loading(),
+                    loaded: (publications) => Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        children: [
+                          Flexible(
+                            child: BlocProvider(
+                                create: (context) => LikeCubit(
+                                      contentRepository: sl(),
+                                      retrieveContentCubit:
+                                          context.read<RetrieveContentCubit>(),
+                                      sessionCubit: sl(),
+                                    ),
+                                child: PublicationsLoaded(
+                                    publications: publications,
+                                ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            } else {
+              return Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: Text(
+                  'private_user'.tr(),
+                  style: const TextStyle(fontSize: 16),
+                ),
+              );
+            }
+          } else {
+            return const CircularProgressIndicator();
+          }
+        });
+  }
 
   void printUpdate() {
     Alert(
@@ -295,7 +302,7 @@ class GroupLoaded extends StatelessWidget {
 
   loadMembers(members) {
     members = members;
-    return Text(members.length.toString() + ' members'.tr(),
+    return Text(members.length.toString() + 'members'.tr(),
         style: const TextStyle(fontSize: 16));
   }
 

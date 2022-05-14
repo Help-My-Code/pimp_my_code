@@ -22,6 +22,7 @@ class UpdateGroupBloc extends Bloc<UpdateGroupEvent, UpdateGroupState> {
     on<_UpdateConfidentiality>(onUpdateConfidentiality);
     on<_Loaded>(onLoaded);
   }
+
   void onLoaded(_Loaded event, Emitter emit) {
     emit(state.copyWith(
       confidentiality: event.group.confidentiality,

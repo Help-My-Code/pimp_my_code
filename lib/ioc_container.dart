@@ -21,6 +21,7 @@ import 'domain/repositories/notification_repository.dart';
 import 'domain/repositories/user_repository.dart';
 import 'domain/services/program_service.dart';
 import 'domain/usecases/content/create_publication_use_case.dart';
+import 'domain/usecases/content/get_publications_by_group_id.dart';
 import 'domain/usecases/follow/find_follow_by_follower_id.dart';
 import 'domain/usecases/group-member/create_group_member.dart';
 import 'domain/usecases/group-member/delete_group_member.dart';
@@ -116,7 +117,7 @@ void registerInteractor(ChopperClient chopper) {
 void registerMapper() {
   sl.registerFactory(() => ContentMapper(sl()));
   sl.registerFactory(() => UserMapper());
-  sl.registerFactory(() => GroupMapper());
+  sl.registerFactory(() => GroupMapper(sl()));
   sl.registerFactory(() => GroupMemberMapper(sl(), sl()));
   sl.registerFactory(() => NotificationMapper(sl(), sl()));
   sl.registerFactory(() => FollowMapper(sl()));
@@ -154,6 +155,7 @@ void registerUseCases() {
   sl.registerSingleton(SeeAllNotificationsUseCase(sl()));
   sl.registerSingleton(FindUserByIdUseCase(sl()));
   sl.registerSingleton(GetPublicationsByUserIdUseCase(sl()));
+  sl.registerSingleton(GetPublicationsByGroupIdUseCase(sl()));
   sl.registerSingleton(FindFollowByFollowerIdUseCase(sl()));
   sl.registerSingleton(FindFollowByUserIdUseCase(sl()));
   sl.registerSingleton(UpdateUserUseCase(sl()));
@@ -172,7 +174,7 @@ void registerBloc() {
   sl.registerFactory(() => LoginBloc(sl(), sl()));
   sl.registerSingleton(ErrorHandlerBloc());
   sl.registerSingleton(AppObserver(sl(), sl()));
-  sl.registerFactory(() => RetrieveContentCubit(sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => RetrieveContentCubit(sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => CreatePostCubit(sl(), sl()));
   sl.registerFactory(() => RetrieveUserCubit(sl()));
   sl.registerFactory(() => RetrieveGroupCubit(sl()));

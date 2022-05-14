@@ -25,8 +25,8 @@ class QuitGroupBloc extends Bloc<QuitGroupEvent, QuitGroupState> {
     String userId = await _sessionCubit.getUserId();
     final successOrFailure =
         await _deleteGroupMemberUseCase(DeleteGroupMemberParam(
-      event.groupId,
       userId,
+      event.groupId,
     ));
     successOrFailure.fold(
       (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),

@@ -15,7 +15,7 @@ class FindGroupByIdUseCase
   Future<Either<FindGroupByIdFailure, Group>> call(
     FindGroupByIdParam params,
   ) async {
-    return await _repository.getById(id: params.name);
+    return await _repository.getById(id: params.id);
   }
 }
 
@@ -26,7 +26,7 @@ class FindGroupByIdFailure extends Failure {
 }
 
 class FindGroupByIdParam {
-  final String name;
+  final String id;
 
-  FindGroupByIdParam(this.name);
+  FindGroupByIdParam(this.id);
 }

@@ -321,8 +321,10 @@ class AccountLoaded extends StatelessWidget {
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
-          create: (context) => sl<UpdateUserBloc>(),
-          child: UpdateUserModal(user: user)),
+        create: (context) =>
+        sl<UpdateUserBloc>()..add(UpdateUserEvent.loaded(user)),
+        child: UpdateUserModal(user: user),
+      ),
       buttons: [],
     ).show();
   }

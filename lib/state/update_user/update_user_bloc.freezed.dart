@@ -52,6 +52,12 @@ class _$UpdateUserEventTearOff {
       confidentiality,
     );
   }
+
+  _Loaded loaded(User user) {
+    return _Loaded(
+      user,
+    );
+  }
 }
 
 /// @nodoc
@@ -68,6 +74,7 @@ mixin _$UpdateUserEvent {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +85,7 @@ mixin _$UpdateUserEvent {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +96,7 @@ mixin _$UpdateUserEvent {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -102,6 +111,7 @@ mixin _$UpdateUserEvent {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -112,6 +122,7 @@ mixin _$UpdateUserEvent {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -122,6 +133,7 @@ mixin _$UpdateUserEvent {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -189,6 +201,7 @@ class _$_Submit implements _Submit {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return submit();
   }
@@ -202,6 +215,7 @@ class _$_Submit implements _Submit {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return submit?.call();
   }
@@ -215,6 +229,7 @@ class _$_Submit implements _Submit {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -235,6 +250,7 @@ class _$_Submit implements _Submit {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return submit(this);
   }
@@ -248,6 +264,7 @@ class _$_Submit implements _Submit {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return submit?.call(this);
   }
@@ -261,6 +278,7 @@ class _$_Submit implements _Submit {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -347,6 +365,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return updateDescription(description);
   }
@@ -360,6 +379,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return updateDescription?.call(description);
   }
@@ -373,6 +393,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -393,6 +414,7 @@ class _$_UpdateDescription implements _UpdateDescription {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateDescription(this);
   }
@@ -406,6 +428,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateDescription?.call(this);
   }
@@ -419,6 +442,7 @@ class _$_UpdateDescription implements _UpdateDescription {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateDescription != null) {
@@ -512,6 +536,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return updateProfilePictureURL(profilePictureURL);
   }
@@ -525,6 +550,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return updateProfilePictureURL?.call(profilePictureURL);
   }
@@ -538,6 +564,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -558,6 +585,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateProfilePictureURL(this);
   }
@@ -571,6 +599,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateProfilePictureURL?.call(this);
   }
@@ -584,6 +613,7 @@ class _$_UpdateProfilePictureURL implements _UpdateProfilePictureURL {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateProfilePictureURL != null) {
@@ -675,6 +705,7 @@ class _$_UpdatePassword implements _UpdatePassword {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return updatePassword(password);
   }
@@ -688,6 +719,7 @@ class _$_UpdatePassword implements _UpdatePassword {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return updatePassword?.call(password);
   }
@@ -701,6 +733,7 @@ class _$_UpdatePassword implements _UpdatePassword {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (updatePassword != null) {
@@ -721,6 +754,7 @@ class _$_UpdatePassword implements _UpdatePassword {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updatePassword(this);
   }
@@ -734,6 +768,7 @@ class _$_UpdatePassword implements _UpdatePassword {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updatePassword?.call(this);
   }
@@ -747,6 +782,7 @@ class _$_UpdatePassword implements _UpdatePassword {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updatePassword != null) {
@@ -839,6 +875,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return updateConfirmPassword(confirmPassword);
   }
@@ -852,6 +889,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return updateConfirmPassword?.call(confirmPassword);
   }
@@ -865,6 +903,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfirmPassword != null) {
@@ -885,6 +924,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateConfirmPassword(this);
   }
@@ -898,6 +938,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateConfirmPassword?.call(this);
   }
@@ -911,6 +952,7 @@ class _$_UpdateConfirmPassword implements _UpdateConfirmPassword {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfirmPassword != null) {
@@ -1004,6 +1046,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     required TResult Function(String confirmPassword) updateConfirmPassword,
     required TResult Function(Confidentiality confidentiality)
         updateConfidentiality,
+    required TResult Function(User user) loaded,
   }) {
     return updateConfidentiality(confidentiality);
   }
@@ -1017,6 +1060,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
   }) {
     return updateConfidentiality?.call(confidentiality);
   }
@@ -1030,6 +1074,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(String password)? updatePassword,
     TResult Function(String confirmPassword)? updateConfirmPassword,
     TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -1050,6 +1095,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
         updateConfirmPassword,
     required TResult Function(_UpdateConfidentiality value)
         updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
   }) {
     return updateConfidentiality(this);
   }
@@ -1063,6 +1109,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
   }) {
     return updateConfidentiality?.call(this);
   }
@@ -1076,6 +1123,7 @@ class _$_UpdateConfidentiality implements _UpdateConfidentiality {
     TResult Function(_UpdatePassword value)? updatePassword,
     TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
     TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
     if (updateConfidentiality != null) {
@@ -1093,6 +1141,170 @@ abstract class _UpdateConfidentiality implements UpdateUserEvent {
   @JsonKey(ignore: true)
   _$UpdateConfidentialityCopyWith<_UpdateConfidentiality> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$LoadedCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
+      __$LoadedCopyWithImpl<$Res>;
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res> extends _$UpdateUserEventCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
+      : super(_value, (v) => _then(v as _Loaded));
+
+  @override
+  _Loaded get _value => super._value as _Loaded;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_Loaded(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Loaded implements _Loaded {
+  const _$_Loaded(this.user);
+
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'UpdateUserEvent.loaded(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Loaded &&
+            const DeepCollectionEquality().equals(other.user, user));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadedCopyWith<_Loaded> get copyWith =>
+      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() submit,
+    required TResult Function(String description) updateDescription,
+    required TResult Function(String profilePictureURL) updateProfilePictureURL,
+    required TResult Function(String password) updatePassword,
+    required TResult Function(String confirmPassword) updateConfirmPassword,
+    required TResult Function(Confidentiality confidentiality)
+        updateConfidentiality,
+    required TResult Function(User user) loaded,
+  }) {
+    return loaded(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? submit,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(String password)? updatePassword,
+    TResult Function(String confirmPassword)? updateConfirmPassword,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
+  }) {
+    return loaded?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? submit,
+    TResult Function(String description)? updateDescription,
+    TResult Function(String profilePictureURL)? updateProfilePictureURL,
+    TResult Function(String password)? updatePassword,
+    TResult Function(String confirmPassword)? updateConfirmPassword,
+    TResult Function(Confidentiality confidentiality)? updateConfidentiality,
+    TResult Function(User user)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_UpdateDescription value) updateDescription,
+    required TResult Function(_UpdateProfilePictureURL value)
+        updateProfilePictureURL,
+    required TResult Function(_UpdatePassword value) updatePassword,
+    required TResult Function(_UpdateConfirmPassword value)
+        updateConfirmPassword,
+    required TResult Function(_UpdateConfidentiality value)
+        updateConfidentiality,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdatePassword value)? updatePassword,
+    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Submit value)? submit,
+    TResult Function(_UpdateDescription value)? updateDescription,
+    TResult Function(_UpdateProfilePictureURL value)? updateProfilePictureURL,
+    TResult Function(_UpdatePassword value)? updatePassword,
+    TResult Function(_UpdateConfirmPassword value)? updateConfirmPassword,
+    TResult Function(_UpdateConfidentiality value)? updateConfidentiality,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loaded implements UpdateUserEvent {
+  const factory _Loaded(User user) = _$_Loaded;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
