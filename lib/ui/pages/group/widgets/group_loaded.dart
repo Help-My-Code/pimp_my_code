@@ -81,7 +81,6 @@ class _GroupLoadedState extends State<GroupLoaded> {
             ],
           ),
         ),
-        _buildAddPublications(context),
         _buildPublications(context),
       ],
     );
@@ -203,8 +202,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
 
   _buildAddPublications(BuildContext context) {
     return GFButton(
-      onPressed: () {
-        showMaterialModalBottomSheet(
+      onPressed: () async {
+        await showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CreatePostCard(groupId: widget.group.id),
         );
@@ -223,55 +222,60 @@ class _GroupLoadedState extends State<GroupLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
-                membersContainCurrentUser(snapshot.data!) ||
-                widget.group.id == snapshot.data) {
-              return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
-                listener: (context, state) {
-                  state.maybeWhen(
-                    orElse: () {},
-                    failure: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              const Text('Failed_to_load_publications').tr(),
+                membersContainCurrentUser(snapshot.data!)) {
+              return Column(
+                children: [
+                  if(membersContainCurrentUser(snapshot.data!))
+                  _buildAddPublications(context),
+                  BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
+                    listener: (context, state) {
+                      state.maybeWhen(
+                        orElse: () {},
+                        failure: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  const Text('Failed_to_load_publications').tr(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        initial: () {
+                          context
+                              .read<RetrieveContentCubit>()
+                              .loadPublicationByGroupId(widget.group.id);
+                          return const Loading();
+                        },
+                        orElse: () => const Loading(),
+                        loaded: (publications) => Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height,
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: BlocProvider(
+                                  create: (context) => LikeCubit(
+                                    contentRepository: sl(),
+                                    retrieveContentCubit:
+                                        context.read<RetrieveContentCubit>(),
+                                    sessionCubit: sl(),
+                                  ),
+                                  child: PublicationsLoaded(
+                                    publications: publications,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
-                  );
-                },
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    initial: () {
-                      context
-                          .read<RetrieveContentCubit>()
-                          .loadPublicationByGroupId(widget.group.id);
-                      return const Loading();
-                    },
-                    orElse: () => const Loading(),
-                    loaded: (publications) => Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: BlocProvider(
-                              create: (context) => LikeCubit(
-                                contentRepository: sl(),
-                                retrieveContentCubit:
-                                    context.read<RetrieveContentCubit>(),
-                                sessionCubit: sl(),
-                              ),
-                              child: PublicationsLoaded(
-                                publications: publications,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                  ),
+                ],
               );
             } else {
               return Container(
@@ -279,7 +283,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: Text(
-                  'private_user'.tr(),
+                  'private_group'.tr(),
                   style: const TextStyle(fontSize: 16),
                 ),
               );
