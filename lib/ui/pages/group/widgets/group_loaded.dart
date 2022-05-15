@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -20,6 +21,7 @@ import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
+import '../../home/widgets/create_post_card.dart';
 import '../../home/widgets/publications_loaded.dart';
 
 class GroupLoaded extends StatefulWidget {
@@ -79,6 +81,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
             ],
           ),
         ),
+        _buildAddPublications(context),
         _buildPublications(context),
       ],
     );
@@ -195,6 +198,22 @@ class _GroupLoadedState extends State<GroupLoaded> {
               icon: const Icon(Icons.remove, color: Colors.white),
             ));
       },
+    );
+  }
+
+  _buildAddPublications(BuildContext context) {
+    return GFButton(
+      onPressed: () {
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => CreatePostCard(groupId: widget.group.id),
+        );
+        sl<RetrieveContentCubit>().loadPublicationByGroupId(widget.group.id);
+      },
+      text: tr('add_post'),
+      shape: GFButtonShape.standard,
+      color: Colors.amber,
+      icon: const Icon(Icons.add, color: Colors.white),
     );
   }
 

@@ -15,12 +15,14 @@ import '../../../../ioc_container.dart';
 
 class CreatePostCard extends StatelessWidget {
   final String? contentId;
-  const CreatePostCard({Key? key, this.contentId}) : super(key: key);
+  final String? groupId;
+
+  const CreatePostCard({Key? key, this.contentId, this.groupId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (ctx) => sl<CreatePostCubit>()..makeComment(contentId),
+      create: (ctx) => sl<CreatePostCubit>()..makeAttributes(contentId, groupId),
       child: Builder(builder: (context) {
         return BlocConsumer<CreatePostCubit, CreatePostState>(
             listener: (context, state) {

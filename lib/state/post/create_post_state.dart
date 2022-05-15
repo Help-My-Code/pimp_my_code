@@ -14,6 +14,7 @@ class CreatePostState with _$CreatePostState {
     String? code,
     String? codeResult,
     String? parentId,
+    String? groupId,
     required ContentType contentType,
     required String language,
     required bool isLoading,

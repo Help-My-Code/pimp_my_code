@@ -27,6 +27,10 @@ class ApiContentRepository extends ContentRepository {
         'contentType': content.contentType.name.toUpperCase(),
         'creatorId': content.creatorId,
       };
+      if (content.groupId != null) {
+        fields['groupId'] = content.groupId!;
+      }
+
       if (content.parentId != null) {
         fields['parentId'] = content.parentId!;
       }
