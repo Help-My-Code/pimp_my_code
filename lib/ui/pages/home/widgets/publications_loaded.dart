@@ -9,28 +9,13 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
+import '../../../../utils/like_helper.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
 
 class PublicationsLoaded extends StatelessWidget {
   final List<Content> publications;
-
-  void onLikePress(LikeCubit likeCubit, Content publication) {
-    if (publication.isLike) {
-      likeCubit.unlike(publication.id!);
-    } else {
-      likeCubit.like(publication.id!);
-    }
-  }
-
-  void onDislikePress(LikeCubit likeCubit, Content publication) {
-    if (publication.isDislike) {
-      likeCubit.undislike(publication.id!);
-    } else {
-      likeCubit.dislike(publication.id!);
-    }
-  }
 
   void showComments(BuildContext context, Content content) {
     final contentCubit = sl<RetrieveContentCubit>()..loadComment(content.id!);
