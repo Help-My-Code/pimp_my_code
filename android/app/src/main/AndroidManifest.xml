@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pimp_my_code">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="pimp_my_code"
         android:name="${applicationName}"

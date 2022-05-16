@@ -5,7 +5,6 @@ import '../../../../core/form_status.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../state/login/login_bloc.dart';
 import '../../../router/routes.dart';
-import '../../../styles.dart';
 import '../../../validator/validators.dart';
 
 class LoginForm extends StatefulWidget {
@@ -42,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
       padding: const EdgeInsets.only(bottom: 20),
       child: const Text(
         'to_login',
-        style: TextStyles.bold,
+        style: TextStyle(fontWeight: FontWeight.bold),
       ).tr(),
     );
   }

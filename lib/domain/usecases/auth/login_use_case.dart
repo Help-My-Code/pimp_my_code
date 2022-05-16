@@ -16,7 +16,7 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
   Future<Either<LoginFailure, LoginResponse>> call(LoginParam params) async {
     final loginResponseOrFailure =
         await _repository.login(params.email, params.password);
-    loginResponseOrFailure.fold((failure) {}, _saveUserInfoAfterLogin);
+    await loginResponseOrFailure.fold((failure) {}, _saveUserInfoAfterLogin);
     return loginResponseOrFailure;
   }
 
