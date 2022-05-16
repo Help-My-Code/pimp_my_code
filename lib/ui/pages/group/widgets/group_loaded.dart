@@ -17,6 +17,7 @@ import '../../../../state/join_group/join_group_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/quit_group/quit_group_bloc.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
+import '../../../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
@@ -225,8 +226,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 membersContainCurrentUser(snapshot.data!)) {
               return Column(
                 children: [
-                  if(membersContainCurrentUser(snapshot.data!))
-                  _buildAddPublications(context),
+                  if (membersContainCurrentUser(snapshot.data!))
+                    _buildAddPublications(context),
                   BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                     listener: (context, state) {
                       state.maybeWhen(
@@ -234,8 +235,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
                         failure: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content:
-                                  const Text('Failed_to_load_publications').tr(),
+                              content: const Text('Failed_to_load_publications')
+                                  .tr(),
                             ),
                           );
                         },
@@ -294,8 +295,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
         });
   }
 
-  void printUpdate() {
-    Alert(
+  Future<void> printUpdate() async {
+    await Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
@@ -305,6 +306,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
       ),
       buttons: [],
     ).show();
+    context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
   }
 
   bool membersContainCurrentUser(String userId) {
