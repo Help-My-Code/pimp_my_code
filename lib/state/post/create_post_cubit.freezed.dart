@@ -28,6 +28,7 @@ class _$CreatePostStateTearOff {
       String? code,
       String? codeResult,
       String? parentId,
+      String? groupId,
       required ContentType contentType,
       required String language,
       required bool isLoading,
@@ -43,6 +44,7 @@ class _$CreatePostStateTearOff {
       code: code,
       codeResult: codeResult,
       parentId: parentId,
+      groupId: groupId,
       contentType: contentType,
       language: language,
       isLoading: isLoading,
@@ -66,6 +68,7 @@ mixin _$CreatePostState {
   String? get code => throw _privateConstructorUsedError;
   String? get codeResult => throw _privateConstructorUsedError;
   String? get parentId => throw _privateConstructorUsedError;
+  String? get groupId => throw _privateConstructorUsedError;
   ContentType get contentType => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -93,6 +96,7 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String? code,
       String? codeResult,
       String? parentId,
+      String? groupId,
       ContentType contentType,
       String language,
       bool isLoading,
@@ -120,6 +124,7 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? code = freezed,
     Object? codeResult = freezed,
     Object? parentId = freezed,
+    Object? groupId = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
@@ -163,6 +168,10 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      groupId: groupId == freezed
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as String?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -204,6 +213,7 @@ abstract class _$CreatePostStateCopyWith<$Res>
       String? code,
       String? codeResult,
       String? parentId,
+      String? groupId,
       ContentType contentType,
       String language,
       bool isLoading,
@@ -233,6 +243,7 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? code = freezed,
     Object? codeResult = freezed,
     Object? parentId = freezed,
+    Object? groupId = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
@@ -276,6 +287,10 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      groupId: groupId == freezed
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as String?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -313,6 +328,7 @@ class _$_CreatePostState extends _CreatePostState {
       this.code,
       this.codeResult,
       this.parentId,
+      this.groupId,
       required this.contentType,
       required this.language,
       required this.isLoading,
@@ -339,6 +355,8 @@ class _$_CreatePostState extends _CreatePostState {
   @override
   final String? parentId;
   @override
+  final String? groupId;
+  @override
   final ContentType contentType;
   @override
   final String language;
@@ -351,7 +369,7 @@ class _$_CreatePostState extends _CreatePostState {
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, groupId: $groupId, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -370,6 +388,7 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality()
                 .equals(other.codeResult, codeResult) &&
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
+            const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality()
                 .equals(other.contentType, contentType) &&
             const DeepCollectionEquality().equals(other.language, language) &&
@@ -392,6 +411,7 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(parentId),
+      const DeepCollectionEquality().hash(groupId),
       const DeepCollectionEquality().hash(contentType),
       const DeepCollectionEquality().hash(language),
       const DeepCollectionEquality().hash(isLoading),
@@ -415,6 +435,7 @@ abstract class _CreatePostState extends CreatePostState {
           String? code,
           String? codeResult,
           String? parentId,
+          String? groupId,
           required ContentType contentType,
           required String language,
           required bool isLoading,
@@ -441,6 +462,8 @@ abstract class _CreatePostState extends CreatePostState {
   String? get codeResult;
   @override
   String? get parentId;
+  @override
+  String? get groupId;
   @override
   ContentType get contentType;
   @override

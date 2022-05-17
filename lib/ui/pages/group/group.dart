@@ -101,18 +101,19 @@ class _GroupPageState extends State<GroupPage> {
                   },
                   builder: (context, state) {
                     return state.maybeWhen(
-                        initial: () {
-                          context
-                              .read<RetrieveGroupMembersByGroupIdCubit>()
-                              .loadGroupMemberByGroupId(group.id);
-                          return const Loading();
-                        },
-                        orElse: () => const Loading(),
-                        loaded: (members) => GroupLoaded(
-                              group: group,
-                              context: context,
-                              members: members,
-                            ));
+                      initial: () {
+                        context
+                            .read<RetrieveGroupMembersByGroupIdCubit>()
+                            .loadGroupMemberByGroupId(group.id);
+                        return const Loading();
+                      },
+                      orElse: () => const Loading(),
+                      loaded: (members) => GroupLoaded(
+                        group: group,
+                        context: context,
+                        members: members,
+                      ),
+                    );
                   },
                 ),
               ),

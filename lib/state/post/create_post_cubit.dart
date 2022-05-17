@@ -33,10 +33,15 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     return state.code != null && state.code!.isNotEmpty;
   }
 
-  void makeComment(String? parentId) {
+  void makeAttributes(String? parentId, String? groupId) {
     if (parentId != null) {
       emit(
         state.copyWith(contentType: ContentType.comment, parentId: parentId),
+      );
+    }
+    if (groupId != null) {
+      emit(
+        state.copyWith(groupId: groupId),
       );
     }
   }
@@ -99,6 +104,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           userPicture: state.userPicture!,
           username: state.username ?? '',
           parentId: state.parentId,
+          groupId: state.groupId
         ),
       );
       either.fold((f) {

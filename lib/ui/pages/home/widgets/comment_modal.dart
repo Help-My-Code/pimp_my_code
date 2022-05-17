@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
+import 'package:pimp_my_code/utils/like_helper.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import 'post_card.dart';
@@ -34,8 +36,10 @@ class CommentModal extends StatelessWidget {
               return PostCard(
                 contentType: ContentType.comment,
                 contentId: comments[index].id!,
-                onLikePressed: () {}, // TODO
-                onUnlikePressed: () {},
+                onLikePressed: () =>
+                    onLikePress(context.read<LikeCubit>(), comments[index]),
+                onUnlikePressed: () =>
+                    onDislikePress(context.read<LikeCubit>(), comments[index]),
                 onCommentaryPressed: () {},
                 codes: comments[index].code == null
                     ? ['']

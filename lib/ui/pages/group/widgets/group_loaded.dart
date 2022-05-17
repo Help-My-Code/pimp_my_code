@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -16,10 +17,12 @@ import '../../../../state/join_group/join_group_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/quit_group/quit_group_bloc.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
+import '../../../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
 import '../../../widgets/loading.dart';
+import '../../home/widgets/create_post_card.dart';
 import '../../home/widgets/publications_loaded.dart';
 
 class GroupLoaded extends StatefulWidget {
@@ -198,61 +201,82 @@ class _GroupLoadedState extends State<GroupLoaded> {
     );
   }
 
+  _buildAddPublications(BuildContext context) {
+    return GFButton(
+      onPressed: () async {
+        await showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => CreatePostCard(groupId: widget.group.id),
+        );
+        sl<RetrieveContentCubit>().loadPublicationByGroupId(widget.group.id);
+      },
+      text: tr('add_post'),
+      shape: GFButtonShape.standard,
+      color: Colors.amber,
+      icon: const Icon(Icons.add, color: Colors.white),
+    );
+  }
+
   _buildPublications(BuildContext context) {
     return FutureBuilder<String>(
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
-                membersContainCurrentUser(snapshot.data!) ||
-                widget.group.id == snapshot.data) {
-              return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
-                listener: (context, state) {
-                  state.maybeWhen(
-                    orElse: () {},
-                    failure: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              const Text('Failed_to_load_publications').tr(),
+                membersContainCurrentUser(snapshot.data!)) {
+              return Column(
+                children: [
+                  if (membersContainCurrentUser(snapshot.data!))
+                    _buildAddPublications(context),
+                  BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
+                    listener: (context, state) {
+                      state.maybeWhen(
+                        orElse: () {},
+                        failure: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('Failed_to_load_publications')
+                                  .tr(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        initial: () {
+                          context
+                              .read<RetrieveContentCubit>()
+                              .loadPublicationByGroupId(widget.group.id);
+                          return const Loading();
+                        },
+                        orElse: () => const Loading(),
+                        loaded: (publications) => Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height,
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: BlocProvider(
+                                  create: (context) => LikeCubit(
+                                    contentRepository: sl(),
+                                    retrieveContentCubit:
+                                        context.read<RetrieveContentCubit>(),
+                                    sessionCubit: sl(),
+                                  ),
+                                  child: PublicationsLoaded(
+                                    publications: publications,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
-                  );
-                },
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    initial: () {
-                      context
-                          .read<RetrieveContentCubit>()
-                          .loadPublicationByGroupId(widget.group.id);
-                      return const Loading();
-                    },
-                    orElse: () => const Loading(),
-                    loaded: (publications) => Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: BlocProvider(
-                              create: (context) => LikeCubit(
-                                contentRepository: sl(),
-                                retrieveContentCubit:
-                                    context.read<RetrieveContentCubit>(),
-                                sessionCubit: sl(),
-                              ),
-                              child: PublicationsLoaded(
-                                publications: publications,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                  ),
+                ],
               );
             } else {
               return Container(
@@ -260,7 +284,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: Text(
-                  'private_user'.tr(),
+                  'private_group'.tr(),
                   style: const TextStyle(fontSize: 16),
                 ),
               );
@@ -271,8 +295,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
         });
   }
 
-  void printUpdate() {
-    Alert(
+  Future<void> printUpdate() async {
+    await Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
@@ -282,6 +306,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
       ),
       buttons: [],
     ).show();
+    context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
   }
 
   bool membersContainCurrentUser(String userId) {
