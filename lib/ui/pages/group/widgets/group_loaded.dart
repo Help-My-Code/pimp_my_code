@@ -18,6 +18,7 @@ import '../../../../state/like/like_cubit.dart';
 import '../../../../state/quit_group/quit_group_bloc.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
+import '../../../../state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
@@ -126,17 +127,21 @@ class _GroupLoadedState extends State<GroupLoaded> {
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('follow_success').tr(),
+            content: const Text('join_group_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveGroupMembersByGroupIdCubit>()
+              .loadGroupMemberByGroupId(widget.group.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByGroupId(widget.group.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('follow_failed').tr(),
+            content: const Text('join_group_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -166,17 +171,21 @@ class _GroupLoadedState extends State<GroupLoaded> {
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('unfollow_success').tr(),
+            content: const Text('quit_group_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveGroupMembersByGroupIdCubit>()
+              .loadGroupMemberByGroupId(widget.group.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByGroupId(widget.group.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('unfollow_failed').tr(),
+            content: const Text('quit_group_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -208,7 +217,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
           context: context,
           builder: (context) => CreatePostCard(groupId: widget.group.id),
         );
-        sl<RetrieveContentCubit>().loadPublicationByGroupId(widget.group.id);
+        context.read<RetrieveContentCubit>()
+            .loadPublicationByGroupId(widget.group.id);
       },
       text: tr('add_post'),
       shape: GFButtonShape.standard,
@@ -226,7 +236,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 membersContainCurrentUser(snapshot.data!)) {
               return Column(
                 children: [
-                  if (membersContainCurrentUser(snapshot.data!))
+                  if (membersContainCurrentUser(snapshot.data!) ||
+                      widget.group.creator!.id == snapshot.data!)
                     _buildAddPublications(context),
                   BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                     listener: (context, state) {

@@ -89,5 +89,9 @@
   "group_updated": "Le groupe a été modifié",
   "group_updated_failed": "La modification du groupe a échoué",
   "join": "Rejoindre",
-  "quit": "Quitter"
+  "quit": "Quitter",
+  "quit_group_success": "Vous avez quitté le groupe",
+  "quit_group_failed": "La sortie du groupe n'a pas pu être effectué",
+  "join_group_success": "Vous avez rejoint le groupe",
+  "join_group_failed": "L'entrée dans le groupe n'a pas pu être effectuée"
 }

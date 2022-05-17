@@ -190,7 +190,6 @@ class _UpdateUserModalState extends State<UpdateUserModal> {
             backgroundColor: Colors.green,
           ));
           Navigator.pop(context);
-          //TODO recharger la page
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -198,7 +197,6 @@ class _UpdateUserModalState extends State<UpdateUserModal> {
             backgroundColor: Theme.of(context).errorColor,
           ));
           Navigator.pop(context);
-          //TODO recharger la page
         }
       },
       builder: (context, state) {

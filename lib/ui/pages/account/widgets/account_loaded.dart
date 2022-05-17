@@ -6,6 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
 import 'package:pimp_my_code/domain/entities/follow.dart';
+import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
 import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -16,6 +17,8 @@ import '../../../../state/follow_user/follow_user_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
+import '../../../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/unfollow_user/unfollow_user_bloc.dart';
 import '../../../../state/update_user/update_user_bloc.dart';
@@ -127,7 +130,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
           if (snapshot.hasData) {
             if (widget.isUserConnected) {
               return GFButton(
-                onPressed: () => _printUpdate(),
+                onPressed: () => printUpdate(),
                 text: tr('edit_profile'),
                 shape: GFButtonShape.standard,
                 color: Colors.amber,
@@ -153,14 +156,18 @@ class _AccountLoadedState extends State<AccountLoaded> {
             content: const Text('follow_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveFollowByUserIdCubit>()
+              .loadFollowByUserId(widget.user.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByUserId(widget.user.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('follow_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -193,14 +200,18 @@ class _AccountLoadedState extends State<AccountLoaded> {
             content: const Text('unfollow_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveFollowByUserIdCubit>()
+              .loadFollowByUserId(widget.user.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByUserId(widget.user.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('unfollow_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -298,8 +309,8 @@ class _AccountLoadedState extends State<AccountLoaded> {
         });
   }
 
-  void _printUpdate() {
-    Alert(
+  Future<void> printUpdate() async {
+    await Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
@@ -309,6 +320,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
       ),
       buttons: [],
     ).show();
+    context.read<RetrieveUserByIdCubit>().loadUserById(widget.user.id);
   }
 
   _loadFollowings(followings) {
