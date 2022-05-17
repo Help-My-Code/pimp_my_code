@@ -90,6 +90,7 @@
   "group_updated_failed": "La modification du groupe a échoué",
   "join": "Rejoindre",
   "quit": "Quitter",
+  "request_sent": "Demande envoyée",
   "quit_group_success": "Vous avez quitté le groupe",
   "quit_group_failed": "La sortie du groupe n'a pas pu être effectué",
   "join_group_success": "Vous avez rejoint le groupe",

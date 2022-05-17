@@ -88,6 +88,7 @@
   "group_updated_failed": "The update of group was failed",
   "join": "Join",
   "quit": "Quit",
+  "request_sent": "Request sent",
   "quit_group_success": "You left the group",
   "quit_group_failed": "The exit of the group could not be carried out",
   "join_group_success": "You joined the group",

@@ -11,6 +11,7 @@ import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../core/form_status.dart';
+import '../../../../domain/entities/enum/status.dart';
 import '../../../../domain/entities/user.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/follow_user/follow_user_bloc.dart';
@@ -138,7 +139,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
               );
             } else {
               if (followersContainCurrentUser(snapshot.data!)) {
-                return _buildUnfollowButton(context);
+                return _buildUnfollowButton(context, getFollowByUserId(snapshot.data!)!);
               }
               return _buildFollowButton(context);
             }
@@ -192,7 +193,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
     );
   }
 
-  _buildUnfollowButton(BuildContext context) {
+  _buildUnfollowButton(BuildContext context, Follow follow) {
     return BlocConsumer<UnfollowUserBloc, UnfollowUserState>(
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
@@ -227,7 +228,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
                       .add(UnfollowUserEvent.submit(widget.user.id));
                 }
               },
-              text: tr('unfollow'),
+              text: follow.followStatus == Status.accepted ? tr('unfollow') : tr('request_sent'),
               shape: GFButtonShape.standard,
               color: Colors.amber,
               icon: const Icon(Icons.remove, color: Colors.white),
@@ -334,5 +335,12 @@ class _AccountLoadedState extends State<AccountLoaded> {
       if (follower.follower.id == userId) return true;
     }
     return false;
+  }
+
+  Follow? getFollowByUserId(String userId) {
+    for (var follower in widget.followers) {
+      if (follower.follower.id == userId) return follower;
+    }
+    return null;
   }
 }
