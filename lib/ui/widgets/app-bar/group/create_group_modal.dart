@@ -28,7 +28,7 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width * 0.6;
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.5,
       width: width,
       child: SingleChildScrollView(
         child: Form(
@@ -105,7 +105,7 @@ class _CreateGroupModalState extends State<CreateGroupModal> {
                           .add(CreateGroupEvent.submit(snapshot.data!));
                     }
                   },
-                  width: 120,
+                  width: 160,
                 );
               },
             );
