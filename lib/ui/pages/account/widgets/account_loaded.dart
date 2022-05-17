@@ -139,7 +139,8 @@ class _AccountLoadedState extends State<AccountLoaded> {
               );
             } else {
               if (followersContainCurrentUser(snapshot.data!)) {
-                return _buildUnfollowButton(context, getFollowByUserId(snapshot.data!)!);
+                return _buildUnfollowButton(
+                    context, getFollowByUserId(snapshot.data!)!);
               }
               return _buildFollowButton(context);
             }
@@ -228,7 +229,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
                       .add(UnfollowUserEvent.submit(widget.user.id));
                 }
               },
-              text: follow.followStatus == Status.accepted ? tr('unfollow') : tr('request_sent'),
+              text: follow.followStatus == Status.accepted
+                  ? tr('unfollow')
+                  : tr('request_sent'),
               shape: GFButtonShape.standard,
               color: Colors.amber,
               icon: const Icon(Icons.remove, color: Colors.white),
@@ -243,7 +246,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.user.confidentiality == Confidentiality.public ||
-                followersContainCurrentUser(snapshot.data!) ||
+                (followersContainCurrentUser(snapshot.data!) &&
+                    getFollowByUserId(snapshot.data!)!.followStatus !=
+                        Status.pendingInvit) ||
                 widget.user.id == snapshot.data) {
               return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                 listener: (context, state) {

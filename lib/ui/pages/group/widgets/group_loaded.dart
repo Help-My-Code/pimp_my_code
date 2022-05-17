@@ -113,7 +113,8 @@ class _GroupLoadedState extends State<GroupLoaded> {
               );
             } else {
               if (groupMembersContainCurrentUser(snapshot.data!)) {
-                return _buildQuitButton(context, getGroupMembersByUserId(snapshot.data!)!);
+                return _buildQuitButton(
+                    context, getGroupMembersByUserId(snapshot.data!)!);
               }
               return _buildJoinButton(context);
             }
@@ -202,7 +203,9 @@ class _GroupLoadedState extends State<GroupLoaded> {
                       .add(QuitGroupEvent.submit(widget.group.id));
                 }
               },
-              text: groupMember.membershipStatus == Status.accepted ? tr('quit') : tr('request_sent'),
+              text: groupMember.membershipStatus == Status.accepted
+                  ? tr('quit')
+                  : tr('request_sent'),
               shape: GFButtonShape.standard,
               color: Colors.amber,
               icon: const Icon(Icons.remove, color: Colors.white),
@@ -235,7 +238,9 @@ class _GroupLoadedState extends State<GroupLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
-                groupMembersContainCurrentUser(snapshot.data!)) {
+                (groupMembersContainCurrentUser(snapshot.data!) &&
+                    getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
+                        Status.pendingInvit)) {
               return Column(
                 children: [
                   if (groupMembersContainCurrentUser(snapshot.data!) ||
