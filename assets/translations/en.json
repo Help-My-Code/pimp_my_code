@@ -79,6 +79,7 @@
   "follow_failed": "Follow could not be performed",
   "add_message": "Add a message",
   "add_comment": "Comment",
+  "add_group": "Create group",
   "add_your_comment": "Add your comment",
   "members": " Members",
   "name": "Name",
@@ -87,5 +88,12 @@
   "group_updated": "Group was updated",
   "group_updated_failed": "The update of group was failed",
   "join": "Join",
-  "quit": "Quit"
+  "quit": "Quit",
+  "request_sent": "Request sent",
+  "quit_group_success": "You left the group",
+  "quit_group_failed": "The exit of the group could not be carried out",
+  "join_group_success": "You joined the group",
+  "join_group_failed": "The enter in the group could not be carried out",
+  "group_created": "Group was created",
+  "group_created_failed": "The creation of group was failed"
 }

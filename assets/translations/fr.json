@@ -83,11 +83,19 @@
   "follow_failed": "L'abonnement n'a pas pu être effectué",
   "add_message": "Ajouter un message",
   "add_comment": "Commenter",
+  "add_group": "Créer un groupe",
   "add_your_comment": "Ajouter votre commentaire",
   "members": " Membres",
   "name": "Nom",
   "group_updated": "Le groupe a été modifié",
   "group_updated_failed": "La modification du groupe a échoué",
   "join": "Rejoindre",
-  "quit": "Quitter"
+  "quit": "Quitter",
+  "request_sent": "Demande envoyée",
+  "quit_group_success": "Vous avez quitté le groupe",
+  "quit_group_failed": "La sortie du groupe n'a pas pu être effectué",
+  "join_group_success": "Vous avez rejoint le groupe",
+  "join_group_failed": "L'entrée dans le groupe n'a pas pu être effectuée",
+  "group_created": "Le groupe a été créé",
+  "group_created_failed": "La création du groupe a échoué"
 }

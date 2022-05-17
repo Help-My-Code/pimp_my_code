@@ -111,7 +111,7 @@ class _GroupPageState extends State<GroupPage> {
                       loaded: (members) => GroupLoaded(
                         group: group,
                         context: context,
-                        members: members,
+                        groupMembers: members,
                       ),
                     );
                   },

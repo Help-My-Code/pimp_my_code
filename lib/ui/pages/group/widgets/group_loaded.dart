@@ -5,6 +5,7 @@ import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pimp_my_code/domain/entities/enum/status.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -18,6 +19,7 @@ import '../../../../state/like/like_cubit.dart';
 import '../../../../state/quit_group/quit_group_bloc.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
+import '../../../../state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
@@ -30,12 +32,12 @@ class GroupLoaded extends StatefulWidget {
       {Key? key,
       required this.group,
       required this.context,
-      required this.members})
+      required this.groupMembers})
       : super(key: key);
 
   final Group group;
   final BuildContext context;
-  final List<GroupMember> members;
+  final List<GroupMember> groupMembers;
 
   @override
   State<GroupLoaded> createState() => _GroupLoadedState();
@@ -67,7 +69,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                           fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
-                    Text(widget.members.length.toString() + 'members'.tr(),
+                    Text(widget.groupMembers.length.toString() + 'members'.tr(),
                         style: const TextStyle(fontSize: 16)),
                     const SizedBox(height: 10),
                     Text(
@@ -110,8 +112,9 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 icon: const Icon(Icons.edit, color: Colors.white),
               );
             } else {
-              if (membersContainCurrentUser(snapshot.data!)) {
-                return _buildQuitButton(context);
+              if (groupMembersContainCurrentUser(snapshot.data!)) {
+                return _buildQuitButton(
+                    context, getGroupMembersByUserId(snapshot.data!)!);
               }
               return _buildJoinButton(context);
             }
@@ -126,17 +129,21 @@ class _GroupLoadedState extends State<GroupLoaded> {
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('follow_success').tr(),
+            content: const Text('join_group_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveGroupMembersByGroupIdCubit>()
+              .loadGroupMemberByGroupId(widget.group.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByGroupId(widget.group.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('follow_failed').tr(),
+            content: const Text('join_group_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -161,22 +168,26 @@ class _GroupLoadedState extends State<GroupLoaded> {
     );
   }
 
-  _buildQuitButton(BuildContext context) {
+  _buildQuitButton(BuildContext context, GroupMember groupMember) {
     return BlocConsumer<QuitGroupBloc, QuitGroupState>(
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('unfollow_success').tr(),
+            content: const Text('quit_group_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveGroupMembersByGroupIdCubit>()
+              .loadGroupMemberByGroupId(widget.group.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByGroupId(widget.group.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('unfollow_failed').tr(),
+            content: const Text('quit_group_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -192,7 +203,9 @@ class _GroupLoadedState extends State<GroupLoaded> {
                       .add(QuitGroupEvent.submit(widget.group.id));
                 }
               },
-              text: tr('quit'),
+              text: groupMember.membershipStatus == Status.accepted
+                  ? tr('quit')
+                  : tr('request_sent'),
               shape: GFButtonShape.standard,
               color: Colors.amber,
               icon: const Icon(Icons.remove, color: Colors.white),
@@ -208,7 +221,9 @@ class _GroupLoadedState extends State<GroupLoaded> {
           context: context,
           builder: (context) => CreatePostCard(groupId: widget.group.id),
         );
-        sl<RetrieveContentCubit>().loadPublicationByGroupId(widget.group.id);
+        context
+            .read<RetrieveContentCubit>()
+            .loadPublicationByGroupId(widget.group.id);
       },
       text: tr('add_post'),
       shape: GFButtonShape.standard,
@@ -223,10 +238,13 @@ class _GroupLoadedState extends State<GroupLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
-                membersContainCurrentUser(snapshot.data!)) {
+                (groupMembersContainCurrentUser(snapshot.data!) &&
+                    getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
+                        Status.pendingInvit)) {
               return Column(
                 children: [
-                  if (membersContainCurrentUser(snapshot.data!))
+                  if (groupMembersContainCurrentUser(snapshot.data!) ||
+                      widget.group.creator!.id == snapshot.data!)
                     _buildAddPublications(context),
                   BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                     listener: (context, state) {
@@ -309,10 +327,17 @@ class _GroupLoadedState extends State<GroupLoaded> {
     context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
   }
 
-  bool membersContainCurrentUser(String userId) {
-    for (var member in widget.members) {
+  bool groupMembersContainCurrentUser(String userId) {
+    for (var member in widget.groupMembers) {
       if (member.member!.id == userId) return true;
     }
     return false;
+  }
+
+  GroupMember? getGroupMembersByUserId(String userId) {
+    for (var member in widget.groupMembers) {
+      if (member.member!.id == userId) return member;
+    }
+    return null;
   }
 }
