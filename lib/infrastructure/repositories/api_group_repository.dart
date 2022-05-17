@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
+import '../../domain/usecases/group/create_group.dart';
 import '../../domain/usecases/group/find_group_by_id.dart';
 import '../../domain/usecases/group/find_group_by_name.dart';
 import '../../domain/usecases/group/find_my_groups.dart';
@@ -73,6 +74,21 @@ class ApiGroupRepository extends GroupRepository {
       return Right(UpdateGroupSuccess());
     } catch (e) {
       return Left(UpdateGroupFailed());
+    }
+  }
+
+  @override
+  Future<Either<CreateGroupFailed, CreateGroupSuccess>> createGroup(
+      String creatorId, String name) async {
+    try {
+      await _dataSource.createGroup(fields: {
+        'creatorId': creatorId,
+        'name': name,
+        'description': '',
+      });
+      return Right(CreateGroupSuccess());
+    } catch (e) {
+      return Left(CreateGroupFailed());
     }
   }
 }

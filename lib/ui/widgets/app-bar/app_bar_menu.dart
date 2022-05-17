@@ -2,9 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pimp_my_code/state/create_group/create_group_bloc.dart';
 import '../../../state/retrieve_group/retrieve_group_cubit.dart';
 import '../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import '../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
+import 'group/create_group_modal.dart';
 import 'group/group_modal.dart';
 import 'notification/notification_modal.dart';
 import 'search/search_modal.dart';
@@ -66,6 +69,30 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           ),
         ],
         child: const GroupModal(),
+      ),
+      buttons: [
+        DialogButton(
+          onPressed: () {
+            Navigator.pop(context);
+            printCreateGroups();
+          },
+          child: const Text('add_group').tr(),
+        ),
+      ],
+    ).show();
+  }
+
+  void printCreateGroups() {
+    Alert(
+      context: context,
+      title: 'add_group'.tr(),
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl.get<CreateGroupBloc>(),
+          ),
+        ],
+        child: const CreateGroupModal(),
       ),
       buttons: [],
     ).show();

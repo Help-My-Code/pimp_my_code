@@ -11,9 +11,9 @@ part 'update_group_event.dart';
 part 'update_group_state.dart';
 
 class UpdateGroupBloc extends Bloc<UpdateGroupEvent, UpdateGroupState> {
-  final UpdateGroupUseCase _registerUseCase;
+  final UpdateGroupUseCase _updateGroupUseCase;
 
-  UpdateGroupBloc(this._registerUseCase)
+  UpdateGroupBloc(this._updateGroupUseCase)
       : super(const UpdateGroupState.state()) {
     on<_Submit>(onSubmit);
     on<_UpdateName>(onUpdateName);
@@ -34,7 +34,7 @@ class UpdateGroupBloc extends Bloc<UpdateGroupEvent, UpdateGroupState> {
 
   void onSubmit(_Submit event, Emitter emit) async {
     emit(state.copyWith(status: const FormSubmitting()));
-    final successOrFailure = await _registerUseCase(UpdateGroupParams(
+    final successOrFailure = await _updateGroupUseCase(UpdateGroupParams(
       event.groupId,
       state.name,
       state.description!,

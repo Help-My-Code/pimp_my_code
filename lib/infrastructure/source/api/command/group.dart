@@ -18,4 +18,7 @@ abstract class GroupInteractor extends ChopperService {
 
   @Put(path: '/update')
   Future<Response> update({@Body() required Map<String, String> fields});
+
+  @Post(path: '/create')
+  Future<Response> createGroup({@Body() required Map<String, String> fields});
 }
