@@ -33,8 +33,14 @@ class NotificationsLoaded extends StatelessWidget {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Navigator.pop(context);
-                      GoRouter.of(context)
-                          .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id, extra: false);
+                      if(notifications[index].groupLinked != null) {
+                        GoRouter.of(context)
+                            .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id, extra: false);
+                      }
+                      if(notifications[index].userLinked != null) {
+                        GoRouter.of(context).go(
+                            Routes.account.path + '?userId=' + notifications[index].userLinked!.id, extra: false);
+                      }
                     },
                     child: Row(
                       children: <Widget>[
