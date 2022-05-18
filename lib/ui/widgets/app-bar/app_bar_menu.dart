@@ -2,24 +2,24 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/state/create_group/create_group_bloc.dart';
-import '../../../state/retrieve_group/retrieve_group_cubit.dart';
-import '../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
-import '../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
-import 'group/create_group_modal.dart';
-import 'group/group_modal.dart';
-import 'notification/notification_modal.dart';
-import 'search/search_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../config/asset.dart';
 import '../../../ioc_container.dart';
+import '../../../state/retrieve_group/retrieve_group_cubit.dart';
+import '../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
+import '../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
 import '../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 import '../../router/routes.dart';
 import '../loading.dart';
+import 'group/create_group_modal.dart';
+import 'group/group_modal.dart';
+import 'notification/notifications_loaded.dart';
+import 'search/search_modal.dart';
+import '../../../../domain/entities/notification.dart' as notification;
 
 class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBarMenu({Key? key})
@@ -98,13 +98,22 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     ).show();
   }
 
-  void printNotifications() {
+  void printNotifications(List<notification.Notification> notifications) {
     Alert(
       context: context,
       title: 'notifications'.tr(),
       content: BlocProvider(
         create: (context) => sl.get<RetrieveNotificationsCubit>(),
-        child: const NotificationModal(),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              NotificationsLoaded(notifications: notifications),
+            ],
+          ),
+        ),
       ),
       buttons: [],
     ).show();
@@ -151,13 +160,27 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         tooltip: 'search'.tr(),
         onPressed: () => printSearch(),
       ),
-      IconButton(
-        //TODO activer bonne icone selon s'il y a des nouvelles notifs (voir Badges getwidget)
-        icon: const Icon(Icons.notifications_none),
-        //icon: const Icon(Icons.notifications_active),
-        tooltip: 'notifications'.tr(),
-        onPressed: () => printNotifications(),
-      ),
+      BlocConsumer<RetrieveNotificationsCubit, RetrieveNotificationsState>(
+          listener: (context, state) {
+            state.maybeWhen(
+              orElse: () {},
+              failure: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text('Failed_to_load_notifications').tr(),
+                  backgroundColor: Theme.of(context).errorColor,
+                ));
+              },
+            );
+          }, builder: (context, state) {
+        return state.maybeWhen(
+          initial: () {
+            context.read<RetrieveNotificationsCubit>().loadNotifications();
+            return const Loading();
+          },
+          orElse: () => const Loading(),
+          loaded: (notifications) => _buildNotificationsButton(notifications),
+        );
+      }),
       IconButton(
         icon: const Icon(Icons.person),
         tooltip: 'my_account'.tr(),
@@ -204,5 +227,29 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         );
       },
     );
+  }
+
+  _buildNotificationsButton(List<notification.Notification> notifications) {
+    if(hasNewNotifications(notifications)) {
+      return IconButton(
+        icon: const Icon(Icons.notifications_active),
+        tooltip: 'notifications'.tr(),
+        onPressed: () => printNotifications(notifications),
+      );
+    }
+    return IconButton(
+      icon: const Icon(Icons.notifications_none),
+      tooltip: 'notifications'.tr(),
+      onPressed: () => printNotifications(notifications),
+    );
+  }
+
+  bool hasNewNotifications(List<notification.Notification> notifications) {
+    for(var notification in notifications) {
+      if(notification.isSeen == false) {
+        return true;
+      }
+    }
+    return false;
   }
 }

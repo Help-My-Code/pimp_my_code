@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import 'state/session/session_cubit.dart';
 import 'ui/router/router.dart';
 
@@ -15,6 +16,9 @@ class App extends StatelessWidget {
     final router = sl<AppRouter>();
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => sl<RetrieveNotificationsCubit>(),
+        ),
         BlocProvider(
           create: (context) => sl<SessionCubit>(),
         ),
