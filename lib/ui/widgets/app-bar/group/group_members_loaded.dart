@@ -51,8 +51,7 @@ class GroupMembersLoaded extends StatelessWidget {
                         GoRouter.of(context).go(
                             Routes.group.path +
                                 '?groupId=' +
-                                groupMembers[index].group.id,
-                            extra: false);
+                                groupMembers[index].group.id);
                       },
                       child: Row(
                         children: <Widget>[
@@ -106,8 +105,7 @@ class GroupMembersLoaded extends StatelessWidget {
                         GoRouter.of(context).go(
                             Routes.group.path +
                                 '?groupId=' +
-                                groupMembers[index].group.id,
-                            extra: true);
+                                groupMembers[index].group.id);
                       },
                       child: Row(
                         children: <Widget>[

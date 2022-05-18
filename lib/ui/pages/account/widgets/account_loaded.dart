@@ -6,7 +6,6 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
 import 'package:pimp_my_code/domain/entities/follow.dart';
-import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
 import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -31,13 +30,11 @@ class AccountLoaded extends StatefulWidget {
   const AccountLoaded({
     Key? key,
     required this.user,
-    required this.isUserConnected,
     required this.context,
     required this.followers,
   }) : super(key: key);
 
   final User user;
-  final bool isUserConnected;
   final BuildContext context;
   final List<Follow> followers;
 
@@ -129,7 +126,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (widget.isUserConnected) {
+            if (widget.user.id == snapshot.data!) {
               return GFButton(
                 onPressed: () => printUpdate(),
                 text: tr('edit_profile'),

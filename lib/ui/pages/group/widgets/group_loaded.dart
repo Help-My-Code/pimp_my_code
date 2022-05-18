@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/enum/status.dart';
 import 'package:pimp_my_code/domain/entities/group_member.dart';
+import 'package:pimp_my_code/ui/pages/group/widgets/delete_group_modal.dart';
 import 'package:pimp_my_code/ui/pages/group/widgets/update_group_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -14,6 +16,7 @@ import '../../../../core/form_status.dart';
 import '../../../../domain/entities/enum/confidentiality.dart';
 import '../../../../domain/entities/group.dart';
 import '../../../../ioc_container.dart';
+import '../../../../state/delete_group/delete_group_cubit.dart';
 import '../../../../state/join_group/join_group_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/quit_group/quit_group_bloc.dart';
@@ -23,6 +26,7 @@ import '../../../../state/retrieve_group_members_by_group_id/retrieve_group_memb
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_group/update_group_bloc.dart';
 import '../../../default_pictures.dart';
+import '../../../router/routes.dart';
 import '../../../widgets/loading.dart';
 import '../../home/widgets/create_post_card.dart';
 import '../../home/widgets/publications_loaded.dart';
@@ -80,7 +84,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.09),
-              _buildButton(context),
+              _buildButtons(context),
             ],
           ),
         ),
@@ -98,18 +102,29 @@ class _GroupLoadedState extends State<GroupLoaded> {
     );
   }
 
-  _buildButton(BuildContext context) {
+  _buildButtons(BuildContext context) {
     return FutureBuilder<String>(
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.creator!.id == snapshot.data!) {
-              return GFButton(
-                onPressed: () => printUpdate(),
-                text: tr('edit_group'),
-                shape: GFButtonShape.standard,
-                color: Colors.amber,
-                icon: const Icon(Icons.edit, color: Colors.white),
+              return Column(
+                children: [
+                  GFButton(
+                    onPressed: () => printUpdate(),
+                    text: tr('edit_group'),
+                    shape: GFButtonShape.standard,
+                    color: Colors.amber,
+                    icon: const Icon(Icons.edit, color: Colors.white),
+                  ),
+                  GFButton(
+                    onPressed: () => printDelete(),
+                    text: tr('delete_group'),
+                    shape: GFButtonShape.standard,
+                    color: Colors.deepOrange,
+                    icon: const Icon(Icons.remove, color: Colors.white),
+                  ),
+                ],
               );
             } else {
               if (groupMembersContainCurrentUser(snapshot.data!)) {
@@ -325,6 +340,19 @@ class _GroupLoadedState extends State<GroupLoaded> {
       buttons: [],
     ).show();
     context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
+  }
+
+  Future<void> printDelete() async {
+    await Alert(
+      context: context,
+      title: 'delete_group_confirmation'.tr(),
+      content: BlocProvider(
+        create: (context) => sl<DeleteGroupCubit>(),
+        child: DeleteGroupModal(group: widget.group),
+      ),
+      buttons: [],
+    ).show();
+    GoRouter.of(context).go(Routes.home.path);
   }
 
   bool groupMembersContainCurrentUser(String userId) {

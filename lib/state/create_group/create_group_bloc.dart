@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pimp_my_code/domain/entities/group.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/usecases/group/create_group.dart';
 
 part 'create_group_bloc.freezed.dart';

@@ -55,4 +55,12 @@ class _$GroupInteractor extends GroupInteractor {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> delete({required Map<String, String> fields}) {
+    final $url = '/group/delete';
+    final $body = fields;
+    final $request = Request('DELETE', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

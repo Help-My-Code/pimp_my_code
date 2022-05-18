@@ -62,6 +62,8 @@
   "code_compiling": "Veuillez patienter svp... votre code est en cours de compilation...",
   "edit_profile": "Modifier le profil",
   "edit_group": "Modifier le groupe",
+  "delete_group": "Supprimer le groupe",
+  "delete_group_confirmation": "Etes-vous sûr(e) de vouloir supprimer le groupe ?",
   "follow": "S'abonner",
   "unfollow": "Se désabonner",
   "followers": " Abonnés",

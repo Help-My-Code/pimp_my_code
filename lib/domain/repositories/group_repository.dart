@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../entities/enum/confidentiality.dart';
 import '../entities/group.dart';
 import '../usecases/group/create_group.dart';
+import '../usecases/group/delete_group.dart';
 import '../usecases/group/find_group_by_id.dart';
 import '../usecases/group/find_group_by_name.dart';
 import '../usecases/group/find_my_groups.dart';
@@ -26,4 +27,6 @@ abstract class GroupRepository {
 
   Future<Either<CreateGroupFailed, CreateGroupSuccess>> createGroup(
       String creatorId, String name);
+
+  Future<Either<DeleteGroupFailed, DeleteGroupSuccess>> deleteGroup(String groupId);
 }

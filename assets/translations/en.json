@@ -62,6 +62,8 @@
   "code_compiling": "Please wait... your code is compiling...",
   "edit_profile": "Edit profile",
   "edit_group": "Edit group",
+  "delete_group": "Delete group",
+  "delete_group_confirmation": "Are you sure you want to delete the group?",
   "follow": "Follow",
   "unfollow": "Unfollow",
   "followers": " Followers",

@@ -77,7 +77,6 @@ class AppRouter {
                   ],
                   child: AccountPage(
                     userId: state.queryParams['userId']!,
-                    isUserConnected: state.extra! as bool,
                   ))),
       GoRoute(
           path: Routes.group.path,
@@ -97,7 +96,6 @@ class AppRouter {
                   ],
                   child: GroupPage(
                     groupId: state.queryParams['groupId']!,
-                    isCreatorOrAdmin: state.extra! as bool,
                   ))),
     ],
     redirect: (state) {
