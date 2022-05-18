@@ -16,11 +16,9 @@ class GroupPage extends StatefulWidget {
   const GroupPage({
     Key? key,
     required this.groupId,
-    required this.isCreatorOrAdmin,
   }) : super(key: key);
 
   final String groupId;
-  final bool isCreatorOrAdmin;
 
   @override
   State<GroupPage> createState() => _GroupPageState();

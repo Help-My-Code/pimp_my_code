@@ -35,11 +35,11 @@ class NotificationsLoaded extends StatelessWidget {
                       Navigator.pop(context);
                       if(notifications[index].groupLinked != null) {
                         GoRouter.of(context)
-                            .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id, extra: false);
+                            .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id);
                       }
                       if(notifications[index].userLinked != null) {
                         GoRouter.of(context).go(
-                            Routes.account.path + '?userId=' + notifications[index].userLinked!.id, extra: false);
+                            Routes.account.path + '?userId=' + notifications[index].userLinked!.id);
                       }
                     },
                     child: Row(

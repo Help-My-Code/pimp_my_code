@@ -34,7 +34,7 @@ class SearchedGroupsLoaded extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                       GoRouter.of(context)
-                          .go(Routes.group.path + '?groupId=' + groups[index].id, extra: false);
+                          .go(Routes.group.path + '?groupId=' + groups[index].id);
                     },
                     child: Row(
                       children: <Widget>[

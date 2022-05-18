@@ -31,13 +31,11 @@ class AccountLoaded extends StatefulWidget {
   const AccountLoaded({
     Key? key,
     required this.user,
-    required this.isUserConnected,
     required this.context,
     required this.followers,
   }) : super(key: key);
 
   final User user;
-  final bool isUserConnected;
   final BuildContext context;
   final List<Follow> followers;
 
@@ -129,7 +127,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (widget.isUserConnected) {
+            if (widget.user.id == snapshot.data!) {
               return GFButton(
                 onPressed: () => printUpdate(),
                 text: tr('edit_profile'),

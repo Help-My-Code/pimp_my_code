@@ -17,11 +17,9 @@ class AccountPage extends StatefulWidget {
   const AccountPage({
     Key? key,
     required this.userId,
-    required this.isUserConnected,
   }) : super(key: key);
 
   final String userId;
-  final bool isUserConnected;
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -113,7 +111,6 @@ class _AccountPageState extends State<AccountPage> {
                       orElse: () => const Loading(),
                       loaded: (followers) => AccountLoaded(
                         user: user,
-                        isUserConnected: widget.isUserConnected,
                         context: context,
                         followers: followers,
                       ),

@@ -59,7 +59,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       ],
     );
   }
-  
+
   void printSearch() {
     Alert(
       context: context,
@@ -191,7 +191,6 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         onPressed: () {
           GoRouter.of(context).go(
             Routes.account.path + '?userId=' + userId,
-            extra: true,
           );
         },
       ),
