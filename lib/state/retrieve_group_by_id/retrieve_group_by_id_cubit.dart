@@ -12,9 +12,9 @@ class RetrieveGroupByIdCubit extends Cubit<RetrieveGroupByIdState> {
   RetrieveGroupByIdCubit(this._findGroupById)
       : super(const RetrieveGroupByIdState.initial());
 
-  void loadGroup(String name) async {
+  void loadGroup(String id) async {
     emit(const RetrieveGroupByIdState.loading());
-    final group = await _findGroupById(FindGroupByIdParam(name));
+    final group = await _findGroupById(FindGroupByIdParam(id));
     group.fold((l) {
       emit(const RetrieveGroupByIdState.failure());
     }, (r) {

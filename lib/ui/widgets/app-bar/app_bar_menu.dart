@@ -156,7 +156,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
         icon: const Icon(Icons.home),
         tooltip: 'home'.tr(),
         onPressed: () {
-          GoRouter.of(context).go('/');
+          GoRouter.of(context).go(Routes.home.path);
         },
       ),
       IconButton(

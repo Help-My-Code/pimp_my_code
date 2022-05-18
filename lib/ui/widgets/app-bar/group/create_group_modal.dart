@@ -1,17 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
-import 'package:getwidget/components/toggle/gf_toggle.dart';
-import 'package:getwidget/types/gf_toggle_type.dart';
-import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../core/form_status.dart';
-import '../../../../domain/entities/user.dart';
 import '../../../../state/create_group/create_group_bloc.dart';
 import '../../../../state/session/session_cubit.dart';
-import '../../../../state/update_user/update_user_bloc.dart';
 import '../../../validator/validators.dart';
 
 class CreateGroupModal extends StatefulWidget {

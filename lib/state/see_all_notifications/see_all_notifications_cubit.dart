@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pimp_my_code/domain/usecases/notification/see_all_notifications.dart';
-import '../../domain/entities/notification.dart';
 
-import '../../domain/usecases/notification/find_notifications.dart';
 import '../session/session_cubit.dart';
 
 part 'see_all_notifications_cubit.freezed.dart';

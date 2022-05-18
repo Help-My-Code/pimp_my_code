@@ -4,6 +4,7 @@ import '../../domain/entities/enum/confidentiality.dart';
 import '../../domain/entities/group.dart';
 import '../../domain/repositories/group_repository.dart';
 import '../../domain/usecases/group/create_group.dart';
+import '../../domain/usecases/group/delete_group.dart';
 import '../../domain/usecases/group/find_group_by_id.dart';
 import '../../domain/usecases/group/find_group_by_name.dart';
 import '../../domain/usecases/group/find_my_groups.dart';
@@ -89,6 +90,18 @@ class ApiGroupRepository extends GroupRepository {
       return Right(CreateGroupSuccess());
     } catch (e) {
       return Left(CreateGroupFailed());
+    }
+  }
+
+  @override
+  Future<Either<DeleteGroupFailed, DeleteGroupSuccess>> deleteGroup(String groupId) async {
+    try {
+      await _dataSource.delete(fields: {
+        'groupId': groupId,
+      });
+      return Right(DeleteGroupSuccess());
+    } catch (e) {
+      return Left(DeleteGroupFailed());
     }
   }
 }

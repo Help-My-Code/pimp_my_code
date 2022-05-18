@@ -6,7 +6,6 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:pimp_my_code/domain/entities/enum/confidentiality.dart';
 import 'package:pimp_my_code/domain/entities/follow.dart';
-import 'package:pimp_my_code/state/retrieve_user/retrieve_user_cubit.dart';
 import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 

@@ -4,7 +4,6 @@ import '../../domain/entities/notification.dart';
 import '../../domain/repositories/notification_repository.dart';
 import '../../domain/usecases/notification/find_notifications.dart';
 import '../../domain/usecases/notification/see_all_notifications.dart';
-import '../../domain/usecases/user/update_user_use_case.dart';
 import '../converter/notification_mapper.dart';
 import '../source/api/command/notification.dart';
 import '../source/api/model/notification/notification_model.dart';

@@ -9,6 +9,7 @@ import 'package:pimp_my_code/domain/usecases/group/find_group_by_id.dart';
 import 'package:pimp_my_code/domain/usecases/user/update_user_use_case.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
 import 'package:pimp_my_code/state/create_group/create_group_bloc.dart';
+import 'package:pimp_my_code/state/delete_group/delete_group_cubit.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
 import 'package:pimp_my_code/state/join_group/join_group_bloc.dart';
 import 'package:pimp_my_code/state/quit_group/quit_group_bloc.dart';
@@ -28,6 +29,7 @@ import 'domain/usecases/content/get_publications_by_group_id.dart';
 import 'domain/usecases/follow/find_follow_by_follower_id.dart';
 import 'domain/usecases/group-member/create_group_member.dart';
 import 'domain/usecases/group-member/delete_group_member.dart';
+import 'domain/usecases/group/delete_group.dart';
 import 'domain/usecases/group/find_my_groups.dart';
 import 'domain/usecases/group/update_group.dart';
 import 'domain/usecases/notification/find_notifications.dart';
@@ -170,6 +172,7 @@ void registerUseCases() {
   sl.registerSingleton(FindGroupByIdUseCase(sl()));
   sl.registerSingleton(FindGroupMembersByGroupIdUseCase(sl()));
   sl.registerSingleton(CreateGroupUseCase(sl()));
+  sl.registerSingleton(DeleteGroupUseCase(sl()));
 }
 
 void registerBloc() {
@@ -198,6 +201,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveGroupMembersByGroupIdCubit(sl()));
   sl.registerFactory(() => CreateGroupBloc(sl()));
   sl.registerFactory(() => SeeAllNotificationsCubit(sl(), sl()));
+  sl.registerFactory(() => DeleteGroupCubit(sl()));
 }
 
 ChopperClient createChopper(Config config) {
