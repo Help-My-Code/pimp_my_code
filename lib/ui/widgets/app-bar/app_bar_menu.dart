@@ -12,6 +12,7 @@ import '../../../state/retrieve_my_groups/retrieve_my_groups_cubit.dart';
 import '../../../state/retrieve_notifications/retrieve_notifications_cubit.dart';
 import '../../../state/retrieve_user/retrieve_user_cubit.dart';
 import '../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
+import '../../../state/see_all_notifications/see_all_notifications_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 import '../../router/routes.dart';
 import '../loading.dart';
@@ -36,6 +37,29 @@ class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
 enum MenuValues { login, logout }
 
 class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.read<SessionCubit>().state is! Authenticated) {
+      return const Loading();
+    }
+    context.read<RetrieveNotificationsCubit>().loadNotifications();
+    return AppBar(
+      backgroundColor: Colors.amber,
+      leadingWidth: 60,
+      leading: Image.asset(Asset.zoomedLogo),
+      automaticallyImplyLeading: true,
+      title: const Text('title', style: TextStyle(color: Colors.white)).tr(),
+      iconTheme: const IconThemeData(color: Colors.white),
+      actions: <Widget>[
+        ..._buildVisibleIcons(
+          (context.read<SessionCubit>().state as Authenticated).userId,
+        ),
+        _buildExtras(),
+      ],
+    );
+  }
+  
   void printSearch() {
     Alert(
       context: context,
@@ -98,12 +122,12 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     ).show();
   }
 
-  void printNotifications(List<notification.Notification> notifications) {
-    Alert(
+  Future<void> printNotifications(List<notification.Notification> notifications, String userId) async {
+    await Alert(
       context: context,
       title: 'notifications'.tr(),
       content: BlocProvider(
-        create: (context) => sl.get<RetrieveNotificationsCubit>(),
+        create: (context) => sl.get<SeeAllNotificationsCubit>(),
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.7,
           width: MediaQuery.of(context).size.width * 0.5,
@@ -117,33 +141,13 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       ),
       buttons: [],
     ).show();
+    context.read<RetrieveNotificationsCubit>().loadNotifications();
   }
 
   void _onSelectMenu(MenuValues item) {
     if (item == MenuValues.logout) {
       context.read<SessionCubit>().logout();
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (context.read<SessionCubit>().state is! Authenticated) {
-      return const Loading();
-    }
-    return AppBar(
-      backgroundColor: Colors.amber,
-      leadingWidth: 60,
-      leading: Image.asset(Asset.zoomedLogo),
-      automaticallyImplyLeading: true,
-      title: const Text('title', style: TextStyle(color: Colors.white)).tr(),
-      iconTheme: const IconThemeData(color: Colors.white),
-      actions: <Widget>[
-        ..._buildVisibleIcons(
-          (context.read<SessionCubit>().state as Authenticated).userId,
-        ),
-        _buildExtras(),
-      ],
-    );
   }
 
   List<Widget> _buildVisibleIcons(String userId) {
@@ -178,7 +182,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
             return const Loading();
           },
           orElse: () => const Loading(),
-          loaded: (notifications) => _buildNotificationsButton(notifications),
+          loaded: (notifications) => _buildNotificationsButton(notifications, userId),
         );
       }),
       IconButton(
@@ -229,18 +233,18 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     );
   }
 
-  _buildNotificationsButton(List<notification.Notification> notifications) {
+  _buildNotificationsButton(List<notification.Notification> notifications, String userId) {
     if(hasNewNotifications(notifications)) {
       return IconButton(
         icon: const Icon(Icons.notifications_active),
         tooltip: 'notifications'.tr(),
-        onPressed: () => printNotifications(notifications),
+        onPressed: () => printNotifications(notifications, userId),
       );
     }
     return IconButton(
       icon: const Icon(Icons.notifications_none),
       tooltip: 'notifications'.tr(),
-      onPressed: () => printNotifications(notifications),
+      onPressed: () => printNotifications(notifications, userId),
     );
   }
 

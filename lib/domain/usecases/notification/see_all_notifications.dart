@@ -11,17 +11,11 @@ class SeeAllNotificationsUseCase
   SeeAllNotificationsUseCase(this._repository);
 
   @override
-  Future<Either<SeeAllNotificationsFailure, void>> call(
+  Future<Either<SeeAllNotificationsFailed, SeeAllNotificationsSuccess>> call(
     SeeAllNotificationsParam params,
   ) async {
     return await _repository.seeAllNotificationsByUserId(id: params.id);
   }
-}
-
-class SeeAllNotificationsFailure extends Failure {
-  final String message;
-
-  SeeAllNotificationsFailure(this.message);
 }
 
 class SeeAllNotificationsParam {
@@ -29,3 +23,7 @@ class SeeAllNotificationsParam {
 
   SeeAllNotificationsParam(this.id);
 }
+
+class SeeAllNotificationsFailed extends Failure {}
+
+class SeeAllNotificationsSuccess {}

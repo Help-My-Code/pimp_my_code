@@ -8,7 +8,7 @@ abstract class NotificationInteractor extends ChopperService {
       _$NotificationInteractor(client);
 
   @Put(path: '/seeAllNotificationsByUserId')
-  Future<Response> seeAllNotificationsByUserId(@Query() String userId);
+  Future<Response> seeAllNotificationsByUserId({@Body() required Map<String, String> fields});
 
   @Get(path: '/getByUserId')
   Future<Response> getByUserId(@Query() String userId);

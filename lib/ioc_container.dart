@@ -14,6 +14,7 @@ import 'package:pimp_my_code/state/join_group/join_group_bloc.dart';
 import 'package:pimp_my_code/state/quit_group/quit_group_bloc.dart';
 import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
+import 'package:pimp_my_code/state/see_all_notifications/see_all_notifications_cubit.dart';
 import 'package:pimp_my_code/state/unfollow_user/unfollow_user_bloc.dart';
 import 'package:pimp_my_code/state/update_group/update_group_bloc.dart';
 import 'package:pimp_my_code/state/update_user/update_user_bloc.dart';
@@ -196,6 +197,7 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveGroupByIdCubit(sl()));
   sl.registerFactory(() => RetrieveGroupMembersByGroupIdCubit(sl()));
   sl.registerFactory(() => CreateGroupBloc(sl()));
+  sl.registerFactory(() => SeeAllNotificationsCubit(sl(), sl()));
 }
 
 ChopperClient createChopper(Config config) {
