@@ -236,6 +236,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     if(hasNewNotifications(notifications)) {
       return IconButton(
         icon: const Icon(Icons.notifications_active),
+        color: Colors.deepOrange,
         tooltip: 'notifications'.tr(),
         onPressed: () => printNotifications(notifications, userId),
       );
