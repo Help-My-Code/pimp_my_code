@@ -175,7 +175,7 @@ class NotificationsLoaded extends StatelessWidget {
             orElse: () {},
             failure: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('Failed_to_update_follow').tr(),
+                content: const Text('failed_to_update_follow').tr(),
                 backgroundColor: Theme.of(context).errorColor,
               ));
               Navigator.pop(context);
@@ -232,7 +232,7 @@ class NotificationsLoaded extends StatelessWidget {
             orElse: () {},
             failure: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('Failed_to_update_group_member').tr(),
+                content: const Text('failed_to_update_group_member').tr(),
                 backgroundColor: Theme.of(context).errorColor,
               ));
               Navigator.pop(context);

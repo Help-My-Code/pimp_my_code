@@ -103,7 +103,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
         orElse: () {},
         failure: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Failed_to_load_follows').tr(),
+            content: const Text('failed_to_load_follows').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
         },
@@ -255,7 +255,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content:
-                              const Text('Failed_to_load_publications').tr(),
+                              const Text('failed_to_load_publications').tr(),
                         ),
                       );
                     },

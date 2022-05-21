@@ -269,7 +269,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                         failure: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text('Failed_to_load_publications')
+                              content: const Text('failed_to_load_publications')
                                   .tr(),
                             ),
                           );

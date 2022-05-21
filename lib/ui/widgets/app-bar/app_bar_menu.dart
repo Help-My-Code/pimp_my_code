@@ -182,7 +182,7 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           orElse: () {},
           failure: () {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: const Text('Failed_to_load_notifications').tr(),
+              content: const Text('failed_to_load_notifications').tr(),
               backgroundColor: Theme.of(context).errorColor,
             ));
           },

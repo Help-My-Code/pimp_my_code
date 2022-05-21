@@ -101,5 +101,16 @@
   "group_created": "Le groupe a été créé",
   "group_created_failed": "La création du groupe a échoué",
   "accept": "Accepter",
-  "refuse": "Refuser"
+  "refuse": "Refuser",
+  "failed_to_load_user": "Chargement de l'utilisateur échoué",
+  "failed_to_load_users": "Chargement des utilisateurs échoué",
+  "failed_to_load_follows": "Chargement de l'abonnement échoué",
+  "failed_to_load_publications": "Chargement des publications échoué",
+  "failed_to_load_group": "Chargement du groupe échoué",
+  "failed_to_load_groups": "Chargement des groupes échoué",
+  "failed_to_load_group_members": "Chargement des membres du groupe échoué",
+  "failed_to_load_notifications": "Chargement des notifications échoué",
+  "failed_to_update_follow": "Mise à jour de l'abonnement échouée",
+  "failed_to_update_group_member": "Mise à jour du membre du groupe échouée",
+  "failed_to_delete_group": "Suppression du groupe échouée"
 }

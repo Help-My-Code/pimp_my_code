@@ -64,7 +64,7 @@ class _AccountPageState extends State<AccountPage> {
               orElse: () {},
               failure: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_user').tr(),
+                  content: const Text('failed_to_load_user').tr(),
                   backgroundColor: Theme.of(context).errorColor,
                 ));
               },
@@ -94,7 +94,7 @@ class _AccountPageState extends State<AccountPage> {
                       orElse: () {},
                       failure: () {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text('Failed_to_load_follows').tr(),
+                          content: const Text('failed_to_load_follows').tr(),
                           backgroundColor: Theme.of(context).errorColor,
                         ));
                       },
