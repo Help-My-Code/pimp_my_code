@@ -17,7 +17,10 @@ class ApiContentRepository extends ContentRepository {
   final ContentMapper _contentMapper;
 
   ApiContentRepository(
-      this._dataSource, this._contentMapper, this._userLikeInteractor);
+    this._dataSource,
+    this._contentMapper,
+    this._userLikeInteractor,
+  );
 
   @override
   Future<Either<Failure, Unit>> createContent(Content content) async {
@@ -60,8 +63,10 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
-  Future<Either<GetPublicationFailed, Content>> getContent(String id) {
-    throw UnimplementedError();
+  Future<Either<GetPublicationFailed, Content>> getContent(String id) async {
+    final response = await _dataSource.getContent(id);
+    final contentModel = ApiContentModel.fromJson(response.body);
+    return Right(_contentMapper.mapApiContentToContent(contentModel));
   }
 
   @override

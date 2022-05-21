@@ -56,4 +56,12 @@ class _$ContentInteractor extends ContentInteractor {
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> getContent(String contentId) {
+    final $url = '/content/getById';
+    final $params = <String, dynamic>{'contentId': contentId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

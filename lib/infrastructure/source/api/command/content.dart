@@ -22,4 +22,7 @@ abstract class ContentInteractor extends ChopperService {
 
   @Get(path: 'getResponsesToContentById')
   Future<Response> getComments(@Query() String contentId);
+
+  @Get(path: 'getById')
+  Future<Response> getContent(@Query() String contentId);
 }
