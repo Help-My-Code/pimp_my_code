@@ -67,45 +67,45 @@ class AppRouter {
             const MessagingPage(),
       ),
       GoRoute(
-          path: Routes.account.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => sl<RetrieveUserByIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveContentCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          sl<RetrieveFollowByFollowerIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveFollowByUserIdCubit>(),
-                    ),
-                  ],
-                  child: AccountPage(
-                    userId: state.queryParams['userId']!,
-                  ))),
+        path: Routes.account.path,
+        builder: (BuildContext context, GoRouterState state) =>
+            MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<RetrieveUserByIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveContentCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveFollowByFollowerIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveFollowByUserIdCubit>(),
+            ),
+          ],
+          child: AccountPage(
+            userId: state.queryParams['userId']!,
+          ),
+        ),
+      ),
       GoRoute(
-          path: Routes.group.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => sl<RetrieveGroupByIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveContentCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          sl<RetrieveGroupMembersByGroupIdCubit>(),
-                    ),
-                  ],
-                  child: GroupPage(
-                    groupId: state.queryParams['groupId']!,
+        path: Routes.group.path,
+        builder: (BuildContext context, GoRouterState state) =>
+            MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<RetrieveGroupByIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveContentCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveGroupMembersByGroupIdCubit>(),
+            ),
+          ],
+          child: GroupPage(
+            groupId: state.queryParams['groupId']!,
           ),
         ),
       ),
