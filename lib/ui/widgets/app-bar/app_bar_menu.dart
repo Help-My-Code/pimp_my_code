@@ -14,6 +14,7 @@ import '../../../state/retrieve_user/retrieve_user_cubit.dart';
 import '../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
 import '../../../state/see_all_notifications/see_all_notifications_cubit.dart';
 import '../../../state/session/session_cubit.dart';
+import '../../../state/update_follow/update_follow_cubit.dart';
 import '../../router/routes.dart';
 import '../loading.dart';
 import 'group/create_group_modal.dart';
@@ -37,7 +38,6 @@ class CustomAppBarMenu extends StatefulWidget implements PreferredSizeWidget {
 enum MenuValues { login, logout }
 
 class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
-
   @override
   Widget build(BuildContext context) {
     if (context.read<SessionCubit>().state is! Authenticated) {
@@ -122,7 +122,8 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     ).show();
   }
 
-  Future<void> printNotifications(List<notification.Notification> notifications, String userId) async {
+  Future<void> printNotifications(
+      List<notification.Notification> notifications, String userId) async {
     await Alert(
       context: context,
       title: 'notifications'.tr(),
@@ -134,7 +135,10 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              NotificationsLoaded(notifications: notifications),
+              BlocProvider(
+                create: (context) => sl<UpdateFollowCubit>(),
+                child: NotificationsLoaded(notifications: notifications),
+              )
             ],
           ),
         ),
@@ -166,23 +170,24 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
       ),
       BlocConsumer<RetrieveNotificationsCubit, RetrieveNotificationsState>(
           listener: (context, state) {
-            state.maybeWhen(
-              orElse: () {},
-              failure: () {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_notifications').tr(),
-                  backgroundColor: Theme.of(context).errorColor,
-                ));
-              },
-            );
-          }, builder: (context, state) {
+        state.maybeWhen(
+          orElse: () {},
+          failure: () {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text('Failed_to_load_notifications').tr(),
+              backgroundColor: Theme.of(context).errorColor,
+            ));
+          },
+        );
+      }, builder: (context, state) {
         return state.maybeWhen(
           initial: () {
             context.read<RetrieveNotificationsCubit>().loadNotifications();
             return const Loading();
           },
           orElse: () => const Loading(),
-          loaded: (notifications) => _buildNotificationsButton(notifications, userId),
+          loaded: (notifications) =>
+              _buildNotificationsButton(notifications, userId),
         );
       }),
       IconButton(
@@ -232,8 +237,9 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
     );
   }
 
-  _buildNotificationsButton(List<notification.Notification> notifications, String userId) {
-    if(hasNewNotifications(notifications)) {
+  _buildNotificationsButton(
+      List<notification.Notification> notifications, String userId) {
+    if (hasNewNotifications(notifications)) {
       return IconButton(
         icon: const Icon(Icons.notifications_active),
         color: Colors.deepOrange,
@@ -249,8 +255,8 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
   }
 
   bool hasNewNotifications(List<notification.Notification> notifications) {
-    for(var notification in notifications) {
-      if(notification.isSeen == false) {
+    for (var notification in notifications) {
+      if (notification.isSeen == false) {
         return true;
       }
     }

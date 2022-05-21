@@ -1,11 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:pimp_my_code/domain/entities/enum/status.dart';
 
+import '../../domain/entities/enum/notification_type.dart';
 import '../../domain/entities/follow.dart';
 import '../../domain/repositories/follow_repository.dart';
 import '../../domain/usecases/follow/create_follow.dart';
 import '../../domain/usecases/follow/delete_follow.dart';
 import '../../domain/usecases/follow/find_follow_by_follower_id.dart';
 import '../../domain/usecases/follow/find_follow_by_user_id.dart';
+import '../../domain/usecases/follow/update_follow.dart';
 import '../converter/follow_mapper.dart';
 import '../source/api/command/follow.dart';
 import '../source/api/model/follow/follow_model.dart';
@@ -65,6 +68,25 @@ class ApiFollowRepository extends FollowRepository {
       return Right(DeleteFollowSuccess());
     } catch (e) {
       return Left(DeleteFollowFailed());
+    }
+  }
+
+  @override
+  Future<Either<UpdateFollowFailed, UpdateFollowSuccess>> updateFollow(
+      {required NotificationType notificationType,
+      required String followerId,
+      required String userId}) async {
+    try {
+      await _dataSource.updateFollow(fields: {
+        'followStatus': notificationType == NotificationType.followAccepted
+            ? Status.accepted.name.toUpperCase()
+            : Status.refused.name.toUpperCase(),
+        'followerId': followerId,
+        'userId': userId,
+      });
+      return Right(UpdateFollowSuccess());
+    } catch (e) {
+      return Left(UpdateFollowFailed());
     }
   }
 }

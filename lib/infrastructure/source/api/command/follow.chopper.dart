@@ -49,4 +49,13 @@ class _$FollowInteractor extends FollowInteractor {
     final $request = Request('DELETE', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> updateFollow(
+      {required Map<String, String> fields}) {
+    final $url = '/follow/update';
+    final $body = fields;
+    final $request = Request('PUT', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

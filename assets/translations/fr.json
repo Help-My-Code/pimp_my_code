@@ -99,5 +99,7 @@
   "join_group_success": "Vous avez rejoint le groupe",
   "join_group_failed": "L'entrée dans le groupe n'a pas pu être effectuée",
   "group_created": "Le groupe a été créé",
-  "group_created_failed": "La création du groupe a échoué"
+  "group_created_failed": "La création du groupe a échoué",
+  "accept": "Accepter",
+  "refuse": "Refuser"
 }

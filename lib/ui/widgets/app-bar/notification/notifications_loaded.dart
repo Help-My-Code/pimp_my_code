@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getwidget/components/button/gf_icon_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/state/see_all_notifications/see_all_notifications_cubit.dart';
 import 'package:pimp_my_code/ui/router/routes.dart';
 
 import '../../../../domain/entities/enum/notification_type.dart';
 import '../../../../domain/entities/notification.dart' as notification;
+import '../../../../state/update_follow/update_follow_cubit.dart';
 
 class NotificationsLoaded extends StatelessWidget {
   final List<notification.Notification> notifications;
@@ -33,13 +35,15 @@ class NotificationsLoaded extends StatelessWidget {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Navigator.pop(context);
-                      if(notifications[index].groupLinked != null) {
-                        GoRouter.of(context)
-                            .go(Routes.group.path + '?groupId=' + notifications[index].groupLinked!.id);
+                      if (notifications[index].groupLinked != null) {
+                        GoRouter.of(context).go(Routes.group.path +
+                            '?groupId=' +
+                            notifications[index].groupLinked!.id);
                       }
-                      if(notifications[index].userLinked != null) {
-                        GoRouter.of(context).go(
-                            Routes.account.path + '?userId=' + notifications[index].userLinked!.id);
+                      if (notifications[index].userLinked != null) {
+                        GoRouter.of(context).go(Routes.account.path +
+                            '?userId=' +
+                            notifications[index].userLinked!.id);
                       }
                     },
                     child: Row(
@@ -47,6 +51,9 @@ class NotificationsLoaded extends StatelessWidget {
                         _initIcon(notifications[index]),
                         const SizedBox(width: 10),
                         _initText(notifications[index]),
+                        if (notifications[index].notificationType ==
+                            NotificationType.followDemand)
+                          _initButtons(notifications[index])
                       ],
                     ),
                   ),
@@ -154,5 +161,62 @@ class NotificationsLoaded extends StatelessWidget {
                 'liked_your_publication'.tr(),
             style: const TextStyle(fontSize: 16));
     }
+  }
+
+  _initButtons(notification.Notification notification) {
+    return BlocConsumer<UpdateFollowCubit, UpdateFollowState>(
+      listener: (context, state) {
+        state.maybeWhen(
+            orElse: () {},
+            failure: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Failed_to_update_follow').tr(),
+                backgroundColor: Theme.of(context).errorColor,
+              ));
+              Navigator.pop(context);
+            },
+            success: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Follow_updated_successful').tr(),
+                backgroundColor: Colors.green,
+              ));
+              Navigator.pop(context);
+            });
+      },
+      builder: (context, state) {
+        return Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            GFIconButton(
+              onPressed: () async {
+                context.read<UpdateFollowCubit>().updateFollow(
+                    NotificationType.followAccepted,
+                    notification.userLinked!.id,
+                    notification.userRecipient.id);
+              },
+              tooltip: 'accept'.tr(),
+              color: Colors.amber,
+              icon: const Icon(Icons.check, color: Colors.white),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            GFIconButton(
+              onPressed: () async {
+                context.read<UpdateFollowCubit>().updateFollow(
+                    NotificationType.followRefused,
+                    notification.userLinked!.id,
+                    notification.userRecipient.id);
+              },
+              tooltip: 'refuse'.tr(),
+              color: Colors.deepOrange,
+              icon: const Icon(Icons.cancel, color: Colors.white),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
