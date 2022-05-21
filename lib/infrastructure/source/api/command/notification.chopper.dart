@@ -17,10 +17,11 @@ class _$NotificationInteractor extends NotificationInteractor {
   final definitionType = NotificationInteractor;
 
   @override
-  Future<Response<dynamic>> seeAllNotificationsByUserId(String userId) {
+  Future<Response<dynamic>> seeAllNotificationsByUserId(
+      {required Map<String, String> fields}) {
     final $url = '/notification/seeAllNotificationsByUserId';
-    final $params = <String, dynamic>{'userId': userId};
-    final $request = Request('PUT', $url, client.baseUrl, parameters: $params);
+    final $body = fields;
+    final $request = Request('PUT', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
 

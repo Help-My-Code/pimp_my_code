@@ -18,4 +18,7 @@ abstract class GroupMemberInteractor extends ChopperService {
 
   @Delete(path: '/delete')
   Future<Response> deleteGroupMember({@Body() required Map<String, String> fields});
+
+  @Put(path: '/update')
+  Future<Response> updateGroupMember({@Body() required Map<String, String> fields});
 }

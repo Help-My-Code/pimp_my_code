@@ -47,7 +47,6 @@ class MyGroupsLoaded extends StatelessWidget {
                       Navigator.pop(context);
                       GoRouter.of(context).go(
                         Routes.group.path + '?groupId=' + groups[index].id,
-                        extra: true,
                       );
                     },
                     child: Row(

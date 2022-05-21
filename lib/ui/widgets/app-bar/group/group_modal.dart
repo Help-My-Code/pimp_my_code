@@ -25,7 +25,7 @@ class GroupModal extends StatelessWidget {
               orElse: () {},
               failure: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_groups').tr(),
+                  content: const Text('failed_to_load_groups').tr(),
                   backgroundColor: Theme.of(context).errorColor,
                 ));
               },
@@ -47,7 +47,7 @@ class GroupModal extends StatelessWidget {
                   orElse: () {},
                   failure: () {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text('Failed_to_load_group_members').tr(),
+                      content: const Text('failed_to_load_group_members').tr(),
                       backgroundColor: Theme.of(context).errorColor,
                     ));
                   },

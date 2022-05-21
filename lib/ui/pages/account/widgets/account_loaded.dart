@@ -10,12 +10,15 @@ import 'package:pimp_my_code/ui/pages/account/widgets/update_user_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../core/form_status.dart';
+import '../../../../domain/entities/enum/status.dart';
 import '../../../../domain/entities/user.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/follow_user/follow_user_bloc.dart';
 import '../../../../state/like/like_cubit.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_follow_by_follower_id/retrieve_follow_by_follower_id_cubit.dart';
+import '../../../../state/retrieve_follow_by_user_id/retrieve_follow_by_user_id_cubit.dart';
+import '../../../../state/retrieve_user_by_id/retrieve_user_by_id_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/unfollow_user/unfollow_user_bloc.dart';
 import '../../../../state/update_user/update_user_bloc.dart';
@@ -27,13 +30,11 @@ class AccountLoaded extends StatefulWidget {
   const AccountLoaded({
     Key? key,
     required this.user,
-    required this.isUserConnected,
     required this.context,
     required this.followers,
   }) : super(key: key);
 
   final User user;
-  final bool isUserConnected;
   final BuildContext context;
   final List<Follow> followers;
 
@@ -102,7 +103,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
         orElse: () {},
         failure: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: const Text('Failed_to_load_follows').tr(),
+            content: const Text('failed_to_load_follows').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
         },
@@ -125,9 +126,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (widget.isUserConnected) {
+            if (widget.user.id == snapshot.data!) {
               return GFButton(
-                onPressed: () => _printUpdate(),
+                onPressed: () => printUpdate(),
                 text: tr('edit_profile'),
                 shape: GFButtonShape.standard,
                 color: Colors.amber,
@@ -135,7 +136,8 @@ class _AccountLoadedState extends State<AccountLoaded> {
               );
             } else {
               if (followersContainCurrentUser(snapshot.data!)) {
-                return _buildUnfollowButton(context);
+                return _buildUnfollowButton(
+                    context, getFollowByUserId(snapshot.data!)!);
               }
               return _buildFollowButton(context);
             }
@@ -153,14 +155,18 @@ class _AccountLoadedState extends State<AccountLoaded> {
             content: const Text('follow_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveFollowByUserIdCubit>()
+              .loadFollowByUserId(widget.user.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByUserId(widget.user.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('follow_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -185,7 +191,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
     );
   }
 
-  _buildUnfollowButton(BuildContext context) {
+  _buildUnfollowButton(BuildContext context, Follow follow) {
     return BlocConsumer<UnfollowUserBloc, UnfollowUserState>(
       listener: (context, state) {
         if (state.status is FormSubmissionSuccessful) {
@@ -193,14 +199,18 @@ class _AccountLoadedState extends State<AccountLoaded> {
             content: const Text('unfollow_success').tr(),
             backgroundColor: Colors.green,
           ));
-          //TODO recharger la page
+          context
+              .read<RetrieveFollowByUserIdCubit>()
+              .loadFollowByUserId(widget.user.id);
+          context
+              .read<RetrieveContentCubit>()
+              .loadPublicationByUserId(widget.user.id);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('unfollow_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          //TODO recharger la page
         }
       },
       builder: (context, state) {
@@ -216,7 +226,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
                       .add(UnfollowUserEvent.submit(widget.user.id));
                 }
               },
-              text: tr('unfollow'),
+              text: follow.followStatus == Status.accepted
+                  ? tr('unfollow')
+                  : tr('request_sent'),
               shape: GFButtonShape.standard,
               color: Colors.amber,
               icon: const Icon(Icons.remove, color: Colors.white),
@@ -231,7 +243,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.user.confidentiality == Confidentiality.public ||
-                followersContainCurrentUser(snapshot.data!) ||
+                (followersContainCurrentUser(snapshot.data!) &&
+                    getFollowByUserId(snapshot.data!)!.followStatus !=
+                        Status.pendingInvit) ||
                 widget.user.id == snapshot.data) {
               return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
                 listener: (context, state) {
@@ -241,7 +255,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content:
-                              const Text('Failed_to_load_publications').tr(),
+                              const Text('failed_to_load_publications').tr(),
                         ),
                       );
                     },
@@ -298,8 +312,8 @@ class _AccountLoadedState extends State<AccountLoaded> {
         });
   }
 
-  void _printUpdate() {
-    Alert(
+  Future<void> printUpdate() async {
+    await Alert(
       context: context,
       title: 'update_informations'.tr(),
       content: BlocProvider(
@@ -309,6 +323,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
       ),
       buttons: [],
     ).show();
+    context.read<RetrieveUserByIdCubit>().loadUserById(widget.user.id);
   }
 
   _loadFollowings(followings) {
@@ -322,5 +337,12 @@ class _AccountLoadedState extends State<AccountLoaded> {
       if (follower.follower.id == userId) return true;
     }
     return false;
+  }
+
+  Follow? getFollowByUserId(String userId) {
+    for (var follower in widget.followers) {
+      if (follower.follower.id == userId) return follower;
+    }
+    return null;
   }
 }

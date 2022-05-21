@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content:
-                              const Text('Failed_to_load_publications').tr(),
+                              const Text('failed_to_load_publications').tr(),
                         ),
                       );
                     },

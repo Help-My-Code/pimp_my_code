@@ -204,7 +204,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: const Text('register_success').tr(),
                 backgroundColor: Colors.green,
               ));
-              GoRouter.of(context).go('/');
+              GoRouter.of(context).go(Routes.home.path);
             }
             if (state.status is FormSubmissionFailed) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

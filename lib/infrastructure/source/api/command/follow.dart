@@ -18,4 +18,7 @@ abstract class FollowInteractor extends ChopperService {
 
   @Delete(path: '/delete')
   Future<Response> deleteFollow({@Body() required Map<String, String> fields});
+
+  @Put(path: '/update')
+  Future<Response> updateFollow({@Body() required Map<String, String> fields});
 }
