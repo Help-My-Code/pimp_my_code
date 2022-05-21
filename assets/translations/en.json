@@ -97,5 +97,21 @@
   "join_group_success": "You joined the group",
   "join_group_failed": "The enter in the group could not be carried out",
   "group_created": "Group was created",
-  "group_created_failed": "The creation of group was failed"
+  "group_created_failed": "The creation of group was failed",
+  "accept": "Accept",
+  "failed_to_load_user": "Failed to load user",
+  "failed_to_load_users": "Failed to load users",
+  "failed_to_load_follows": "Failed to load follows",
+  "failed_to_load_publications": "Failed to load publications",
+  "failed_to_load_group": "Failed to load group",
+  "failed_to_load_groups": "Failed to load groups",
+  "failed_to_load_group_members": "Failed to load group members",
+  "failed_to_load_notifications": "Failed to load notifications",
+  "failed_to_update_follow": "Failed to update follow",
+  "failed_to_update_group_member": "Failed to update group member",
+  "failed_to_delete_group": "Failed to delete group",
+  "group_member_updated_successful": "Group member updated successfully",
+  "follow_updated_successful": "Follow updated successfully",
+  "delete_group_success": "Group deleted successfully"
+
 }

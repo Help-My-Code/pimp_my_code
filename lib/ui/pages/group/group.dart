@@ -60,7 +60,7 @@ class _GroupPageState extends State<GroupPage> {
               orElse: () {},
               failure: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: const Text('Failed_to_load_group').tr(),
+                  content: const Text('failed_to_load_group').tr(),
                   backgroundColor: Theme.of(context).errorColor,
                 ));
               },
@@ -91,7 +91,7 @@ class _GroupPageState extends State<GroupPage> {
                       failure: () {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content:
-                              const Text('Failed_to_load_group_members').tr(),
+                              const Text('failed_to_load_group_members').tr(),
                           backgroundColor: Theme.of(context).errorColor,
                         ));
                       },

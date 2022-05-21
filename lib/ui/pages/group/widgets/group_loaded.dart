@@ -253,6 +253,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
+                widget.group.creator!.id == snapshot.data! ||
                 (groupMembersContainCurrentUser(snapshot.data!) &&
                     getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
                         Status.pendingInvit)) {
@@ -268,7 +269,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
                         failure: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text('Failed_to_load_publications')
+                              content: const Text('failed_to_load_publications')
                                   .tr(),
                             ),
                           );

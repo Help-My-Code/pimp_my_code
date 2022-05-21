@@ -27,13 +27,13 @@ class DeleteGroupModal extends StatelessWidget {
                 orElse: () {},
                 success: () {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: const Text('Delete_group_success').tr(),
+                    content: const Text('delete_group_success').tr(),
                     backgroundColor: Colors.green,
                   ));
                 },
                 failure: () {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: const Text('Failed_to_delete_group').tr(),
+                    content: const Text('failed_to_delete_group').tr(),
                     backgroundColor: Theme.of(context).errorColor,
                   ));
                 },
