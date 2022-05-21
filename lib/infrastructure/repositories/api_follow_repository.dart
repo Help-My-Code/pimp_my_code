@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:pimp_my_code/domain/entities/enum/role.dart';
 import 'package:pimp_my_code/domain/entities/enum/status.dart';
 
 import '../../domain/entities/enum/notification_type.dart';
@@ -73,14 +74,12 @@ class ApiFollowRepository extends FollowRepository {
 
   @override
   Future<Either<UpdateFollowFailed, UpdateFollowSuccess>> updateFollow(
-      {required NotificationType notificationType,
+      {required Status followStatus,
       required String followerId,
       required String userId}) async {
     try {
       await _dataSource.updateFollow(fields: {
-        'followStatus': notificationType == NotificationType.followAccepted
-            ? Status.accepted.name.toUpperCase()
-            : Status.refused.name.toUpperCase(),
+        'followStatus': followStatus.name.toUpperCase(),
         'followerId': followerId,
         'userId': userId,
       });

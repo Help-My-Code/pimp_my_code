@@ -15,6 +15,7 @@ import '../../../state/retrive_group_members/retrieve_group_members_cubit.dart';
 import '../../../state/see_all_notifications/see_all_notifications_cubit.dart';
 import '../../../state/session/session_cubit.dart';
 import '../../../state/update_follow/update_follow_cubit.dart';
+import '../../../state/update_group_member/update_group_member_cubit.dart';
 import '../../router/routes.dart';
 import '../loading.dart';
 import 'group/create_group_modal.dart';
@@ -135,8 +136,15 @@ class _CustomAppBarMenuState extends State<CustomAppBarMenu> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              BlocProvider(
-                create: (context) => sl<UpdateFollowCubit>(),
+              MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => sl<UpdateFollowCubit>(),
+                  ),
+                  BlocProvider(
+                    create: (context) => sl<UpdateGroupMemberCubit>(),
+                  ),
+                ],
                 child: NotificationsLoaded(notifications: notifications),
               )
             ],

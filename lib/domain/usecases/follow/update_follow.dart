@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:pimp_my_code/domain/entities/enum/status.dart';
 import 'package:pimp_my_code/domain/repositories/follow_repository.dart';
 
 import '../../../core/failure.dart';
 import '../../../core/usecase.dart';
-import '../../entities/enum/notification_type.dart';
 
 class UpdateFollowUseCase
     extends UseCase<UpdateFollowSuccess, UpdateFollowParam> {
@@ -16,16 +16,16 @@ class UpdateFollowUseCase
     UpdateFollowParam params,
   ) async {
     return repository.updateFollow(
-        notificationType: params.notificationType,
+        followStatus: params.followStatus,
         followerId: params.followerId,
         userId: params.userId);
   }
 }
 
 class UpdateFollowParam {
-  UpdateFollowParam(this.notificationType, this.followerId, this.userId);
+  UpdateFollowParam(this.followStatus, this.followerId, this.userId);
 
-  final NotificationType notificationType;
+  final Status followStatus;
   final String followerId;
   final String userId;
 }

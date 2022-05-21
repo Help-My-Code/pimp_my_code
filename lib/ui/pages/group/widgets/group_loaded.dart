@@ -253,6 +253,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
             if (widget.group.confidentiality == Confidentiality.public ||
+                widget.group.creator!.id == snapshot.data! ||
                 (groupMembersContainCurrentUser(snapshot.data!) &&
                     getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
                         Status.pendingInvit)) {

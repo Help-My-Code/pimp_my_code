@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pimp_my_code/domain/entities/enum/status.dart';
 import 'package:pimp_my_code/state/see_all_notifications/see_all_notifications_cubit.dart';
 import 'package:pimp_my_code/ui/router/routes.dart';
 
 import '../../../../domain/entities/enum/notification_type.dart';
 import '../../../../domain/entities/notification.dart' as notification;
 import '../../../../state/update_follow/update_follow_cubit.dart';
+import '../../../../state/update_group_member/update_group_member_cubit.dart';
 
 class NotificationsLoaded extends StatelessWidget {
   final List<notification.Notification> notifications;
@@ -53,7 +55,10 @@ class NotificationsLoaded extends StatelessWidget {
                         _initText(notifications[index]),
                         if (notifications[index].notificationType ==
                             NotificationType.followDemand)
-                          _initButtons(notifications[index])
+                          _initFollowResultButtons(notifications[index]),
+                        if (notifications[index].notificationType ==
+                            NotificationType.groupJoinDemand)
+                          _initJoinGroupResultButtons(notifications[index])
                       ],
                     ),
                   ),
@@ -163,7 +168,7 @@ class NotificationsLoaded extends StatelessWidget {
     }
   }
 
-  _initButtons(notification.Notification notification) {
+  _initFollowResultButtons(notification.Notification notification) {
     return BlocConsumer<UpdateFollowCubit, UpdateFollowState>(
       listener: (context, state) {
         state.maybeWhen(
@@ -192,7 +197,7 @@ class NotificationsLoaded extends StatelessWidget {
             GFIconButton(
               onPressed: () async {
                 context.read<UpdateFollowCubit>().updateFollow(
-                    NotificationType.followAccepted,
+                    Status.accepted,
                     notification.userLinked!.id,
                     notification.userRecipient.id);
               },
@@ -206,9 +211,66 @@ class NotificationsLoaded extends StatelessWidget {
             GFIconButton(
               onPressed: () async {
                 context.read<UpdateFollowCubit>().updateFollow(
-                    NotificationType.followRefused,
+                    Status.refused,
                     notification.userLinked!.id,
                     notification.userRecipient.id);
+              },
+              tooltip: 'refuse'.tr(),
+              color: Colors.deepOrange,
+              icon: const Icon(Icons.cancel, color: Colors.white),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _initJoinGroupResultButtons(notification.Notification notification) {
+    return BlocConsumer<UpdateGroupMemberCubit, UpdateGroupMemberState>(
+      listener: (context, state) {
+        state.maybeWhen(
+            orElse: () {},
+            failure: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Failed_to_update_group_member').tr(),
+                backgroundColor: Theme.of(context).errorColor,
+              ));
+              Navigator.pop(context);
+            },
+            success: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Group_member_updated_successful').tr(),
+                backgroundColor: Colors.green,
+              ));
+              Navigator.pop(context);
+            });
+      },
+      builder: (context, state) {
+        return Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            GFIconButton(
+              onPressed: () async {
+                context.read<UpdateGroupMemberCubit>().updateGroupMember(
+                    Status.accepted,
+                    notification.userLinked!.id,
+                    notification.groupLinked!.id);
+              },
+              tooltip: 'accept'.tr(),
+              color: Colors.amber,
+              icon: const Icon(Icons.check, color: Colors.white),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            GFIconButton(
+              onPressed: () async {
+                context.read<UpdateGroupMemberCubit>().updateGroupMember(
+                    Status.refused,
+                    notification.userLinked!.id,
+                    notification.groupLinked!.id);
               },
               tooltip: 'refuse'.tr(),
               color: Colors.deepOrange,
