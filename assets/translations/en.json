@@ -109,6 +109,9 @@
   "failed_to_load_notifications": "Failed to load notifications",
   "failed_to_update_follow": "Failed to update follow",
   "failed_to_update_group_member": "Failed to update group member",
-  "failed_to_delete_group": "Failed to delete group"
+  "failed_to_delete_group": "Failed to delete group",
+  "group_member_updated_successful": "Group member updated successfully",
+  "follow_updated_successful": "Follow updated successfully",
+  "delete_group_success": "Group deleted successfully"
 
 }

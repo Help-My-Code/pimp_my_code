@@ -182,7 +182,7 @@ class NotificationsLoaded extends StatelessWidget {
             },
             success: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('Follow_updated_successful').tr(),
+                content: const Text('follow_updated_successful').tr(),
                 backgroundColor: Colors.green,
               ));
               Navigator.pop(context);
@@ -239,7 +239,7 @@ class NotificationsLoaded extends StatelessWidget {
             },
             success: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: const Text('Group_member_updated_successful').tr(),
+                content: const Text('group_member_updated_successful').tr(),
                 backgroundColor: Colors.green,
               ));
               Navigator.pop(context);
