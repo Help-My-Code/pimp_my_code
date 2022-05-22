@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/repositories/follow_repository.dart';
 import 'package:pimp_my_code/domain/repositories/group_member_repository.dart';
 
 import '../../../core/failure.dart';
 import '../../../core/usecase.dart';
-import '../../entities/enum/notification_type.dart';
 import '../../entities/enum/status.dart';
 
 class UpdateGroupMemberUseCase

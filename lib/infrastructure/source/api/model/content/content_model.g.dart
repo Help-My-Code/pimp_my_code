@@ -28,6 +28,8 @@ _$_ApiContentModel _$$_ApiContentModelFromJson(Map<String, dynamic> json) =>
       numberOfLikes: json['numberOfLikes'] as int,
       numberOfDislikes: json['numberOfDislikes'] as int,
       numberOfComments: json['numberOfComments'] as int,
+      stdin: json['stdin'] as String?,
+      stdout: json['stdout'] as String?,
     );
 
 Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
@@ -49,4 +51,6 @@ Map<String, dynamic> _$$_ApiContentModelToJson(_$_ApiContentModel instance) =>
       'numberOfLikes': instance.numberOfLikes,
       'numberOfDislikes': instance.numberOfDislikes,
       'numberOfComments': instance.numberOfComments,
+      'stdin': instance.stdin,
+      'stdout': instance.stdout,
     };
