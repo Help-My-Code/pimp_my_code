@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:pimp_my_code/domain/entities/enum/role.dart';
 import 'package:pimp_my_code/domain/entities/enum/status.dart';
 
-import '../../domain/entities/enum/notification_type.dart';
 import '../../domain/entities/follow.dart';
 import '../../domain/repositories/follow_repository.dart';
 import '../../domain/usecases/follow/create_follow.dart';

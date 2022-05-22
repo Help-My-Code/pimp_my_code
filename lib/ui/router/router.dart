@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pimp_my_code/state/retrieve_publication/retrieve_publication_cubit.dart';
 
 import '../../ioc_container.dart';
 import '../../state/login/login_bloc.dart';
@@ -18,6 +19,7 @@ import '../pages/group/group.dart';
 import '../pages/home/home.dart';
 import '../pages/login/login.dart';
 import '../pages/messaging.dart';
+import '../pages/publication/publication.dart';
 import '../pages/register/register.dart';
 import 'routes.dart';
 
@@ -52,51 +54,61 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: Routes.publication.path,
+        builder: (BuildContext context, GoRouterState state) => BlocProvider(
+          create: (context) => RetrievePublicationCubit(sl())
+            ..loadPublication(state.params['id']),
+          child: const Publication(),
+        ),
+      ),
+      GoRoute(
         path: Routes.messaging.path,
         builder: (BuildContext context, GoRouterState state) =>
             const MessagingPage(),
       ),
       GoRoute(
-          path: Routes.account.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => sl<RetrieveUserByIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveContentCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          sl<RetrieveFollowByFollowerIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveFollowByUserIdCubit>(),
-                    ),
-                  ],
-                  child: AccountPage(
-                    userId: state.queryParams['userId']!,
-                  ))),
+        path: Routes.account.path,
+        builder: (BuildContext context, GoRouterState state) =>
+            MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<RetrieveUserByIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveContentCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveFollowByFollowerIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveFollowByUserIdCubit>(),
+            ),
+          ],
+          child: AccountPage(
+            userId: state.queryParams['userId']!,
+          ),
+        ),
+      ),
       GoRoute(
-          path: Routes.group.path,
-          builder: (BuildContext context, GoRouterState state) =>
-              MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => sl<RetrieveGroupByIdCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) => sl<RetrieveContentCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          sl<RetrieveGroupMembersByGroupIdCubit>(),
-                    ),
-                  ],
-                  child: GroupPage(
-                    groupId: state.queryParams['groupId']!,
-                  ))),
+        path: Routes.group.path,
+        builder: (BuildContext context, GoRouterState state) =>
+            MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<RetrieveGroupByIdCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveContentCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<RetrieveGroupMembersByGroupIdCubit>(),
+            ),
+          ],
+          child: GroupPage(
+            groupId: state.queryParams['groupId']!,
+          ),
+        ),
+      ),
     ],
     redirect: (state) {
       final bool isInUnAuthPage = state.location == Routes.login.path ||

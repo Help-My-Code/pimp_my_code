@@ -39,7 +39,9 @@ class _$ApiContentModelTearOff {
       @JsonKey(name: 'contentType') required String contentType,
       required int numberOfLikes,
       required int numberOfDislikes,
-      required int numberOfComments}) {
+      required int numberOfComments,
+      String? stdin,
+      String? stdout}) {
     return _ApiContentModel(
       id: id,
       content: content,
@@ -58,6 +60,8 @@ class _$ApiContentModelTearOff {
       numberOfLikes: numberOfLikes,
       numberOfDislikes: numberOfDislikes,
       numberOfComments: numberOfComments,
+      stdin: stdin,
+      stdout: stdout,
     );
   }
 
@@ -92,6 +96,8 @@ mixin _$ApiContentModel {
   int get numberOfLikes => throw _privateConstructorUsedError;
   int get numberOfDislikes => throw _privateConstructorUsedError;
   int get numberOfComments => throw _privateConstructorUsedError;
+  String? get stdin => throw _privateConstructorUsedError;
+  String? get stdout => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -121,7 +127,9 @@ abstract class $ApiContentModelCopyWith<$Res> {
       @JsonKey(name: 'contentType') String contentType,
       int numberOfLikes,
       int numberOfDislikes,
-      int numberOfComments});
+      int numberOfComments,
+      String? stdin,
+      String? stdout});
 
   $ApiUserModelCopyWith<$Res>? get creator;
 }
@@ -154,6 +162,8 @@ class _$ApiContentModelCopyWithImpl<$Res>
     Object? numberOfLikes = freezed,
     Object? numberOfDislikes = freezed,
     Object? numberOfComments = freezed,
+    Object? stdin = freezed,
+    Object? stdout = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -224,6 +234,14 @@ class _$ApiContentModelCopyWithImpl<$Res>
           ? _value.numberOfComments
           : numberOfComments // ignore: cast_nullable_to_non_nullable
               as int,
+      stdin: stdin == freezed
+          ? _value.stdin
+          : stdin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stdout: stdout == freezed
+          ? _value.stdout
+          : stdout // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -263,7 +281,9 @@ abstract class _$ApiContentModelCopyWith<$Res>
       @JsonKey(name: 'contentType') String contentType,
       int numberOfLikes,
       int numberOfDislikes,
-      int numberOfComments});
+      int numberOfComments,
+      String? stdin,
+      String? stdout});
 
   @override
   $ApiUserModelCopyWith<$Res>? get creator;
@@ -299,6 +319,8 @@ class __$ApiContentModelCopyWithImpl<$Res>
     Object? numberOfLikes = freezed,
     Object? numberOfDislikes = freezed,
     Object? numberOfComments = freezed,
+    Object? stdin = freezed,
+    Object? stdout = freezed,
   }) {
     return _then(_ApiContentModel(
       id: id == freezed
@@ -369,6 +391,14 @@ class __$ApiContentModelCopyWithImpl<$Res>
           ? _value.numberOfComments
           : numberOfComments // ignore: cast_nullable_to_non_nullable
               as int,
+      stdin: stdin == freezed
+          ? _value.stdin
+          : stdin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stdout: stdout == freezed
+          ? _value.stdout
+          : stdout // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -393,7 +423,9 @@ class _$_ApiContentModel implements _ApiContentModel {
       @JsonKey(name: 'contentType') required this.contentType,
       required this.numberOfLikes,
       required this.numberOfDislikes,
-      required this.numberOfComments});
+      required this.numberOfComments,
+      this.stdin,
+      this.stdout});
 
   factory _$_ApiContentModel.fromJson(Map<String, dynamic> json) =>
       _$$_ApiContentModelFromJson(json);
@@ -436,10 +468,14 @@ class _$_ApiContentModel implements _ApiContentModel {
   final int numberOfDislikes;
   @override
   final int numberOfComments;
+  @override
+  final String? stdin;
+  @override
+  final String? stdout;
 
   @override
   String toString() {
-    return 'ApiContentModel(id: $id, content: $content, creatorId: $creatorId, medias: $medias, username: $username, title: $title, code: $code, codeResult: $codeResult, creator: $creator, userImage: $userImage, createdAt: $createdAt, groupId: $groupId, parentId: $parentId, contentType: $contentType, numberOfLikes: $numberOfLikes, numberOfDislikes: $numberOfDislikes, numberOfComments: $numberOfComments)';
+    return 'ApiContentModel(id: $id, content: $content, creatorId: $creatorId, medias: $medias, username: $username, title: $title, code: $code, codeResult: $codeResult, creator: $creator, userImage: $userImage, createdAt: $createdAt, groupId: $groupId, parentId: $parentId, contentType: $contentType, numberOfLikes: $numberOfLikes, numberOfDislikes: $numberOfDislikes, numberOfComments: $numberOfComments, stdin: $stdin, stdout: $stdout)';
   }
 
   @override
@@ -468,29 +504,34 @@ class _$_ApiContentModel implements _ApiContentModel {
             const DeepCollectionEquality()
                 .equals(other.numberOfDislikes, numberOfDislikes) &&
             const DeepCollectionEquality()
-                .equals(other.numberOfComments, numberOfComments));
+                .equals(other.numberOfComments, numberOfComments) &&
+            const DeepCollectionEquality().equals(other.stdin, stdin) &&
+            const DeepCollectionEquality().equals(other.stdout, stdout));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(creatorId),
-      const DeepCollectionEquality().hash(medias),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(codeResult),
-      const DeepCollectionEquality().hash(creator),
-      const DeepCollectionEquality().hash(userImage),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(groupId),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(contentType),
-      const DeepCollectionEquality().hash(numberOfLikes),
-      const DeepCollectionEquality().hash(numberOfDislikes),
-      const DeepCollectionEquality().hash(numberOfComments));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(content),
+        const DeepCollectionEquality().hash(creatorId),
+        const DeepCollectionEquality().hash(medias),
+        const DeepCollectionEquality().hash(username),
+        const DeepCollectionEquality().hash(title),
+        const DeepCollectionEquality().hash(code),
+        const DeepCollectionEquality().hash(codeResult),
+        const DeepCollectionEquality().hash(creator),
+        const DeepCollectionEquality().hash(userImage),
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(groupId),
+        const DeepCollectionEquality().hash(parentId),
+        const DeepCollectionEquality().hash(contentType),
+        const DeepCollectionEquality().hash(numberOfLikes),
+        const DeepCollectionEquality().hash(numberOfDislikes),
+        const DeepCollectionEquality().hash(numberOfComments),
+        const DeepCollectionEquality().hash(stdin),
+        const DeepCollectionEquality().hash(stdout)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -521,7 +562,9 @@ abstract class _ApiContentModel implements ApiContentModel {
       @JsonKey(name: 'contentType') required String contentType,
       required int numberOfLikes,
       required int numberOfDislikes,
-      required int numberOfComments}) = _$_ApiContentModel;
+      required int numberOfComments,
+      String? stdin,
+      String? stdout}) = _$_ApiContentModel;
 
   factory _ApiContentModel.fromJson(Map<String, dynamic> json) =
       _$_ApiContentModel.fromJson;
@@ -564,6 +607,10 @@ abstract class _ApiContentModel implements ApiContentModel {
   int get numberOfDislikes;
   @override
   int get numberOfComments;
+  @override
+  String? get stdin;
+  @override
+  String? get stdout;
   @override
   @JsonKey(ignore: true)
   _$ApiContentModelCopyWith<_ApiContentModel> get copyWith =>

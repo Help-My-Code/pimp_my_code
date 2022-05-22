@@ -5,6 +5,7 @@ enum Routes {
   messaging,
   account,
   group,
+  publication,
 }
 
 extension RoutesExtension on Routes {
@@ -22,6 +23,8 @@ extension RoutesExtension on Routes {
         return '/account';
       case Routes.group:
         return '/group';
+      case Routes.publication:
+        return '/publication/:id';
     }
   }
 }

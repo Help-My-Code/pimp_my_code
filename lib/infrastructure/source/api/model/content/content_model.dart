@@ -25,6 +25,8 @@ class ApiContentModel with _$ApiContentModel {
     required int numberOfLikes,
     required int numberOfDislikes,
     required int numberOfComments,
+    String? stdin,
+    String? stdout,
   }) = _ApiContentModel;
 
   factory ApiContentModel.fromJson(Map<String, dynamic> json) =>

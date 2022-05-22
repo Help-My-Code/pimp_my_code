@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../domain/entities/enum/role.dart';
 import '../../domain/entities/enum/status.dart';
-import '../../domain/usecases/follow/update_follow.dart';
 import '../../domain/usecases/group-member/create_group_member.dart';
 import '../../domain/usecases/group-member/delete_group_member.dart';
 import '../../domain/usecases/group-member/find_group_members_by_group_id.dart';
@@ -35,11 +34,11 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
   }
 
   @override
-  Future<Either<FindGroupMembersByGroupIdFailure, List<GroupMember>>> getByGroupId(
-      {required String id}) async {
+  Future<Either<FindGroupMembersByGroupIdFailure, List<GroupMember>>>
+      getByGroupId({required String id}) async {
     final response = await _dataSource.getByGroupId(id);
     final List<Map<String, dynamic>> apiGroupMembers =
-    List.from(response.body['groupMember']);
+        List.from(response.body['groupMember']);
     return Right(
       apiGroupMembers
           .map(ApiGroupMemberModel.fromJson)
@@ -49,8 +48,9 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
   }
 
   @override
-  Future<Either<CreateGroupMemberFailed, CreateGroupMemberSuccess>> createGroupMember(
-      {required String userId, required String groupId}) async {
+  Future<Either<CreateGroupMemberFailed, CreateGroupMemberSuccess>>
+      createGroupMember(
+          {required String userId, required String groupId}) async {
     try {
       await _dataSource.createGroupMember(fields: {
         'memberId': userId,
@@ -63,8 +63,9 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
   }
 
   @override
-  Future<Either<DeleteGroupMemberFailed, DeleteGroupMemberSuccess>> deleteGroupMember(
-      {required String userId, required String groupId}) async {
+  Future<Either<DeleteGroupMemberFailed, DeleteGroupMemberSuccess>>
+      deleteGroupMember(
+          {required String userId, required String groupId}) async {
     try {
       await _dataSource.deleteGroupMember(fields: {
         'groupId': groupId,
@@ -77,10 +78,11 @@ class ApiGroupMemberRepository extends GroupMemberRepository {
   }
 
   @override
-  Future<Either<UpdateGroupMemberFailed, UpdateGroupMemberSuccess>> updateGroupMember(
-      {required Status membershipStatus,
-        required String memberId,
-        required String groupId}) async {
+  Future<Either<UpdateGroupMemberFailed, UpdateGroupMemberSuccess>>
+      updateGroupMember(
+          {required Status membershipStatus,
+          required String memberId,
+          required String groupId}) async {
     try {
       await _dataSource.updateGroupMember(fields: {
         'membershipStatus': membershipStatus.name.toUpperCase(),
