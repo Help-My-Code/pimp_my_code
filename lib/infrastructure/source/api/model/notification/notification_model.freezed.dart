@@ -28,7 +28,7 @@ class _$ApiNotificationModelTearOff {
       @JsonKey(name: 'is_seen') required bool isSeen,
       @JsonKey(name: 'notification_type') required String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
-      @JsonKey(name: 'content_id') String? contentLinked,
+      @JsonKey(name: 'content_linked') String? contentLinked,
       @JsonKey(name: 'user_recipient') required ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked}) {
     return _ApiNotificationModel(
@@ -62,7 +62,7 @@ mixin _$ApiNotificationModel {
   String get notificationType => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_linked')
   ApiGroupModel? get groupLinked => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content_id')
+  @JsonKey(name: 'content_linked')
   String? get contentLinked => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_recipient')
   ApiUserModel get userRecipient => throw _privateConstructorUsedError;
@@ -86,7 +86,7 @@ abstract class $ApiNotificationModelCopyWith<$Res> {
       @JsonKey(name: 'is_seen') bool isSeen,
       @JsonKey(name: 'notification_type') String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
-      @JsonKey(name: 'content_id') String? contentLinked,
+      @JsonKey(name: 'content_linked') String? contentLinked,
       @JsonKey(name: 'user_recipient') ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked});
 
@@ -194,7 +194,7 @@ abstract class _$ApiNotificationModelCopyWith<$Res>
       @JsonKey(name: 'is_seen') bool isSeen,
       @JsonKey(name: 'notification_type') String notificationType,
       @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
-      @JsonKey(name: 'content_id') String? contentLinked,
+      @JsonKey(name: 'content_linked') String? contentLinked,
       @JsonKey(name: 'user_recipient') ApiUserModel userRecipient,
       @JsonKey(name: 'user_linked') ApiUserModel? userLinked});
 
@@ -274,7 +274,7 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
       @JsonKey(name: 'is_seen') required this.isSeen,
       @JsonKey(name: 'notification_type') required this.notificationType,
       @JsonKey(name: 'group_linked') this.groupLinked,
-      @JsonKey(name: 'content_id') this.contentLinked,
+      @JsonKey(name: 'content_linked') this.contentLinked,
       @JsonKey(name: 'user_recipient') required this.userRecipient,
       @JsonKey(name: 'user_linked') this.userLinked});
 
@@ -296,7 +296,7 @@ class _$_ApiNotificationModel implements _ApiNotificationModel {
   @JsonKey(name: 'group_linked')
   final ApiGroupModel? groupLinked;
   @override
-  @JsonKey(name: 'content_id')
+  @JsonKey(name: 'content_linked')
   final String? contentLinked;
   @override
   @JsonKey(name: 'user_recipient')
@@ -361,7 +361,7 @@ abstract class _ApiNotificationModel implements ApiNotificationModel {
           @JsonKey(name: 'is_seen') required bool isSeen,
           @JsonKey(name: 'notification_type') required String notificationType,
           @JsonKey(name: 'group_linked') ApiGroupModel? groupLinked,
-          @JsonKey(name: 'content_id') String? contentLinked,
+          @JsonKey(name: 'content_linked') String? contentLinked,
           @JsonKey(name: 'user_recipient') required ApiUserModel userRecipient,
           @JsonKey(name: 'user_linked') ApiUserModel? userLinked}) =
       _$_ApiNotificationModel;
@@ -384,7 +384,7 @@ abstract class _ApiNotificationModel implements ApiNotificationModel {
   @JsonKey(name: 'group_linked')
   ApiGroupModel? get groupLinked;
   @override
-  @JsonKey(name: 'content_id')
+  @JsonKey(name: 'content_linked')
   String? get contentLinked;
   @override
   @JsonKey(name: 'user_recipient')

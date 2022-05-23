@@ -42,6 +42,7 @@ class NotificationMapper {
       id: apiNotificationModel.id,
       dateHour: apiNotificationModel.dateHour,
       isSeen: apiNotificationModel.isSeen,
+      contentLinked: apiNotificationModel.contentLinked,
       notificationType:
           _notificationTypeFromString(apiNotificationModel.notificationType),
       groupLinked: apiNotificationModel.groupLinked == null

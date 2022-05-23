@@ -37,13 +37,18 @@ class NotificationsLoaded extends StatelessWidget {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Navigator.pop(context);
+                      if (notifications[index].contentLinked != null) {
+                        return GoRouter.of(context).go(Routes.publication.path +
+                            '/' +
+                            notifications[index].contentLinked!);
+                      }
                       if (notifications[index].groupLinked != null) {
-                        GoRouter.of(context).go(Routes.group.path +
+                        return GoRouter.of(context).go(Routes.group.path +
                             '?groupId=' +
                             notifications[index].groupLinked!.id);
                       }
                       if (notifications[index].userLinked != null) {
-                        GoRouter.of(context).go(Routes.account.path +
+                        return GoRouter.of(context).go(Routes.account.path +
                             '?userId=' +
                             notifications[index].userLinked!.id);
                       }
@@ -196,10 +201,8 @@ class NotificationsLoaded extends StatelessWidget {
             ),
             GFIconButton(
               onPressed: () async {
-                context.read<UpdateFollowCubit>().updateFollow(
-                    Status.accepted,
-                    notification.userLinked!.id,
-                    notification.userRecipient.id);
+                context.read<UpdateFollowCubit>().updateFollow(Status.accepted,
+                    notification.userLinked!.id, notification.userRecipient.id);
               },
               tooltip: 'accept'.tr(),
               color: Colors.amber,
@@ -210,10 +213,8 @@ class NotificationsLoaded extends StatelessWidget {
             ),
             GFIconButton(
               onPressed: () async {
-                context.read<UpdateFollowCubit>().updateFollow(
-                    Status.refused,
-                    notification.userLinked!.id,
-                    notification.userRecipient.id);
+                context.read<UpdateFollowCubit>().updateFollow(Status.refused,
+                    notification.userLinked!.id, notification.userRecipient.id);
               },
               tooltip: 'refuse'.tr(),
               color: Colors.deepOrange,
