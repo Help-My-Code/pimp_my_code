@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
@@ -60,6 +61,11 @@ class PostCard extends StatelessWidget {
         GFCard(
           boxFit: BoxFit.cover,
           title: GFListTile(
+            onTap: () {
+              if (contentType == ContentType.publication) {
+                context.go('/publication/$contentId');
+              }
+            },
             avatar: GFAvatar(
               backgroundImage: NetworkImage(imageURL),
             ),

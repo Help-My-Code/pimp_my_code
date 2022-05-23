@@ -14,7 +14,7 @@ class ShareModal extends StatelessWidget {
   Widget build(BuildContext context) {
     late final String url;
     if (kIsWeb) {
-      url = Uri.base.toString() + '/publication/' + _contentId;
+      url = '${Uri.base.host}:${Uri.base.port}/#/publication/$_contentId';
     } else {
       url = sl<Config>().browserUrl + '/publication/' + _contentId;
     }
