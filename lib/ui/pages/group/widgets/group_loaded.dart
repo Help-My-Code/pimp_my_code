@@ -58,7 +58,7 @@ class _GroupLoadedState extends State<GroupLoaded> {
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-          child: Row(
+          child: Wrap(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
@@ -70,11 +70,15 @@ class _GroupLoadedState extends State<GroupLoaded> {
                     Text(
                       widget.group.name,
                       style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
-                    Text(widget.groupMembers.length.toString() + 'members'.tr(),
-                        style: const TextStyle(fontSize: 16)),
+                    Text(
+                      widget.groupMembers.length.toString() + 'members'.tr(),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     const SizedBox(height: 10),
                     Text(
                       widget.group.description ?? '',
@@ -104,39 +108,40 @@ class _GroupLoadedState extends State<GroupLoaded> {
 
   _buildButtons(BuildContext context) {
     return FutureBuilder<String>(
-        future: context.read<SessionCubit>().getUserId(),
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.hasData) {
-            if (widget.group.creator!.id == snapshot.data!) {
-              return Column(
-                children: [
-                  GFButton(
-                    onPressed: () => printUpdate(),
-                    text: tr('edit_group'),
-                    shape: GFButtonShape.standard,
-                    color: Colors.amber,
-                    icon: const Icon(Icons.edit, color: Colors.white),
-                  ),
-                  GFButton(
-                    onPressed: () => printDelete(),
-                    text: tr('delete_group'),
-                    shape: GFButtonShape.standard,
-                    color: Colors.deepOrange,
-                    icon: const Icon(Icons.remove, color: Colors.white),
-                  ),
-                ],
-              );
-            } else {
-              if (groupMembersContainCurrentUser(snapshot.data!)) {
-                return _buildQuitButton(
-                    context, getGroupMembersByUserId(snapshot.data!)!);
-              }
-              return _buildJoinButton(context);
-            }
+      future: context.read<SessionCubit>().getUserId(),
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.hasData) {
+          if (widget.group.creator!.id == snapshot.data!) {
+            return Column(
+              children: [
+                GFButton(
+                  onPressed: () => printUpdate(),
+                  text: tr('edit_group'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.amber,
+                  icon: const Icon(Icons.edit, color: Colors.white),
+                ),
+                GFButton(
+                  onPressed: () => printDelete(),
+                  text: tr('delete_group'),
+                  shape: GFButtonShape.standard,
+                  color: Colors.deepOrange,
+                  icon: const Icon(Icons.remove, color: Colors.white),
+                ),
+              ],
+            );
           } else {
-            return const CircularProgressIndicator();
+            if (groupMembersContainCurrentUser(snapshot.data!)) {
+              return _buildQuitButton(
+                  context, getGroupMembersByUserId(snapshot.data!)!);
+            }
+            return _buildJoinButton(context);
           }
-        });
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
   }
 
   _buildJoinButton(BuildContext context) {
@@ -163,22 +168,23 @@ class _GroupLoadedState extends State<GroupLoaded> {
       },
       builder: (context, state) {
         return Form(
-            key: _formKey,
-            child: GFButton(
-              onPressed: () {
-                if (_formKey.currentState != null &&
-                    _formKey.currentState!.validate() &&
-                    state.status is FormNotSent) {
-                  context
-                      .read<JoinGroupBloc>()
-                      .add(JoinGroupEvent.submit(widget.group.id));
-                }
-              },
-              text: tr('join'),
-              shape: GFButtonShape.standard,
-              color: Colors.amber,
-              icon: const Icon(Icons.add, color: Colors.white),
-            ));
+          key: _formKey,
+          child: GFButton(
+            onPressed: () {
+              if (_formKey.currentState != null &&
+                  _formKey.currentState!.validate() &&
+                  state.status is FormNotSent) {
+                context
+                    .read<JoinGroupBloc>()
+                    .add(JoinGroupEvent.submit(widget.group.id));
+              }
+            },
+            text: tr('join'),
+            shape: GFButtonShape.standard,
+            color: Colors.amber,
+            icon: const Icon(Icons.add, color: Colors.white),
+          ),
+        );
       },
     );
   }
@@ -207,24 +213,25 @@ class _GroupLoadedState extends State<GroupLoaded> {
       },
       builder: (context, state) {
         return Form(
-            key: _formKey,
-            child: GFButton(
-              onPressed: () {
-                if (_formKey.currentState != null &&
-                    _formKey.currentState!.validate() &&
-                    state.status is FormNotSent) {
-                  context
-                      .read<QuitGroupBloc>()
-                      .add(QuitGroupEvent.submit(widget.group.id));
-                }
-              },
-              text: groupMember.membershipStatus == Status.accepted
-                  ? tr('quit')
-                  : tr('request_sent'),
-              shape: GFButtonShape.standard,
-              color: Colors.amber,
-              icon: const Icon(Icons.remove, color: Colors.white),
-            ));
+          key: _formKey,
+          child: GFButton(
+            onPressed: () {
+              if (_formKey.currentState != null &&
+                  _formKey.currentState!.validate() &&
+                  state.status is FormNotSent) {
+                context
+                    .read<QuitGroupBloc>()
+                    .add(QuitGroupEvent.submit(widget.group.id));
+              }
+            },
+            text: groupMember.membershipStatus == Status.accepted
+                ? tr('quit')
+                : tr('request_sent'),
+            shape: GFButtonShape.standard,
+            color: Colors.amber,
+            icon: const Icon(Icons.remove, color: Colors.white),
+          ),
+        );
       },
     );
   }
@@ -249,84 +256,85 @@ class _GroupLoadedState extends State<GroupLoaded> {
 
   _buildPublications(BuildContext context) {
     return FutureBuilder<String>(
-        future: context.read<SessionCubit>().getUserId(),
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.hasData) {
-            if (widget.group.confidentiality == Confidentiality.public ||
-                widget.group.creator!.id == snapshot.data! ||
-                (groupMembersContainCurrentUser(snapshot.data!) &&
-                    getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
-                        Status.pendingInvit)) {
-              return Column(
-                children: [
-                  if (groupMembersContainCurrentUser(snapshot.data!) ||
-                      widget.group.creator!.id == snapshot.data!)
-                    _buildAddPublications(context),
-                  BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
-                    listener: (context, state) {
-                      state.maybeWhen(
-                        orElse: () {},
-                        failure: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text('failed_to_load_publications')
-                                  .tr(),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        initial: () {
-                          context
-                              .read<RetrieveContentCubit>()
-                              .loadPublicationByGroupId(widget.group.id);
-                          return const Loading();
-                        },
-                        orElse: () => const Loading(),
-                        loaded: (publications) => Container(
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: BlocProvider(
-                                  create: (context) => LikeCubit(
-                                    contentRepository: sl(),
-                                    retrieveContentCubit:
-                                        context.read<RetrieveContentCubit>(),
-                                    sessionCubit: sl(),
-                                  ),
-                                  child: PublicationsLoaded(
-                                    publications: publications,
-                                  ),
+      future: context.read<SessionCubit>().getUserId(),
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.hasData) {
+          if (widget.group.confidentiality == Confidentiality.public ||
+              widget.group.creator!.id == snapshot.data! ||
+              (groupMembersContainCurrentUser(snapshot.data!) &&
+                  getGroupMembersByUserId(snapshot.data!)!.membershipStatus !=
+                      Status.pendingInvit)) {
+            return Column(
+              children: [
+                if (groupMembersContainCurrentUser(snapshot.data!) ||
+                    widget.group.creator!.id == snapshot.data!)
+                  _buildAddPublications(context),
+                BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      failure: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                const Text('failed_to_load_publications').tr(),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      initial: () {
+                        context
+                            .read<RetrieveContentCubit>()
+                            .loadPublicationByGroupId(widget.group.id);
+                        return const Loading();
+                      },
+                      orElse: () => const Loading(),
+                      loaded: (publications) => Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height,
+                        child: Column(
+                          children: [
+                            Flexible(
+                              child: BlocProvider(
+                                create: (context) => LikeCubit(
+                                  contentRepository: sl(),
+                                  retrieveContentCubit:
+                                      context.read<RetrieveContentCubit>(),
+                                  sessionCubit: sl(),
+                                ),
+                                child: PublicationsLoaded(
+                                  publications: publications,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
-                ],
-              );
-            } else {
-              return Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: Text(
-                  'private_group'.tr(),
-                  style: const TextStyle(fontSize: 16),
+                      ),
+                    );
+                  },
                 ),
-              );
-            }
+              ],
+            );
           } else {
-            return const CircularProgressIndicator();
+            return Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Text(
+                'private_group'.tr(),
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
           }
-        });
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
   }
 
   Future<void> printUpdate() async {

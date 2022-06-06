@@ -55,7 +55,7 @@ class _AccountLoadedState extends State<AccountLoaded> {
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-          child: Row(
+          child: Wrap(
             children: <Widget>[
               _buildAvatar(context),
               const SizedBox(width: 30),
@@ -64,16 +64,22 @@ class _AccountLoadedState extends State<AccountLoaded> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(widget.user.firstname + ' ' + widget.user.lastname,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(
+                      widget.user.firstname + ' ' + widget.user.lastname,
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
-                    Text(widget.followers.length.toString() + 'followers'.tr(),
-                        style: const TextStyle(fontSize: 16)),
+                    Text(
+                      widget.followers.length.toString() + 'followers'.tr(),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     _buildFollowings(context),
                     const SizedBox(height: 10),
-                    Text(widget.user.description ?? '',
-                        style: const TextStyle(fontSize: 16)),
+                    Text(
+                      widget.user.description ?? '',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ],
                 ),
               ),
@@ -137,7 +143,9 @@ class _AccountLoadedState extends State<AccountLoaded> {
             } else {
               if (followersContainCurrentUser(snapshot.data!)) {
                 return _buildUnfollowButton(
-                    context, getFollowByUserId(snapshot.data!)!);
+                  context,
+                  getFollowByUserId(snapshot.data!)!,
+                );
               }
               return _buildFollowButton(context);
             }
@@ -215,101 +223,102 @@ class _AccountLoadedState extends State<AccountLoaded> {
       },
       builder: (context, state) {
         return Form(
-            key: _formKey,
-            child: GFButton(
-              onPressed: () {
-                if (_formKey.currentState != null &&
-                    _formKey.currentState!.validate() &&
-                    state.status is FormNotSent) {
-                  context
-                      .read<UnfollowUserBloc>()
-                      .add(UnfollowUserEvent.submit(widget.user.id));
-                }
-              },
-              text: follow.followStatus == Status.accepted
-                  ? tr('unfollow')
-                  : tr('request_sent'),
-              shape: GFButtonShape.standard,
-              color: Colors.amber,
-              icon: const Icon(Icons.remove, color: Colors.white),
-            ));
+          key: _formKey,
+          child: GFButton(
+            onPressed: () {
+              if (_formKey.currentState != null &&
+                  _formKey.currentState!.validate() &&
+                  state.status is FormNotSent) {
+                context
+                    .read<UnfollowUserBloc>()
+                    .add(UnfollowUserEvent.submit(widget.user.id));
+              }
+            },
+            text: follow.followStatus == Status.accepted
+                ? tr('unfollow')
+                : tr('request_sent'),
+            shape: GFButtonShape.standard,
+            color: Colors.amber,
+            icon: const Icon(Icons.remove, color: Colors.white),
+          ),
+        );
       },
     );
   }
 
   _buildPublications(BuildContext context) {
     return FutureBuilder<String>(
-        future: context.read<SessionCubit>().getUserId(),
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.hasData) {
-            if (widget.user.confidentiality == Confidentiality.public ||
-                (followersContainCurrentUser(snapshot.data!) &&
-                    getFollowByUserId(snapshot.data!)!.followStatus !=
-                        Status.pendingInvit) ||
-                widget.user.id == snapshot.data) {
-              return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
-                listener: (context, state) {
-                  state.maybeWhen(
-                    orElse: () {},
-                    failure: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              const Text('failed_to_load_publications').tr(),
-                        ),
-                      );
-                    },
-                  );
-                },
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    initial: () {
-                      context
-                          .read<RetrieveContentCubit>()
-                          .loadPublicationByUserId(widget.user.id);
-                      return const Loading();
-                    },
-                    orElse: () => const Loading(),
-                    loaded: (publications) => Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: BlocProvider(
-                              create: (context) => LikeCubit(
-                                contentRepository: sl(),
-                                retrieveContentCubit:
-                                    context.read<RetrieveContentCubit>(),
-                                sessionCubit: sl(),
-                              ),
-                              child: PublicationsLoaded(
-                                publications: publications,
-                              ),
+      future: context.read<SessionCubit>().getUserId(),
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.hasData) {
+          if (widget.user.confidentiality == Confidentiality.public ||
+              (followersContainCurrentUser(snapshot.data!) &&
+                  getFollowByUserId(snapshot.data!)!.followStatus !=
+                      Status.pendingInvit) ||
+              widget.user.id == snapshot.data) {
+            return BlocConsumer<RetrieveContentCubit, RetrieveContentState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  failure: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('failed_to_load_publications').tr(),
+                      ),
+                    );
+                  },
+                );
+              },
+              builder: (context, state) {
+                return state.maybeWhen(
+                  initial: () {
+                    context
+                        .read<RetrieveContentCubit>()
+                        .loadPublicationByUserId(widget.user.id);
+                    return const Loading();
+                  },
+                  orElse: () => const Loading(),
+                  loaded: (publications) => Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      children: [
+                        Flexible(
+                          child: BlocProvider(
+                            create: (context) => LikeCubit(
+                              contentRepository: sl(),
+                              retrieveContentCubit:
+                                  context.read<RetrieveContentCubit>(),
+                              sessionCubit: sl(),
+                            ),
+                            child: PublicationsLoaded(
+                              publications: publications,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              );
-            } else {
-              return Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: Text(
-                  'private_user'.tr(),
-                  style: const TextStyle(fontSize: 16),
-                ),
-              );
-            }
+                  ),
+                );
+              },
+            );
           } else {
-            return const CircularProgressIndicator();
+            return Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Text(
+                'private_user'.tr(),
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
           }
-        });
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
   }
 
   Future<void> printUpdate() async {
