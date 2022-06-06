@@ -53,7 +53,7 @@ class NotificationsLoaded extends StatelessWidget {
                             notifications[index].userLinked!.id);
                       }
                     },
-                    child: Row(
+                    child: Wrap(
                       children: <Widget>[
                         _initIcon(notifications[index]),
                         const SizedBox(width: 10),
