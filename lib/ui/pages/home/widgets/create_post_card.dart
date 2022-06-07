@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:pimp_my_code/domain/usecases/program/execute_program_use_case.dart';
 import '../../../../state/post/create_post_cubit.dart';
 import 'create_post_card_radio.dart';
 import '../../../widgets/code_editor/code_editor.dart';
@@ -17,25 +18,39 @@ class CreatePostCard extends StatelessWidget {
   final String? contentId;
   final String? groupId;
 
-  const CreatePostCard({Key? key, this.contentId, this.groupId}) : super(key: key);
+  const CreatePostCard({Key? key, this.contentId, this.groupId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (ctx) => sl<CreatePostCubit>()..makeAttributes(contentId, groupId),
+      create: (ctx) =>
+          sl<CreatePostCubit>()..makeAttributes(contentId, groupId),
       child: Builder(builder: (context) {
         return BlocConsumer<CreatePostCubit, CreatePostState>(
             listener: (context, state) {
           state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                  (f) => Alert(
-                        context: context,
-                        title: 'notifications'.tr(),
-                        content: Text((f as CreatePublicationFailure).message),
-                        buttons: [],
-                      ).show(),
-                  (_) {}));
+            () {},
+            (either) => either.fold(
+              (failure) {
+                late final String message;
+                if (failure is ExecuteProgramFailure) {
+                  message = failure.message;
+                } else if (failure is CreatePublicationFailure) {
+                  message = failure.message;
+                } else {
+                  message = 'error';
+                }
+                return Alert(
+                  context: context,
+                  title: 'notifications'.tr(),
+                  content: Text(message),
+                  buttons: [],
+                ).show();
+              },
+              (_) {},
+            ),
+          );
         }, builder: (context, state) {
           return SingleChildScrollView(
             child: GFCard(
