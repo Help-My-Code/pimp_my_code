@@ -15,11 +15,11 @@ class CreatePostState with _$CreatePostState {
     String? codeResult,
     String? parentId,
     String? groupId,
+    Either<Failure, Unit>? failureOrSuccessOption,
     required ContentType contentType,
     required String language,
     required bool isLoading,
     required bool isCompiling,
-    required Option<Either<Failure, Unit>> failureOrSuccessOption,
   }) = _CreatePostState;
 
   factory CreatePostState.initial() => CreatePostState(
@@ -31,7 +31,6 @@ class CreatePostState with _$CreatePostState {
         isLoading: false,
         isCompiling: false,
         language: 'PYTHON',
-        failureOrSuccessOption: none(),
         contentType: ContentType.publication,
       );
 }

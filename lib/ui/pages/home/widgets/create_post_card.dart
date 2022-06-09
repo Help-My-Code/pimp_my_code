@@ -29,27 +29,24 @@ class CreatePostCard extends StatelessWidget {
       child: Builder(builder: (context) {
         return BlocConsumer<CreatePostCubit, CreatePostState>(
             listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                late final String message;
-                if (failure is ExecuteProgramFailure) {
-                  message = failure.message;
-                } else if (failure is CreatePublicationFailure) {
-                  message = failure.message;
-                } else {
-                  message = 'error';
-                }
-                return Alert(
-                  context: context,
-                  title: 'notifications'.tr(),
-                  content: Text(message),
-                  buttons: [],
-                ).show();
-              },
-              (_) {},
-            ),
+          state.failureOrSuccessOption?.fold(
+            (failure) {
+              late final String message;
+              if (failure is ExecuteProgramFailure) {
+                message = failure.message;
+              } else if (failure is CreatePublicationFailure) {
+                message = failure.message;
+              } else {
+                message = 'error';
+              }
+              return Alert(
+                context: context,
+                title: 'notifications'.tr(),
+                content: Text(message),
+                buttons: [],
+              ).show();
+            },
+            (_) {},
           );
         }, builder: (context, state) {
           return SingleChildScrollView(

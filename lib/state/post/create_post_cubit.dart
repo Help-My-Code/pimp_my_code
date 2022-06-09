@@ -80,10 +80,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       final either = await _executeProgramUseCase
           .call(ExecuteProgramParams(state.language, state.code!));
       either.fold((f) {
-        emit(state.copyWith(failureOrSuccessOption: some(left(f))));
+        emit(state.copyWith(
+            failureOrSuccessOption: left(f), isCompiling: false));
       }, (r) {
-        emit(state.copyWith(codeResult: r));
+        emit(state.copyWith(codeResult: r, isCompiling: false));
       });
+      return;
     }
     emit(state.copyWith(isCompiling: false));
   }
@@ -94,21 +96,20 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     if (isValid) {
       final either = await _createPublicationUseCase.call(
         CreatePublicationParam(
-          code: state.code,
-          codeResult: state.codeResult,
-          createdAt: state.createdAt!,
-          creatorId: creatorId,
-          contentType: state.contentType.string,
-          medias: state.medias!,
-          content: state.content!,
-          userPicture: state.userPicture!,
-          username: state.username ?? '',
-          parentId: state.parentId,
-          groupId: state.groupId
-        ),
+            code: state.code,
+            codeResult: state.codeResult,
+            createdAt: state.createdAt!,
+            creatorId: creatorId,
+            contentType: state.contentType.string,
+            medias: state.medias!,
+            content: state.content!,
+            userPicture: state.userPicture!,
+            username: state.username ?? '',
+            parentId: state.parentId,
+            groupId: state.groupId),
       );
       either.fold((f) {
-        emit(state.copyWith(failureOrSuccessOption: some(left(f))));
+        emit(state.copyWith(failureOrSuccessOption: left(f)));
       }, (r) {
         Navigator.of(context).pop();
         GoRouter.of(context).refresh();
