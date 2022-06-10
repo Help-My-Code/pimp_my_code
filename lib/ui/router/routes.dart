@@ -24,7 +24,7 @@ extension RoutesExtension on Routes {
       case Routes.group:
         return '/group';
       case Routes.publication:
-        return '/publication';
+        return '/publication/:id';
     }
   }
 }
