@@ -29,11 +29,11 @@ class _$CreatePostStateTearOff {
       String? codeResult,
       String? parentId,
       String? groupId,
+      Either<Failure, Unit>? failureOrSuccessOption,
       required ContentType contentType,
       required String language,
       required bool isLoading,
-      required bool isCompiling,
-      required Option<Either<Failure, Unit>> failureOrSuccessOption}) {
+      required bool isCompiling}) {
     return _CreatePostState(
       title: title,
       content: content,
@@ -45,11 +45,11 @@ class _$CreatePostStateTearOff {
       codeResult: codeResult,
       parentId: parentId,
       groupId: groupId,
+      failureOrSuccessOption: failureOrSuccessOption,
       contentType: contentType,
       language: language,
       isLoading: isLoading,
       isCompiling: isCompiling,
-      failureOrSuccessOption: failureOrSuccessOption,
     );
   }
 }
@@ -69,12 +69,12 @@ mixin _$CreatePostState {
   String? get codeResult => throw _privateConstructorUsedError;
   String? get parentId => throw _privateConstructorUsedError;
   String? get groupId => throw _privateConstructorUsedError;
+  Either<Failure, Unit>? get failureOrSuccessOption =>
+      throw _privateConstructorUsedError;
   ContentType get contentType => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isCompiling => throw _privateConstructorUsedError;
-  Option<Either<Failure, Unit>> get failureOrSuccessOption =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreatePostStateCopyWith<CreatePostState> get copyWith =>
@@ -97,11 +97,11 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String? codeResult,
       String? parentId,
       String? groupId,
+      Either<Failure, Unit>? failureOrSuccessOption,
       ContentType contentType,
       String language,
       bool isLoading,
-      bool isCompiling,
-      Option<Either<Failure, Unit>> failureOrSuccessOption});
+      bool isCompiling});
 }
 
 /// @nodoc
@@ -125,11 +125,11 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? parentId = freezed,
     Object? groupId = freezed,
+    Object? failureOrSuccessOption = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
     Object? isCompiling = freezed,
-    Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -172,6 +172,10 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as String?,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Unit>?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -188,10 +192,6 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.isCompiling
           : isCompiling // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<Failure, Unit>>,
     ));
   }
 }
@@ -214,11 +214,11 @@ abstract class _$CreatePostStateCopyWith<$Res>
       String? codeResult,
       String? parentId,
       String? groupId,
+      Either<Failure, Unit>? failureOrSuccessOption,
       ContentType contentType,
       String language,
       bool isLoading,
-      bool isCompiling,
-      Option<Either<Failure, Unit>> failureOrSuccessOption});
+      bool isCompiling});
 }
 
 /// @nodoc
@@ -244,11 +244,11 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? codeResult = freezed,
     Object? parentId = freezed,
     Object? groupId = freezed,
+    Object? failureOrSuccessOption = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
     Object? isCompiling = freezed,
-    Object? failureOrSuccessOption = freezed,
   }) {
     return _then(_CreatePostState(
       title: title == freezed
@@ -291,6 +291,10 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as String?,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Unit>?,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -307,10 +311,6 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.isCompiling
           : isCompiling // ignore: cast_nullable_to_non_nullable
               as bool,
-      failureOrSuccessOption: failureOrSuccessOption == freezed
-          ? _value.failureOrSuccessOption
-          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<Failure, Unit>>,
     ));
   }
 }
@@ -329,11 +329,11 @@ class _$_CreatePostState extends _CreatePostState {
       this.codeResult,
       this.parentId,
       this.groupId,
+      this.failureOrSuccessOption,
       required this.contentType,
       required this.language,
       required this.isLoading,
-      required this.isCompiling,
-      required this.failureOrSuccessOption})
+      required this.isCompiling})
       : super._();
 
   @override
@@ -357,6 +357,8 @@ class _$_CreatePostState extends _CreatePostState {
   @override
   final String? groupId;
   @override
+  final Either<Failure, Unit>? failureOrSuccessOption;
+  @override
   final ContentType contentType;
   @override
   final String language;
@@ -364,12 +366,10 @@ class _$_CreatePostState extends _CreatePostState {
   final bool isLoading;
   @override
   final bool isCompiling;
-  @override
-  final Option<Either<Failure, Unit>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, groupId: $groupId, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, groupId: $groupId, failureOrSuccessOption: $failureOrSuccessOption, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling)';
   }
 
   @override
@@ -390,13 +390,13 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality().equals(other.parentId, parentId) &&
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality()
+                .equals(other.failureOrSuccessOption, failureOrSuccessOption) &&
+            const DeepCollectionEquality()
                 .equals(other.contentType, contentType) &&
             const DeepCollectionEquality().equals(other.language, language) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
-                .equals(other.isCompiling, isCompiling) &&
-            const DeepCollectionEquality()
-                .equals(other.failureOrSuccessOption, failureOrSuccessOption));
+                .equals(other.isCompiling, isCompiling));
   }
 
   @override
@@ -412,11 +412,11 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(parentId),
       const DeepCollectionEquality().hash(groupId),
+      const DeepCollectionEquality().hash(failureOrSuccessOption),
       const DeepCollectionEquality().hash(contentType),
       const DeepCollectionEquality().hash(language),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(isCompiling),
-      const DeepCollectionEquality().hash(failureOrSuccessOption));
+      const DeepCollectionEquality().hash(isCompiling));
 
   @JsonKey(ignore: true)
   @override
@@ -426,22 +426,21 @@ class _$_CreatePostState extends _CreatePostState {
 
 abstract class _CreatePostState extends CreatePostState {
   const factory _CreatePostState(
-          {String? title,
-          String? content,
-          String? userPicture,
-          String? username,
-          DateTime? createdAt,
-          List<String>? medias,
-          String? code,
-          String? codeResult,
-          String? parentId,
-          String? groupId,
-          required ContentType contentType,
-          required String language,
-          required bool isLoading,
-          required bool isCompiling,
-          required Option<Either<Failure, Unit>> failureOrSuccessOption}) =
-      _$_CreatePostState;
+      {String? title,
+      String? content,
+      String? userPicture,
+      String? username,
+      DateTime? createdAt,
+      List<String>? medias,
+      String? code,
+      String? codeResult,
+      String? parentId,
+      String? groupId,
+      Either<Failure, Unit>? failureOrSuccessOption,
+      required ContentType contentType,
+      required String language,
+      required bool isLoading,
+      required bool isCompiling}) = _$_CreatePostState;
   const _CreatePostState._() : super._();
 
   @override
@@ -465,6 +464,8 @@ abstract class _CreatePostState extends CreatePostState {
   @override
   String? get groupId;
   @override
+  Either<Failure, Unit>? get failureOrSuccessOption;
+  @override
   ContentType get contentType;
   @override
   String get language;
@@ -472,8 +473,6 @@ abstract class _CreatePostState extends CreatePostState {
   bool get isLoading;
   @override
   bool get isCompiling;
-  @override
-  Option<Either<Failure, Unit>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$CreatePostStateCopyWith<_CreatePostState> get copyWith =>
