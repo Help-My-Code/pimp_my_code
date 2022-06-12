@@ -6,6 +6,7 @@ import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../../../config/env/base.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
@@ -13,6 +14,7 @@ import '../../../../utils/like_helper.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
+import 'dart:html' as html;
 
 class PublicationsLoaded extends StatelessWidget {
   final List<Content> publications;
@@ -52,6 +54,10 @@ class PublicationsLoaded extends StatelessWidget {
     ).show();
   }
 
+  void navigateToCodeRoom(BuildContext context, Content content) {
+    html.window.open(sl<Config>().liveCodingUrl, '_blank');
+  }
+
   const PublicationsLoaded({
     Key? key,
     required this.publications,
@@ -70,6 +76,7 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
+          onCodeRoomPressed: () => navigateToCodeRoom(context, publications[index]),
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
