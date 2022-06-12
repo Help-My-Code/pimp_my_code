@@ -5,6 +5,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../config/env/base.dart';
 import '../../../../domain/entities/content/content.dart';
@@ -14,7 +15,6 @@ import '../../../../utils/like_helper.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
-import 'dart:html' as html;
 
 class PublicationsLoaded extends StatelessWidget {
   final List<Content> publications;
@@ -55,7 +55,7 @@ class PublicationsLoaded extends StatelessWidget {
   }
 
   void navigateToCodeRoom(BuildContext context, Content content) {
-    html.window.open(sl<Config>().liveCodingUrl, '_blank');
+    launchUrlString(sl<Config>().liveCodingUrl);
   }
 
   const PublicationsLoaded({
@@ -76,7 +76,8 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
-          onCodeRoomPressed: () => navigateToCodeRoom(context, publications[index]),
+          onCodeRoomPressed: () =>
+              navigateToCodeRoom(context, publications[index]),
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
