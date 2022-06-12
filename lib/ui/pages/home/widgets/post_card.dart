@@ -4,6 +4,9 @@ import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+import '../../../../config/env/base.dart';
+import '../../../../ioc_container.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import 'share_modal.dart';
@@ -26,7 +29,6 @@ class PostCard extends StatelessWidget {
     this.onLikePressed,
     this.onUnlikePressed,
     this.onCommentaryPressed,
-    this.onCodeRoomPressed,
     required this.isLiked,
     required this.isDisliked,
     required this.contentId,
@@ -44,7 +46,7 @@ class PostCard extends StatelessWidget {
   final String post;
   final List<String>? codes;
   final String likeCount, unlikeCount, commentaryCount;
-  final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed, onCodeRoomPressed;
+  final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
   final bool isLiked;
   final bool isDisliked;
 
@@ -99,12 +101,12 @@ class PostCard extends StatelessWidget {
                 GFItemsCarousel(
                   rowCount: 3,
                   children: images!.map(
-                        (url) {
+                    (url) {
                       return Container(
                         margin: const EdgeInsets.all(5.0),
                         child: ClipRRect(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0)),
+                              const BorderRadius.all(Radius.circular(5.0)),
                           child: ImageFullScreenWrapper(
                             url: url,
                             dark: true,
@@ -117,7 +119,7 @@ class PostCard extends StatelessWidget {
               if (codes != null && codes!.first.isNotEmpty)
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 2.5),
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 2.5),
                   child: CodeShowRoom(
                     data: codes!.first,
                     language: language,
@@ -125,7 +127,7 @@ class PostCard extends StatelessWidget {
                 ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 child: Text(
                   post,
                   textAlign: TextAlign.left,
@@ -165,9 +167,10 @@ class PostCard extends StatelessWidget {
               if (contentType == ContentType.publication && kIsWeb)
                 GFButton(
                   textColor: Colors.amber,
-                  onPressed: onCodeRoomPressed,
+                  hoverElevation: 0,
+                  onPressed: () => launchUrlString(sl<Config>().liveCodingUrl),
                   text: 'go_live_coding_room'.tr(),
-                  icon: const Icon(Icons.code, color: Colors.amber,),
+                  icon: const Icon(Icons.code, color: Colors.amber),
                   shape: GFButtonShape.square,
                   type: GFButtonType.transparent,
                 ),

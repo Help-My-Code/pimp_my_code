@@ -54,10 +54,6 @@ class PublicationsLoaded extends StatelessWidget {
     ).show();
   }
 
-  void navigateToCodeRoom(BuildContext context, Content content) {
-    launchUrlString(sl<Config>().liveCodingUrl);
-  }
-
   const PublicationsLoaded({
     Key? key,
     required this.publications,
@@ -76,8 +72,6 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
-          onCodeRoomPressed: () =>
-              navigateToCodeRoom(context, publications[index]),
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
