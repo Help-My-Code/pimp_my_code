@@ -4,9 +4,13 @@ import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+import '../../../../config/env/base.dart';
+import '../../../../ioc_container.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import 'share_modal.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PostCard extends StatelessWidget {
   const PostCard({
@@ -160,6 +164,16 @@ class PostCard extends StatelessWidget {
                   shape: GFButtonShape.square,
                   type: GFButtonType.transparent,
                 ),
+              if (contentType == ContentType.publication && kIsWeb)
+                GFButton(
+                  textColor: Colors.amber,
+                  hoverElevation: 0,
+                  onPressed: () => launchUrlString(sl<Config>().liveCodingUrl),
+                  text: 'go_live_coding_room'.tr(),
+                  icon: const Icon(Icons.code, color: Colors.amber),
+                  shape: GFButtonShape.square,
+                  type: GFButtonType.transparent,
+                ),
             ],
           ),
         ),
@@ -172,7 +186,7 @@ class PostCard extends StatelessWidget {
             },
             child: const Icon(Icons.share),
           ),
-        )
+        ),
       ],
     );
   }

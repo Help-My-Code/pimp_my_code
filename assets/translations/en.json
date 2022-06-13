@@ -112,6 +112,7 @@
   "failed_to_delete_group": "Failed to delete group",
   "group_member_updated_successful": "Group member updated successfully",
   "follow_updated_successful": "Follow updated successfully",
-  "delete_group_success": "Group deleted successfully"
+  "delete_group_success": "Group deleted successfully",
+  "go_live_coding_room": "Go to live coding room"
 
 }

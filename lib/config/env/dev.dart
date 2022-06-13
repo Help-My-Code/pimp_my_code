@@ -6,4 +6,7 @@ class DeveloppementConfig extends Config {
 
   @override
   String get browserUrl => 'http://localhost';
+
+  @override
+  String get liveCodingUrl => 'http://localhost:4200/';
 }
