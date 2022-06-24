@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../config/env/base.dart';
 import '../../../../ioc_container.dart';
+import '../../../../state/session/session_cubit.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import 'share_modal.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class PostCard extends StatelessWidget {
   const PostCard({
     Key? key,
+    required this.sessionCubit,
     required this.post,
     required this.imageURL,
     required this.username,
@@ -35,6 +37,7 @@ class PostCard extends StatelessWidget {
     required this.contentType,
   }) : super(key: key);
 
+  final SessionCubit sessionCubit;
   final String language;
   final ContentType contentType;
   final String? title;
@@ -56,6 +59,12 @@ class PostCard extends StatelessWidget {
       title: 'share'.tr(),
       content: ShareModal(contentId),
     ).show();
+  }
+
+  navigateToLiveCoding() async {
+    var token = await sessionCubit.getToken();
+    launchUrlString(
+        sl<Config>().liveCodingUrl + '?token=' + token + '&content=' + contentId);
   }
 
   @override
@@ -168,7 +177,7 @@ class PostCard extends StatelessWidget {
                 GFButton(
                   textColor: Colors.amber,
                   hoverElevation: 0,
-                  onPressed: () => launchUrlString(sl<Config>().liveCodingUrl),
+                  onPressed: () => navigateToLiveCoding(),
                   text: 'go_live_coding_room'.tr(),
                   icon: const Icon(Icons.code, color: Colors.amber),
                   shape: GFButtonShape.square,

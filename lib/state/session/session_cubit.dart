@@ -54,4 +54,12 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
     }
     return userId;
   }
+
+  Future<String> getToken() async {
+    final token = await _secureStorage.read(key: 'token');
+    if (token == null) {
+      throw AssertionError();
+    }
+    return token;
+  }
 }

@@ -5,6 +5,7 @@ import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:pimp_my_code/utils/like_helper.dart';
 import '../../../../domain/entities/content/content.dart';
+import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import 'post_card.dart';
 
@@ -34,6 +35,7 @@ class CommentModal extends StatelessWidget {
           child: ListView.builder(
             itemBuilder: ((context, index) {
               return PostCard(
+                sessionCubit: sl(),
                 contentType: ContentType.comment,
                 contentId: comments[index].id!,
                 onLikePressed: () =>
