@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pimp_my_code/ioc_container.dart';
 import 'package:pimp_my_code/state/retrieve_publication/retrieve_publication_cubit.dart';
 import 'package:pimp_my_code/ui/pages/home/widgets/post_card.dart';
 import 'package:pimp_my_code/ui/widgets/loading.dart';
@@ -20,6 +21,7 @@ class Publication extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => const Loading(),
             loaded: (publication) => PostCard(
+              sessionCubit: sl(),
               contentType: ContentType.publication,
               contentId: publication.id!,
               onLikePressed: () =>

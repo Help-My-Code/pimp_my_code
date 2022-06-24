@@ -65,6 +65,7 @@ class PublicationsLoaded extends StatelessWidget {
       itemCount: publications.length,
       itemBuilder: (context, index) {
         return PostCard(
+          sessionCubit: sl(),
           contentType: ContentType.publication,
           contentId: publications[index].id!,
           onLikePressed: () =>
