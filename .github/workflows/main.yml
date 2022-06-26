@@ -59,11 +59,7 @@ jobs:
       - run: flutter test
       - run: flutter build web
       - run: sudo apt-get update
-      - run: sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
       - run: sudo mkdir -p /etc/apt/keyrings
       - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
       - run: echo \
