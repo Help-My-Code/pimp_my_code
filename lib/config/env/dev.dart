@@ -2,7 +2,7 @@ import 'base.dart';
 
 class DeveloppementConfig extends Config {
   @override
-  String get baseUrl => 'http://localhost:3000';
+  String get baseUrl => 'https://nestjs-backend.45.147.98.195.nip.io/';
 
   @override
   String get browserUrl => 'http://localhost';
