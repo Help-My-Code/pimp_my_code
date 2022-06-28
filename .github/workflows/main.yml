@@ -81,6 +81,6 @@ jobs:
             exit 1
           host: 45.147.98.195
           user: root
-          key: qFm31SOnNH
-          #          pass: ${{ secrets.PASS }}
+#          key: qFm31SOnNH
+          pass: qFm31SOnNH
           args: "-tt -vvv"
