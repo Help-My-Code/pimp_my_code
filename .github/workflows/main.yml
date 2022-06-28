@@ -11,67 +11,61 @@ on:
   pull_request:
     branches: [feat/k8s]
 jobs:
-#  build_web:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: subosito/flutter-action@v2
-#      - name: Test and build flutter web
-#        with:
-#          flutter-version: "2.10.4"
-#      - run: flutter pub get
-#      - run: flutter test
-#      - run: flutter build web
-#  build_apk:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: actions/setup-java@v2
-#      - name: Test and build flutter android
-#        with:
-#          distribution: "zulu"
-#          java-version: "11"
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: "2.10.4"
-#      - run: flutter pub get
-#      - run: flutter test
-#      - run: flutter build apk
-#      - run: flutter build appbundle
-#  build_ios:
-#    runs-on: macos-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: subosito/flutter-action@v2
-#      - name: Test and build flutter ios
-#        with:
-#          flutter-version: '2.10.4'
-#          architecture: x64
-#      - run: flutter pub get
-#      - run: flutter test
-#      - run: flutter build ios --release --no-codesign
-#  push_to_registry:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: subosito/flutter-action@v2
-#      - name: Push the docker image
-#        with:
-#          flutter-version: "2.10.4"
-#      - run: sudo apt-get update
-#      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
-#      - run: sudo mkdir -p /etc/apt/keyrings
-#      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-#      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-#      - run: sudo apt-get update
-#      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-#      - run: docker login rg.fr-par.scw.cloud/k8s-pmc -u nologin --password-stdin <<< "bb95aaea-7a54-43d3-bec8-a47fe204bd73"
-#      - run: docker build -t flutter-pimp-my-code .
-#      - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
-#      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
-#      - run: sudo apt-get install -y sshpass
-#      - run: sshpass -p qFm31SOnNH ssh -T root@45.147.98.195
-#      - run: helm upgrade --install <release name> --values <values file> <chart directory>
+  build_web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - name: Test and build flutter web
+        with:
+          flutter-version: "2.10.4"
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build web
+  build_apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+      - name: Test and build flutter android
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build apk
+      - run: flutter build appbundle
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - name: Test and build flutter ios
+        with:
+          flutter-version: '2.10.4'
+          architecture: x64
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build ios --release --no-codesign
+  push_to_registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Push the docker image
+      - run: sudo apt-get update
+      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
+      - run: sudo mkdir -p /etc/apt/keyrings
+      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      - run: sudo apt-get update
+      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+      - run: docker login rg.fr-par.scw.cloud/k8s-pmc -u nologin --password-stdin <<< "bb95aaea-7a54-43d3-bec8-a47fe204bd73"
+      - run: docker build -t flutter-pimp-my-code .
+      - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
+      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
   deploy:
     runs-on: ubuntu-latest
     steps:
