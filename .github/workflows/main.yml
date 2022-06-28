@@ -7,9 +7,9 @@ name: Flutter build
 
 on:
   push:
-    branches: [feat/k8s, develop]
+    branches: [feat/k8s]
   pull_request:
-    branches: [feat/k8s, develop]
+    branches: [feat/k8s]
 jobs:
   build_web:
     runs-on: ubuntu-latest
