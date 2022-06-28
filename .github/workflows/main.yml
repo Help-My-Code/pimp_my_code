@@ -66,3 +66,6 @@ jobs:
       - run: docker build -t flutter-pimp-my-code .
       - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
       - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
+      - run: sudo apt-get install -y sshpass
+      - run: sshpass -p qFm31SOnNH ssh root@45.147.98.195
+      - run: helm upgrade --install <release name> --values <values file> <chart directory>
