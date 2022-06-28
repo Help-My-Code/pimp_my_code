@@ -47,15 +47,15 @@ jobs:
 #    - run: flutter pub get
 #    - run: flutter test
 #    - run: flutter build ios --release --no-codesign
-  deploy_web:
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "2.10.4"
-      - run: sudo apt-get update
+#  deploy_web:
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - uses: actions/checkout@v3
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: "2.10.4"
+#      - run: sudo apt-get update
 #      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
 #      - run: sudo mkdir -p /etc/apt/keyrings
 #      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -66,6 +66,21 @@ jobs:
 #      - run: docker build -t flutter-pimp-my-code .
 #      - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
 #      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
-      - run: sudo apt-get install -y sshpass
-      - run: sshpass -p qFm31SOnNH ssh -T root@45.147.98.195
-      - run: ls
+#      - run: sudo apt-get install -y sshpass
+#      - run: sshpass -p qFm31SOnNH ssh -T root@45.147.98.195
+#      - run: helm upgrade --install <release name> --values <values file> <chart directory>
+  k8s:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ls -a via OPEN SSH Private Key
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /tmp
+            ls -a
+            exit 1
+          host: 45.147.98.195
+          user: root
+          key: qFm31SOnNH
+          #          pass: ${{ secrets.PASS }}
+          args: "-tt -vvv"
