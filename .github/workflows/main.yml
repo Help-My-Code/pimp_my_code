@@ -66,14 +66,14 @@ jobs:
 #      - run: docker build -t flutter-pimp-my-code .
 #      - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
 #      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Deploy into cluster
-        uses: appleboy/ssh-action@master
-        with:
-          host: "45.147.98.195"
-          username: "root"
-          password: "qFm31SOnNH"
-          script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
+#  deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Deploy into cluster
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: "45.147.98.195"
+#          username: "root"
+#          password: "qFm31SOnNH"
+#          script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
