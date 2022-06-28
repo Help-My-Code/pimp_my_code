@@ -77,7 +77,8 @@ jobs:
         with:
           command: |
             cd /tmp
-            ls -a
+            ll
+            helm flutter-pimp-my-code k8s-pmc/flutter-pimp-my-code/ -f k8s-pmc/flutter-pimp-my-code/values.yaml
             exit 1
           host: 45.147.98.195
           user: root
