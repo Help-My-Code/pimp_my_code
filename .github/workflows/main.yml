@@ -58,7 +58,7 @@ jobs:
       - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
       - run: sudo apt-get update
       - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-      - run: docker login rg.fr-par.scw.cloud/k8s-pmc-dev -u nologin --password-stdin <<< "bb95aaea-7a54-43d3-bec8-a47fe204bd73"
+      - run: docker login ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
       - run: docker build -t flutter-pimp-my-code .
       - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
       - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
