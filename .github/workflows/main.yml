@@ -61,7 +61,7 @@ jobs:
       - run: docker login rg.fr-par.scw.cloud/k8s-pmc-dev -u nologin --password-stdin <<< "bb95aaea-7a54-43d3-bec8-a47fe204bd73"
       - run: docker build -t flutter-pimp-my-code .
       - run: docker tag flutter-pimp-my-code ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.DEV_VERSION }}
-      - run: docker push ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/flutter-pimp-my-code:latest
+      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
 #  deploy:
 #    name: deploy
 #    needs: push_to_registry
