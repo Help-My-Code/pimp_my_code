@@ -15,6 +15,7 @@ jobs:
         - run: flutter pub get
         - run: flutter test
         - run: flutter build web
+
     build_apk:
       name: build_apk
       needs: build_web
@@ -32,6 +33,7 @@ jobs:
         - run: flutter test
         - run: flutter build apk
         - run: flutter build appbundle
+
     build_ios:
       name: build_ios
       needs: build_apk
@@ -45,6 +47,7 @@ jobs:
         - run: flutter pub get
         - run: flutter test
         - run: flutter build ios --release --no-codesign
+
   push_to_registry:
     name: push_to_registry
     needs: build_ios
@@ -72,6 +75,7 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/flutter-pimp-my-code-snapshot-${{ secrets.DEV_VERSION }}:latest
+
   deploy:
     name: deploy
     needs: push_to_registry
