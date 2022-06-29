@@ -1,0 +1,86 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build_web:
+    name: build_web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build web
+  build_apk:
+    name: build_apk
+    needs: build_web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build apk
+      - run: flutter build appbundle
+  build_ios:
+    name: build_ios
+    needs: build_apk
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.4'
+          architecture: x64
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build ios --release --no-codesign
+  push_to_registry:
+    name: push_to_registry
+    needs: build_ios
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Cloud Coding Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}
+          username: nologin
+          password: ${{ secrets.PROD_DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/flutter-pimp-my-code-${{ secrets.PROD_VERSION }}:latest
+  deploy:
+    name: deploy
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: appleboy/ssh-action@master
+        with:
+          host: '${{ secrets.K8S_MASTER_HOST_IP }}'
+          username: '${{ secrets.K8S_MASTER_USERNAME }}'
+          password: '${{ secrets.K8S_MASTER_PASSWORD }}'
+          script: cd k8s-pmc/ && git pull && helm upgrade --recreate-pods flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values-prod.yaml
