@@ -60,8 +60,8 @@ jobs:
       - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
       - run: docker login ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
       - run: docker build -t ${{ secrets.PROJECT_NAME }} .
-      - run: docker tag ${{ secrets.PROJECT_NAME }} rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
-      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
+      - run: docker tag ${{ secrets.PROJECT_NAME }} ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/flutter-pimp-my-code
+      - run: docker push ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/flutter-pimp-my-code:latest
 #  deploy:
 #    name: deploy
 #    needs: push_to_registry
