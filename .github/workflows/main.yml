@@ -71,16 +71,16 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.DEV_VERSION }}:${{ secrets.DEV_VERSION }}
-#  deploy:
-#    name: deploy
-#    needs: push_to_registry
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#      - uses: appleboy/ssh-action@master
-#        with:
-#          host: '${{ secrets.K8S_MASTER_HOST_IP }}'
-#          username: '${{ secrets.K8S_MASTER_USERNAME }}'
-#          password: '${{ secrets.K8S_MASTER_PASSWORD }}'
-#          script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
+          tags: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/flutter-pimp-my-code-snapshot-${{ secrets.DEV_VERSION }}:latest
+  deploy:
+    name: deploy
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: appleboy/ssh-action@master
+        with:
+          host: '${{ secrets.K8S_MASTER_HOST_IP }}'
+          username: '${{ secrets.K8S_MASTER_USERNAME }}'
+          password: '${{ secrets.K8S_MASTER_PASSWORD }}'
+          script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
