@@ -10,6 +10,7 @@ on:
     branches: [feat/k8s]
 jobs:
   build_web:
+    name: build_web
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,6 +21,8 @@ jobs:
       - run: flutter test
       - run: flutter build web
   build_apk:
+    name: build_apk
+    needs: build_web
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +38,8 @@ jobs:
       - run: flutter build apk
       - run: flutter build appbundle
   build_ios:
+    name: build_ios
+    needs: build_apk
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -47,6 +52,7 @@ jobs:
       - run: flutter build ios --release --no-codesign
   push_to_registry:
     name: push_to_registry
+    needs: build_ios
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -62,13 +68,14 @@ jobs:
       - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
       - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
   deploy:
+    name: deploy
     needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: appleboy/ssh-action@master
         with:
-          host: $K8S_MASTER_HOST_IP
+          host: '${{ secrets.K8S_MASTER_HOST_IP }}'
           username: "root"
           password: "qFm31SOnNH"
           script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
