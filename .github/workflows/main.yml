@@ -50,26 +50,26 @@ jobs:
 #      - run: flutter pub get
 #      - run: flutter test
 #      - run: flutter build ios --release --no-codesign
-  push_to_registry:
-    name: push_to_registry
+#  push_to_registry:
+#    name: push_to_registry
 #    needs: build_ios
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: sudo apt-get update
-      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
-      - run: sudo mkdir -p /etc/apt/keyrings
-      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-      - run: sudo apt-get update
-      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-      - run: docker login rg.fr-par.scw.cloud/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
-      - run: docker build -t flutter-pimp-my-code-dev-${{ secrets.DEV_DOCKER_VERSION }} .
-      - run: docker tag flutter-pimp-my-code-snapshot-${{ secrets.DEV_DOCKER_VERSION }} rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code-dev
-      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:snapshot-${{ secrets.DEV_DOCKER_VERSION }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sudo apt-get update
+#      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
+#      - run: sudo mkdir -p /etc/apt/keyrings
+#      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+#      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#      - run: sudo apt-get update
+#      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+#      - run: docker login rg.fr-par.scw.cloud/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
+#      - run: docker build -t flutter-pimp-my-code-dev-${{ secrets.DEV_DOCKER_VERSION }} .
+#      - run: docker tag flutter-pimp-my-code-snapshot-${{ secrets.DEV_DOCKER_VERSION }} rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code-dev
+#      - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:snapshot-${{ secrets.DEV_DOCKER_VERSION }}
   deploy:
-    name: deploy
-    needs: push_to_registry
+#    name: deploy
+#    needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
