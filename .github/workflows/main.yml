@@ -83,4 +83,4 @@ jobs:
           host: '${{ secrets.K8S_MASTER_HOST_IP }}'
           username: '${{ secrets.K8S_MASTER_USERNAME }}'
           password: '${{ secrets.K8S_MASTER_PASSWORD }}'
-          script: cd k8s-pmc/ && git pull && helm upgrade flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
+          script: cd k8s-pmc/ && git pull && helm upgrade --recreate-pods flutter-pimp-my-code flutter-pimp-my-code/ -f flutter-pimp-my-code/values.yaml
