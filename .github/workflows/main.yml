@@ -45,23 +45,49 @@ jobs:
   #      - run: flutter pub get
   #      - run: flutter test
   #      - run: flutter build ios --release --no-codesign
-  push_to_registry:
-    #    name: push_to_registry
-    #    needs: build_ios
+  docker:
+    name: Build docker image and push
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: sudo apt-get update
-      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
-      - run: sudo mkdir -p /etc/apt/keyrings
-      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-      - run: sudo apt-get update
-      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-      - run: docker login ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
-      - run: docker build -t ${{ secrets.PROJECT_NAME }} .
-      - run: docker tag ${{ secrets.PROJECT_NAME }} ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}:0.1.1
-      - run: docker push ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}:0.1.1
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Cloud Coding Registry
+        uses: docker/login-action@v1
+        with:
+          registry: rg.fr-par.scw.cloud/${{ secrets.DEV_DOCKER_REGISTRY }}
+          username: nologin
+          password: ${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}:0.1.1
+#  push_to_registry:
+#    #    name: push_to_registry
+#    #    needs: build_ios
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sudo apt-get update
+#      - run: sudo apt-get install ca-certificates curl gnupg lsb-release
+#      - run: sudo mkdir -p /etc/apt/keyrings
+#      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+#      - run: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#      - run: sudo apt-get update
+#      - run: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+#      - run: docker login ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }} -u nologin --password-stdin <<< "${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}"
+#      - run: docker build -t ${{ secrets.PROJECT_NAME }} .
+#      - run: docker tag ${{ secrets.PROJECT_NAME }} ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}:0.1.1
+#      - run: docker push ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}:0.1.1
 #  deploy:
 #    name: deploy
 #    needs: push_to_registry
