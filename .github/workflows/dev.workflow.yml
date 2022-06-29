@@ -2,9 +2,9 @@
 
 on:
   push:
-    branches: [develop]
+    branches: [feat/k8s]
   pull_request:
-    branches: [develop]
+    branches: [feat/k8s]
 jobs:
     build_web:
       name: build_web
