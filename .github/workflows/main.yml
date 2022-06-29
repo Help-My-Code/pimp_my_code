@@ -46,6 +46,7 @@ jobs:
       - run: flutter test
       - run: flutter build ios --release --no-codesign
   push_to_registry:
+    name: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -61,6 +62,7 @@ jobs:
       - run: docker tag flutter-pimp-my-code rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code
       - run: docker push rg.fr-par.scw.cloud/k8s-pmc/flutter-pimp-my-code:latest
   deploy:
+    needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
