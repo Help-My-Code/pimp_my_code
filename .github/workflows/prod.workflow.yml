@@ -1,3 +1,5 @@
+name: CI/CD
+
 on:
   push:
     branches: [main]
@@ -71,7 +73,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/flutter-pimp-my-code-${{ secrets.PROD_VERSION }}:latest
+          tags: ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.PROD_VERSION }}:latest
   deploy:
     name: deploy
     needs: push_to_registry
