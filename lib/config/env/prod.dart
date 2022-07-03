@@ -2,7 +2,7 @@ import 'base.dart';
 
 class ProductionConfig extends Config {
   @override
-  String get baseUrl => const String.fromEnvironment('BACKEND', defaultValue: 'https://backend.dev.pimp-my-code.xyz');
+  String get baseUrl => 'https://backend.dev.pimp-my-code.xyz';
 
   @override
   String get browserUrl => const String.fromEnvironment('WEB_URL', defaultValue: 'http://localhost');
