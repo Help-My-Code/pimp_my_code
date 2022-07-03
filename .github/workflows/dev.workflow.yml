@@ -69,6 +69,7 @@ jobs:
           registry: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}
           username: ${{ secrets.DEV_DOCKER_USERNAME }}
           password: ${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}
+
       - name: Build the tagged Docker image
         run: "docker build \
         -f Dockerfile . \
