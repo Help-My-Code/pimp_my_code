@@ -11,7 +11,7 @@ import 'app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  // GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
+  GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
   await init(ProductionConfig());
   BlocOverrides.runZoned(() {
     runApp(
