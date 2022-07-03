@@ -51,7 +51,6 @@ jobs:
 #      - run: flutter build ios --release --no-codesign
   push_to_registry:
     name: push_to_registry
-#    needs: build_ios
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
