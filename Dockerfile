@@ -8,7 +8,8 @@ ARG LIVE_BACKEND
 ENV \
 BACKEND=${BACKEND} \
 WEB_URL=${WEB_URL} \
-LIVE_BACKEND=${LIVE_BACKEND} \
+LIVE_BACKEND=${LIVE_BACKEND}
+
 # Install flutter dependencies
 RUN apt-get update
 RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3 sed
