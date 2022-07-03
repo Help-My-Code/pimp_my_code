@@ -26,7 +26,7 @@ RUN flutter upgrade
 RUN mkdir /app/
 COPY . /app/
 WORKDIR /app/
-RUN flutter build web --dart-define=${BACKEND}=https://www.kindacode.com/api --dart-define=WEB_URL=${WEB_URL}--dart-define=LIVE_BACKEND=${LIVE_BACKEND}
+RUN flutter build web --dart-define=BACKEND=${BACKEND}--dart-define=WEB_URL=${WEB_URL}--dart-define=LIVE_BACKEND=${LIVE_BACKEND}
 # Stage 2 - Create the run-time image
 FROM nginx:1.21.1-alpine
 COPY --from=build-env /app/build/web /usr/share/nginx/html
