@@ -163,6 +163,7 @@ class _LoginFormState extends State<LoginForm> {
               .read<LoginBloc>()
               .add(const LoginEvent.updatePassword('azertY1234!'));
           context.read<LoginBloc>().add(const LoginEvent.submit());
+          GoRouter.of(context).go(Routes.home.path);
         },
         child: Text('quick login'.toUpperCase()),
       ),
