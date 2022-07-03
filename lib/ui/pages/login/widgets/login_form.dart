@@ -156,7 +156,6 @@ class _LoginFormState extends State<LoginForm> {
       padding: const EdgeInsets.all(15.0),
       child: TextButton(
         onPressed: () {
-          print("VAR = ${const String.fromEnvironment('BACKEND', defaultValue: 'http://localhost:3000')}");
           context
               .read<LoginBloc>()
               .add(const LoginEvent.updateEmail('example5@example.com'));
