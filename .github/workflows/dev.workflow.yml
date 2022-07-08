@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [feat/k8s]
+    branches: [develop]
   pull_request:
-    branches: [feat/k8s]
+    branches: [develop]
 jobs:
 #  build_web:
 #    name: build_web
