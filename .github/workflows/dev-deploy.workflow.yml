@@ -1,0 +1,51 @@
+name: CI/CD - DEPLOY
+
+on:
+  pull_request:
+    branches: [develop]
+    types:
+      - closed
+
+jobs:
+  push_to_registry:
+    name: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}
+          username: ${{ secrets.DEV_DOCKER_USERNAME }}
+          password: ${{ secrets.DEV_DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build the tagged Docker image
+        run: "docker build \
+       -f Dockerfile . \
+       --build-arg WEB_URL=${{ secrets.DEV_WEB_URL }} \
+       --build-arg BACKEND=${{ secrets.DEV_BACKEND }} \
+       --build-arg LIVE_BACKEND=${{ secrets.DEV_LIVE_BACKEND }} \
+       --tag ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-snapshot-${{ secrets.DEV_VERSION }}:latest"
+      - name: Push the tagged Docker image
+        run: docker push ${{ secrets.DEV_DOCKER_HOST }}/${{ secrets.DEV_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-snapshot-${{ secrets.DEV_VERSION }}:latest
+
+  deploy:
+    name: deploy
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: appleboy/ssh-action@master
+        with:
+          host: '${{ secrets.K8S_MASTER_HOST_IP }}'
+          username: '${{ secrets.K8S_MASTER_USERNAME }}'
+          password: '${{ secrets.K8S_MASTER_PASSWORD }}'
+          script: cd k8s-pmc/ && git pull && helm upgrade --recreate-pods ${{ secrets.PROJECT_NAME }}-dev ${{ secrets.PROJECT_NAME }}/ -f ${{ secrets.PROJECT_NAME }}/values-dev.yaml
