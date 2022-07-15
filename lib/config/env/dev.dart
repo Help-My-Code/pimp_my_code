@@ -8,5 +8,5 @@ class DeveloppementConfig extends Config {
   String get browserUrl => const String.fromEnvironment('WEB_URL', defaultValue: 'http://localhost');
 
   @override
-  String get liveCodingUrl => const String.fromEnvironment('LIVE_BACKEND', defaultValue: 'http://localhost/4200');
+  String get liveCodingUrl => const String.fromEnvironment('LIVE_BACKEND', defaultValue: 'http://localhost:4200');
 }
