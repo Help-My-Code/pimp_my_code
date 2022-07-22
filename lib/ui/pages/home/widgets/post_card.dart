@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
@@ -20,6 +21,7 @@ class PostCard extends StatelessWidget {
     required this.post,
     required this.imageURL,
     required this.username,
+    required this.creatorId,
     required this.date,
     this.language = 'dart',
     this.title,
@@ -45,6 +47,7 @@ class PostCard extends StatelessWidget {
   final String imageURL;
   final String contentId;
   final String username;
+  final String creatorId;
   final String date;
   final String post;
   final List<String>? codes;
@@ -63,8 +66,11 @@ class PostCard extends StatelessWidget {
 
   navigateToLiveCoding() async {
     var token = await sessionCubit.getToken();
-    launchUrlString(
-        sl<Config>().liveCodingUrl + '?token=' + token + '&content=' + contentId);
+    launchUrlString(sl<Config>().liveCodingUrl +
+        '?token=' +
+        token +
+        '&content=' +
+        contentId);
   }
 
   @override
@@ -186,17 +192,58 @@ class PostCard extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          top: 50,
-          right: 50,
-          child: InkWell(
-            onTap: () {
-              onSharePress(context);
-            },
-            child: const Icon(Icons.share),
-          ),
-        ),
+        _buildActionButtons(context),
       ],
     );
+  }
+
+  _buildActionButtons(BuildContext context) {
+    return FutureBuilder<String>(
+        future: context.read<SessionCubit>().getUserId(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            if (creatorId == snapshot.data!) {
+              return Positioned(
+                  top: 50,
+                  right: 50,
+                child: Row (
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        onSharePress(context);
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        onSharePress(context);
+                      },
+                      child: const Icon(Icons.delete),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        onSharePress(context);
+                      },
+                      child: const Icon(Icons.share),
+                    ),
+                  ],
+                )
+              );
+            } else {
+              return Positioned(
+                top: 50,
+                right: 50,
+                child: InkWell(
+                  onTap: () {
+                    onSharePress(context);
+                  },
+                  child: const Icon(Icons.share),
+                ),
+              );
+            }
+          } else {
+            return const CircularProgressIndicator();
+          }
+        });
   }
 }

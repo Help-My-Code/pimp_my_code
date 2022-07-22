@@ -36,6 +36,7 @@ class Publication extends StatelessWidget {
                   ? publication.userPicture!
                   : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
               username: publication.username,
+              creatorId: publication.creatorId,
               date: DateFormat('dd MMMM yyyy').format(publication.createdAt),
               isLiked: publication.isLike,
               isDisliked: publication.isDislike,

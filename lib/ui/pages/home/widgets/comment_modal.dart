@@ -53,6 +53,7 @@ class CommentModal extends StatelessWidget {
                     ? comments[index].userPicture!
                     : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
                 username: comments[index].username,
+                creatorId: comments[index].creatorId,
                 date: DateFormat('dd MMMM yyyy')
                     .format(comments[index].createdAt),
                 isLiked: comments[index].isLike,
