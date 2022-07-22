@@ -8,9 +8,12 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../config/env/base.dart';
 import '../../../../ioc_container.dart';
+import '../../../../state/delete_content/delete_content_cubit.dart';
+import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
+import '../../group/widgets/delete_content_modal.dart';
 import 'share_modal.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -55,6 +58,35 @@ class PostCard extends StatelessWidget {
   final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
   final bool isLiked;
   final bool isDisliked;
+
+  /*Future<void> onUpdatePress(BuildContext context) async {
+    await Alert(
+      context: context,
+      title: 'update_informations'.tr(),
+      content: BlocProvider(
+        create: (context) =>
+        sl<UpdateGroupBloc>()..add(UpdateGroupEvent.loaded(widget.group)),
+        child: UpdateGroupModal(group: widget.group),
+      ),
+      buttons: [],
+    ).show();
+    context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
+  }*/
+
+  Future<void> onDeletePress(BuildContext context) async {
+    await Alert(
+      context: context,
+      title: 'delete_content_confirmation'.tr(),
+      content: BlocProvider(
+        create: (context) => sl<DeleteContentCubit>(),
+        child: DeleteContentModal(contentId: contentId),
+      ),
+      buttons: [],
+    ).show();
+    //TODO lancer la bonne requête selon la page où on est
+    //TODO publication rechargée trop vite (avant suppression)
+    context.read<RetrieveContentCubit>().loadPublicationByUserId(creatorId);
+  }
 
   void onSharePress(BuildContext context) {
     Alert(
@@ -216,7 +248,7 @@ class PostCard extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        onSharePress(context);
+                        onDeletePress(context);
                       },
                       child: const Icon(Icons.delete),
                     ),

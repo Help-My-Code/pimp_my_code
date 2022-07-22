@@ -63,7 +63,9 @@
   "edit_profile": "Edit profile",
   "edit_group": "Edit group",
   "delete_group": "Delete group",
+  "delete_content": "Delete content",
   "delete_group_confirmation": "Are you sure you want to delete the group?",
+  "delete_content_confirmation": "Are you sure you want to delete the publication?",
   "follow": "Follow",
   "unfollow": "Unfollow",
   "followers": " Followers",
@@ -113,6 +115,7 @@
   "group_member_updated_successful": "Group member updated successfully",
   "follow_updated_successful": "Follow updated successfully",
   "delete_group_success": "Group deleted successfully",
+  "delete_content_success": "Content deleted successfully",
   "go_live_coding_room": "Go to live coding room"
 
 }
