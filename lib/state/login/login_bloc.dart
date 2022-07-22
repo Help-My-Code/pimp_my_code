@@ -32,12 +32,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final successOrFailure =
         await _loginUseCase(LoginParam(state.email, state.password));
     successOrFailure.fold(
-        (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),
-        (success) {
-      emit(
-        state.copyWith(status: const FormSubmissionSuccessful()),
-      );
-      _sessionCubit.showHome(success.user);
-    });
+      (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),
+      (success) {
+        emit(
+          state.copyWith(status: const FormSubmissionSuccessful()),
+        );
+        _sessionCubit.showHome(success.user);
+      },
+    );
   }
 }

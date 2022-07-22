@@ -5,9 +5,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../../config/env/base.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';

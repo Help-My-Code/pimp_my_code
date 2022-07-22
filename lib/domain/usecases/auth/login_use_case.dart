@@ -1,4 +1,4 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../../core/usecase.dart';
@@ -9,7 +9,7 @@ import '../../repositories/auth_repository.dart';
 
 class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
   final AuthRepository _repository;
-  final FlutterSecureStorage _storage;
+  final SharedPreferences _storage;
 
   LoginUseCase(this._repository, this._storage);
   @override
@@ -20,9 +20,8 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
     return loginResponseOrFailure;
   }
 
-  Future<Either<UserIdNotFoundInLocalStorage, String>>
-      attemptAutoLogin() async {
-    final String? id = await _storage.read(key: 'id');
+  Either<UserIdNotFoundInLocalStorage, String> attemptAutoLogin() {
+    final String? id = _storage.getString('id');
     if (id == null) {
       return Left(UserIdNotFoundInLocalStorage());
     }
@@ -31,8 +30,8 @@ class LoginUseCase extends UseCase<LoginResponse, LoginParam> {
 
   _saveUserInfoAfterLogin(LoginResponse response) async {
     final decodedToken = TokenDecoder.convertTokenToMap(response.token);
-    await _storage.write(key: 'token', value: response.token);
-    await _storage.write(key: 'id', value: decodedToken['userId']);
+    await _storage.setString('token', response.token);
+    await _storage.setString('id', decodedToken['userId']);
   }
 }
 

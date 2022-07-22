@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddTokenInterceptor implements RequestInterceptor {
-  final FlutterSecureStorage _storage;
+  final SharedPreferences _storage;
 
   AddTokenInterceptor(this._storage);
   @override
   FutureOr<Request> onRequest(Request request) async {
-    final String? token = await _storage.read(key: 'token');
+    final String? token = _storage.getString('token');
 
     if (token != null) {
       return applyHeader(
