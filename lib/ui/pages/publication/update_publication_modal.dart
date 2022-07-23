@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pimp_my_code/state/retrieve_publication/retrieve_publication_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../core/form_status.dart';
@@ -9,13 +8,18 @@ import '../../../../state/update_content/update_content_bloc.dart';
 import '../../validator/validators.dart';
 
 class UpdatePublicationModal extends StatelessWidget {
-  UpdatePublicationModal(
-      {Key? key, required this.contentId, this.title, required this.content})
-      : super(key: key);
+  UpdatePublicationModal({
+    Key? key,
+    required this.contentId,
+    this.title,
+    required this.content,
+    required this.reloadFunction,
+  }) : super(key: key);
 
   final String contentId;
   final String? title;
   final String content;
+  final VoidCallback reloadFunction;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -100,15 +104,14 @@ class UpdatePublicationModal extends StatelessWidget {
             'save'.tr(),
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState != null &&
                 _formKey.currentState!.validate() &&
                 state.status is FormNotSent) {
               context
                   .read<UpdateContentBloc>()
-                  .add(UpdateContentEvent.submit(contentId));
+                  .add(UpdateContentEvent.submit(contentId, reloadFunction));
               Navigator.pop(context);
-              context.read<RetrievePublicationCubit>().loadPublication(contentId);
             }
           },
           width: 120,

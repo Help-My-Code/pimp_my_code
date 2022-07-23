@@ -72,6 +72,7 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
+          reloadPublication: () {},
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],

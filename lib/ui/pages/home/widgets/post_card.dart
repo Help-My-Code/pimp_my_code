@@ -12,7 +12,6 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../config/env/base.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/delete_content/delete_content_cubit.dart';
-import '../../../../state/retrieve_publication/retrieve_publication_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_content/update_content_bloc.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
@@ -40,6 +39,7 @@ class PostCard extends StatelessWidget {
     this.onLikePressed,
     this.onUnlikePressed,
     this.onCommentaryPressed,
+    required this.reloadPublication,
     required this.isLiked,
     required this.isDisliked,
     required this.contentId,
@@ -60,7 +60,10 @@ class PostCard extends StatelessWidget {
   final String post;
   final List<String>? codes;
   final String likeCount, unlikeCount, commentaryCount;
-  final Function()? onLikePressed, onUnlikePressed, onCommentaryPressed;
+  final Function()? onLikePressed,
+      onUnlikePressed,
+      onCommentaryPressed,
+      reloadPublication;
   final bool isLiked;
   final bool isDisliked;
 
@@ -68,10 +71,19 @@ class PostCard extends StatelessWidget {
     await Alert(
       context: context,
       title: 'update_content'.tr(),
-      content: BlocProvider(
-        create: (context) => sl<UpdateContentBloc>(),
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                sl<UpdateContentBloc>()..init(title ?? '', post),
+          ),
+        ],
         child: UpdatePublicationModal(
-            contentId: contentId, title: title, content: post),
+          contentId: contentId,
+          title: title,
+          content: post,
+          reloadFunction: () => reloadPublication!(),
+        ),
       ),
       buttons: [],
     ).show();

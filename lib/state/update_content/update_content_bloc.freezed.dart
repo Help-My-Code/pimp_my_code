@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UpdateContentEventTearOff {
   const _$UpdateContentEventTearOff();
 
-  _Submit submit(String contentId) {
+  _Submit submit(String contentId, VoidCallback reloadFunction) {
     return _Submit(
       contentId,
+      reloadFunction,
     );
   }
 
@@ -51,7 +52,8 @@ const $UpdateContentEvent = _$UpdateContentEventTearOff();
 mixin _$UpdateContentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String contentId) submit,
+    required TResult Function(String contentId, VoidCallback reloadFunction)
+        submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
     required TResult Function(String title, String content) loaded,
@@ -59,7 +61,7 @@ mixin _$UpdateContentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -67,7 +69,7 @@ mixin _$UpdateContentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -122,7 +124,7 @@ class _$UpdateContentEventCopyWithImpl<$Res>
 abstract class _$SubmitCopyWith<$Res> {
   factory _$SubmitCopyWith(_Submit value, $Res Function(_Submit) then) =
       __$SubmitCopyWithImpl<$Res>;
-  $Res call({String contentId});
+  $Res call({String contentId, VoidCallback reloadFunction});
 }
 
 /// @nodoc
@@ -137,12 +139,17 @@ class __$SubmitCopyWithImpl<$Res> extends _$UpdateContentEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = freezed,
+    Object? reloadFunction = freezed,
   }) {
     return _then(_Submit(
       contentId == freezed
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as String,
+      reloadFunction == freezed
+          ? _value.reloadFunction
+          : reloadFunction // ignore: cast_nullable_to_non_nullable
+              as VoidCallback,
     ));
   }
 }
@@ -150,14 +157,16 @@ class __$SubmitCopyWithImpl<$Res> extends _$UpdateContentEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Submit implements _Submit {
-  const _$_Submit(this.contentId);
+  const _$_Submit(this.contentId, this.reloadFunction);
 
   @override
   final String contentId;
+  @override
+  final VoidCallback reloadFunction;
 
   @override
   String toString() {
-    return 'UpdateContentEvent.submit(contentId: $contentId)';
+    return 'UpdateContentEvent.submit(contentId: $contentId, reloadFunction: $reloadFunction)';
   }
 
   @override
@@ -165,12 +174,14 @@ class _$_Submit implements _Submit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Submit &&
-            const DeepCollectionEquality().equals(other.contentId, contentId));
+            const DeepCollectionEquality().equals(other.contentId, contentId) &&
+            (identical(other.reloadFunction, reloadFunction) ||
+                other.reloadFunction == reloadFunction));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(contentId));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(contentId), reloadFunction);
 
   @JsonKey(ignore: true)
   @override
@@ -180,36 +191,37 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String contentId) submit,
+    required TResult Function(String contentId, VoidCallback reloadFunction)
+        submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
     required TResult Function(String title, String content) loaded,
   }) {
-    return submit(contentId);
+    return submit(contentId, reloadFunction);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
   }) {
-    return submit?.call(contentId);
+    return submit?.call(contentId, reloadFunction);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
-      return submit(contentId);
+      return submit(contentId, reloadFunction);
     }
     return orElse();
   }
@@ -253,9 +265,11 @@ class _$_Submit implements _Submit {
 }
 
 abstract class _Submit implements UpdateContentEvent {
-  const factory _Submit(String contentId) = _$_Submit;
+  const factory _Submit(String contentId, VoidCallback reloadFunction) =
+      _$_Submit;
 
   String get contentId;
+  VoidCallback get reloadFunction;
   @JsonKey(ignore: true)
   _$SubmitCopyWith<_Submit> get copyWith => throw _privateConstructorUsedError;
 }
@@ -325,7 +339,8 @@ class _$_UpdateTitle implements _UpdateTitle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String contentId) submit,
+    required TResult Function(String contentId, VoidCallback reloadFunction)
+        submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
     required TResult Function(String title, String content) loaded,
@@ -336,7 +351,7 @@ class _$_UpdateTitle implements _UpdateTitle {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -347,7 +362,7 @@ class _$_UpdateTitle implements _UpdateTitle {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -471,7 +486,8 @@ class _$_UpdateContent implements _UpdateContent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String contentId) submit,
+    required TResult Function(String contentId, VoidCallback reloadFunction)
+        submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
     required TResult Function(String title, String content) loaded,
@@ -482,7 +498,7 @@ class _$_UpdateContent implements _UpdateContent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -493,7 +509,7 @@ class _$_UpdateContent implements _UpdateContent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -624,7 +640,8 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String contentId) submit,
+    required TResult Function(String contentId, VoidCallback reloadFunction)
+        submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
     required TResult Function(String title, String content) loaded,
@@ -635,7 +652,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -646,7 +663,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String contentId)? submit,
+    TResult Function(String contentId, VoidCallback reloadFunction)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
     TResult Function(String title, String content)? loaded,
@@ -711,7 +728,7 @@ class _$UpdateContentStateTearOff {
 
   _State state(
       {String content = '',
-      String? title = '',
+      String title = '',
       FormStatus status = const FormNotSent()}) {
     return _State(
       content: content,
@@ -727,23 +744,23 @@ const $UpdateContentState = _$UpdateContentStateTearOff();
 /// @nodoc
 mixin _$UpdateContentState {
   String get content => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   FormStatus get status => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content, String? title, FormStatus status)
+    required TResult Function(String content, String title, FormStatus status)
         state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String content, String? title, FormStatus status)? state,
+    TResult Function(String content, String title, FormStatus status)? state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content, String? title, FormStatus status)? state,
+    TResult Function(String content, String title, FormStatus status)? state,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -774,7 +791,7 @@ abstract class $UpdateContentStateCopyWith<$Res> {
   factory $UpdateContentStateCopyWith(
           UpdateContentState value, $Res Function(UpdateContentState) then) =
       _$UpdateContentStateCopyWithImpl<$Res>;
-  $Res call({String content, String? title, FormStatus status});
+  $Res call({String content, String title, FormStatus status});
 }
 
 /// @nodoc
@@ -800,7 +817,7 @@ class _$UpdateContentStateCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -815,7 +832,7 @@ abstract class _$StateCopyWith<$Res>
   factory _$StateCopyWith(_State value, $Res Function(_State) then) =
       __$StateCopyWithImpl<$Res>;
   @override
-  $Res call({String content, String? title, FormStatus status});
+  $Res call({String content, String title, FormStatus status});
 }
 
 /// @nodoc
@@ -841,7 +858,7 @@ class __$StateCopyWithImpl<$Res> extends _$UpdateContentStateCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -861,7 +878,7 @@ class _$_State implements _State {
   final String content;
   @JsonKey()
   @override
-  final String? title;
+  final String title;
   @JsonKey()
   @override
   final FormStatus status;
@@ -896,7 +913,7 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content, String? title, FormStatus status)
+    required TResult Function(String content, String title, FormStatus status)
         state,
   }) {
     return state(content, title, status);
@@ -905,7 +922,7 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String content, String? title, FormStatus status)? state,
+    TResult Function(String content, String title, FormStatus status)? state,
   }) {
     return state?.call(content, title, status);
   }
@@ -913,7 +930,7 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content, String? title, FormStatus status)? state,
+    TResult Function(String content, String title, FormStatus status)? state,
     required TResult orElse(),
   }) {
     if (state != null) {
@@ -952,13 +969,13 @@ class _$_State implements _State {
 }
 
 abstract class _State implements UpdateContentState {
-  const factory _State({String content, String? title, FormStatus status}) =
+  const factory _State({String content, String title, FormStatus status}) =
       _$_State;
 
   @override
   String get content;
   @override
-  String? get title;
+  String get title;
   @override
   FormStatus get status;
   @override

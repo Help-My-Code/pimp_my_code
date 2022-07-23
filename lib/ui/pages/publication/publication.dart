@@ -32,6 +32,9 @@ class Publication extends StatelessWidget {
                   onLikePress(context.read<LikeCubit>(), publication),
               onUnlikePressed: () =>
                   onDislikePress(context.read<LikeCubit>(), publication),
+              reloadPublication: () => context
+                  .read<RetrievePublicationCubit>()
+                  .loadPublication(publication.id!),
               codes: publication.code == null ? [''] : [publication.code!],
               title: publication.title,
               post: publication.content,

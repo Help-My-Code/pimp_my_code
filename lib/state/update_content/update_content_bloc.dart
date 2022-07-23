@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
@@ -30,14 +31,15 @@ class UpdateContentBloc extends Bloc<UpdateContentEvent, UpdateContentState> {
     emit(state.copyWith(status: const FormSubmitting()));
     final successOrFailure = await _updateContentUseCase(UpdateContentParams(
       event.contentId,
-      state.title!,
+      state.title,
       state.content,
     ));
     successOrFailure.fold(
-      (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),
-      (success) =>
-          emit(state.copyWith(status: const FormSubmissionSuccessful())),
-    );
+        (failure) => emit(state.copyWith(status: const FormSubmissionFailed())),
+        (success) {
+      emit(state.copyWith(status: const FormSubmissionSuccessful()));
+      event.reloadFunction();
+    });
   }
 
   void onUpdateTitle(_UpdateTitle event, Emitter emit) {
@@ -45,7 +47,10 @@ class UpdateContentBloc extends Bloc<UpdateContentEvent, UpdateContentState> {
   }
 
   void onUpdateContent(_UpdateContent event, Emitter emit) {
-    emit(state.copyWith(
-        content: event.content, status: const FormNotSent()));
+    emit(state.copyWith(content: event.content, status: const FormNotSent()));
+  }
+
+  void init(String title, String content) {
+    add(_Loaded(title, content));
   }
 }

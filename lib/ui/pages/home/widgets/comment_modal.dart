@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +22,7 @@ class CommentModal extends StatelessWidget {
       child: BlocBuilder<RetrieveContentCubit, RetrieveContentState>(
         builder: (context, state) {
           return state.maybeWhen(
-            loaded: (comments) => _buildCommentList(comments),
+            loaded: (comments) => _buildCommentList(comments, context),
             orElse: () => const Center(child: CircularProgressIndicator()),
           );
         },
@@ -28,7 +30,7 @@ class CommentModal extends StatelessWidget {
     );
   }
 
-  Column _buildCommentList(List<Content> comments) {
+  Column _buildCommentList(List<Content> comments, BuildContext context) {
     return Column(
       children: [
         Expanded(
@@ -44,6 +46,9 @@ class CommentModal extends StatelessWidget {
                 onUnlikePressed: () =>
                     onDislikePress(context.read<LikeCubit>(), comments[index]),
                 onCommentaryPressed: () {},
+                reloadPublication: () {
+                  context.read<RetrieveContentCubit>().loadComment(parentId);
+                },
                 codes: comments[index].code == null
                     ? ['']
                     : [comments[index].code!],
