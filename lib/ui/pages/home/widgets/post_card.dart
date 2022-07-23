@@ -11,6 +11,7 @@ import '../../../../ioc_container.dart';
 import '../../../../state/delete_content/delete_content_cubit.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
+import '../../../router/routes.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import '../../group/widgets/delete_content_modal.dart';
@@ -20,6 +21,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class PostCard extends StatelessWidget {
   const PostCard({
     Key? key,
+    required this.allowOwnerActions,
     required this.sessionCubit,
     required this.post,
     required this.imageURL,
@@ -42,6 +44,7 @@ class PostCard extends StatelessWidget {
     required this.contentType,
   }) : super(key: key);
 
+  final bool allowOwnerActions;
   final SessionCubit sessionCubit;
   final String language;
   final ContentType contentType;
@@ -83,9 +86,6 @@ class PostCard extends StatelessWidget {
       ),
       buttons: [],
     ).show();
-    //TODO lancer la bonne requête selon la page où on est
-    //TODO publication rechargée trop vite (avant suppression)
-    context.read<RetrieveContentCubit>().loadPublicationByUserId(creatorId);
   }
 
   void onSharePress(BuildContext context) {
@@ -234,33 +234,32 @@ class PostCard extends StatelessWidget {
         future: context.read<SessionCubit>().getUserId(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
-            if (creatorId == snapshot.data!) {
+            if (creatorId == snapshot.data! && allowOwnerActions) {
               return Positioned(
                   top: 50,
                   right: 50,
-                child: Row (
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        onSharePress(context);
-                      },
-                      child: const Icon(Icons.edit),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        onDeletePress(context);
-                      },
-                      child: const Icon(Icons.delete),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        onSharePress(context);
-                      },
-                      child: const Icon(Icons.share),
-                    ),
-                  ],
-                )
-              );
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          onSharePress(context);
+                        },
+                        child: const Icon(Icons.edit),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          onDeletePress(context);
+                        },
+                        child: const Icon(Icons.delete),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          onSharePress(context);
+                        },
+                        child: const Icon(Icons.share),
+                      ),
+                    ],
+                  ));
             } else {
               return Positioned(
                 top: 50,

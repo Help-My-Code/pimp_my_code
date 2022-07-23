@@ -118,6 +118,6 @@
   "group_member_updated_successful": "Le membre du groupe a bien été mis à jour",
   "follow_updated_successful": "L'abonnement a bien été mis à jour",
   "delete_group_success": "Le groupe a bien été supprimé",
-  "delete_content_success": "La publication a bien été supprimé",
+  "delete_content_success": "La publication a bien été supprimée",
   "go_live_coding_room": "Aller dans la salle de live coding"
 }

@@ -11,7 +11,10 @@ import '../../../state/like/like_cubit.dart';
 import '../../../utils/like_helper.dart';
 
 class Publication extends StatelessWidget {
-  const Publication({Key? key}) : super(key: key);
+  const Publication({Key? key, required this.allowOwnerActions})
+      : super(key: key);
+
+  final bool allowOwnerActions;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class Publication extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => const Loading(),
             loaded: (publication) => PostCard(
+              allowOwnerActions: allowOwnerActions,
               sessionCubit: sl(),
               contentType: ContentType.publication,
               contentId: publication.id!,

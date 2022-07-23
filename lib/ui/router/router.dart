@@ -58,7 +58,9 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) => BlocProvider(
           create: (context) => RetrievePublicationCubit(sl())
             ..loadPublication(state.params['id']),
-          child: const Publication(),
+          child: const Publication(
+            allowOwnerActions: true,
+          ),
         ),
       ),
       GoRoute(
