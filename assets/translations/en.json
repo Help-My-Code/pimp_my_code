@@ -63,7 +63,9 @@
   "edit_profile": "Edit profile",
   "edit_group": "Edit group",
   "delete_group": "Delete group",
+  "delete_content": "Delete content",
   "delete_group_confirmation": "Are you sure you want to delete the group?",
+  "delete_content_confirmation": "Are you sure you want to delete the publication?",
   "follow": "Follow",
   "unfollow": "Unfollow",
   "followers": " Followers",
@@ -110,9 +112,15 @@
   "failed_to_update_follow": "Failed to update follow",
   "failed_to_update_group_member": "Failed to update group member",
   "failed_to_delete_group": "Failed to delete group",
+  "failed_to_delete_content": "Failed to delete publication",
   "group_member_updated_successful": "Group member updated successfully",
   "follow_updated_successful": "Follow updated successfully",
   "delete_group_success": "Group deleted successfully",
-  "go_live_coding_room": "Go to live coding room"
+  "delete_content_success": "Content deleted successfully",
+  "content_updated": "Content updated successfully",
+  "go_live_coding_room": "Go to live coding room",
+  "comments": "Comments",
+  "share": "Share",
+  "update_content": "Update publication"
 
 }

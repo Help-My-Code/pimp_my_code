@@ -1,5 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pimp_my_code/domain/usecases/content/delete_publication.dart';
+import 'package:pimp_my_code/domain/usecases/content/update_content.dart';
 import 'package:pimp_my_code/domain/usecases/follow/create_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/delete_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/update_follow.dart';
@@ -10,14 +12,18 @@ import 'package:pimp_my_code/domain/usecases/group/find_group_by_id.dart';
 import 'package:pimp_my_code/domain/usecases/user/update_user_use_case.dart';
 import 'package:pimp_my_code/infrastructure/source/api/command/user_like.dart';
 import 'package:pimp_my_code/state/create_group/create_group_bloc.dart';
+import 'package:pimp_my_code/state/delete_content/delete_content_cubit.dart';
 import 'package:pimp_my_code/state/delete_group/delete_group_cubit.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
 import 'package:pimp_my_code/state/join_group/join_group_bloc.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:pimp_my_code/state/quit_group/quit_group_bloc.dart';
 import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
+import 'package:pimp_my_code/state/retrieve_publication/retrieve_publication_cubit.dart';
 import 'package:pimp_my_code/state/see_all_notifications/see_all_notifications_cubit.dart';
 import 'package:pimp_my_code/state/unfollow_user/unfollow_user_bloc.dart';
+import 'package:pimp_my_code/state/update_content/update_content_bloc.dart';
 import 'package:pimp_my_code/state/update_follow/update_follow_cubit.dart';
 import 'package:pimp_my_code/state/update_group/update_group_bloc.dart';
 import 'package:pimp_my_code/state/update_group_member/update_group_member_cubit.dart';
@@ -171,6 +177,8 @@ void registerUseCases() {
   sl.registerSingleton(CreateGroupMemberUseCase(sl()));
   sl.registerSingleton(DeleteFollowUseCase(sl()));
   sl.registerSingleton(DeleteGroupMemberUseCase(sl()));
+  sl.registerSingleton(DeleteContentUseCase(sl()));
+  sl.registerSingleton(UpdateContentUseCase(sl()));
   sl.registerSingleton(FindGroupByIdUseCase(sl()));
   sl.registerSingleton(FindGroupMembersByGroupIdUseCase(sl()));
   sl.registerSingleton(CreateGroupUseCase(sl()));
@@ -195,6 +203,9 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveUserByIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
+  sl.registerFactory(() => RetrievePublicationCubit(sl()));
+  sl.registerFactory(() => LikeCubit(
+      contentRepository: sl(), sessionCubit: sl(), retrieveContentCubit: sl()));
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
   sl.registerFactory(() => UpdateGroupBloc(sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));
@@ -206,7 +217,9 @@ void registerBloc() {
   sl.registerFactory(() => CreateGroupBloc(sl()));
   sl.registerFactory(() => SeeAllNotificationsCubit(sl(), sl()));
   sl.registerFactory(() => DeleteGroupCubit(sl()));
+  sl.registerFactory(() => DeleteContentCubit(sl()));
   sl.registerFactory(() => UpdateFollowCubit(sl()));
+  sl.registerFactory(() => UpdateContentBloc(sl()));
   sl.registerFactory(() => UpdateGroupMemberCubit(sl()));
 }
 

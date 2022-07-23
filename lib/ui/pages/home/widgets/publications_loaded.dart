@@ -63,6 +63,7 @@ class PublicationsLoaded extends StatelessWidget {
       itemCount: publications.length,
       itemBuilder: (context, index) {
         return PostCard(
+          allowOwnerActions: false,
           sessionCubit: sl(),
           contentType: ContentType.publication,
           contentId: publications[index].id!,
@@ -71,6 +72,7 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
+          reloadPublication: () {},
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
@@ -81,6 +83,7 @@ class PublicationsLoaded extends StatelessWidget {
               ? publications[index].userPicture!
               : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
           username: publications[index].username,
+          creatorId: publications[index].creatorId,
           date:
               DateFormat('dd MMMM yyyy').format(publications[index].createdAt),
           isLiked: publications[index].isLike,

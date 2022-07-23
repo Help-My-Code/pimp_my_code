@@ -11,7 +11,10 @@ import '../../../state/like/like_cubit.dart';
 import '../../../utils/like_helper.dart';
 
 class Publication extends StatelessWidget {
-  const Publication({Key? key}) : super(key: key);
+  const Publication({Key? key, required this.allowOwnerActions})
+      : super(key: key);
+
+  final bool allowOwnerActions;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class Publication extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => const Loading(),
             loaded: (publication) => PostCard(
+              allowOwnerActions: allowOwnerActions,
               sessionCubit: sl(),
               contentType: ContentType.publication,
               contentId: publication.id!,
@@ -28,6 +32,9 @@ class Publication extends StatelessWidget {
                   onLikePress(context.read<LikeCubit>(), publication),
               onUnlikePressed: () =>
                   onDislikePress(context.read<LikeCubit>(), publication),
+              reloadPublication: () => context
+                  .read<RetrievePublicationCubit>()
+                  .loadPublication(publication.id!),
               codes: publication.code == null ? [''] : [publication.code!],
               title: publication.title,
               post: publication.content,
@@ -36,6 +43,7 @@ class Publication extends StatelessWidget {
                   ? publication.userPicture!
                   : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
               username: publication.username,
+              creatorId: publication.creatorId,
               date: DateFormat('dd MMMM yyyy').format(publication.createdAt),
               isLiked: publication.isLike,
               isDisliked: publication.isDislike,

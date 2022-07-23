@@ -2,13 +2,15 @@ import 'package:dartz/dartz.dart';
 import '../../core/failure.dart';
 
 import '../entities/content/content.dart';
+import '../usecases/content/delete_publication.dart';
+import '../usecases/content/update_content.dart';
 
 abstract class ContentRepository {
   Future<Either<GetPublicationFailed, List<Content>>> getContents();
   Future<Either<GetPublicationFailed, Content>> getContent(String id);
   Future<Either<Failure, Unit>> createContent(Content content);
-  Future<Either<Failure, Content>> updateContent(Content content);
-  Future<Either<Failure, void>> deleteContent(String id);
+  Future<Either<UpdateContentFailed, UpdateContentSuccess>> updateContent(String contentId, String title, String content);
+  Future<Either<DeleteContentFailed, DeleteContentSuccess>> deleteContent(String id);
   Future<Either<GetPublicationFailed, List<Content>>> getFollowingPublications(
       {required String userId});
   Future<Either<GetPublicationFailed, List<Content>>> getPublicationsByUserId(

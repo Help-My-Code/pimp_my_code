@@ -50,6 +50,23 @@ class _$ContentInteractor extends ContentInteractor {
   }
 
   @override
+  Future<Response<dynamic>> deleteContent(
+      {required Map<String, String> fields}) {
+    final $url = '/content/delete';
+    final $body = fields;
+    final $request = Request('DELETE', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> update({required Map<String, String> fields}) {
+    final $url = '/content/update';
+    final $body = fields;
+    final $request = Request('PUT', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> getComments(String contentId) {
     final $url = '/content/getResponsesToContentById';
     final $params = <String, dynamic>{'contentId': contentId};
