@@ -23,6 +23,9 @@ abstract class ContentInteractor extends ChopperService {
   @Delete(path: '/delete')
   Future<Response> deleteContent({@Body() required Map<String, String> fields});
 
+  @Put(path: '/update')
+  Future<Response> update({@Body() required Map<String, String> fields});
+
   @Get(path: 'getResponsesToContentById')
   Future<Response> getComments(@Query() String contentId);
 

@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../../../state/delete_content/delete_content_cubit.dart';
-import '../../../router/routes.dart';
+import '../../../state/delete_content/delete_content_cubit.dart';
+import '../../router/routes.dart';
 
-class DeleteContentModal extends StatelessWidget {
-  DeleteContentModal({Key? key, required this.contentId}) : super(key: key);
+class DeletePublicationModal extends StatelessWidget {
+  DeletePublicationModal({Key? key, required this.contentId}) : super(key: key);
 
   final String contentId;
   final _formKey = GlobalKey<FormState>();

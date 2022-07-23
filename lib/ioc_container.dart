@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pimp_my_code/domain/usecases/content/delete_publication.dart';
+import 'package:pimp_my_code/domain/usecases/content/update_content.dart';
 import 'package:pimp_my_code/domain/usecases/follow/create_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/delete_follow.dart';
 import 'package:pimp_my_code/domain/usecases/follow/update_follow.dart';
@@ -21,6 +22,7 @@ import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cub
 import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
 import 'package:pimp_my_code/state/see_all_notifications/see_all_notifications_cubit.dart';
 import 'package:pimp_my_code/state/unfollow_user/unfollow_user_bloc.dart';
+import 'package:pimp_my_code/state/update_content/update_content_bloc.dart';
 import 'package:pimp_my_code/state/update_follow/update_follow_cubit.dart';
 import 'package:pimp_my_code/state/update_group/update_group_bloc.dart';
 import 'package:pimp_my_code/state/update_group_member/update_group_member_cubit.dart';
@@ -176,6 +178,7 @@ void registerUseCases() {
   sl.registerSingleton(DeleteFollowUseCase(sl()));
   sl.registerSingleton(DeleteGroupMemberUseCase(sl()));
   sl.registerSingleton(DeleteContentUseCase(sl()));
+  sl.registerSingleton(UpdateContentUseCase(sl()));
   sl.registerSingleton(FindGroupByIdUseCase(sl()));
   sl.registerSingleton(FindGroupMembersByGroupIdUseCase(sl()));
   sl.registerSingleton(CreateGroupUseCase(sl()));
@@ -213,6 +216,7 @@ void registerBloc() {
   sl.registerFactory(() => DeleteGroupCubit(sl()));
   sl.registerFactory(() => DeleteContentCubit(sl()));
   sl.registerFactory(() => UpdateFollowCubit(sl()));
+  sl.registerFactory(() => UpdateContentBloc(sl()));
   sl.registerFactory(() => UpdateGroupMemberCubit(sl()));
 }
 

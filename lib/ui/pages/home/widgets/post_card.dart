@@ -4,17 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
+import 'package:pimp_my_code/ui/pages/publication/update_publication_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../config/env/base.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/delete_content/delete_content_cubit.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
+import '../../../../state/retrieve_publication/retrieve_publication_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
+import '../../../../state/update_content/update_content_bloc.dart';
 import '../../../router/routes.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
-import '../../group/widgets/delete_content_modal.dart';
+import '../../publication/delete_publication_modal.dart';
 import 'share_modal.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -62,19 +65,25 @@ class PostCard extends StatelessWidget {
   final bool isLiked;
   final bool isDisliked;
 
-  /*Future<void> onUpdatePress(BuildContext context) async {
+  Future<void> onUpdatePress(BuildContext context) async {
     await Alert(
       context: context,
-      title: 'update_informations'.tr(),
-      content: BlocProvider(
-        create: (context) =>
-        sl<UpdateGroupBloc>()..add(UpdateGroupEvent.loaded(widget.group)),
-        child: UpdateGroupModal(group: widget.group),
+      title: 'update_content'.tr(),
+      content: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl<UpdateContentBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => sl<RetrievePublicationCubit>(),
+          ),
+        ],
+        child: UpdatePublicationModal(
+            contentId: contentId, title: title, content: post),
       ),
       buttons: [],
     ).show();
-    context.read<RetrieveGroupByIdCubit>().loadGroup(widget.group.id);
-  }*/
+  }
 
   Future<void> onDeletePress(BuildContext context) async {
     await Alert(
@@ -82,7 +91,7 @@ class PostCard extends StatelessWidget {
       title: 'delete_content_confirmation'.tr(),
       content: BlocProvider(
         create: (context) => sl<DeleteContentCubit>(),
-        child: DeleteContentModal(contentId: contentId),
+        child: DeletePublicationModal(contentId: contentId),
       ),
       buttons: [],
     ).show();
@@ -242,7 +251,7 @@ class PostCard extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          onSharePress(context);
+                          onUpdatePress(context);
                         },
                         child: const Icon(Icons.edit),
                       ),

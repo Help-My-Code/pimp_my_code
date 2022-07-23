@@ -4,6 +4,7 @@ import '../../core/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/usecases/content/create_publication_use_case.dart';
 import '../../domain/usecases/content/delete_publication.dart';
+import '../../domain/usecases/content/update_content.dart';
 import '../source/api/command/content.dart';
 import '../source/api/command/user_like.dart';
 import '../source/api/model/content/content_model.dart';
@@ -59,7 +60,8 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
-  Future<Either<DeleteContentFailed, DeleteContentSuccess>> deleteContent(String id)  async {
+  Future<Either<DeleteContentFailed, DeleteContentSuccess>> deleteContent(
+      String id) async {
     try {
       await _dataSource.deleteContent(fields: {
         'contentId': id,
@@ -123,8 +125,18 @@ class ApiContentRepository extends ContentRepository {
   }
 
   @override
-  Future<Either<Failure, Content>> updateContent(Content content) {
-    throw UnimplementedError();
+  Future<Either<UpdateContentFailed, UpdateContentSuccess>> updateContent(
+      String contentId, String title, String content) async {
+    try {
+      await _dataSource.update(fields: {
+        'contentId': contentId,
+        'title': title,
+        'content': content,
+      });
+      return Right(UpdateContentSuccess());
+    } catch (e) {
+      return Left(UpdateContentFailed());
+    }
   }
 
   @override
