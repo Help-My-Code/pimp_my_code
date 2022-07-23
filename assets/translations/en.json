@@ -116,6 +116,8 @@
   "follow_updated_successful": "Follow updated successfully",
   "delete_group_success": "Group deleted successfully",
   "delete_content_success": "Content deleted successfully",
-  "go_live_coding_room": "Go to live coding room"
+  "go_live_coding_room": "Go to live coding room",
+  "comments": "Comments",
+  "share": "Share"
 
 }
