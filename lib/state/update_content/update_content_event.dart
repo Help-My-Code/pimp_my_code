@@ -6,5 +6,5 @@ class UpdateContentEvent with _$UpdateContentEvent {
   const factory UpdateContentEvent.updateTitle(String title) = _UpdateTitle;
   const factory UpdateContentEvent.updateContent(String content) =
       _UpdateContent;
-  const factory UpdateContentEvent.loaded(Content content) = _Loaded;
+  const factory UpdateContentEvent.loaded(String title, String content) = _Loaded;
 }

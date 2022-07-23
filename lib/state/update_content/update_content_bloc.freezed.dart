@@ -36,8 +36,9 @@ class _$UpdateContentEventTearOff {
     );
   }
 
-  _Loaded loaded(Content content) {
+  _Loaded loaded(String title, String content) {
     return _Loaded(
+      title,
       content,
     );
   }
@@ -53,7 +54,7 @@ mixin _$UpdateContentEvent {
     required TResult Function(String contentId) submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
-    required TResult Function(Content content) loaded,
+    required TResult Function(String title, String content) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,7 +62,7 @@ mixin _$UpdateContentEvent {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,7 +70,7 @@ mixin _$UpdateContentEvent {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -182,7 +183,7 @@ class _$_Submit implements _Submit {
     required TResult Function(String contentId) submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
-    required TResult Function(Content content) loaded,
+    required TResult Function(String title, String content) loaded,
   }) {
     return submit(contentId);
   }
@@ -193,7 +194,7 @@ class _$_Submit implements _Submit {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
   }) {
     return submit?.call(contentId);
   }
@@ -204,7 +205,7 @@ class _$_Submit implements _Submit {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -327,7 +328,7 @@ class _$_UpdateTitle implements _UpdateTitle {
     required TResult Function(String contentId) submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
-    required TResult Function(Content content) loaded,
+    required TResult Function(String title, String content) loaded,
   }) {
     return updateTitle(title);
   }
@@ -338,7 +339,7 @@ class _$_UpdateTitle implements _UpdateTitle {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
   }) {
     return updateTitle?.call(title);
   }
@@ -349,7 +350,7 @@ class _$_UpdateTitle implements _UpdateTitle {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) {
     if (updateTitle != null) {
@@ -473,7 +474,7 @@ class _$_UpdateContent implements _UpdateContent {
     required TResult Function(String contentId) submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
-    required TResult Function(Content content) loaded,
+    required TResult Function(String title, String content) loaded,
   }) {
     return updateContent(content);
   }
@@ -484,7 +485,7 @@ class _$_UpdateContent implements _UpdateContent {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
   }) {
     return updateContent?.call(content);
   }
@@ -495,7 +496,7 @@ class _$_UpdateContent implements _UpdateContent {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) {
     if (updateContent != null) {
@@ -555,9 +556,7 @@ abstract class _UpdateContent implements UpdateContentEvent {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({Content content});
-
-  $ContentCopyWith<$Res> get content;
+  $Res call({String title, String content});
 }
 
 /// @nodoc
@@ -571,35 +570,35 @@ class __$LoadedCopyWithImpl<$Res> extends _$UpdateContentEventCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? title = freezed,
     Object? content = freezed,
   }) {
     return _then(_Loaded(
+      title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as Content,
+              as String,
     ));
-  }
-
-  @override
-  $ContentCopyWith<$Res> get content {
-    return $ContentCopyWith<$Res>(_value.content, (value) {
-      return _then(_value.copyWith(content: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.content);
+  const _$_Loaded(this.title, this.content);
 
   @override
-  final Content content;
+  final String title;
+  @override
+  final String content;
 
   @override
   String toString() {
-    return 'UpdateContentEvent.loaded(content: $content)';
+    return 'UpdateContentEvent.loaded(title: $title, content: $content)';
   }
 
   @override
@@ -607,12 +606,15 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Loaded &&
+            const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.content, content));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(content));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(content));
 
   @JsonKey(ignore: true)
   @override
@@ -625,9 +627,9 @@ class _$_Loaded implements _Loaded {
     required TResult Function(String contentId) submit,
     required TResult Function(String title) updateTitle,
     required TResult Function(String content) updateContent,
-    required TResult Function(Content content) loaded,
+    required TResult Function(String title, String content) loaded,
   }) {
-    return loaded(content);
+    return loaded(title, content);
   }
 
   @override
@@ -636,9 +638,9 @@ class _$_Loaded implements _Loaded {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
   }) {
-    return loaded?.call(content);
+    return loaded?.call(title, content);
   }
 
   @override
@@ -647,11 +649,11 @@ class _$_Loaded implements _Loaded {
     TResult Function(String contentId)? submit,
     TResult Function(String title)? updateTitle,
     TResult Function(String content)? updateContent,
-    TResult Function(Content content)? loaded,
+    TResult Function(String title, String content)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(content);
+      return loaded(title, content);
     }
     return orElse();
   }
@@ -695,9 +697,10 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements UpdateContentEvent {
-  const factory _Loaded(Content content) = _$_Loaded;
+  const factory _Loaded(String title, String content) = _$_Loaded;
 
-  Content get content;
+  String get title;
+  String get content;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }

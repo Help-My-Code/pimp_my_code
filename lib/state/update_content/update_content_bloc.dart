@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/form_status.dart';
-import '../../domain/entities/content/content.dart';
 import '../../domain/usecases/content/update_content.dart';
 
 part 'update_content_bloc.freezed.dart';
@@ -22,8 +21,8 @@ class UpdateContentBloc extends Bloc<UpdateContentEvent, UpdateContentState> {
 
   void onLoaded(_Loaded event, Emitter emit) {
     emit(state.copyWith(
-      content: event.content.content,
-      title: event.content.title,
+      content: event.content,
+      title: event.title,
     ));
   }
 

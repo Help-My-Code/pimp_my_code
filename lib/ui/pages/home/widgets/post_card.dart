@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
@@ -7,19 +8,17 @@ import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/ui/pages/publication/update_publication_modal.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../../../config/env/base.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/delete_content/delete_content_cubit.dart';
-import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../state/retrieve_publication/retrieve_publication_cubit.dart';
 import '../../../../state/session/session_cubit.dart';
 import '../../../../state/update_content/update_content_bloc.dart';
-import '../../../router/routes.dart';
 import '../../../widgets/code_editor/code_showroom.dart';
 import '../../../widgets/image_full_screen_wrapper/image_full_screen_wrapper.dart';
 import '../../publication/delete_publication_modal.dart';
 import 'share_modal.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PostCard extends StatelessWidget {
   const PostCard({
@@ -69,15 +68,8 @@ class PostCard extends StatelessWidget {
     await Alert(
       context: context,
       title: 'update_content'.tr(),
-      content: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => sl<UpdateContentBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => sl<RetrievePublicationCubit>(),
-          ),
-        ],
+      content: BlocProvider(
+        create: (context) => sl<UpdateContentBloc>(),
         child: UpdatePublicationModal(
             contentId: contentId, title: title, content: post),
       ),

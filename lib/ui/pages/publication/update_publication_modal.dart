@@ -86,14 +86,12 @@ class UpdatePublicationModal extends StatelessWidget {
             content: const Text('content_updated').tr(),
             backgroundColor: Colors.green,
           ));
-          Navigator.pop(context);
         }
         if (state.status is FormSubmissionFailed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Text('content_updated_failed').tr(),
             backgroundColor: Theme.of(context).errorColor,
           ));
-          Navigator.pop(context);
         }
       },
       builder: (context, state) {
@@ -109,9 +107,8 @@ class UpdatePublicationModal extends StatelessWidget {
               context
                   .read<UpdateContentBloc>()
                   .add(UpdateContentEvent.submit(contentId));
-              context
-                  .read<RetrievePublicationCubit>()
-                  .loadPublication(contentId);
+              Navigator.pop(context);
+              context.read<RetrievePublicationCubit>().loadPublication(contentId);
             }
           },
           width: 120,
