@@ -17,6 +17,7 @@ import 'package:pimp_my_code/state/delete_content/delete_content_cubit.dart';
 import 'package:pimp_my_code/state/delete_group/delete_group_cubit.dart';
 import 'package:pimp_my_code/state/follow_user/follow_user_bloc.dart';
 import 'package:pimp_my_code/state/join_group/join_group_bloc.dart';
+import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:pimp_my_code/state/quit_group/quit_group_bloc.dart';
 import 'package:pimp_my_code/state/retrieve_group_by_id/retrieve_group_by_id_cubit.dart';
 import 'package:pimp_my_code/state/retrieve_group_members_by_group_id/retrieve_group_members_by_user_id_cubit.dart';
@@ -205,6 +206,8 @@ void registerBloc() {
   sl.registerFactory(() => RetrieveFollowByFollowerIdCubit(sl()));
   sl.registerFactory(() => RetrieveFollowByUserIdCubit(sl()));
   sl.registerFactory(() => RetrievePublicationCubit(sl()));
+  sl.registerFactory(() => LikeCubit(
+      contentRepository: sl(), sessionCubit: sl(), retrieveContentCubit: sl()));
   sl.registerFactory(() => UpdateUserBloc(sl(), sl()));
   sl.registerFactory(() => UpdateGroupBloc(sl()));
   sl.registerFactory(() => FollowUserBloc(sl(), sl()));

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pimp_my_code/state/retrieve_publication/retrieve_publication_cubit.dart';
 
 import '../../ioc_container.dart';
+import '../../state/like/like_cubit.dart';
 import '../../state/login/login_bloc.dart';
 import '../../state/post/create_post_cubit.dart';
 import '../../state/register/register_bloc.dart';
@@ -55,9 +56,16 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.publication.path,
-        builder: (BuildContext context, GoRouterState state) => BlocProvider(
-          create: (context) => RetrievePublicationCubit(sl())
-            ..loadPublication(state.params['id']),
+        builder: (BuildContext context, GoRouterState state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => RetrievePublicationCubit(sl())
+                ..loadPublication(state.params['id']),
+            ),
+            BlocProvider(
+              create: (context) => sl<LikeCubit>(),
+            ),
+          ],
           child: const Publication(
             allowOwnerActions: true,
           ),
