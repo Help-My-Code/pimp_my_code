@@ -158,10 +158,10 @@ class _LoginFormState extends State<LoginForm> {
         onPressed: () {
           context
               .read<LoginBloc>()
-              .add(const LoginEvent.updateEmail('example5@example.com'));
+              .add(const LoginEvent.updateEmail('example@example.com'));
           context
               .read<LoginBloc>()
-              .add(const LoginEvent.updatePassword('azertY1234!'));
+              .add(const LoginEvent.updatePassword('Azerty1234!'));
           context.read<LoginBloc>().add(const LoginEvent.submit());
         },
         child: Text('quick login'.toUpperCase()),
