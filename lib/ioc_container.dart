@@ -28,6 +28,7 @@ import 'package:pimp_my_code/state/update_follow/update_follow_cubit.dart';
 import 'package:pimp_my_code/state/update_group/update_group_bloc.dart';
 import 'package:pimp_my_code/state/update_group_member/update_group_member_cubit.dart';
 import 'package:pimp_my_code/state/update_user/update_user_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'domain/repositories/follow_repository.dart';
 import 'domain/repositories/group_member_repository.dart';
 import 'domain/repositories/notification_repository.dart';
@@ -103,6 +104,8 @@ import 'ui/router/router.dart';
 final sl = GetIt.instance;
 
 Future<void> init(Config config) async {
+  final prefs = await SharedPreferences.getInstance();
+  sl.registerSingleton(prefs);
   sl.registerSingleton(config);
   final ChopperClient chopper = createChopper(config);
   registerInteractor(chopper);
