@@ -13,11 +13,11 @@ part 'session_state.dart';
 class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   final LoginUseCase _loginUseCase;
   final LogoutUseCase _logoutUseCase;
-  final SharedPreferences _secureStorage;
+  final SharedPreferences _localStorage;
   SessionCubit(
     this._loginUseCase,
     this._logoutUseCase,
-    this._secureStorage,
+    this._localStorage,
   ) : super(const UnknownAuthState()) {
     _attemptAutoLogin();
   }
@@ -48,7 +48,7 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   }
 
   Future<String> getUserId() async {
-    final userId = _secureStorage.getString('id');
+    final userId = _localStorage.getString('id');
     if (userId == null) {
       throw AssertionError();
     }
@@ -56,7 +56,7 @@ class SessionCubit extends Cubit<SessionState> with ChangeNotifier {
   }
 
   Future<String> getToken() async {
-    final token = _secureStorage.getString('token');
+    final token = _localStorage.getString('token');
     if (token == null) {
       throw AssertionError();
     }
