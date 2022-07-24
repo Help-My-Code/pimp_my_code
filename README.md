@@ -1,6 +1,18 @@
 # pimp_my_code
 
-A new Flutter project.
+Pimp My Code frontend social application.
+
+This application was build for help peaple when they struggle with there code other peaple can come help them.
+
+## Availability
+
+This is a flutter app so she can be available for :
+
+- Android
+- IOS
+- Web
+
+she was designed for these device but we can imaginate this application on desktop too, with flutter 3.
 
 ## Getting Started
 
@@ -15,4 +27,4 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-Generate files : flutter pub run build_runner build --delete-conflicting-outputs 
+Generate files : flutter pub run build_runner build --delete-conflicting-outputs
