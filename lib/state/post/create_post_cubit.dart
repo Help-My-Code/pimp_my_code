@@ -58,7 +58,9 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(state.copyWith(content: content));
   }
 
-  void onMediasChange(List<String> medias) {
+  void onMediasChange(String media, int index) {
+    var medias = state.medias;
+    medias?[index] = media;
     emit(state.copyWith(medias: medias));
   }
 
