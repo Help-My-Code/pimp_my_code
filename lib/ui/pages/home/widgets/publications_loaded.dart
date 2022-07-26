@@ -63,6 +63,7 @@ class PublicationsLoaded extends StatelessWidget {
       itemCount: publications.length,
       itemBuilder: (context, index) {
         return PostCard(
+          isFullPage: false,
           allowOwnerActions: false,
           sessionCubit: sl(),
           contentType: ContentType.publication,
