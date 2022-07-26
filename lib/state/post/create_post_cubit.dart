@@ -60,7 +60,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
   void onMediasChange(String media, int index) {
     var medias = state.medias;
-    medias?[index] = media;
+    medias[index] = media;
     emit(state.copyWith(medias: medias));
   }
 
@@ -96,19 +96,22 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(state.copyWith(isLoading: true));
     final creatorId = await context.read<SessionCubit>().getUserId();
     if (isValid) {
+      final List<String> nonNullMedias =
+          state.medias.whereType<String>().toList();
       final either = await _createPublicationUseCase.call(
         CreatePublicationParam(
-            code: state.code,
-            codeResult: state.codeResult,
-            createdAt: state.createdAt!,
-            creatorId: creatorId,
-            contentType: state.contentType.string,
-            medias: state.medias!,
-            content: state.content!,
-            userPicture: state.userPicture!,
-            username: state.username ?? '',
-            parentId: state.parentId,
-            groupId: state.groupId),
+          code: state.code,
+          codeResult: state.codeResult,
+          createdAt: state.createdAt!,
+          creatorId: creatorId,
+          contentType: state.contentType.string,
+          medias: nonNullMedias,
+          content: state.content!,
+          userPicture: state.userPicture!,
+          username: state.username ?? '',
+          parentId: state.parentId,
+          groupId: state.groupId,
+        ),
       );
       either.fold((f) {
         emit(state.copyWith(failureOrSuccessOption: left(f)));

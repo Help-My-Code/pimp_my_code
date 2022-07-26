@@ -24,12 +24,12 @@ class _$CreatePostStateTearOff {
       String? userPicture,
       String? username,
       DateTime? createdAt,
-      List<String>? medias,
       String? code,
       String? codeResult,
       String? parentId,
       String? groupId,
       Either<Failure, Unit>? failureOrSuccessOption,
+      required List<String?> medias,
       required ContentType contentType,
       required String language,
       required bool isLoading,
@@ -40,12 +40,12 @@ class _$CreatePostStateTearOff {
       userPicture: userPicture,
       username: username,
       createdAt: createdAt,
-      medias: medias,
       code: code,
       codeResult: codeResult,
       parentId: parentId,
       groupId: groupId,
       failureOrSuccessOption: failureOrSuccessOption,
+      medias: medias,
       contentType: contentType,
       language: language,
       isLoading: isLoading,
@@ -64,13 +64,13 @@ mixin _$CreatePostState {
   String? get userPicture => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  List<String>? get medias => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   String? get codeResult => throw _privateConstructorUsedError;
   String? get parentId => throw _privateConstructorUsedError;
   String? get groupId => throw _privateConstructorUsedError;
   Either<Failure, Unit>? get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  List<String?> get medias => throw _privateConstructorUsedError;
   ContentType get contentType => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -92,12 +92,12 @@ abstract class $CreatePostStateCopyWith<$Res> {
       String? userPicture,
       String? username,
       DateTime? createdAt,
-      List<String>? medias,
       String? code,
       String? codeResult,
       String? parentId,
       String? groupId,
       Either<Failure, Unit>? failureOrSuccessOption,
+      List<String?> medias,
       ContentType contentType,
       String language,
       bool isLoading,
@@ -120,12 +120,12 @@ class _$CreatePostStateCopyWithImpl<$Res>
     Object? userPicture = freezed,
     Object? username = freezed,
     Object? createdAt = freezed,
-    Object? medias = freezed,
     Object? code = freezed,
     Object? codeResult = freezed,
     Object? parentId = freezed,
     Object? groupId = freezed,
     Object? failureOrSuccessOption = freezed,
+    Object? medias = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
@@ -152,10 +152,6 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      medias: medias == freezed
-          ? _value.medias
-          : medias // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -176,6 +172,10 @@ class _$CreatePostStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Unit>?,
+      medias: medias == freezed
+          ? _value.medias
+          : medias // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -209,12 +209,12 @@ abstract class _$CreatePostStateCopyWith<$Res>
       String? userPicture,
       String? username,
       DateTime? createdAt,
-      List<String>? medias,
       String? code,
       String? codeResult,
       String? parentId,
       String? groupId,
       Either<Failure, Unit>? failureOrSuccessOption,
+      List<String?> medias,
       ContentType contentType,
       String language,
       bool isLoading,
@@ -239,12 +239,12 @@ class __$CreatePostStateCopyWithImpl<$Res>
     Object? userPicture = freezed,
     Object? username = freezed,
     Object? createdAt = freezed,
-    Object? medias = freezed,
     Object? code = freezed,
     Object? codeResult = freezed,
     Object? parentId = freezed,
     Object? groupId = freezed,
     Object? failureOrSuccessOption = freezed,
+    Object? medias = freezed,
     Object? contentType = freezed,
     Object? language = freezed,
     Object? isLoading = freezed,
@@ -271,10 +271,6 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      medias: medias == freezed
-          ? _value.medias
-          : medias // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -295,6 +291,10 @@ class __$CreatePostStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Unit>?,
+      medias: medias == freezed
+          ? _value.medias
+          : medias // ignore: cast_nullable_to_non_nullable
+              as List<String?>,
       contentType: contentType == freezed
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
@@ -324,12 +324,12 @@ class _$_CreatePostState extends _CreatePostState {
       this.userPicture,
       this.username,
       this.createdAt,
-      this.medias,
       this.code,
       this.codeResult,
       this.parentId,
       this.groupId,
       this.failureOrSuccessOption,
+      required this.medias,
       required this.contentType,
       required this.language,
       required this.isLoading,
@@ -347,8 +347,6 @@ class _$_CreatePostState extends _CreatePostState {
   @override
   final DateTime? createdAt;
   @override
-  final List<String>? medias;
-  @override
   final String? code;
   @override
   final String? codeResult;
@@ -358,6 +356,8 @@ class _$_CreatePostState extends _CreatePostState {
   final String? groupId;
   @override
   final Either<Failure, Unit>? failureOrSuccessOption;
+  @override
+  final List<String?> medias;
   @override
   final ContentType contentType;
   @override
@@ -369,7 +369,7 @@ class _$_CreatePostState extends _CreatePostState {
 
   @override
   String toString() {
-    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, medias: $medias, code: $code, codeResult: $codeResult, parentId: $parentId, groupId: $groupId, failureOrSuccessOption: $failureOrSuccessOption, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling)';
+    return 'CreatePostState(title: $title, content: $content, userPicture: $userPicture, username: $username, createdAt: $createdAt, code: $code, codeResult: $codeResult, parentId: $parentId, groupId: $groupId, failureOrSuccessOption: $failureOrSuccessOption, medias: $medias, contentType: $contentType, language: $language, isLoading: $isLoading, isCompiling: $isCompiling)';
   }
 
   @override
@@ -383,7 +383,6 @@ class _$_CreatePostState extends _CreatePostState {
                 .equals(other.userPicture, userPicture) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.medias, medias) &&
             const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality()
                 .equals(other.codeResult, codeResult) &&
@@ -391,6 +390,7 @@ class _$_CreatePostState extends _CreatePostState {
             const DeepCollectionEquality().equals(other.groupId, groupId) &&
             const DeepCollectionEquality()
                 .equals(other.failureOrSuccessOption, failureOrSuccessOption) &&
+            const DeepCollectionEquality().equals(other.medias, medias) &&
             const DeepCollectionEquality()
                 .equals(other.contentType, contentType) &&
             const DeepCollectionEquality().equals(other.language, language) &&
@@ -407,12 +407,12 @@ class _$_CreatePostState extends _CreatePostState {
       const DeepCollectionEquality().hash(userPicture),
       const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(medias),
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(codeResult),
       const DeepCollectionEquality().hash(parentId),
       const DeepCollectionEquality().hash(groupId),
       const DeepCollectionEquality().hash(failureOrSuccessOption),
+      const DeepCollectionEquality().hash(medias),
       const DeepCollectionEquality().hash(contentType),
       const DeepCollectionEquality().hash(language),
       const DeepCollectionEquality().hash(isLoading),
@@ -431,12 +431,12 @@ abstract class _CreatePostState extends CreatePostState {
       String? userPicture,
       String? username,
       DateTime? createdAt,
-      List<String>? medias,
       String? code,
       String? codeResult,
       String? parentId,
       String? groupId,
       Either<Failure, Unit>? failureOrSuccessOption,
+      required List<String?> medias,
       required ContentType contentType,
       required String language,
       required bool isLoading,
@@ -454,8 +454,6 @@ abstract class _CreatePostState extends CreatePostState {
   @override
   DateTime? get createdAt;
   @override
-  List<String>? get medias;
-  @override
   String? get code;
   @override
   String? get codeResult;
@@ -465,6 +463,8 @@ abstract class _CreatePostState extends CreatePostState {
   String? get groupId;
   @override
   Either<Failure, Unit>? get failureOrSuccessOption;
+  @override
+  List<String?> get medias;
   @override
   ContentType get contentType;
   @override
