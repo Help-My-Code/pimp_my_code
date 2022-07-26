@@ -25,8 +25,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     final valid = (state.content != null && state.content!.isNotEmpty) &&
         state.userPicture != null &&
         state.username != null &&
-        state.createdAt != null &&
-        state.medias != null;
+        state.createdAt != null;
     return valid;
   }
 

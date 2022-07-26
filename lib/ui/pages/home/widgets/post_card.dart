@@ -22,6 +22,7 @@ import 'share_modal.dart';
 class PostCard extends StatelessWidget {
   const PostCard({
     Key? key,
+    required this.isFullPage,
     required this.allowOwnerActions,
     required this.sessionCubit,
     required this.post,
@@ -46,6 +47,7 @@ class PostCard extends StatelessWidget {
     required this.contentType,
   }) : super(key: key);
 
+  final bool isFullPage;
   final bool allowOwnerActions;
   final SessionCubit sessionCubit;
   final String language;
@@ -110,134 +112,189 @@ class PostCard extends StatelessWidget {
   }
 
   navigateToLiveCoding() async {
-    var token = await sessionCubit.getToken();
-    launchUrlString(sl<Config>().liveCodingUrl +
-        '?token=' +
-        token +
-        '&content=' +
-        contentId);
+    final token = await sessionCubit.getToken();
+    final baseUrl = sl<Config>().liveCodingUrl;
+    launchUrlString('$baseUrl?token=$token&content=$contentId');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final card = isFullPage
+        ? GFCard(
+            boxFit: BoxFit.cover,
+            height: MediaQuery.of(context).size.height * 0.8,
+            title: buildCardHeader(context),
+            content: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: content(),
+            ),
+            buttonBar: buttonBar(),
+          )
+        : GFCard(
+            boxFit: BoxFit.cover,
+            title: buildCardHeader(context),
+            content: content(),
+            buttonBar: buttonBar(),
+          );
+    return Column(
       children: [
-        GFCard(
-          boxFit: BoxFit.cover,
-          title: GFListTile(
-            onTap: () {
-              if (contentType == ContentType.publication) {
-                context.go('/publication/$contentId');
-              }
-            },
-            avatar: GFAvatar(
-              backgroundImage: NetworkImage(imageURL),
-            ),
-            title: Text(
-              username,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subTitle: Text(date),
-          ),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        if (isFullPage)
+          Row(
             children: [
-              if (title != null)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(
-                    title!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              ClipRRect(
+                borderRadius:
+                    const BorderRadius.only(bottomRight: Radius.circular(15)),
+                child: Container(
+                  color: Colors.amber,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => context.pop(),
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        Stack(
+          children: [
+            card,
+            _buildActionButtons(context),
+          ],
+        ),
+      ],
+    );
+  }
+
+  GFListTile buildCardHeader(BuildContext context) {
+    return GFListTile(
+      onTap: () {
+        if (contentType == ContentType.publication) {
+          context.push('/publication/$contentId');
+        }
+      },
+      avatar: buildAvatar(),
+      title: buildTitle(),
+      subTitle: Text(date),
+    );
+  }
+
+  GFAvatar buildAvatar() {
+    return GFAvatar(
+      backgroundImage: NetworkImage(imageURL),
+    );
+  }
+
+  Text buildTitle() {
+    return Text(
+      username,
+      style: const TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+
+  GFButtonBar buttonBar() {
+    return GFButtonBar(
+      children: <Widget>[
+        GFButton(
+          textColor: Colors.black,
+          onPressed: onLikePressed,
+          text: likeCount,
+          icon: Icon(
+            isLiked ? Icons.thumb_up : Icons.thumb_up_outlined,
+          ),
+          shape: GFButtonShape.square,
+          type: GFButtonType.transparent,
+        ),
+        GFButton(
+          textColor: Colors.black,
+          onPressed: onUnlikePressed,
+          text: unlikeCount,
+          icon: Icon(
+            isDisliked ? Icons.thumb_down : Icons.thumb_down_outlined,
+          ),
+          shape: GFButtonShape.square,
+          type: GFButtonType.transparent,
+        ),
+        if (contentType == ContentType.publication)
+          GFButton(
+            textColor: Colors.black,
+            onPressed: onCommentaryPressed,
+            text: commentaryCount,
+            icon: const Icon(Icons.comment_outlined),
+            shape: GFButtonShape.square,
+            type: GFButtonType.transparent,
+          ),
+        if (contentType == ContentType.publication && kIsWeb)
+          GFButton(
+            textColor: Colors.amber,
+            hoverElevation: 0,
+            onPressed: () => navigateToLiveCoding(),
+            text: 'go_live_coding_room'.tr(),
+            icon: const Icon(Icons.code, color: Colors.amber),
+            shape: GFButtonShape.square,
+            type: GFButtonType.transparent,
+          ),
+      ],
+    );
+  }
+
+  Column content() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Text(
+              title!,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        if (title != null)
+          const SizedBox(
+            height: 20,
+          ),
+        if (images != null && images!.isNotEmpty)
+          GFItemsCarousel(
+            rowCount: 3,
+            children: images!.map(
+              (url) {
+                return Container(
+                  margin: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                    child: ImageFullScreenWrapper(
+                      url: url,
+                      dark: true,
                     ),
                   ),
-                ),
-              if (title != null)
-                const SizedBox(
-                  height: 20,
-                ),
-              if (images != null && images!.isNotEmpty)
-                GFItemsCarousel(
-                  rowCount: 3,
-                  children: images!.map(
-                    (url) {
-                      return Container(
-                        margin: const EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5.0)),
-                          child: ImageFullScreenWrapper(
-                            url: url,
-                            dark: true,
-                          ),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
-              if (codes != null && codes!.first.isNotEmpty)
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 2.5),
-                  child: CodeShowRoom(
-                    data: codes!.first,
-                    language: language,
-                  ),
-                ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                child: Text(
-                  post,
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+                );
+              },
+            ).toList(),
           ),
-          buttonBar: GFButtonBar(
-            children: <Widget>[
-              GFButton(
-                textColor: Colors.black,
-                onPressed: onLikePressed,
-                text: likeCount,
-                icon: Icon(isLiked ? Icons.thumb_up : Icons.thumb_up_outlined),
-                shape: GFButtonShape.square,
-                type: GFButtonType.transparent,
-              ),
-              GFButton(
-                textColor: Colors.black,
-                onPressed: onUnlikePressed,
-                text: unlikeCount,
-                icon: Icon(
-                  isDisliked ? Icons.thumb_down : Icons.thumb_down_outlined,
-                ),
-                shape: GFButtonShape.square,
-                type: GFButtonType.transparent,
-              ),
-              if (contentType == ContentType.publication)
-                GFButton(
-                  textColor: Colors.black,
-                  onPressed: onCommentaryPressed,
-                  text: commentaryCount,
-                  icon: const Icon(Icons.comment_outlined),
-                  shape: GFButtonShape.square,
-                  type: GFButtonType.transparent,
-                ),
-              if (contentType == ContentType.publication && kIsWeb)
-                GFButton(
-                  textColor: Colors.amber,
-                  hoverElevation: 0,
-                  onPressed: () => navigateToLiveCoding(),
-                  text: 'go_live_coding_room'.tr(),
-                  icon: const Icon(Icons.code, color: Colors.amber),
-                  shape: GFButtonShape.square,
-                  type: GFButtonType.transparent,
-                ),
-            ],
+        if (codes != null && codes!.first.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 2.5,
+            ),
+            child: CodeShowRoom(
+              data: codes!.first,
+              language: language,
+            ),
+          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 10,
+          ),
+          child: Text(
+            post,
+            textAlign: TextAlign.left,
           ),
         ),
-        _buildActionButtons(context),
       ],
     );
   }

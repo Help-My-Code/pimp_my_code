@@ -66,6 +66,7 @@ class Publication extends StatelessWidget {
           return state.maybeWhen(
             orElse: () => const Loading(),
             loaded: (publication) => PostCard(
+              isFullPage: true,
               allowOwnerActions: allowOwnerActions,
               sessionCubit: sl(),
               contentType: ContentType.publication,
