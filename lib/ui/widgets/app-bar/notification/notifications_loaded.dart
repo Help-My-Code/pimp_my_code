@@ -25,6 +25,7 @@ class NotificationsLoaded extends StatelessWidget {
     context.read<SeeAllNotificationsCubit>().seeAllNotifications();
     return SizedBox(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(height: 10),
           SizedBox(
@@ -32,43 +33,35 @@ class NotificationsLoaded extends StatelessWidget {
             child: ListView.builder(
               itemCount: notifications.length,
               itemBuilder: (context, index) {
-                return Column(children: <Widget>[
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (notifications[index].contentLinked != null) {
-                        return GoRouter.of(context).go(Routes.publication.path +
-                            '/' +
-                            notifications[index].contentLinked!);
-                      }
-                      if (notifications[index].groupLinked != null) {
-                        return GoRouter.of(context).go(Routes.group.path +
-                            '?groupId=' +
-                            notifications[index].groupLinked!.id);
-                      }
-                      if (notifications[index].userLinked != null) {
-                        return GoRouter.of(context).go(Routes.account.path +
-                            '?userId=' +
-                            notifications[index].userLinked!.id);
-                      }
-                    },
-                    child: Wrap(
-                      children: <Widget>[
-                        _initIcon(notifications[index]),
-                        const SizedBox(width: 10),
-                        _initText(notifications[index]),
-                        if (notifications[index].notificationType ==
-                            NotificationType.followDemand)
-                          _initFollowResultButtons(notifications[index]),
-                        if (notifications[index].notificationType ==
-                            NotificationType.groupJoinDemand)
-                          _initJoinGroupResultButtons(notifications[index])
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                ]);
+                final notif = notifications[index];
+                return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () => _onClick(context, notif),
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          children: <Widget>[
+                            Icon(
+                              _initIcon(notif),
+                              size: MediaQuery.of(context).size.width > 600
+                                  ? 26
+                                  : 12,
+                            ),
+                            const SizedBox(width: 10),
+                            _initText(context, notif),
+                            if (notif.notificationType ==
+                                NotificationType.followDemand)
+                              _initFollowResultButtons(notif),
+                            if (notifications[index].notificationType ==
+                                NotificationType.groupJoinDemand)
+                              _initJoinGroupResultButtons(notif)
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                    ]);
               },
             ),
           ),
@@ -77,100 +70,82 @@ class NotificationsLoaded extends StatelessWidget {
     );
   }
 
-  _initIcon(notification.Notification notification) {
-    switch (notification.notificationType) {
-      case NotificationType.dislike:
-        return const Icon(Icons.thumb_down);
-      case NotificationType.comment:
-        return const Icon(Icons.comment_outlined);
-      case NotificationType.share:
-        return const Icon(Icons.share);
-      case NotificationType.groupJoinDemand:
-      case NotificationType.groupAccepted:
-        return const Icon(Icons.group_add);
-      case NotificationType.groupRefused:
-        return const Icon(Icons.group_remove);
-      case NotificationType.followDemand:
-      case NotificationType.followAccepted:
-        return const Icon(Icons.person_add);
-      case NotificationType.followRefused:
-        return const Icon(Icons.person_remove);
-      default:
-        return const Icon(Icons.thumb_up);
+  void _onClick(BuildContext context, notification.Notification notif) {
+    Navigator.pop(context);
+    if (notif.contentLinked != null) {
+      GoRouter.of(context)
+          .go('${Routes.publication.path}/${notif.contentLinked!}');
+      return;
+    }
+    if (notif.groupLinked != null) {
+      GoRouter.of(context)
+          .go('${Routes.group.path}?groupId=${notif.groupLinked!.id}');
+      return;
+    }
+    if (notif.userLinked != null) {
+      GoRouter.of(context)
+          .go('${Routes.account.path}?userId=${notif.userLinked!.id}');
+      return;
     }
   }
 
-  _initText(notification.Notification notification) {
+  IconData _initIcon(notification.Notification notification) {
     switch (notification.notificationType) {
       case NotificationType.dislike:
-        return Text(
-            notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'didnt_like_your_publication'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.thumb_down;
       case NotificationType.comment:
-        return Text(
-            notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'commented_your_publication'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.comment_outlined;
       case NotificationType.share:
-        return Text(
-            notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'shared_your_publication'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.share;
       case NotificationType.groupJoinDemand:
-        return Text(
-            'received_membership_demand_for_group'.tr() +
-                notification.groupLinked!.name,
-            style: const TextStyle(fontSize: 16));
       case NotificationType.groupAccepted:
-        return Text(
-            'membership_demand_for_group'.tr() +
-                notification.groupLinked!.name +
-                'was_accepted_feminine'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.group_add;
       case NotificationType.groupRefused:
-        return Text(
-            'membership_demand_for_group'.tr() +
-                notification.groupLinked!.name +
-                'was_refused_feminine'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.group_remove;
       case NotificationType.followDemand:
-        return Text(
-            notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'asks_to_follow_you'.tr(),
-            style: const TextStyle(fontSize: 16));
       case NotificationType.followAccepted:
-        return Text(
-            'follow_request_to'.tr() +
-                notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'was_accepted_masculine'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.person_add;
       case NotificationType.followRefused:
-        return Text(
-            'Votre demande de follow à ' +
-                notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'was_refused_masculine'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.person_remove;
       default:
-        return Text(
-            notification.userLinked!.firstname +
-                ' ' +
-                notification.userLinked!.lastname +
-                'liked_your_publication'.tr(),
-            style: const TextStyle(fontSize: 16));
+        return Icons.thumb_up;
     }
+  }
+
+  String _getTextForLargeDevice(
+    NotificationType type,
+    notification.Notification notif,
+  ) {
+    switch (type) {
+      case NotificationType.dislike:
+        return '${notif.userLinked!.firstname} ${tr('didnt_like_your_publication')}';
+      case NotificationType.comment:
+        return '${notif.userLinked!.firstname} + ${tr('commented_your_publication')}';
+      case NotificationType.share:
+        return '${notif.userLinked!.firstname} ${tr('shared_your_publication')}';
+      case NotificationType.groupJoinDemand:
+        return '${tr('received_membership_demand_for_group')} ${notif.groupLinked!.name}';
+      case NotificationType.groupAccepted:
+        return '${tr("membership_demand_for_group")} ${notif.groupLinked!.name} ${tr("was_accepted_feminine")}';
+      case NotificationType.groupRefused:
+        return '${tr("membership_demand_for_group")} ${notif.groupLinked!.name} ${tr('was_refused_feminine')}';
+      case NotificationType.followDemand:
+        return '${notif.userLinked!.firstname} ${tr("asks_to_follow_you")}';
+      case NotificationType.followRefused:
+        return '${tr('follow_request_to')} ${notif.userLinked!.firstname} ${tr("was_refused_masculine")}';
+      case NotificationType.followAccepted:
+        return '${tr('follow_request_to')} ${notif.userLinked!.firstname} ${tr('was_accepted_masculine')}';
+      case NotificationType.like:
+        return '${notif.userLinked!.firstname} + ${tr('liked_your_publication')}';
+    }
+  }
+
+  _initText(BuildContext context, notification.Notification notification) {
+    final double fontSize = MediaQuery.of(context).size.width > 600 ? 16 : 12;
+    return Text(
+      _getTextForLargeDevice(notification.notificationType, notification),
+      style: TextStyle(fontSize: fontSize),
+    );
   }
 
   _initFollowResultButtons(notification.Notification notification) {

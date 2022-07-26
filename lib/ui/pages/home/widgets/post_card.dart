@@ -110,12 +110,9 @@ class PostCard extends StatelessWidget {
   }
 
   navigateToLiveCoding() async {
-    var token = await sessionCubit.getToken();
-    launchUrlString(sl<Config>().liveCodingUrl +
-        '?token=' +
-        token +
-        '&content=' +
-        contentId);
+    final token = await sessionCubit.getToken();
+    final baseUrl = sl<Config>().liveCodingUrl;
+    launchUrlString('$baseUrl?token=$token&content=$contentId');
   }
 
   @override
