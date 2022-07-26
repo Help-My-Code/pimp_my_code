@@ -7,6 +7,7 @@ import 'package:pimp_my_code/utils/like_helper.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
+import '../../../default_pictures.dart';
 import 'post_card.dart';
 
 class CommentModal extends StatelessWidget {
@@ -55,7 +56,7 @@ class CommentModal extends StatelessWidget {
                 images: comments[index].medias,
                 imageURL: comments[index].userPicture != null
                     ? comments[index].userPicture!
-                    : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+                    : DefaultPictures.defaultUserPicture,
                 username: comments[index].username,
                 creatorId: comments[index].creatorId,
                 date: DateFormat('dd MMMM yyyy')

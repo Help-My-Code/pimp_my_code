@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../domain/entities/enum/content_type.dart';
 import '../../domain/usecases/content/create_publication_use_case.dart';
 import '../../domain/usecases/program/execute_program_use_case.dart';
+import '../../ui/default_pictures.dart';
 import '../session/session_cubit.dart';
 
 import '../../core/failure.dart';

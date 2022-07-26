@@ -10,6 +10,7 @@ import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../utils/like_helper.dart';
+import '../../../default_pictures.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
@@ -81,7 +82,7 @@ class PublicationsLoaded extends StatelessWidget {
           images: publications[index].medias,
           imageURL: publications[index].userPicture != null
               ? publications[index].userPicture!
-              : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+              : DefaultPictures.defaultUserPicture,
           username: publications[index].username,
           creatorId: publications[index].creatorId,
           date:

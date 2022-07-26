@@ -9,6 +9,7 @@ import 'package:pimp_my_code/ui/widgets/loading.dart';
 import '../../../domain/entities/enum/content_type.dart';
 import '../../../state/like/like_cubit.dart';
 import '../../../utils/like_helper.dart';
+import '../../default_pictures.dart';
 
 class Publication extends StatelessWidget {
   const Publication({Key? key, required this.allowOwnerActions})
@@ -41,7 +42,7 @@ class Publication extends StatelessWidget {
               images: publication.medias,
               imageURL: publication.userPicture != null
                   ? publication.userPicture!
-                  : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+                  : DefaultPictures.defaultUserPicture,
               username: publication.username,
               creatorId: publication.creatorId,
               date: DateFormat('dd MMMM yyyy').format(publication.createdAt),
