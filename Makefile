@@ -17,4 +17,3 @@ get:
 
 coverage:
 	flutter test --coverage && lcov --remove coverage/lcov.info "**/*.chopper.dart" "**/*.freezed.dart" "**/*.g.dart" -o coverage/lcov.info && genhtml ./coverage/lcov.info -o ./coverage/html
-	

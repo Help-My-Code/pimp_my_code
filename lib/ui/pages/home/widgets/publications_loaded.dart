@@ -5,13 +5,12 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pimp_my_code/domain/entities/enum/content_type.dart';
 import 'package:pimp_my_code/state/like/like_cubit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../../config/env/base.dart';
 import '../../../../domain/entities/content/content.dart';
 import '../../../../ioc_container.dart';
 import '../../../../state/retrieve_content/retrieve_content_cubit.dart';
 import '../../../../utils/like_helper.dart';
+import '../../../default_pictures.dart';
 import 'comment_modal.dart';
 import 'create_post_card.dart';
 import 'post_card.dart';
@@ -65,6 +64,8 @@ class PublicationsLoaded extends StatelessWidget {
       itemCount: publications.length,
       itemBuilder: (context, index) {
         return PostCard(
+          isFullPage: false,
+          allowOwnerActions: false,
           sessionCubit: sl(),
           contentType: ContentType.publication,
           contentId: publications[index].id!,
@@ -73,6 +74,7 @@ class PublicationsLoaded extends StatelessWidget {
           onUnlikePressed: () =>
               onDislikePress(context.read<LikeCubit>(), publications[index]),
           onCommentaryPressed: () => showComments(context, publications[index]),
+          reloadPublication: () {},
           codes: publications[index].code == null
               ? ['']
               : [publications[index].code!],
@@ -81,8 +83,9 @@ class PublicationsLoaded extends StatelessWidget {
           images: publications[index].medias,
           imageURL: publications[index].userPicture != null
               ? publications[index].userPicture!
-              : 'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+              : DefaultPictures.defaultUserPicture,
           username: publications[index].username,
+          creatorId: publications[index].creatorId,
           date:
               DateFormat('dd MMMM yyyy').format(publications[index].createdAt),
           isLiked: publications[index].isLike,

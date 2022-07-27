@@ -1,8 +1,8 @@
 import 'base.dart';
 
-class DeveloppementConfig extends Config {
+class ProductionConfig extends Config {
   @override
-  String get baseUrl => const String.fromEnvironment('BACKEND', defaultValue: 'http://localhost:3000');
+  String get baseUrl => const String.fromEnvironment('BACKEND', defaultValue: 'http://backend.dev.pimp-my-code.xyz');
 
   @override
   String get browserUrl => const String.fromEnvironment('WEB_URL', defaultValue: 'http://localhost');

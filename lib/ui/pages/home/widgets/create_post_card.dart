@@ -86,8 +86,11 @@ class CreatePostCard extends StatelessWidget {
                       Flexible(
                         child: TextFormField(
                           maxLines: 1,
-                          onChanged:
-                              context.read<CreatePostCubit>().onContentChange,
+                          onChanged: (String media) {
+                            context
+                                .read<CreatePostCubit>()
+                                .onMediasChange(media, 0);
+                          },
                           decoration:
                               InputDecoration(hintText: tr('media_hint')),
                         ),
@@ -98,8 +101,11 @@ class CreatePostCard extends StatelessWidget {
                       Flexible(
                           child: TextFormField(
                         maxLines: 1,
-                        onChanged:
-                            context.read<CreatePostCubit>().onContentChange,
+                        onChanged: (String media) {
+                          context
+                              .read<CreatePostCubit>()
+                              .onMediasChange(media, 1);
+                        },
                         decoration: InputDecoration(hintText: tr('media_hint')),
                       )),
                       const SizedBox(
@@ -108,8 +114,11 @@ class CreatePostCard extends StatelessWidget {
                       Flexible(
                           child: TextFormField(
                         maxLines: 1,
-                        onChanged:
-                            context.read<CreatePostCubit>().onContentChange,
+                        onChanged: (String media) {
+                          context
+                              .read<CreatePostCubit>()
+                              .onMediasChange(media, 2);
+                        },
                         decoration: InputDecoration(hintText: tr('media_hint')),
                       )),
                     ],

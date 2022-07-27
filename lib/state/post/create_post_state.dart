@@ -10,12 +10,12 @@ class CreatePostState with _$CreatePostState {
     String? userPicture,
     String? username,
     DateTime? createdAt,
-    List<String>? medias,
     String? code,
     String? codeResult,
     String? parentId,
     String? groupId,
     Either<Failure, Unit>? failureOrSuccessOption,
+    required List<String?> medias,
     required ContentType contentType,
     required String language,
     required bool isLoading,
@@ -24,10 +24,9 @@ class CreatePostState with _$CreatePostState {
 
   factory CreatePostState.initial() => CreatePostState(
         username: 'username',
-        userPicture:
-            'https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png',
+        userPicture: DefaultPictures.defaultUserPicture,
         createdAt: DateTime.now(),
-        medias: [],
+        medias: [null, null, null],
         isLoading: false,
         isCompiling: false,
         language: 'PYTHON',
