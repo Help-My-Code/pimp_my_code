@@ -120,7 +120,7 @@ class NotificationsLoaded extends StatelessWidget {
       case NotificationType.dislike:
         return '${notif.userLinked!.firstname} ${tr('didnt_like_your_publication')}';
       case NotificationType.comment:
-        return '${notif.userLinked!.firstname} + ${tr('commented_your_publication')}';
+        return '${notif.userLinked!.firstname} ${tr('commented_your_publication')}';
       case NotificationType.share:
         return '${notif.userLinked!.firstname} ${tr('shared_your_publication')}';
       case NotificationType.groupJoinDemand:
@@ -136,7 +136,7 @@ class NotificationsLoaded extends StatelessWidget {
       case NotificationType.followAccepted:
         return '${tr('follow_request_to')} ${notif.userLinked!.firstname} ${tr('was_accepted_masculine')}';
       case NotificationType.like:
-        return '${notif.userLinked!.firstname} + ${tr('liked_your_publication')}';
+        return '${notif.userLinked!.firstname} ${tr('liked_your_publication')}';
     }
   }
 
