@@ -5,6 +5,7 @@ on:
     branches: [main]
     types:
       - closed
+
 jobs:
   push_to_registry:
     name: push_to_registry
@@ -26,12 +27,16 @@ jobs:
           username: ${{ secrets.PROD_DOCKER_USERNAME }}
           password: ${{ secrets.PROD_DOCKER_REGISTRY_PASSWORD }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.PROD_VERSION }}:latest
+      - name: Build the tagged Docker image
+        run: "docker build \
+       -f Dockerfile . \
+       --build-arg WEB_URL=${{ secrets.PROD_WEB_URL }} \
+       --build-arg BACKEND=${{ secrets.PROD_BACKEND }} \
+       --build-arg LIVE_BACKEND=${{ secrets.PROD_LIVE_BACKEND }} \
+       --tag ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-snapshot-${{ secrets.PROD_VERSION }}:latest"
+      - name: Push the tagged Docker image
+        run: docker push ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.PROD_VERSION }}:latest
+
   deploy:
     name: deploy
     needs: push_to_registry
