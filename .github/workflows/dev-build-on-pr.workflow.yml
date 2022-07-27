@@ -3,7 +3,7 @@ name: CI/CD - BUILD
 on:
   pull_request:
     branches: [develop]
- jobs:
+jobs:
    build_web:
      name: build_web
      runs-on: ubuntu-latest
