@@ -33,7 +33,7 @@ jobs:
        --build-arg WEB_URL=${{ secrets.PROD_WEB_URL }} \
        --build-arg BACKEND=${{ secrets.PROD_BACKEND }} \
        --build-arg LIVE_BACKEND=${{ secrets.PROD_LIVE_BACKEND }} \
-       --tag ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-snapshot-${{ secrets.PROD_VERSION }}:latest"
+       --tag ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.PROD_VERSION }}:latest"
       - name: Push the tagged Docker image
         run: docker push ${{ secrets.PROD_DOCKER_HOST }}/${{ secrets.PROD_DOCKER_REGISTRY }}/${{ secrets.PROJECT_NAME }}-${{ secrets.PROD_VERSION }}:latest
 
